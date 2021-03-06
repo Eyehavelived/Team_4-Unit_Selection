@@ -20,6 +20,9 @@ h1{
 
 .row{
     margin: 4em 20px;
+    //Add new property
+    font-style: normal;
+    position: relative;
 }
 
 .overlay::before{
@@ -32,3 +35,75 @@ h1{
     left: 0;
     background: linear-gradient(180deg, transparent 0%, transparent 18%, rgba(0,0,0,0.8) 99%, rgba(0,0,0,0.8) 100% );
 }
+
+// New CSS property added
+.row h1{
+    font-size: 48px;
+    padding-left:10px;
+    
+}
+.row h4{
+    font-size: 25px;
+    width:28.5em;
+    font-weight: bold;
+    padding-left:10px;
+}
+
+.row span{
+    color:#006DAE;
+}
+
+
+.btn{
+    background: none;
+    border: 1px solid #006DAE;
+    border-radius: 4px;
+    padding: 20px 20px;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px;
+    transition: 0.8s;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .home-fst-btn{
+    color: #fff;
+  }
+  .home-snd-btn{
+    border: 1px dashed #808080;
+    color: #006DAE;
+  }
+  .home-fst-btn:hover{
+    color: #006DAE;
+  }
+  .home-snd-btn:hover{
+    color: #fff;
+  }
+  .btn::before{
+    background: #006DAE;
+    height: 0%;
+    left: 0;
+    position: absolute;
+    transition: 0.8s;
+    width: 100%;
+    z-index: -1;
+    content: "";
+  }
+  .home-fst-btn::before{
+    border-radius: 0 0 50% 50%;
+    top: 0;
+  }
+  .home-snd-btn::before{
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+  }
+  .home-fst-btn::before{
+    height: 180%;
+  }
+  .home-snd-btn:hover::before{
+    height: 180%;
+  }
+  .home-fst-btn:hover::before{
+    height: 0%;
+  }

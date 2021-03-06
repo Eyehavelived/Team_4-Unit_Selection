@@ -5,6 +5,14 @@ const navLinks = [
     {
         title: 'Home', 
         path: '/'
+    },
+    {
+        title:'About',
+        path:'/About'
+    },
+    {
+        title:'How to use',
+        path:'/howtouse'
     }
 ]
 
@@ -14,7 +22,7 @@ export default function Navigation({user}){
 
     return (
     <nav className="site-navigation">
-        <span className="menu-title">React Blog</span>
+        <span className="menu-title">M Unit Selection</span>
         <div className={`menu-content-container ${menuActive && `active`}`}>
             <ul>
                 { navLinks.map((link,index)=>(
