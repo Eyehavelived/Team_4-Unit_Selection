@@ -49,14 +49,14 @@
         align-items: center;
         list-style-type: none;
         padding: 0 20px 0 50px;
-        
 
+        
         a{  
             text-decoration: none;
             padding: 0 20px 0 20px;
             font-size: 20px;
             color: $text-color;
-
+           
             &:hover{
                 color: $text-link;
             }

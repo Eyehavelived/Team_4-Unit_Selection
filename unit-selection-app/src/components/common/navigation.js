@@ -31,6 +31,7 @@ export default function Navigation({user}){
                     </li>
                 ))}
             </ul>
+
         </div>
     </nav>)
 }
