@@ -1,0 +1,15 @@
+{
+  "name": "unit-selection-backend",
+  "version": "1.0.0",
+  "description": "A Koa and GraphQL backend for unit-selection-app",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Eyehavelived/Team_4-Unit_Selection/tree/master/unit-selection-app/graphql"
+  },
+  "author": "Jay Tan",
+  "license": "ISC"
+}
