@@ -1,10 +1,3 @@
-const moment = require('moment')
-
-module.exports = [
-    {
-        unitCode: 'FIT3162',
-        unitName: 'Computer Science Project 2',
-        unitFaculty: 'Faculty of Information Technology',
-        degreeType: 'Undergraduate',
-    }
-]
+const searchUnits = require('./mocks/searchUnits')
+const compareUnits = require('./mocks/compareUnits')
+const scheduleUnits = require('./mocks/scheduleUnits')
