@@ -1,5 +1,6 @@
 @import './_variables';
 @import './_navigation';
+@import 'home.scss';
 
 
 html body{
@@ -10,7 +11,38 @@ html body{
 }
 
 h1{
-    font-size: 2rem;
+    font-size: 48px;
+    line-height: 57px;
+    font-style: bold;
+}
+
+h2{
+  font-size: 39px;
+  line-height: 47px;
+  font-style: bold;
+}
+
+h3{
+  font-size: 31px;
+  line-height: 37px;
+  font-style: bold;
+}
+
+h4{
+  font-size: 25px;
+  line-height: 30px;
+  font-style: bold;
+}
+
+h5{
+  font-size: 20px;
+  line-height: 24px;
+  font-style: bold;
+}
+
+p{
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .container{
@@ -38,12 +70,10 @@ h1{
 
 // New CSS property added
 .row h1{
-    font-size: 48px;
     padding-left:10px;
-    
 }
+
 .row h4{
-    font-size: 25px;
     width:28.5em;
     font-weight: bold;
     padding-left:10px;
