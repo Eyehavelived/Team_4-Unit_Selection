@@ -34,6 +34,6 @@ export default function Navigation({user}){
             </ul>
         </div>
         </div>
-        <button className="menu-button"><Link to="/schedule">Start Scheduling ></Link></button>
+        <button className="menu-button"><Link to="/schedule">Start Scheduling {`>`}</Link></button>
     </nav>)
 }
