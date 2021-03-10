@@ -11,6 +11,8 @@ function App() {
         <Switch>
           <Route path="/:page" component={PageRenderer} />
           <Route path="/" render={()=> <Redirect to="/home"/>}/>
+          {/* Add new route for Scheduling page */}
+          <Route path="/" render={()=> <Redirect to="/schedule"/>}/>
           <Route component={()=>404}/>
         </Switch>
       </div>

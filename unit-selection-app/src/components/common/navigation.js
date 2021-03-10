@@ -22,6 +22,7 @@ export default function Navigation({user}){
 
     return (
     <nav className="site-navigation">
+        <div className="menu-left">
         <span className="menu-title">M Unit Selection</span>
         <div className={`menu-content-container ${menuActive && `active`}`}>
             <ul>
@@ -33,5 +34,7 @@ export default function Navigation({user}){
             </ul>
 
         </div>
+        </div>
+        <button className="menu-button"><Link to="/schedule">Start Scheduling {'>'}</Link></button>
     </nav>)
 }
