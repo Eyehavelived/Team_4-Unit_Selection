@@ -6,31 +6,40 @@ module.exports = [
         unitName: 'Computer Science Project 2',
         unitFaculty: 'Faculty of Information Technology',
         degreeType: 'Undergraduate',
-        unitPreRequisite: 'FIT3161',
-        unitCoRequisite: null,
-        unitProhibition: 'FIT3144',
+        unitPreRequisite: [{
+            prereqUnitCode: 'FIT3161'
+        }],
+        unitCoRequisite: [],
+        unitProhibition: [{
+            prohibitionUnitCode: 'FIT3144'
+        }],
         unitTeachingPeriod: [{
+            periodId: 1,
             periodName: 'Semester 1'
         },
         {
+            periodId: 2,
             periodName: 'Semester 2'
         },
         {
+            periodId: 3,
             periodName: 'Summer A'
         }],
         location: [
             {
+                locationId: 2,
                 locationName: 'Malaysia'
             },
             {
+                locationId: 1,
                 locationName: 'Clayton'
             },
             {
+                locationId: 4,
                 locationName: 'Flexible'
             }
         ],
         synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project.',
-        learningOutcomes: '1. Evaluate and select research methods and technics\n2.Search access',
         assessment: [
             {
                 assessmentName: 'Journal Entries',
@@ -56,11 +65,13 @@ module.exports = [
         workloadRequirements: '144 hours per semester',
         contacts: [
             {
+                staffId: 1,
                 contactName: 'Associate Professor Bernhard Jenny',
                 contactEmail: 'Bernie.Jenny@monash.edu',
                 contactRole: 'Chief Examiner'
             },
             {
+                staffId: 2,
                 contactName: 'Associate Professor Ting Chee Ming',
                 contactEmail: 'Ting.CheeMing@monash.edu',
                 contactRole: 'Unit Coordinator'

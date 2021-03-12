@@ -42,7 +42,6 @@ type CompUnit {
     assessment: [Assessment]!
     workloadRequirements: String
     contacts: [Contact]!
-
 }
 
 type SearchUnit {
