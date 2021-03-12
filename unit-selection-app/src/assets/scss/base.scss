@@ -45,29 +45,6 @@ p{
   line-height: 24px;
 }
 
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.row{
-    margin: 4em 20px;
-    //Add new property
-    font-style: normal;
-    position: relative;
-}
-
-.overlay::before{
-    z-index: 1;
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(180deg, transparent 0%, transparent 18%, rgba(0,0,0,0.8) 99%, rgba(0,0,0,0.8) 100% );
-}
-
 .btn{
   border-radius: 5px;
   border: none;

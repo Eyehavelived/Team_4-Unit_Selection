@@ -1,17 +1,69 @@
 .nav{
-    height: 100px;
+    height: 10vh;
+}
+
+.container-hero{
+    max-width: 100%;
 }
 
 .container-about{
+    max-width: 100%;
     background-color: $secondary-col-1;
 }
 
-.section-hero{
-    padding: 55px 65px;
+.container-howto{
+    max-width: 100%;
+    background-color: $secondary-col-2;
+}
+
+.about-heading{
+    color: white;
+}
+
+.section-heading{
+    text-decoration: underline;
+    padding: 0px 65px;
+}
+
+.about-content{
+    padding: 0px 65px;
+    display: flex;
+    justify-content: space-between;
+
+    &:img{
+        width: 400px;
+        height: 350px;
+    }
+}
+
+.hero-text{
+    max-width: 60%;
+}
+
+.about-text{
+    background: white;
+    max-width: 50%;
+    padding: 10px 65px;
+}
+
+.section-main{
+    box-sizing: border-box;
+    padding: 6vh 6vw;
 }
 
 .hero-content{
-    padding: 10px 65px 10px 65px;
+    padding: 0px 4.6vw;
+    display: flex;
+    justify-content: space-between;
+
+    &:img{
+        width: 400px;
+        height: 350px;
+    }
+}
+
+footer{
+    background: $primary-col-1;
 }
 
 span{
@@ -28,18 +80,19 @@ span{
     position: relative;
     cursor: pointer;
 
-    &:before{
-        background: $primary-col-1;
-        height: 0%;
-        left: 0;
-        position: absolute;
-        transition: 0.8s;
-        width: 100%;
-        z-index: -1;
-        content: "";
-    }
+    
 }
 
+.impact-btn:before{
+    background: $primary-col-1;
+    height: 0%;
+    left: 0;
+    position: absolute;
+    transition: 0.8s;
+    width: 100%;
+    z-index: -1;
+    content: "";
+}
 
 .home-fst-btn{
     color: white;
@@ -54,7 +107,7 @@ span{
         height: 180%;
     }
 
-    &:hover::before{
+    &:hover:before{
         height: 180%;
     }
 }
@@ -72,7 +125,7 @@ span{
         border-radius: 50% 50% 0 0;
     }
 
-    &:hover::before{
+    &:hover:before{
         height: 0%;
     }
 }
