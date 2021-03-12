@@ -56,5 +56,8 @@ type SchedUnit {
     unitCode: String
     unitName: String
     unitTeachingPeriod: [Period]!
-    location: [Location]!
+    location: [Location]
+    unitPreRequisite: [String]!
+    unitCoRequisite: [String]!
+    unitProhibition: [String]!
 }

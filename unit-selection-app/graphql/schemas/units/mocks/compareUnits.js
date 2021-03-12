@@ -6,13 +6,9 @@ module.exports = [
         unitName: 'Computer Science Project 2',
         unitFaculty: 'Faculty of Information Technology',
         degreeType: 'Undergraduate',
-        unitPreRequisite: [{
-            prereqUnitCode: 'FIT3161'
-        }],
+        unitPreRequisite: ['FIT3161'],
         unitCoRequisite: [],
-        unitProhibition: [{
-            prohibitionUnitCode: 'FIT3144'
-        }],
+        unitProhibition: ['FIT3144'],
         unitTeachingPeriod: [{
             periodId: 1,
             periodName: 'Semester 1'
