@@ -1,6 +1,12 @@
-const resolvers = []
+const unitsSchema = require('./units')
 
-const typeDefs = []
+const resolvers = [
+    unitsSchema.resolvers
+]
+
+const typeDefs = [
+    unitsSchema.schema
+]
 
 module.exports = {
     resolvers,

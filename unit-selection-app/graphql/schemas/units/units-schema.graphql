@@ -1,0 +1,61 @@
+type Query {
+    compareUnits: [CompUnit]!
+    scheduleUnits: [SchedUnit]!
+    searchUnits: [SearchUnit]!
+}
+
+type Period {
+    id: Int
+    periodName: String
+}
+
+type Location {
+    id: Int
+    locationName: String
+}
+
+type Assessment {
+    id: Int
+    unitCode: String
+    assessmentWeight: Float
+    assessmentName: String
+}
+
+type Contact {
+    id: Int
+    contactName: String
+    contactEmail: String
+    contactRole: String
+}
+
+type CompUnit {
+    unitCode: String
+    unitName: String
+    unitFaculty: String
+    degreeType: String
+    unitPreRequisite: [String]!
+    unitCoRequisite: [String]!
+    unitProhibition: [String]!
+    unitTeachingPeriod: [Period]!
+    location: [Location]!
+    synopsis: String
+    assessment: [Assessment]!
+    workloadRequirements: String
+    contacts: [Contact]!
+
+}
+
+type SearchUnit {
+    unitCode: String
+    unitName: String
+    unitFaculty: String
+    degreeType: String
+    unitTeachingPeriod: [Period]!
+    location: [Location]!
+}
+type SchedUnit {
+    unitCode: String
+    unitName: String
+    unitTeachingPeriod: [Period]!
+    location: [Location]!
+}
