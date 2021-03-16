@@ -4,7 +4,8 @@
   "description": "A Koa and GraphQL backend for unit-selection-app",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "create=migration": "node ./database/actions/create-migration.js"
   },
   "repository": {
     "type": "git",
