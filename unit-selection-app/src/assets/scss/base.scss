@@ -1,109 +1,57 @@
 @import './_variables';
 @import './_navigation';
+@import 'home.scss';
+@import 'bootstrap/scss/bootstrap.scss';
 
 
 html body{
     font-family: -apple-system, system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", Arial, sans-serif;
     font-weight: 500;
     margin: 0;
-    background-color: $background;
 }
+
+/*
 
 h1{
-    font-size: 2rem;
-}
-
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.row{
-    margin: 4em 20px;
-    //Add new property
-    font-style: normal;
-    position: relative;
-}
-
-.overlay::before{
-    z-index: 1;
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(180deg, transparent 0%, transparent 18%, rgba(0,0,0,0.8) 99%, rgba(0,0,0,0.8) 100% );
-}
-
-// New CSS property added
-.row h1{
     font-size: 48px;
-    padding-left:10px;
-    
-}
-.row h4{
-    font-size: 25px;
-    width:28.5em;
+    line-height: 57px;
     font-weight: bold;
-    padding-left:10px;
 }
 
-.row span{
-    color:#006DAE;
+h2{
+  font-size: 39px;
+  line-height: 47px;
+  font-weight: bold;
 }
 
+h3{
+  font-size: 31px;
+  line-height: 37px;
+  font-weight: bold;
+}
+
+h4{
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+h5{
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+p{
+  font-size: 16px;
+  line-height: 24px;
+}
 
 .btn{
-    background: none;
-    border: 1px solid #006DAE;
-    border-radius: 4px;
-    padding: 20px 20px;
-    font-weight: bold;
-    font-size: 20px;
-    margin: 10px;
-    transition: 0.8s;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-  }
-  .home-fst-btn{
-    color: #fff;
-  }
-  .home-snd-btn{
-    border: 1px dashed #808080;
-    color: #006DAE;
-  }
-  .home-fst-btn:hover{
-    color: #006DAE;
-  }
-  .home-snd-btn:hover{
-    color: #fff;
-  }
-  .btn::before{
-    background: #006DAE;
-    height: 0%;
-    left: 0;
-    position: absolute;
-    transition: 0.8s;
-    width: 100%;
-    z-index: -1;
-    content: "";
-  }
-  .home-fst-btn::before{
-    border-radius: 0 0 50% 50%;
-    top: 0;
-  }
-  .home-snd-btn::before{
-    bottom: 0;
-    border-radius: 50% 50% 0 0;
-  }
-  .home-fst-btn::before{
-    height: 180%;
-  }
-  .home-snd-btn:hover::before{
-    height: 180%;
-  }
-  .home-fst-btn:hover::before{
-    height: 0%;
-  }
+  border-radius: 5px;
+  border: none;
+  padding: 30px;
+}
+
+
+*/
