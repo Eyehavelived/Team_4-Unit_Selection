@@ -1,3 +1,5 @@
+/*
+
 .nav{
     height: 10vh;
 }
@@ -130,3 +132,62 @@ span{
     }
 }
 
+*/
+.container-about{
+    background-color: $secondary-dark;
+
+    h1{
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+.container-howto{
+    background-color: $secondary-light;
+    h1{
+        color: $secondary;
+        text-decoration: underline;
+    }
+}
+
+.container-contact{
+    background-color: $primary;
+    color: white;
+    h1{
+        text-decoration: underline;
+    }
+}
+
+.about-custom{
+    background-color: white;
+}
+
+.carousel-item{
+    height: 32rem;
+    background: $secondary;
+    color:white;
+}
+
+#btn-override{
+    button{
+        width: 4rem;
+        height: 4rem;
+        background-color: white;
+        border-radius: 50%;
+        color: black;
+        transition: 0.4s;
+
+    &:hover{
+        transform: translate(0px,-2px);
+    }
+
+    svg{
+        padding: 0px;
+    }
+    }
+}
+
+footer{
+    background-color: $secondary-dark;
+    color: white;
+}

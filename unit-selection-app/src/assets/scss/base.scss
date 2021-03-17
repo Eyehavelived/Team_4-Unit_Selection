@@ -1,14 +1,16 @@
 @import './_variables';
 @import './_navigation';
 @import 'home.scss';
+@import 'bootstrap/scss/bootstrap.scss';
 
 
 html body{
     font-family: -apple-system, system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", Arial, sans-serif;
     font-weight: 500;
     margin: 0;
-    background-color: $background;
 }
+
+/*
 
 h1{
     font-size: 48px;
@@ -50,3 +52,6 @@ p{
   border: none;
   padding: 30px;
 }
+
+
+*/
