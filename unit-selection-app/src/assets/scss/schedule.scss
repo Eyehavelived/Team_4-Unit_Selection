@@ -1,0 +1,147 @@
+
+.site-navigation{
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #444;
+    
+    .menu-left{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .menu-title{
+        font-size: 24px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-content-container{
+        display: flex;
+        align-items: center;
+    }
+
+    ul{
+        height: 100%;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        padding-inline-start: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style-type: none;
+        padding: 0 20px 0 50px;
+
+        
+        a{  
+            text-decoration: none;
+            padding: 0 20px 0 20px;
+            font-size: 20px;
+            color: #444;
+           
+            &:hover{
+                color: #2997ff;
+            }
+        }
+    }
+   
+
+    .menu-button{
+        background: $primary;
+        padding: 10px 10px;
+        font-size: 25px;
+        font-weight: bold;
+        text-decoration: none;
+
+        a{  
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: white;
+            
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px){
+    
+}
+//Add new property for delete the preivous bullete
+ul.no-bullets {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+  }
+
+ //schedule button
+ .schedule-button{
+   background-color: #5D6465;
+   border-radius: 4px;
+   color:white;
+   font-size: 16px;
+   padding: 15px 32px;
+   margin: 20px 0;
+ }
+
+//schedule scroll
+.scroll-page {
+  margin-left: 30px;
+  float: left;
+  height: 200px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+  width: 240px;
+  background: #f8f9fa;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
+
+.scroll-page::-webkit-scrollbar-track {
+  border-radius: 10px;
+  padding: 2px 0;
+  background-color: #A3BEC1;
+}
+
+.scroll-page::-webkit-scrollbar {
+  width: 10px;
+
+}
+
+.scroll-page::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $primary;
+  border: 1px solid #A3BEC1;
+
+}
+
+
+//schedule's arrow rotating
+.rotate{
+  transform:rotate(90deg);
+}
+.rotate-back{
+  transform:rotate(0deg);
+}
+.arrow_icon{
+  margin-left:auto;
+  transition:transform 0.6s ease;
+}
+
+//Clear default button style
+.clear-button-default{
+  border:0;
+  background-color: transparent;
+  outline:none;
+}
+
+//close-button in comparing apge
+// .close-button{
+
+// }

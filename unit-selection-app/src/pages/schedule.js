@@ -7,6 +7,7 @@ import CreateArea from "../components/createArea";
 import Unit from "../components/unit";
 
 
+
 export default function Scheduling() {
   const sampleFaculty = [
     {
@@ -216,7 +217,6 @@ export default function Scheduling() {
           <Col>
             <u>Units</u>
             <CreateArea onAdd={addUnit} />
-            <Row>
               <div>
                 <u>Selected Units</u>
                 <div className="schedule-scroll">
@@ -234,7 +234,6 @@ export default function Scheduling() {
                   })}
                 </div>
               </div>
-            </Row>
           </Col>
           <Col xs={3}>
             <div>
