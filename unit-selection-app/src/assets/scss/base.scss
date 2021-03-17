@@ -1,5 +1,6 @@
 @import './_variables';
 @import './_navigation';
+@import 'home.scss';
 
 
 html body{
@@ -10,7 +11,38 @@ html body{
 }
 
 h1{
-    font-size: 2rem;
+    font-size: 48px;
+    line-height: 57px;
+    font-style: bold;
+}
+
+h2{
+  font-size: 39px;
+  line-height: 47px;
+  font-style: bold;
+}
+
+h3{
+  font-size: 31px;
+  line-height: 37px;
+  font-style: bold;
+}
+
+h4{
+  font-size: 25px;
+  line-height: 30px;
+  font-style: bold;
+}
+
+h5{
+  font-size: 20px;
+  line-height: 24px;
+  font-style: bold;
+}
+
+p{
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .container{
@@ -38,12 +70,10 @@ h1{
 
 // New CSS property added
 .row h1{
-    font-size: 48px;
     padding-left:10px;
-    
 }
+
 .row h4{
-    font-size: 25px;
     width:28.5em;
     font-weight: bold;
     padding-left:10px;
@@ -52,7 +82,6 @@ h1{
 .row span{
     color:#006DAE;
 }
-
 
 .btn{
     background: none;
@@ -109,3 +138,81 @@ h1{
   .home-fst-btn:hover::before{
     height: 0%;
   }
+
+   //Add new property for delete the preivous bullete
+   ul.no-bullets {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+  }
+
+ //schedule button
+ .schedule-button{
+   background-color: #5D6465;
+   border-radius: 4px;
+   color:white;
+   font-size: 16px;
+   padding: 15px 32px;
+   margin: 20px 0;
+ }
+
+//schedule scroll
+.scroll-page {
+  margin-left: 30px;
+  float: left;
+  height: 200px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+  width: 240px;
+  background: $background;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
+
+.scroll-page::-webkit-scrollbar-track {
+  border-radius: 10px;
+  padding: 2px 0;
+  background-color: #A3BEC1;
+}
+
+.scroll-page::-webkit-scrollbar {
+  width: 10px;
+ 
+}
+
+.scroll-page::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $primary-col-1;
+  border: 1px solid #A3BEC1;
+  
+}
+
+
+//schedule's arrow rotating
+.rotate{
+  transform:rotate(90deg);
+}
+.rotate-back{
+  transform:rotate(0deg);
+}
+.arrow_icon{
+  margin-left:auto;
+  transition:transform 0.6s ease;
+}
+
+//Clear default button style
+.clear-button-default{
+  border:0;
+  background-color: transparent;
+  outline:none;
+}
+
+//close-button in comparing apge
+.close-button{
+  
+}
+  
+
+ 
