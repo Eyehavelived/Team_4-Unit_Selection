@@ -42,9 +42,9 @@ COURSE_CORE_UNITS
 UNIT_CONTACTS
 UNIT_LOCATIONS
 UNIT_TEACHING_PERIODS
-UNIT_PROHIBITION
-UNIT_COREQUISITE
-UNIT_PREREQUISITE
+UNIT_PROHIBITIONS
+UNIT_COREQUISITES
+UNIT_PREREQUISITES
 ```
 For example, the `UNIT` table has attributes `facultyId` and `degreeTypeId`, and as such has `FACULTY` and `DEGREE_TYPE` as its dependencies. Hence, the migration tables for `FACULTY` and `DEGREE_TYPE` must be created BEFORE `UNIT`.
 
