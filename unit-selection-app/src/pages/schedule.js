@@ -13,85 +13,70 @@ export default function Scheduling() {
     {
       box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
       title: "Arts",
-      address: "/arts", //Address to link
     },
     {
       box: <input type="checkbox" key="uuid2" />,
       title: "Information Techonology",
-      address: "/it",
+    
     },
     {
       box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-      address: "/arts", //Address to link
+      title: "Business and Economics",
+
     },
     {
       box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-      address: "/it",
+      title: "Science",
+ 
+    },
+    {
+      box: <input type="checkbox" key="uuid2" />,
+      title: "Law",
+   
     },
     {
       box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-      address: "/arts", //Address to link
+      title: "Pharmacy and Pharmaceutical Sciences",
+   
     },
     {
       box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-      address: "/it",
+      title: "Education",
+    
     },
     {
       box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-      address: "/arts", //Address to link
+      title: "Medicine, Nursing and Health Sciences",
+     
     },
     {
       box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-      address: "/it",
-    },
-    {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-      address: "/arts", //Address to link
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-      address: "/it",
-    },
-    {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-      address: "/arts", //Address to link
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-      address: "/it",
-    },
-    {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-      address: "/arts", //Address to link
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-      address: "/it",
-    },
+      title: "Art, Design and Architecture",
+     
+    },  
   ];
   const sampleYear = [
     {
-      box: <input type="checkbox" key="uuid3" />, //We can use the index to distinguish each box
-      title: 2020,
-      address: "/2021", //Unsure how to jump after choosing the year
+      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
+      title: 2017,
     },
     {
-      box: <input type="checkbox" key="uuid4" />,
-      title: 2021,
-      address: "/2021",
+      box: <input type="checkbox" key="uuid2" />, //We can use the index to distinguish each box
+      title: 2018,
     },
+    {
+      box: <input type="checkbox" key="uuid3" />, //We can use the index to distinguish each box
+      title: 2019,
+    },
+    {
+      box: <input type="checkbox" key="uuid4" />, //We can use the index to distinguish each box
+      title: 2020,
+    },
+    {
+      box: <input type="checkbox" key="uuid5" />,
+      title: 2021,
+    },
+   
   ];
   const sampleSemeter = [
     {
@@ -200,7 +185,7 @@ export default function Scheduling() {
       </div>
       <Container>
         <Row>
-          <Col>
+          <Col xs={3}>
             <ToggleDiv data={sampleFaculty} name="Faculty" />
             <ToggleDiv data={sampleYear} name="Year" />
             <ToggleDiv data={sampleSemeter} name="Semester" />
@@ -214,7 +199,7 @@ export default function Scheduling() {
             </form>
           </Col>
 
-          <Col>
+          <Col xs={3}>
             <u>Units</u>
             <CreateArea onAdd={addUnit} />
               <div>
@@ -236,7 +221,7 @@ export default function Scheduling() {
               </div>
           </Col>
           <Col xs={3}>
-            <div>
+            <div className="comparing-window">
               {units.length > 0 && (
                 <Unit
                   key={units[0].unitcode}
@@ -252,7 +237,7 @@ export default function Scheduling() {
             </div>
           </Col>
           <Col xs={3}>
-            <div>
+            <div className="comparing-window">
               {units.length > 1 && (
                 <Unit
                   key={units[1].unitcode}

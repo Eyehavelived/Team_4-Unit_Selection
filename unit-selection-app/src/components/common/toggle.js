@@ -25,11 +25,9 @@ export default function ToggleDiv(props) {
         //This inline-style is used to save the space for semester and year
       <div style={ (props.name==="Year" || props.name==="Semester" ) ? { height:100+'px'} : {}} className="scroll-page">
       <div className="force-overflow">
-        {props.data.map((link, index) => (
+        {props.data.map((element) => (
           <ul className="no-bullets">
-            <Link key={index} to={link.address}>
-              {link.box} {link.title}
-            </Link>
+            {element.box}{element.title}
           </ul>
         ))}
         </div>
