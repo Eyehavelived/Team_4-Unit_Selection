@@ -21,7 +21,10 @@ VALUES
 ('Mr Stephen Huxford', 'Stephen.Huxford@monash.edu'),
 ('Dr Ian Tan', 'Ian.Tan1@monash.edu'),
 ('Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
-('Dr Arun Konagurthu', 'Arun.Konagurthu@monash.edu');
+('Dr Arun Konagurthu', 'Arun.Konagurthu@monash.edu'),
+('Dr Mario Boley', 'Mario.Boley@monash.edu'),
+('Mr Ganesh Krishnasamy', 'Ganesh.Krishnasamy@monash.edu'),
+('Dr Graeme Gange', 'Graeme.Gange@monash.edu');
 
 INSERT INTO degree_type(degreeTypeName)
 VALUES
@@ -64,14 +67,31 @@ VALUES
 ('FIT3161', 'Computer Science Project 1', 1, 1, 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project. Projects are generally software-based, although sometimes they may involve hardware development or investigation of theory. Projects cover the whole process of software (or hardware) development, from analysis through design to implementation and testing. Comprehensive written documentation on the project is required. Students are assigned in groups to a project supervisor. Students will be expected to meet weekly with their project supervisor during formal lab sessions, and attend 2-hour project management seminars during the first six weeks. Other workshops relevant to research and development of the project will be held in the latter six weeks.\nThe unit is the first part of a 12-credit point project sequence; the second part and exit point for the project is FIT3162.', 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester typically comprising a mixture of scheduled online and face to face learning activities and independent study. Independent study may include associated reading and preparation for scheduled activities. The unit requires on average three/four hours of scheduled activities per week. Scheduled activities may include a combination of teacher directed learning and online engagement.'),
 ('FIT3155', 'Advanced Data Structures and Algorithms', 1, 1, 'lorem ipsum dolores umbridge', 'your soul because the first assignment will decide your grades'),
 ('FIT3045', 'Industry-based learning', 1, 1, 'Students on placement participate full time in a defined, graduate level role during a 22-week placement period at established partners of the Faculty of IT industry based learning program including major global companies, leading Australian companies and worldwide consultancies. The students on placement apply the knowledge, skills and practices of professional attitudes and behaviour developed in their academic units. They develop communication, time management, self-reflection and customer service skills in business situations, experience and participate professionally in the corporate environment and obtain feedback from experienced supervisors on their performance.', 'Students on placement are deployed full-time for 22 weeks with the industry partners of the Faculty of IT industry-based learning program in a graduate level role within the company.'),
-('FIT2032', 'Industry-based learning', 1, 1, 'Students on placement participate full time in a defined, graduate level role during a 22-week placement period at established partners of the Faculty of Information Technology industry based learning program including major global companies, leading Australian companies and worldwide consultancies. The students on placement apply the knowledge, skills and practices of professional attitudes and behaviour developed in their academic units. They develop communication, time management and customer service skills in business situations, experience and participate professionally in the corporate environment and obtain feedback from experienced supervisors on their performance.', 'Students are on placement full-time for 22 weeks with the partners of the industry based learning program in a graduate level role within the company.');
+('FIT2032', 'Industry-based learning', 1, 1, 'Students on placement participate full time in a defined, graduate level role during a 22-week placement period at established partners of the Faculty of Information Technology industry based learning program including major global companies, leading Australian companies and worldwide consultancies. The students on placement apply the knowledge, skills and practices of professional attitudes and behaviour developed in their academic units. They develop communication, time management and customer service skills in business situations, experience and participate professionally in the corporate environment and obtain feedback from experienced supervisors on their performance.', 'Students are on placement full-time for 22 weeks with the partners of the industry based learning program in a graduate level role within the company.'),
+('FIT1048', 'Fundamentals of C++', 1, 1, 'This unit introduces programming fundamentals and the C++ language to students.', 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester'),
+('FIT1045', 'Algorithms and programming fundamentals in python', 1, 1, 'This unit introduces programming fundamentals and the Python language to students. The unit provides a foundational understanding of program design and implementation of algorithms to solve simple problems.', 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester.');
 
 INSERT INTO unit_assessment(id, courseCode, assDesc, assPerc)
 VALUE
-(1, 'FIT3155', 'In-semester assessment', 0.40),
-(2, 'FIT3155', 'Examination (2 hours and 10 minutes)', 0.60),
-(1, 'FIT3162', 'In-semester assessment', 1.00),
-(1, 'FIT3161', 'In-semester assessment', 1.00),
+(1, 'FIT3155', 'Assignment 1', 0.10),
+(2, 'FIT3155', 'Assignment 2', 0.10),
+(3, 'FIT3155', 'Assignment 3', 0.20),
+(4, 'FIT3155', 'Examination (2 hours and 10 minutes)', 0.60),
+(1, 'FIT3162', 'Journal Entries', 0.05),
+(2, 'FIT3162', 'Interim Presentation', 0.05),
+(3, 'FIT3162', 'Final Presentation', 0.10),
+(4, 'FIT3162', 'Software Deliverables', 0.25),
+(5, 'FIT3162', 'Final Report', 0.45),
+(6, 'FIT3162', 'Team Management', 0.10),
+(1, 'FIT3161', 'Journal Entry 1', 0.02),
+(2, 'FIT3161', 'Journal Entry 2', 0.02),
+(3, 'FIT3161', 'Journal Entry 3', 0.02),
+(4, 'FIT3161', 'Project Management Case Studies', 0.10),
+(5, 'FIT3161', 'Project Management Quizzes', 0.10),
+(6, 'FIT3161', 'Project Design', 0.10),
+(7, 'FIT3161', 'Project Progress Report', 0.00),
+(8, 'FIT3161', 'Presentation of Project Plan', 0.10),
+(9, 'FIT3161', 'Project Proposal with Literature Review', 0.50),
 (1, 'FIT3045', 'Initial/Revised Goals, Contents of Logs and Reflections', 0.06),
 (2, 'FIT3045', '3 Academic Visits', 0.05),
 (3, 'FIT3045', 'Frequency of Log and Reflection Submission', 0.02),
@@ -86,3 +106,29 @@ VALUE
 (4, 'FIT2032', 'Oral Presentation', 0.20),
 (5, 'FIT2032', 'Visit preparation', 0.05),
 (6, 'FIT2032', 'Regular Maintenance of Daily Log Book including weekly reflection', 0.02),
+(1, 'FIT1048', 'Assignment 1 - Task-oriented Minor Project', 0.10),
+(2, 'FIT1048', 'Major Project - Project Plan and Design Documentation', 0.15),
+(3, 'FIT1048', 'C++ Project Implementation', 0.25),
+(4, 'FIT1048', 'Examination', 0.50),
+(1, 'FIT1045', 'Tutorial Preparation', 0.08),
+(2, 'FIT1045', 'Workshops', 0.19),
+(3, 'FIT1045', 'In-semester Tests', 0.11),
+(4, 'FIT1045', 'Assignment', 0.22),
+(5, 'FIT1045', 'Examination', 0.40);
+
+INSERT INTO other_requisite(id, unitCode, otherPrereqDesc)
+VALUES
+(1, 'FIT2032', 'at least 72 credit points including 60 FIT or MAT credit points'),
+(1, 'FIT3045', 'at least 72 credit points including 60 FIT or MAT credit points'),
+(1, 'FIT1045', 'VCE Mathematics Methods or Specialist Mathematics units 3 & 4 with a study score of 25');
+
+INSERT INTO specialisation_units(specialisationId, unitCode)
+VALUES
+(1, 'FIT3155'),
+(1, 'FIT3161'),
+(1, 'FIT3162'),
+(1, 'FIT2032'),
+(1, 'FIT3045'),
+(2, 'FIT2032'),
+(2, 'FIT3045');
+
