@@ -24,7 +24,10 @@ VALUES
 ('Dr Arun Konagurthu', 'Arun.Konagurthu@monash.edu'),
 ('Dr Mario Boley', 'Mario.Boley@monash.edu'),
 ('Mr Ganesh Krishnasamy', 'Ganesh.Krishnasamy@monash.edu'),
-('Dr Graeme Gange', 'Graeme.Gange@monash.edu');
+('Dr Graeme Gange', 'Graeme.Gange@monash.edu'),
+('Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
+('Taylor Kearney', 'Taylor.Kearney@monash.edu'),
+('Ms Kamalashunee Velautham', 'Kamalashunee.Kvelautham@monash.edu');
 
 INSERT INTO degree_type(degreeTypeName)
 VALUES
@@ -132,3 +135,88 @@ VALUES
 (2, 'FIT2032'),
 (2, 'FIT3045');
 
+INSERT INTO academic_focus_units(mmId, unitCode)
+VALUES
+(3, 'FIT1048'),
+(3, 'FIT1045'),
+(4, 'FIT1048'),
+(6, 'FIT1045'),
+(6, 'FIT1048');
+
+INSERT INTO course_core_units(courseCode, unitCode)
+VALUES
+('C2000', 'FIT1045'),
+('C2000', 'FIT1048'),
+('C2000', 'FIT3045'),
+('C2001', 'FIT1045'),
+('C2001', 'FIT3161'),
+('C2001', 'FIT3162'),
+('C2001', 'FIT3045');
+
+INSERT INTO unit_contacts(unitCode, staffId, contactAppt)
+VALUES
+('FIT2032', 4, 'Chief Examiner(s)'),
+('FIT3045', 4, 'Chief Examiner(s)'),
+('FIT3045', 5, 'Unit Coordinator(s)'),
+('FIT1045', 8, 'Chief Examiner(s)'),
+('FIT1045', 9, 'Unit Coordinator(s)'),
+('FIT1048', 10, 'Chief Examiner(s)'),
+('FIT3155', 11, 'Chief Examiner(s)'),
+('FIT3155', 12, 'Unit Coordinator(s)'),
+('FIT3161', 1, 'Chief Examiner(s)'),
+('FIT3161', 13, 'Unit Coordinator(s)'),
+('FIT3162', 1, 'Chief Examiner(s)'),
+('FIT3162', 3, 'Unit Coordinator(s)');
+
+INSERT INTO unit_locations(locationId, unitCode)
+VALUES
+(1, 'FIT3162'),
+(3, 'FIT3162'),
+(1, 'FIT3161'),
+(3, 'FIT3161'),
+(1, 'FIT3045'),
+(3, 'FIT3045'),
+(1, 'FIT2032'),
+(1, 'FIT1048'),
+(1, 'FIT1045'),
+(3, 'FIT1045'),
+(1, 'FIT3155'),
+(3, 'FIT3155');
+
+INSERT INTO unit_teaching_periods(tpId, unitCode)
+VALUES
+(1, 'FIT3162'),
+(2, 'FIT3162'),
+(3, 'FIT3162'),
+(1, 'FIT3161'),
+(2, 'FIT3161'),
+(1, 'FIT3045'),
+(2, 'FIT3045'),
+(1, 'FIT2032'),
+(2, 'FIT2032'),
+(2, 'FIT1048'),
+(1, 'FIT1045'),
+(2, 'FIT1045'),
+(1, 'FIT3155'),
+(2, 'FIT3155');
+
+INSERT INTO unit_prohibitions (unitCode, prohUnitCode)
+VALUES
+('FIT3161', 'FIT3144'),
+('FIT3162', 'FIT3144'),
+('FIT3045', 'BUS3000'),
+('FIT2032', 'BUS2000'),
+('FIT1045', 'FIT1053'),
+('FIT1045', 'FIT1029'),
+('FIT1048', 'FIT2071')
+
+/*Currently no data to add to co_requisites table*/
+
+INSERT INTO unit_prerequisites (unitCode, preReqUnitCode)
+VALUES
+('FIT3155', 'FIT2004'),
+('FIT3161', 'FIT2004'),
+('FIT3162', 'FIT3161'),
+('FIT1045', 'MTH1010')
+
+/*ignoring enrolment rules for FIT3045 and FIT2032 for now because too complicated*/
