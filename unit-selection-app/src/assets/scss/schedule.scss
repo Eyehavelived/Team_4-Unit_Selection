@@ -141,18 +141,15 @@ ul.no-bullets {
   outline:none;
 }
 //Schedule's comparing window
-.comparing-window{
-  background-color: #D9D9D9;
-  height: 600px;
-  width:300px;
-  .floating-button{
+
+.floating-button{
     position: relative;
-    bottom: 0px;
-    right: 0;
-  }
+    bottom: 5px;
+    left: 225px;
 }
+
 .close-button{
   position: relative;
-  left:200px;
+  left:130px;
   top:0;
 }

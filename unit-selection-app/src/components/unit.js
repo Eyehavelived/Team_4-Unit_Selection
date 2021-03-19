@@ -1,6 +1,7 @@
 import React from "react";
 import {FaPlusCircle} from 'react-icons/fa';
 import {IoCloseOutline} from "react-icons/io5";
+import {Card} from "react-bootstrap";
 
 function Unit(props) {
   function handleClick() {
@@ -11,13 +12,16 @@ function Unit(props) {
 
   }
   return (
-    <div>
-      <IoCloseOutline className="close-button" onClick={handleClick} size={30}/>
-      <h3>{props.unitcode}</h3>
-      <h5>Unit Title:{props.title}</h5>
+    <Card border="info" style={props.compare?{width:'17rem'}:{}}>
+      <Card.Header>{props.unitcode}<IoCloseOutline style={props.compare?{left:'150px'}:{}} className="close-button" onClick={handleClick} size={30}/></Card.Header>
+      <Card.Body>
+      <Card.Text>
+      Unit Title:{props.title}
       {props.compare && <p>Overview:{props.unitoverview}</p>}
-      {props.compare&&<FaPlusCircle size={70} color={"#AECF8C"} className="floating-button" onClick={handleAddClick}/>}
-    </div>
+      </Card.Text>
+      </Card.Body>
+      {props.compare&&<FaPlusCircle size={40} color={"#AECF8C"} className="floating-button" onClick={handleAddClick}/>}
+    </Card>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavigationSchedule } from "../components/common/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Container, Col } from "react-bootstrap";
+import { Row, Container, Col} from "react-bootstrap";
 import ToggleDiv from "../components/common/toggle";
 import CreateArea from "../components/createArea";
 import Unit from "../components/unit";
@@ -96,35 +96,51 @@ export default function Scheduling() {
       </li>
       </ul>  
     };
-  // const sampleUnits = [
-  //   {
-  //     box: (
-  //       <input
-  //         type="checkbox"
-  //         id="FIT3155"
-  //         name="Advanced Data structure"
-  //         onChange={handleChange}
-  //         onClick={submitUnit}
-  //       />
-  //     ), //We can use the index to distinguish each box
-  //     title: "FIT3155",
-  //     name: "Advanced Data structure",
-  //     address: "/schedule",
-  //   },
-  //   // {
-  //   //   box: (
-  //   //     <input
-  //   //       type="checkbox"
-  //   //       id="FIT3143"
-  //   //       name="Parallel programming"
-  //   //       onClick={updateStatus}
-  //   //     />
-  //   //   ), //We can use the index to distinguish each box
-  //   //   title: "FIT3143",
-  //   //   name: "Parallel programming",
-  //   //   address: "/schedule",
-  //   // },
-  // ];
+  const sampleUnits=
+    [
+      {
+        unitCode: 'FIT3162',
+        unitName: 'Computer Science Project 2',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
+        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester'
+      },
+      {
+        unitCode: 'FIT3161',
+        unitName: 'Computer Science Project 1',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
+        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester'
+      },
+      {
+        unitCode: 'FIT3155',
+        unitName: 'ADvanced Data Structures and Algorithms',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'lorem ipsum dolores umbridge',
+        workloadReq: 'your soul because the first assignment will decide your grades'
+      },
+      {
+        unitCode: 'FIT3045',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners'
+      },
+      {
+        unitCode: 'FIT2032',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners'
+      }
+  ]
+
+
   // function handleChange(event) {}
   // function submitUnit(event) {}
   function handleSearchRequest() {}
@@ -177,7 +193,7 @@ export default function Scheduling() {
       <Container>
         <Row>
           <Col xs={3}>
-          <form>
+          <form >
             <ToggleDiv data={sampleFaculty} name="Faculty" />
             <ToggleDiv data={sampleYear} name="Year" />
             <ToggleDiv data={sampleSemeter} name="Semester" />
@@ -191,7 +207,7 @@ export default function Scheduling() {
               </button>
             </form>
           </Col>
-       
+
 
           <Col xs={3}>
             <u>Units</u>
@@ -215,7 +231,7 @@ export default function Scheduling() {
               </div>
           </Col>
           <Col xs={3}>
-            <div className="comparing-window">
+            {/* <div className="comparing-window"> */}
               {units.length > 0 && (
                 <Unit
                   key={units[0].unitcode}
@@ -228,10 +244,10 @@ export default function Scheduling() {
                   onAddSelected={addInSelectedUnit}
                 />
               )}
-            </div>
+            {/* </div> */}
           </Col>
           <Col xs={3}>
-            <div className="comparing-window">
+            {/* <div className="comparing-window"> */}
               {units.length > 1 && (
                 <Unit
                   key={units[1].unitcode}
@@ -245,7 +261,7 @@ export default function Scheduling() {
                   onAddSelected={addInSelectedUnit}
                 />
               )}
-            </div>
+            {/* </div> */}
           </Col>
         </Row>
       </Container>
