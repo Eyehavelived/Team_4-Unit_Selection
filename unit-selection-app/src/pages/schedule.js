@@ -9,102 +9,93 @@ import Unit from "../components/unit";
 
 
 export default function Scheduling() {
-  const sampleFaculty = [
+  const sampleFaculty = 
     {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Arts",
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Information Techonology",
-    
-    },
-    {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Business and Economics",
-
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Science",
- 
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Law",
-   
-    },
-    {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Pharmacy and Pharmaceutical Sciences",
-   
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Education",
-    
-    },
-    {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: "Medicine, Nursing and Health Sciences",
+      title:
+      <ul  className="no-bullets">
+      <li>
+      <label for="uuid1"><input type="checkbox" id="uuid1"/>Information Techonology</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid2" />
+      <label for="uuid2">Business and Economics</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid3" />
+      <label for="uuid3">Science</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid4" />
+      <label for="uuid4">Law</label>
+      </li>
+      <li>
+      <label for="uuid5"> <input type="checkbox" key="uuid5" />Pharmacy and Pharmaceutical Sciences</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid6" />
+      <label for="uuid6"> Education</label>
+      </li>
+      <li>
+      <label for="uuid7"><input type="checkbox" key="uuid7"/>Medicine, Nursing and Health Sciences</label>
      
-    },
+      </li>
+      <li>
+      <input type="checkbox" key="uuid8" />
+      <label for="uuid8"> Art, Design and Architecture</label>
+      </li>
+      </ul>
+    };
+  const sampleYear = 
     {
-      box: <input type="checkbox" key="uuid2" />,
-      title: "Art, Design and Architecture",
-     
-    },  
-  ];
-  const sampleYear = [
+      title:<ul className="no-bullets">
+      <li>
+      <input type="checkbox" key="uuid9" />
+      <label for="uuid9"> 2017</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid10" />
+      <label for="uuid10"> 2018</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid11" />
+      <label for="uuid11"> 2019</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid12" />
+      <label for="uuid12"> 2020</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid13" />
+      <label for="uuid13"> 2021</label>
+      </li>
+      </ul>
+    };
+  const sampleSemeter = 
     {
-      box: <input type="checkbox" key="uuid1" />, //We can use the index to distinguish each box
-      title: 2017,
-    },
-    {
-      box: <input type="checkbox" key="uuid2" />, //We can use the index to distinguish each box
-      title: 2018,
-    },
-    {
-      box: <input type="checkbox" key="uuid3" />, //We can use the index to distinguish each box
-      title: 2019,
-    },
-    {
-      box: <input type="checkbox" key="uuid4" />, //We can use the index to distinguish each box
-      title: 2020,
-    },
-    {
-      box: <input type="checkbox" key="uuid5" />,
-      title: 2021,
-    },
-   
-  ];
-  const sampleSemeter = [
-    {
-      box: <input type="checkbox" key="uuid5" />, //We can use the index to distinguish each box
-      title: "Semester 1",
-      address: "/semester1", //Unsure how to jump after choosing the semeter
-    },
-    {
-      box: <input type="checkbox" key="uuid6" />,
-      title: "Semester 2",
-      address: "/semester2",
-    },
-    {
-      box: <input type="checkbox" key="uuid7" />,
-      title: "Summer A",
-      address: "/summerA",
-    },
-    {
-      box: <input type="checkbox" key="uuid8" />,
-      title: "Summer B",
-      address: "/summerB",
-    },
-    {
-      box: <input type="checkbox" key="uuid5" />,
-      title: "Winter",
-      address: "/winter",
-    },
-  ];
+      title:
+      <ul className="no-bullets">
+      <li>
+      <input type="checkbox" key="uuid14" />
+      <label for="uuid14">Semester 1</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid15" />
+      <label for="uuid15">Semester 2</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid16" />
+      <label for="uuid16">Summer A</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid17" />
+      <label for="uuid17">Summer B</label>
+      </li>
+      <li>
+      <input type="checkbox" key="uuid18" />
+      <label for="uuid18">Winter</label>
+      </li>
+      </ul>  
+    };
   // const sampleUnits = [
   //   {
   //     box: (
@@ -186,9 +177,11 @@ export default function Scheduling() {
       <Container>
         <Row>
           <Col xs={3}>
+          <form>
             <ToggleDiv data={sampleFaculty} name="Faculty" />
             <ToggleDiv data={sampleYear} name="Year" />
             <ToggleDiv data={sampleSemeter} name="Semester" />
+          </form>  
             <button className="schedule-button">Sort & Filter</button>
             <h6>Unit Code Search</h6>
             <form onSubmit={handleSearchRequest}>
@@ -198,6 +191,7 @@ export default function Scheduling() {
               </button>
             </form>
           </Col>
+       
 
           <Col xs={3}>
             <u>Units</u>

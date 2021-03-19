@@ -1,5 +1,5 @@
 import React from "react";
-import {FaPlusCircle,FaRegWindowClose} from 'react-icons/fa';
+import {FaPlusCircle} from 'react-icons/fa';
 import {IoCloseOutline} from "react-icons/io5";
 
 function Unit(props) {
