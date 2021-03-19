@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS {}.unit (
     synopsis VARCHAR(500),
     workloadReq VARCHAR(500),
     isActive BOOL NOT NULL DEFAULT 1,
-
     CONSTRAINT fk_ufaculty FOREIGN KEY (unitFacultyId)
     REFERENCES faculty(id)
     ON DELETE CASCADE
