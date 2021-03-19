@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS {}.unit (
     unitDegreeTypeId INT(1) NOT NULL,
     synopsis VARCHAR(500),
     workloadReq VARCHAR(500),
-    isActive BOOL NOT NULL DEFAULT 0,
+    isActive BOOL NOT NULL DEFAULT 1,
 
     CONSTRAINT fk_ufaculty FOREIGN KEY (unitFacultyId)
     REFERENCES faculty(id)
