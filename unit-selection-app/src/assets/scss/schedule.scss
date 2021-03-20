@@ -95,7 +95,7 @@ ul.no-bullets {
   height: 200px;
   overflow-y: scroll;
   margin-bottom: 25px;
-  width: 260px;
+  width: 210px;
   background: #ffffff;
 }
 
@@ -152,4 +152,11 @@ ul.no-bullets {
   position: relative;
   left:130px;
   top:0;
+}
+
+//Fixed the position of selected unit column
+.fix-selected-unit{
+  position:relative;
+  top:200px;
+
 }

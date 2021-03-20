@@ -1,10 +1,23 @@
 import React,{useState} from "react"
-
+import {Card} from "react-bootstrap";
+// unitCode: 'FIT3162',
+// unitName: 'Computer Science Project 2',
+// facultyName: 'Faculty of Information Technology',
+// unitType: 'Undergraduate',
+// synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
+// workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
+// year:"2021",
+// semester:"Semester1"
 function CreateArea(props) {
     const [unit, setUnit] = useState({
-      unitcode: "",
-      title: "",
-      unitoverview:""
+      unitCode: "",
+      unitName:"",
+      facultyName:"",
+      unitType:"",
+      synopsis:"",
+      workloadReq:"",
+      year:"",
+      semester:""
     });
   
     function handleChange(event) {
@@ -18,40 +31,25 @@ function CreateArea(props) {
       });
     }
   
-    function submitNote(event) {
+    function submitUnit(event) {
       props.onAdd(unit);
-      setUnit({
-        unitcode: "",
-        title: "",
-        unitoverview:""
-      });
+      // setUnit({
+      //   unitCode: "",
+
+      // });
       event.preventDefault();
     }
   
     return (
-      <div>
-        <form>
-          <input
-            name="unitcode"
+      <Card 
+            style={{width:'10rem'}}> 
+           <label>
+            <input onClick={submitUnit} type="checkbox" 
+            name="unitCode"
             onChange={handleChange}
-            value={unit.unitcode}
-            placeholder="Unit Code"
-          />
-          <input
-            name="title"
-            onChange={handleChange}
-            value={unit.title}
-            placeholder="Unit Title"
-          />
-           <input
-            name="unitoverview"
-            onChange={handleChange}
-            value={unit.unitoverview}
-            placeholder="Unit Overview"
-          />
-          <input onClick={submitNote} type="checkbox"/>
-        </form>
-      </div>
+            value={unit.unitCode}/>
+            {props.unitCode}</label>
+      </Card>     
     );
   }
   

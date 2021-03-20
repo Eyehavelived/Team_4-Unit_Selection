@@ -14,34 +14,33 @@ export default function Scheduling() {
       title:
       <ul  className="no-bullets">
       <li>
-      <label for="uuid1"><input type="checkbox" id="uuid1"/>Information Techonology</label>
+      <label><input onChange={handleChange} type="checkbox" id="uuid1" name="Faculty" value='Faculty of Information Technology'/>Information Techonology</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid2" />
-      <label for="uuid2">Business and Economics</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid2" name="Faculty" value="Business and Economics"/>
+      Business and Economics</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid3" />
-      <label for="uuid3">Science</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid3" name="Faculty" value="Science" />
+      Science</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid4" />
-      <label for="uuid4">Law</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid4" name="Faculty" value="Law"  />
+      Law</label>
       </li>
       <li>
-      <label for="uuid5"> <input type="checkbox" key="uuid5" />Pharmacy and Pharmaceutical Sciences</label>
+      <label onChange={handleChange}> <input type="checkbox" key="uuid5" name="Faculty" value="Pharmacy and Pharmaceutical Sciences" />Pharmacy and Pharmaceutical Sciences</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid6" />
-      <label for="uuid6"> Education</label>
+      <label> <input onChange={handleChange} type="checkbox" key="uuid6" name="Faculty" value="Education"/>
+      Education</label>
       </li>
       <li>
-      <label for="uuid7"><input type="checkbox" key="uuid7"/>Medicine, Nursing and Health Sciences</label>
-     
+      <label onChange={handleChange}><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid8" />
-      <label for="uuid8"> Art, Design and Architecture</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid8" name="Faculty" value="Art, Design and Architecture"/>
+      Art, Design and Architecture</label>
       </li>
       </ul>
     };
@@ -49,24 +48,24 @@ export default function Scheduling() {
     {
       title:<ul className="no-bullets">
       <li>
-      <input type="checkbox" key="uuid9" />
-      <label for="uuid9"> 2017</label>
+      <label> <input onChange={handleChange} type="checkbox" key="uuid9" name="Year" value="2017"/>
+      2017</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid10" />
-      <label for="uuid10"> 2018</label>
+      <label> <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="2018"/>
+      2018</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid11" />
-      <label for="uuid11"> 2019</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid11" name="Year" value="2019"/>
+      2019</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid12" />
-      <label for="uuid12"> 2020</label>
+      <label> <input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="2020"/>
+      2020</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid13" />
-      <label for="uuid13"> 2021</label>
+      <label> <input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="2021"/>
+      2021</label>
       </li>
       </ul>
     };
@@ -75,24 +74,24 @@ export default function Scheduling() {
       title:
       <ul className="no-bullets">
       <li>
-      <input type="checkbox" key="uuid14" />
-      <label for="uuid14">Semester 1</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid14" name="Semester" value="Semester1"/>
+      Semester 1</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid15" />
-      <label for="uuid15">Semester 2</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid15" name="Semester" value="Semester2"/>
+      Semester 2</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid16" />
-      <label for="uuid16">Summer A</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid16" name="Semester" value="SummerA"/>
+      Summer A</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid17" />
-      <label for="uuid17">Summer B</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid17" name="Semester" value="SummerB"/>
+      Summer B</label>
       </li>
       <li>
-      <input type="checkbox" key="uuid18" />
-      <label for="uuid18">Winter</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid18" name="Semester" value="Winter"/>
+      Winter</label>
       </li>
       </ul>  
     };
@@ -104,7 +103,9 @@ export default function Scheduling() {
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
-        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester'
+        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
+        year:"2021",
+        semester:"Semester1"
       },
       {
         unitCode: 'FIT3161',
@@ -112,7 +113,9 @@ export default function Scheduling() {
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
-        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester'
+        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
+        year:"2020",
+        semester:"Semester2"
       },
       {
         unitCode: 'FIT3155',
@@ -120,7 +123,9 @@ export default function Scheduling() {
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'lorem ipsum dolores umbridge',
-        workloadReq: 'your soul because the first assignment will decide your grades'
+        workloadReq: 'your soul because the first assignment will decide your grades',
+        year:"2021",
+        semester:"Semester1"
       },
       {
         unitCode: 'FIT3045',
@@ -128,7 +133,10 @@ export default function Scheduling() {
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners'
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"2020",
+        semester:"Semester2"
+
       },
       {
         unitCode: 'FIT2032',
@@ -136,15 +144,22 @@ export default function Scheduling() {
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners'
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"2021",
+        semester:"Semester1"
       }
   ]
 
-
-  // function handleChange(event) {}
   // function submitUnit(event) {}
   function handleSearchRequest() {}
-
+  const [filterResults,setFilterResults]=useState([]);
+  const [filterUnits,setFilterUnits]=useState(
+    {
+      faculty:"",
+      year:"",
+      semester:""
+    }
+  );
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
   function addUnit(newUnit) {
@@ -185,6 +200,46 @@ export default function Scheduling() {
       });
     });
   }
+  function handleChange(event){
+    const {value,name} = event.target;
+    setFilterUnits(prevValue=>{
+      if(name==="Semester"){
+        return{
+          faculty:prevValue.faculty,
+          year:prevValue.year,
+          semester:value
+        }
+      }else if(name==="Year"){
+        return{
+        faculty:prevValue.faculty,
+        year:value,
+        semester:prevValue.semester
+        }
+      }else{
+        return{
+          faculty:value,
+          year:prevValue.year,
+          semester:prevValue.semester
+          }
+      }
+    })
+  }
+  function handleSortFilter(event){
+    const {faculty,semester,year}=filterUnits;
+    const result=[]
+    setFilterResults([]);
+    for (var i=0;i<sampleUnits.length;i++){
+      if(sampleUnits[i].facultyName===faculty&&sampleUnits[i].year===year&&sampleUnits[i].semester===semester){
+        result.push(sampleUnits[i]);
+      }
+    }
+    setFilterResults(prevResults=>[...prevResults,...result]);
+    // // console.log(filterResults.length);
+    // for(var j =0;j<filterResults.length;j++){
+    //   console.log(filterResults[j]);
+    // }
+    event.preventDefault();
+  }
   return (
     <section className="container home">
       <div className="section hero">
@@ -193,12 +248,12 @@ export default function Scheduling() {
       <Container>
         <Row>
           <Col xs={3}>
-          <form >
+          <form onSubmit={handleSortFilter}>
             <ToggleDiv data={sampleFaculty} name="Faculty" />
             <ToggleDiv data={sampleYear} name="Year" />
             <ToggleDiv data={sampleSemeter} name="Semester" />
-          </form>  
             <button className="schedule-button">Sort & Filter</button>
+          </form>  
             <h6>Unit Code Search</h6>
             <form onSubmit={handleSearchRequest}>
               <input type="text"></input>
@@ -207,12 +262,13 @@ export default function Scheduling() {
               </button>
             </form>
           </Col>
-
-
           <Col xs={3}>
             <u>Units</u>
-            <CreateArea onAdd={addUnit} />
-              <div>
+            {filterResults.map((element)=>{
+              return(
+            <CreateArea onAdd={addUnit} key={element.unitCode} unitCode={element.unitCode}/>);
+            })}
+              <div className="fix-selected-unit">
                 <u>Selected Units</u>
                 <div className="schedule-scroll">
                   {selectedUnits.map((unitItem) => {
@@ -231,7 +287,6 @@ export default function Scheduling() {
               </div>
           </Col>
           <Col xs={3}>
-            {/* <div className="comparing-window"> */}
               {units.length > 0 && (
                 <Unit
                   key={units[0].unitcode}
@@ -244,10 +299,8 @@ export default function Scheduling() {
                   onAddSelected={addInSelectedUnit}
                 />
               )}
-            {/* </div> */}
           </Col>
           <Col xs={3}>
-            {/* <div className="comparing-window"> */}
               {units.length > 1 && (
                 <Unit
                   key={units[1].unitcode}
@@ -261,7 +314,6 @@ export default function Scheduling() {
                   onAddSelected={addInSelectedUnit}
                 />
               )}
-            {/* </div> */}
           </Col>
         </Row>
       </Container>
