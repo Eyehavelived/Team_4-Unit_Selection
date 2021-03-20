@@ -42,13 +42,13 @@ function CreateArea(props) {
   
     return (
       <Card 
-            style={{width:'10rem'}}> 
-           <label>
-            <input onClick={submitUnit} type="checkbox" 
+            className={"checkboxes"}
+            border="secondary"
+            style={{height:'1.6rem',width:'10rem'}}> 
+            <label><input onClick={submitUnit} type="checkbox" 
             name="unitCode"
             onChange={handleChange}
-            value={unit.unitCode}/>
-            {props.unitCode}</label>
+            value={unit.unitCode}/>{props.unitCode}</label>
       </Card>     
     );
   }

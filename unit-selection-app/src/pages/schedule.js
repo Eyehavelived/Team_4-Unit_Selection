@@ -29,18 +29,19 @@ export default function Scheduling() {
       Law</label>
       </li>
       <li>
-      <label onChange={handleChange}> <input type="checkbox" key="uuid5" name="Faculty" value="Pharmacy and Pharmaceutical Sciences" />Pharmacy and Pharmaceutical Sciences</label>
+      <label onChange={handleChange} > <input type="checkbox" key="uuid5" name="Faculty" value="Pharmacy and Pharmaceutical Sciences" />Pharmacy and Pharmaceutical Sciences</label>
       </li>
       <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid6" name="Faculty" value="Education"/>
-      Education</label>
+      <input onChange={handleChange} type="checkbox" key="uuid6" name="Faculty" value="Education"/>
+      <label> Education</label>
       </li>
       <li>
-      <label onChange={handleChange}><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
+      <label onChange={handleChange} for="uuid7"><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
+     
       </li>
       <li>
       <label><input onChange={handleChange} type="checkbox" key="uuid8" name="Faculty" value="Art, Design and Architecture"/>
-      Art, Design and Architecture</label>
+       Art, Design and Architecture</label>
       </li>
       </ul>
     };
@@ -52,7 +53,7 @@ export default function Scheduling() {
       2017</label>
       </li>
       <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="2018"/>
+      <label>  <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="2018"/>
       2018</label>
       </li>
       <li>
@@ -60,12 +61,12 @@ export default function Scheduling() {
       2019</label>
       </li>
       <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="2020"/>
+      <label><input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="2020"/>
       2020</label>
       </li>
       <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="2021"/>
-      2021</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="2021"/>
+       2021</label>
       </li>
       </ul>
     };

@@ -156,7 +156,26 @@ ul.no-bullets {
 
 //Fixed the position of selected unit column
 .fix-selected-unit{
-  position:relative;
-  top:200px;
+  position:absolute;
+  top:250px;
 
 }
+
+//Checkbox label
+label {
+  display:block; 
+ }
+ 
+ label:hover {
+  background:#eee;
+  cursor:pointer;
+ }
+
+//Check boxes inside Units column
+ .checkboxes input{
+  margin: 0px 10px 0px 0px;
+ }
+
+ .checkboxes label{
+   margin: 0px 30px;
+ }
