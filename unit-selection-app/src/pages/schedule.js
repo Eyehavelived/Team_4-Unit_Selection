@@ -191,8 +191,8 @@ export default function Scheduling() {
       }
   ]
 
-  // function submitUnit(event) {}
-  function handleSearchRequest() {}
+ 
+  const [searchRequest,setSearchRequest]=useState("");
   const [filterResults,setFilterResults]=useState([]);
   const [filterUnits,setFilterUnits]=useState(
     {
@@ -203,6 +203,28 @@ export default function Scheduling() {
   );
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
+
+  function handleSearchRequest(event) {
+    event.preventDefault();
+    var result=null;
+    for (var i=0;i<sampleUnits.length;i++){
+      if(sampleUnits[i].unitCode===searchRequest){
+         result=sampleUnits[i];
+         break;
+      }
+    }
+    if(result!=null){
+      setFilterResults((prevUnits) => {
+        for (var i = 0; i < prevUnits.length; i++) {
+          if (prevUnits[i].unitCode === result.unitCode) {
+            return prevUnits;
+          }
+        }
+        return [...prevUnits, result];
+      });
+    }
+
+  }
   function addUnit(newUnit) {
     setUnits((prevUnits) => {
       for (var i = 0; i < prevUnits.length; i++) {
@@ -210,7 +232,6 @@ export default function Scheduling() {
           return prevUnits;
         }
       }
-      console.log("I am in");
       return [...prevUnits, newUnit];
     });
   }
@@ -218,7 +239,6 @@ export default function Scheduling() {
     console.log(2);
     setUnits((prevUnits) => {
       return prevUnits.filter((unitItem) => {
-        console.log(1);
         return unitItem.unitCode !== id;
       });
     });
@@ -278,12 +298,11 @@ export default function Scheduling() {
       }
     }
     setFilterResults(prevResults=>[...prevResults,...result]);
-    // // console.log(filterResults.length);
-    // for(var j =0;j<filterResults.length;j++){
-    //   console.log(filterResults[j]);
-    // }
     event.preventDefault();
   }
+
+  
+
   return (
     <section className="container home">
       <div className="section hero">
@@ -300,8 +319,8 @@ export default function Scheduling() {
           </form>  
             <h6>Unit Code Search</h6>
             <form onSubmit={handleSearchRequest}>
-              <input type="text"></input>
-              <button className="schedule-button" type="submit">
+              <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
+              <button className="schedule-button" type="submit" value="submit">
                 Search
               </button>
             </form>
