@@ -115,8 +115,8 @@ export default function Scheduling() {
         unitType: 'Undergraduate',
         synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
         workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"2020",
-        semester:"Semester2"
+        year:"2021",
+        semester:"Semester1"
       },
       {
         unitCode: 'FIT3155',
@@ -135,12 +135,52 @@ export default function Scheduling() {
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2020",
-        semester:"Semester2"
+        year:"2021",
+        semester:"Semester1"
 
       },
       {
         unitCode: 'FIT2032',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"2021",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT6666',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"2021",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT9999',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"2021",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT8888',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"2021",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT7777',
         unitName: 'Industry-based learning',
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
@@ -268,6 +308,9 @@ export default function Scheduling() {
           </Col>
           <Col xs={3}>
             <u>Units</u>
+            {filterResults.length>0&&
+            <div className="scroll-page">
+            <div className="force-overflow">
             {filterResults.map((element,index)=>{
               return(
             <CreateArea onAdd={addUnit} 
@@ -283,6 +326,9 @@ export default function Scheduling() {
             semester={element.semester}
             />);
             })}
+            </div>
+              </div>
+            }
               <div className="fix-selected-unit">
                 <u>Selected Units</u>
                 <div className="schedule-scroll">
@@ -309,6 +355,10 @@ export default function Scheduling() {
                   unitCode={units[0].unitCode}
                   unitName={units[0].unitName}
                   unitType={units[0].unitType}
+                  synopsis={units[0].synopsis}
+                  workloadReq={units[0].workloadReq}
+                  year={units[0].year}
+                  semester={units[0].semester}
                   compare={true}
                   onDelete={deleteUnit}
                   onAddSelected={addInSelectedUnit}
@@ -323,6 +373,10 @@ export default function Scheduling() {
                   unitCode={units[1].unitCode}
                   unitName={units[1].unitName}
                   unitType={units[1].unitType}
+                  synopsis={units[1].synopsis}
+                  workloadReq={units[1].workloadReq}
+                  year={units[1].year}
+                  semester={units[1].semester}
                   //This normal attribute is used to figure out the unit in selected Unit or in compare window
                   compare={true}
                   onDelete={deleteUnit}
