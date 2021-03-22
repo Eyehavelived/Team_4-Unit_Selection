@@ -4,20 +4,21 @@ import {IoCloseOutline} from "react-icons/io5";
 import {Card} from "react-bootstrap";
 
 function Unit(props) {
-  function handleClick() {
-    props.onDelete(props.id);
+  function handleClick(id) {
+    console.log("q");
+    props.onDelete(id);
   }
   function handleAddClick(){
-      props.onAddSelected(props.unitcode,props.title);
+      props.onAddSelected(props.unitCode,props.unitName);
 
   }
   return (
-    <Card border="info" style={props.compare?{width:'17rem'}:{}}>
-      <Card.Header>{props.unitcode}<IoCloseOutline style={props.compare?{left:'150px'}:{}} className="close-button" onClick={handleClick} size={30}/></Card.Header>
+    <Card border="info" style={props.compare?{width:'14rem'}:{}}>
+      <Card.Header>{props.unitCode}<IoCloseOutline style={props.compare?{left:'105px'}:{}} className="close-button" onClick={()=>handleClick(props.id)} size={30}/></Card.Header>
       <Card.Body>
       <Card.Text>
-      Unit Title:{props.title}
-      {props.compare && <p>Overview:{props.unitoverview}</p>}
+      Unit Name:{props.unitName}
+      {props.compare && <p>Unit Type:{props.unitType}</p>}
       </Card.Text>
       </Card.Body>
       {props.compare&&<FaPlusCircle size={40} color={"#AECF8C"} className="floating-button" onClick={handleAddClick}/>}

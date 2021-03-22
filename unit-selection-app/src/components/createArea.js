@@ -9,34 +9,19 @@ import {Card} from "react-bootstrap";
 // year:"2021",
 // semester:"Semester1"
 function CreateArea(props) {
-    const [unit, setUnit] = useState({
-      unitCode: "",
-      unitName:"",
-      facultyName:"",
-      unitType:"",
-      synopsis:"",
-      workloadReq:"",
-      year:"",
-      semester:""
-    });
-  
-    function handleChange(event) {
-      const { name, value } = event.target;
-  
-      setUnit(prevUnit => {
-        return {
-          ...prevUnit,
-          [name]: value
-        };
-      });
-    }
+    const unit={
+      unitCode: props.unitCode,
+      unitName:props.unitName,
+      facultyName:props.facultyName,
+      unitType:props.unitType,
+      synopsis:props.synopsis,
+      workloadReq:props.workloadReq,
+      year:props.year,
+      semester:props.semester
+    };
   
     function submitUnit(event) {
       props.onAdd(unit);
-      // setUnit({
-      //   unitCode: "",
-
-      // });
       event.preventDefault();
     }
   
@@ -46,9 +31,7 @@ function CreateArea(props) {
             border="secondary"
             style={{height:'1.6rem',width:'10rem'}}> 
             <label><input onClick={submitUnit} type="checkbox" 
-            name="unitCode"
-            onChange={handleChange}
-            value={unit.unitCode}/>{props.unitCode}</label>
+            />{props.unitCode}</label>
       </Card>     
     );
   }

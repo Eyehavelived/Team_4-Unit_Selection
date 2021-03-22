@@ -36,7 +36,7 @@ export default function Scheduling() {
       <label> Education</label>
       </li>
       <li>
-      <label onChange={handleChange} for="uuid7"><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
+      <label onChange={handleChange}><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
      
       </li>
       <li>
@@ -166,28 +166,31 @@ export default function Scheduling() {
   function addUnit(newUnit) {
     setUnits((prevUnits) => {
       for (var i = 0; i < prevUnits.length; i++) {
-        if (prevUnits[i].unitcode === newUnit.unitcode) {
+        if (prevUnits[i].unitCode === newUnit.unitCode) {
           return prevUnits;
         }
       }
+      console.log("I am in");
       return [...prevUnits, newUnit];
     });
   }
   function deleteUnit(id) {
+    console.log(2);
     setUnits((prevUnits) => {
       return prevUnits.filter((unitItem) => {
-        return unitItem.unitcode !== id;
+        console.log(1);
+        return unitItem.unitCode !== id;
       });
     });
   }
   function addInSelectedUnit(unitcode,title) {
     const newUnit = {
-      unitcode: unitcode,
-      title: title,
+      unitCode: unitcode,
+      unitName: title,
     };
     setSelectedUnits((prevSelectedUnits) => {
       for (var i = 0; i < prevSelectedUnits.length; i++) {
-        if (prevSelectedUnits[i].unitcode === newUnit.unitcode) {
+        if (prevSelectedUnits[i].unitCode === newUnit.unitCode) {
           return prevSelectedUnits;
         }
       }
@@ -197,7 +200,7 @@ export default function Scheduling() {
   function deleteSelectedUnit(id) {
     setSelectedUnits((prevSelectedUnits) => {
       return prevSelectedUnits.filter((unitItem) => {
-        return unitItem.unitcode !== id;
+        return unitItem.unitCode !== id;
       });
     });
   }
@@ -265,20 +268,31 @@ export default function Scheduling() {
           </Col>
           <Col xs={3}>
             <u>Units</u>
-            {filterResults.map((element)=>{
+            {filterResults.map((element,index)=>{
               return(
-            <CreateArea onAdd={addUnit} key={element.unitCode} unitCode={element.unitCode}/>);
+            <CreateArea onAdd={addUnit} 
+            key={index} 
+            id={element.unitCode} 
+            unitCode={element.unitCode}
+            unitName={element.unitName}
+            facultyName={element.facultyName}
+            unitType={element.unitType}
+            synopsis={element.synopsis}
+            workloadReq={element.workloadReq}
+            year={element.year}
+            semester={element.semester}
+            />);
             })}
               <div className="fix-selected-unit">
                 <u>Selected Units</u>
                 <div className="schedule-scroll">
-                  {selectedUnits.map((unitItem) => {
+                  {selectedUnits.map((unitItem,index) => {
                     return (
                       <Unit
-                        key={unitItem.unitcode}
-                        id={unitItem.unitcode}
-                        unitcode={unitItem.unitcode}
-                        title={unitItem.title}
+                        key={index}
+                        id={unitItem.unitCode}
+                        unitCode={unitItem.unitCode}
+                        unitName={unitItem.unitName}
                         compare={false}
                         onDelete={deleteSelectedUnit}
                       />
@@ -288,13 +302,13 @@ export default function Scheduling() {
               </div>
           </Col>
           <Col xs={3}>
-              {units.length > 0 && (
+              {units.length >0  && (
                 <Unit
-                  key={units[0].unitcode}
-                  id={units[0].unitcode}
-                  unitcode={units[0].unitcode}
-                  title={units[0].title}
-                  unitoverview={units[0].unitoverview}
+                  key={units[0].unitCode}
+                  id={units[0].unitCode}
+                  unitCode={units[0].unitCode}
+                  unitName={units[0].unitName}
+                  unitType={units[0].unitType}
                   compare={true}
                   onDelete={deleteUnit}
                   onAddSelected={addInSelectedUnit}
@@ -304,11 +318,11 @@ export default function Scheduling() {
           <Col xs={3}>
               {units.length > 1 && (
                 <Unit
-                  key={units[1].unitcode}
-                  id={units[1].unitcode}
-                  unitcode={units[1].unitcode}
-                  title={units[1].title}
-                  unitoverview={units[1].unitoverview}
+                  key={units[1].unitCode}
+                  id={units[1].unitCode}
+                  unitCode={units[1].unitCode}
+                  unitName={units[1].unitName}
+                  unitType={units[1].unitType}
                   //This normal attribute is used to figure out the unit in selected Unit or in compare window
                   compare={true}
                   onDelete={deleteUnit}
