@@ -122,7 +122,7 @@ ul.no-bullets {
 }
 
 
-//schedule's arrow rotating
+//schedule's caret rotating
 .rotate{
   transform:rotate(90deg);
 }
@@ -140,8 +140,8 @@ ul.no-bullets {
   background-color: transparent;
   outline:none;
 }
-//Schedule's comparing window
 
+//Schedule's comparing window
 .floating-button{
     position: relative;
     bottom: 5px;
@@ -171,7 +171,7 @@ label {
   cursor:pointer;
  }
 
-//Check boxes inside Units column
+//It is used to styling the check boxes inside Units
  .checkboxes input{
   margin: 0px 10px 0px 0px;
  }

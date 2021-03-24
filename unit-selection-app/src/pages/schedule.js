@@ -236,7 +236,6 @@ export default function Scheduling() {
     });
   }
   function deleteUnit(id) {
-    console.log(2);
     setUnits((prevUnits) => {
       return prevUnits.filter((unitItem) => {
         return unitItem.unitCode !== id;
@@ -315,7 +314,7 @@ export default function Scheduling() {
             <ToggleDiv data={sampleFaculty} name="Faculty" />
             <ToggleDiv data={sampleYear} name="Year" />
             <ToggleDiv data={sampleSemeter} name="Semester" />
-            <button className="schedule-button">Sort & Filter</button>
+            <button className="schedule-button">Show filtered result</button>
           </form>  
             <h6>Unit Code Search</h6>
             <form onSubmit={handleSearchRequest}>

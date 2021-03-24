@@ -1,12 +1,12 @@
 import React from "react";
-
+//This Caret is used to expand the div for Faculty,Year,Semester
 function Caret(props) {
   return (
     <svg
       className={props.className}
       width={props.width}
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 192 512"
+      viewBox="0 0 192 400"
     >
       <path
         fill={props.fill}

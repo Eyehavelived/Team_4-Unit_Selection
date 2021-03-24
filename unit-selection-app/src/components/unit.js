@@ -4,6 +4,7 @@ import {IoCloseOutline} from "react-icons/io5";
 import {Card} from "react-bootstrap";
 
 function Unit(props) {
+  //This function is sued to
   function handleClick(id) {
     props.onDelete(id);
   }

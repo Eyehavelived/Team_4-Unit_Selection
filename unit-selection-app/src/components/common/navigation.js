@@ -40,16 +40,15 @@ export default function Navigation({user}){
 const navLinksSchedule = [
     {
         title: 'Selection', 
-        path: '/'
-    },
-    {
-        title: '>', 
         path: '/schedule'
     },
     {
+        title: '>', 
+        path: '/scheduleSecond'
+    },
+    {
         title:'Schedule',
-        //Not sure what this schedule refers to
-        path:'/schedulepage'
+        path:'/scheduleSecond'
     },
     {
         title: '>', 

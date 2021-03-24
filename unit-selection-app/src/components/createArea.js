@@ -1,14 +1,7 @@
-import React,{useState} from "react"
+import React from "react"
 import {Card} from "react-bootstrap";
-// unitCode: 'FIT3162',
-// unitName: 'Computer Science Project 2',
-// facultyName: 'Faculty of Information Technology',
-// unitType: 'Undergraduate',
-// synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
-// workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-// year:"2021",
-// semester:"Semester1"
-function CreateArea(props) {
+//This method is used to display units in the Units column after we filter our choice
+export default function CreateArea(props) {
     const unit={
       unitCode: props.unitCode,
       unitName:props.unitName,
@@ -19,7 +12,8 @@ function CreateArea(props) {
       year:props.year,
       semester:props.semester
     };
-  
+    
+    //When we click the checkbox,it will submit our request and display more information in our comparing window
     function submitUnit(event) {
       props.onAdd(unit);
       event.preventDefault();
@@ -35,5 +29,3 @@ function CreateArea(props) {
       </Card>     
     );
   }
-  
-  export default CreateArea;
