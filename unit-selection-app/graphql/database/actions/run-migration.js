@@ -1,4 +1,4 @@
-const knex = require('./mysql')
+const knex = require('../mysql')
 const promise = require('bluebird')
 const path = require('path')
 const fs = require('fs')

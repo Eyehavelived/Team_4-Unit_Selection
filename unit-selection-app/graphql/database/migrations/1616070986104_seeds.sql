@@ -1,3 +1,5 @@
+SET @@global.sql_mode= '';
+
 INSERT INTO teaching_period(periodName)
 VALUES
 ('Semester 1'),
@@ -27,7 +29,8 @@ VALUES
 ('Dr Graeme Gange', 'Graeme.Gange@monash.edu'),
 ('Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
 ('Taylor Kearney', 'Taylor.Kearney@monash.edu'),
-('Ms Kamalashunee Velautham', 'Kamalashunee.Kvelautham@monash.edu');
+('Ms Kamalashunee Velautham', 'Kamalashunee.Kvelautham@monash.edu'),
+('Ms ashunee Velautham', 'Kamalashunee.Kvelautham@monash.edu');
 
 INSERT INTO degree_type(degreeTypeName)
 VALUES
@@ -74,7 +77,7 @@ VALUES
 ('FIT1048', 'Fundamentals of C++', 1, 1, 'This unit introduces programming fundamentals and the C++ language to students.', 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester'),
 ('FIT1045', 'Algorithms and programming fundamentals in python', 1, 1, 'This unit introduces programming fundamentals and the Python language to students. The unit provides a foundational understanding of program design and implementation of algorithms to solve simple problems.', 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester.');
 
-INSERT INTO unit_assessment(id, courseCode, assDesc, assPerc)
+INSERT INTO unit_assessment(id, unitCode, assDesc, assPerc)
 VALUE
 (1, 'FIT3155', 'Assignment 1', 0.10),
 (2, 'FIT3155', 'Assignment 2', 0.10),
@@ -200,23 +203,23 @@ VALUES
 (1, 'FIT3155'),
 (2, 'FIT3155');
 
-INSERT INTO unit_prohibitions (unitCode, prohUnitCode)
-VALUES
-('FIT3161', 'FIT3144'),
-('FIT3162', 'FIT3144'),
-('FIT3045', 'BUS3000'),
-('FIT2032', 'BUS2000'),
-('FIT1045', 'FIT1053'),
-('FIT1045', 'FIT1029'),
-('FIT1048', 'FIT2071')
+-- INSERT INTO unit_prohibitions (unitCode, prohUnitCode)
+-- VALUES
+-- ('FIT3161', 'FIT3144'),
+-- ('FIT3162', 'FIT3144'),
+-- ('FIT3045', 'BUS3000'),
+-- ('FIT2032', 'BUS2000'),
+-- ('FIT1045', 'FIT1053'),
+-- ('FIT1045', 'FIT1029'),
+-- ('FIT1048', 'FIT2071');
 
 /*Currently no data to add to co_requisites table*/
 
 INSERT INTO unit_prerequisites (unitCode, preReqUnitCode)
 VALUES
-('FIT3155', 'FIT2004'),
-('FIT3161', 'FIT2004'),
-('FIT3162', 'FIT3161'),
-('FIT1045', 'MTH1010')
+-- ('FIT3155', 'FIT2004'),
+-- ('FIT3161', 'FIT2004'),
+('FIT3162', 'FIT3161');
+-- ('FIT1045', 'MTH1010');
 
 /*ignoring enrolment rules for FIT3045 and FIT2032 for now because too complicated*/

@@ -55,5 +55,5 @@ npm run create-migration -- --tableName=yourTableNameHere
 
 ## Creating Seeds
 
-## Running Migrations
-
+## Installation and Running Migrations
+When first installing the workspace on your machine, you will need to run a db-migration to create and populate the database on your local workspace.
