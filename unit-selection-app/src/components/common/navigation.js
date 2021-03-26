@@ -32,7 +32,7 @@ export default function Navigation({user}){
              ))}
         </ul>
 
-        <button className="ml-auto btn btn-primary navbar-btn"><Link to="/schedule">Start Scheduling {`>`}</Link></button>
+        <button className="ml-auto btn btn-primary navbar-btn"><Link to="/selector">Start Scheduling {`>`}</Link></button>
             
     </nav>)
 }
@@ -44,11 +44,11 @@ const navLinksSchedule = [
     },
     {
         title: '>', 
-        path: '/schedule'
+        path: '/selector'
     },
     {
         title: 'Selection', 
-        path: '/schedule'
+        path: '/selector'
     },
     {
         title: '>', 

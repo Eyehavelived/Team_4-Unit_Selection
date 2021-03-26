@@ -8,7 +8,7 @@ import Unit from "../components/unit";
 
 
 
-export default function Scheduling() {
+export default function Selector() {
   const sampleFaculty = 
     {
       title:
