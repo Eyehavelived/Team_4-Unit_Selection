@@ -79,15 +79,25 @@ ul.no-bullets {
     line-height:1;
   }
 
- //schedule button
+ //schedule page's button
  .schedule-button{
    background-color: #5D6465;
    border-radius: 4px;
    color:white;
    font-size: 16px;
-   padding: 15px 32px;
+   padding: 10px 32px;
    margin: 20px 0;
  }
+ .search-button{
+  background-color: #5D6465;
+  border-radius: 4px;
+  color:white;
+  font-size: 16px;
+  padding: 10px 32px;
+  margin: 20px 0;
+  width:210px;
+}
+
 
 //schedule scroll
 .scroll-page {
@@ -178,4 +188,11 @@ label {
 
  .checkboxes label{
    margin: 0px 30px;
+ }
+
+ //grey background grid for schedule page
+ .grey-grid{
+   background-color: #d3d3d3;
+   display:inline;
+   width:255px;
  }

@@ -19,7 +19,7 @@ export default function ToggleDiv(props) {
       <button className="clear-button-default" onClick={handleClick}> 
       <Caret width={10} fill={"#006DAE"} className={`${rotate}`} />
       </button>
-      <u>{props.name}</u>
+      <u><b>{props.name}</b></u>
       </label>
       {expandContent&&(
         //This inline-style is used to save the space for displaying semester and year

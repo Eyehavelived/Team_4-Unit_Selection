@@ -316,16 +316,16 @@ export default function Scheduling() {
             <ToggleDiv data={sampleSemeter} name="Semester" />
             <button className="schedule-button">Show filtered result</button>
           </form>  
-            <h6>Unit Code Search</h6>
+            <h6><b>Unit Code Search</b></h6>
             <form onSubmit={handleSearchRequest}>
               <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="schedule-button" type="submit" value="submit">
+              <button className="search-button" type="submit" value="submit">
                 Search
               </button>
             </form>
           </Col>
           <Col xs={3}>
-            <u>Units</u>
+            <u><b>Units</b></u>
             {filterResults.length>0&&
             <div className="scroll-page">
             <div className="force-overflow">
@@ -348,7 +348,7 @@ export default function Scheduling() {
               </div>
             }
               <div className="fix-selected-unit">
-                <u>Selected Units</u>
+                <u><b>Selected Units</b></u>
                 <div className="schedule-scroll">
                   {selectedUnits.map((unitItem,index) => {
                     return (
@@ -365,6 +365,7 @@ export default function Scheduling() {
                 </div>
               </div>
           </Col>
+          <div className="grey-grid">
           <Col xs={3}>
               {units.length >0  && (
                 <Unit
@@ -383,6 +384,8 @@ export default function Scheduling() {
                 />
               )}
           </Col>
+          </div>
+          <div className="grey-grid">
           <Col xs={3}>
               {units.length > 1 && (
                 <Unit
@@ -402,6 +405,7 @@ export default function Scheduling() {
                 />
               )}
           </Col>
+          </div>
         </Row>
       </Container>
     </section>

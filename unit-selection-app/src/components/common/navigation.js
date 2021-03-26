@@ -39,6 +39,14 @@ export default function Navigation({user}){
 
 const navLinksSchedule = [
     {
+        title: 'Home', 
+        path: '/home'
+    },
+    {
+        title: '>', 
+        path: '/schedule'
+    },
+    {
         title: 'Selection', 
         path: '/schedule'
     },
@@ -71,7 +79,7 @@ function NavigationSchedule({user}){
             <ul>
                 { navLinksSchedule.map((link,index)=>(
                     <li key={index}>
-                        <Link to={link.path}>{link.title}</Link>
+                        <Link style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link>
                     </li>
                 ))}
             </ul>
