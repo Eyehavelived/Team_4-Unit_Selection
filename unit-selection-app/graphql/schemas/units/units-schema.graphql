@@ -30,6 +30,7 @@ type Unit {
     synopsis: String
     workloadReq: String
     isActive: Int
+    locationNames: [String]
 }
 
 # type Unit {

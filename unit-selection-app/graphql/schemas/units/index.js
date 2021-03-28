@@ -15,21 +15,18 @@ const getUnitsCurry = cb =>
             console.log("No units found")
             return []
         }
-        temp = [...units]
-        console.log(typeof(temp))
-        return temp
+        // temp = [...units]
+        return units.map(({locationNames, ...rest}) => ({
+            locationNames: locationNames.split(","),
+            ...rest
+        }))
     }
 
 module.exports = {
     resolvers: {
         Query:  {
             getUnit: getUnitsCurry(
-                async ({unitCode}) => 
-                    {
-                        const qry = await PostService.getUnit(unitCode)
-                        // console.log(qry)
-                        return qry
-                    }
+                async ({unitCode}) => await PostService.getUnit(unitCode)
             )
         }
     },

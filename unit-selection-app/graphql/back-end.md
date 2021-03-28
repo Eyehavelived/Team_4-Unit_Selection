@@ -115,3 +115,6 @@ Using the `create-migration` command, create another migration, but with the nam
 
 ## Installation and Running Migrations
 When first installing the workspace on your machine, you will need to run a db-migration to create and populate the database on your local workspace.
+
+## API Development
+Queries to mysql is handled through Knex, with the full documentation accessible at http://knexjs.org/
