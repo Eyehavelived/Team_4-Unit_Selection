@@ -3,20 +3,24 @@ import {Link} from 'react-router-dom';
 
 const navLinks = [
     {
-        title: 'Home', 
+        title: 'Home   >', 
         path: '/'
     },
     {
-        title:'About',
-        path:'/About'
+        title: 'Selection   >', 
+        path: '/schedule'
     },
     {
-        title:'How to use',
-        path:'/howtouse'
+        title:'Schedule   >',
+        path:'/selection'
+    },
+    {
+        title:'View',
+        path:'/view'
     }
 ]
 
-export default function Navigation({user}){
+export default function Navigation2({user}){
 
     const [menuActive, setMenuActive] = useState(false)
 
@@ -24,15 +28,13 @@ export default function Navigation({user}){
     <nav id="nav-override" className="navbar navbar-expand-lg">
         <span className="custom-logo navbar-brand"><Link to='/'>M Unit Selection</Link></span>
 
-        <ul className="navbar-nav">
+        <ul className="navbar-nav ms-auto">
             { navLinks.map((link,index)=>(
                 <li key={index} className="nav-item">
                      <a className="nav-link"><Link to={link.path}>{link.title}</Link></a>
-                 </li>
+                </li>
              ))}
         </ul>
-
-        <button className="ms-auto btn btn-primary navbar-btn"><Link to="/schedule">Start Scheduling {`>`}</Link></button>
             
     </nav>)
 }
