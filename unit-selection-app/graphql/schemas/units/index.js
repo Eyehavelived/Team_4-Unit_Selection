@@ -16,19 +16,33 @@ const getUnitsCurry = cb =>
             return []
         }
         // temp = [...units]
-        return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, ...rest}) => ({
+        return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, ...rest}) => ({
             locationNames: [...new Set(locationNames.split(","))],
-            unitPreRequisites: [...new Set(unitPreRequisites.split(","))],
+            unitPreRequisites: [...new Set(unitPreRequisites ? unitPreRequisites.split(",") : "")],
+            unitCoRequisites: [...new Set(unitCoRequisites ? unitCoRequisites.split(",") : "")],
+            unitProhibitions: [...new Set(unitProhibitions ? unitProhibitions.split(",") : "")],
             teachingPeriods: [...new Set(teachingPeriodNames.split(","))],
             ...rest
         }))
     }
+
+// placeholder
+const filters = (options) => {
+    // conds = {}
+    // if (options['year']) {
+    //     conds['unit.unitCode'] = 
+    // }
+}
 
 module.exports = {
     resolvers: {
         Query:  {
             getUnit: getUnitsCurry(
                 async ({unitCode}) => await PostService.getUnit(unitCode)
+            // ),
+
+            // getUnits: getUnitsCurry(
+            //     async (filters => await PostService.getUnit(filters()))
             )
         }
     },

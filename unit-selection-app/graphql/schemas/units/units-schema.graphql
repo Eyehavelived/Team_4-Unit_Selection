@@ -23,6 +23,8 @@ type Unit {
     workloadReq: String
     isActive: Int
     unitPreRequisites: [String]
+    unitCoRequisites: [String]
+    unitProhibitions: [String]
     locationNames: [String]
     teachingPeriods: [String]
     # unitAssessments: String
