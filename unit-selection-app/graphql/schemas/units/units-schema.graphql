@@ -1,63 +1,49 @@
 type Query {
-    compareUnits: [CompUnit]!
-    scheduleUnits: [SchedUnit]!
-    searchUnits: [SearchUnit]!
+    getUnit(unitCode: String): [Unit]
 }
 
-type Period {
-    id: Int
-    periodName: String
-}
+# type Period {
+#     periodName: String
+# }
 
-type Location {
-    id: Int
-    locationName: String
-}
+# type Location {
+#     locationName: String
+# }
 
 type Assessment {
     id: Int
-    unitCode: String
     assessmentWeight: Float
     assessmentName: String
 }
 
 type Contact {
-    id: Int
     contactName: String
     contactEmail: String
     contactRole: String
 }
 
-type CompUnit {
+type Unit {
     unitCode: String
     unitName: String
-    unitFaculty: String
-    degreeType: String
-    unitPreRequisite: [String]!
-    unitCoRequisite: [String]!
-    unitProhibition: [String]!
-    unitTeachingPeriod: [Period]!
-    location: [Location]!
+    unitFacultyId: Int
+    unitDegreeTypeId: Int
     synopsis: String
-    assessment: [Assessment]!
-    workloadRequirements: String
-    contacts: [Contact]!
+    workloadReq: String
+    isActive: Int
 }
 
-type SearchUnit {
-    unitCode: String
-    unitName: String
-    unitFaculty: String
-    degreeType: String
-    unitTeachingPeriod: [Period]!
-    location: [Location]!
-}
-type SchedUnit {
-    unitCode: String
-    unitName: String
-    unitTeachingPeriod: [Period]!
-    location: [Location]
-    unitPreRequisite: [String]!
-    unitCoRequisite: [String]!
-    unitProhibition: [String]!
-}
+# type Unit {
+#     unitCode: String
+#     unitName: String
+#     unitFaculty: String
+#     degreeType: String
+#     unitPreRequisite: [String]!
+#     unitCoRequisite: [String]!
+#     unitProhibition: [String]!
+#     unitTeachingPeriod: [String]!
+#     unitLocation: [String]!
+#     synopsis: String
+#     assessment: [Assessment]!
+#     workloadRequirements: String
+#     contacts: [Contact]!
+# }
