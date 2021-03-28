@@ -16,8 +16,10 @@ const getUnitsCurry = cb =>
             return []
         }
         // temp = [...units]
-        return units.map(({locationNames, ...rest}) => ({
-            locationNames: locationNames.split(","),
+        return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, ...rest}) => ({
+            locationNames: [...new Set(locationNames.split(","))],
+            unitPreRequisites: [...new Set(unitPreRequisites.split(","))],
+            teachingPeriods: [...new Set(teachingPeriodNames.split(","))],
             ...rest
         }))
     }

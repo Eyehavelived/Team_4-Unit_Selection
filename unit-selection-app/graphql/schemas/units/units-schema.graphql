@@ -2,14 +2,6 @@ type Query {
     getUnit(unitCode: String): [Unit]
 }
 
-# type Period {
-#     periodName: String
-# }
-
-# type Location {
-#     locationName: String
-# }
-
 type Assessment {
     id: Int
     assessmentWeight: Float
@@ -25,12 +17,15 @@ type Contact {
 type Unit {
     unitCode: String
     unitName: String
-    unitFacultyId: Int
-    unitDegreeTypeId: Int
+    facultyName: String
+    degreeType: String
     synopsis: String
     workloadReq: String
     isActive: Int
+    unitPreRequisites: [String]
     locationNames: [String]
+    teachingPeriods: [String]
+    # unitAssessments: String
 }
 
 # type Unit {
