@@ -7,6 +7,8 @@ const path = require('path')
 const PostService = require('../../api/units')
 const {errorHandler} = require('../../api/utils')
 
+const db = require('../../database/mysql')
+
 const getUnitsCurry = cb =>
     async (parent, args, ctx, info) => {
         const units = await cb(args, parent)
@@ -28,10 +30,8 @@ const getUnitsCurry = cb =>
 
 // placeholder
 const filters = (options) => {
-    // conds = {}
-    // if (options['year']) {
-    //     conds['unit.unitCode'] = 
-    // }
+    console.log(options)
+    return true
 }
 
 module.exports = {
@@ -39,10 +39,14 @@ module.exports = {
         Query:  {
             getUnit: getUnitsCurry(
                 async ({unitCode}) => await PostService.getUnit(unitCode)
-            // ),
+            ),
 
-            // getUnits: getUnitsCurry(
-            //     async (filters => await PostService.getUnit(filters()))
+            getUnits: getUnitsCurry(
+                async () => await PostService.getUnits()
+            // ),
+            
+            // getUnitsWithFilters: getUnitsCurry(
+            //     async (options) => await PostService.getUnitsWithFilters(filters(options))
             )
         }
     },

@@ -1,5 +1,8 @@
 type Query {
     getUnit(unitCode: String): [Unit]
+    getUnits: [Unit]
+    # getUnitsWithFilters(facultyName: String = "", year: String = "", semester: String = "")
+
 }
 
 type Assessment {
