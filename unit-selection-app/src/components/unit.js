@@ -14,8 +14,8 @@ function Unit(props) {
   }
   return (
     
-    <Card border="info" style={props.compare?{width:'14rem'}:{width:'12rem',height:'12rem'}}>
-      <Card.Header as="h4">{props.unitCode}<IoCloseOutline style={props.compare?{left:'80px'}:{}} className="close-button" onClick={()=>handleClick(props.id)} size={30}/></Card.Header>
+    <Card border="info" style={props.compare?(props.sideBarStatus?{width:"14rem"}:{width:'25rem'}):{width:'12rem',height:'12rem'}}>
+      <Card.Header as="h4">{props.unitCode}<IoCloseOutline style={props.compare?(props.sideBarStatus?{left:'190px'}:{left:'365px'}):{}} className="close-button" onClick={()=>handleClick(props.id)} size={30}/></Card.Header>
       <Card.Body>
       <Card.Title as="h5"><b>Unit Name: </b></Card.Title>
       <Card.Text  as="h6">{props.unitName}</Card.Text>
@@ -28,7 +28,7 @@ function Unit(props) {
       {props.compare&&<Card.Title as="h5"><b>Workload: </b></Card.Title>}
       {props.compare&&<Card.Text as="h6">{props.workloadReq}</Card.Text>}
       </Card.Body>
-      {props.compare&&<FaPlusCircle size={40} color={"#AECF8C"} className="floating-button" onClick={handleAddClick}/>}
+      {props.compare&&<FaPlusCircle size={40} color={"#AECF8C"} className="floating-button" style={!props.sideBarStatus&&{left:'350px'}}  onClick={handleAddClick}/>}
     </Card>
     
   );

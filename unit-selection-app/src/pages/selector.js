@@ -300,30 +300,45 @@ export default function Selector() {
     event.preventDefault();
   }
 
-  
+  const [sidebar,setSidebar] = useState(true);
+  // const showSideBar = (prevStatus)=>{return (
+    
+  //   setSidebar(!prevStatus)
+  //   console.log(sidebar)
+    
+  //   )};
+  function showSideBar(){
+    setSidebar(prevStatus=>!prevStatus);
+    console.log(sidebar);
 
+  }
+
+  
+  
   return (
     <section className="container home">
       <div className="section hero">
-        <NavigationSchedule />
+        <NavigationSchedule onSide={showSideBar}/>
       </div>
       <Container>
         <Row>
-          <Col xs={3}>
+        {sidebar&&
+          <Col xs={3} className={sidebar?'nav-menu active':'nav-menu'}>
           <form onSubmit={handleSortFilter}>
-            <ToggleDiv data={sampleFaculty} name="Faculty" />
+            <ToggleDiv data={sampleFaculty} name="Faculty" onSide={showSideBar}/>
             <ToggleDiv data={sampleYear} name="Year" />
             <ToggleDiv data={sampleSemeter} name="Semester" />
             <button className="schedule-button">Show filtered result</button>
-          </form>  
-            <h6><b>Unit Code Search</b></h6>
+          </form> 
+            <h6><b>Unit Code Search</b></h6> 
             <form onSubmit={handleSearchRequest}>
               <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
               <button className="search-button" type="submit" value="submit">
                 Search
               </button>
             </form>
-          </Col>
+          </Col>}
+
           <Col xs={3}>
             <u><b>Units</b></u>
             {filterResults.length>0&&
@@ -365,8 +380,9 @@ export default function Selector() {
                 </div>
               </div>
           </Col>
-          <div className="grey-grid">
-          <Col xs={3}>
+          <div className={sidebar?"grey-grid":"grey-grid1"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
+          {/* <Col lg={sidebar?3:4.5} xs={sidebar?3:4.5} > */}
+          <Col xs={sidebar?3:4.5} >
               {units.length >0  && (
                 <Unit
                   key={units[0].unitCode}
@@ -381,12 +397,13 @@ export default function Selector() {
                   compare={true}
                   onDelete={deleteUnit}
                   onAddSelected={addInSelectedUnit}
+                  sideBarStatus={sidebar}
                 />
               )}
           </Col>
           </div>
-          <div className="grey-grid">
-          <Col xs={3}>
+          <div className={sidebar?"grey-grid":"grey-grid2"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
+          <Col xs={sidebar?3:4.5} >
               {units.length > 1 && (
                 <Unit
                   key={units[1].unitCode}
@@ -402,6 +419,7 @@ export default function Selector() {
                   compare={true}
                   onDelete={deleteUnit}
                   onAddSelected={addInSelectedUnit}
+                  sideBarStatus={sidebar}
                 />
               )}
           </Col>

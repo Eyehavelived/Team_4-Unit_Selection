@@ -159,9 +159,9 @@ ul.no-bullets {
 }
 
 .close-button{
-  position: relative;
-  left:50px;
-  top:0;
+  position: absolute;
+  right:0px;
+  top:10;
 }
 
 //Fixed the position of selected unit column
@@ -190,9 +190,36 @@ label {
    margin: 0px 30px;
  }
 
- //grey background grid for schedule page
+ //grey background grid for start schedule page
  .grey-grid{
-   background-color: #d3d3d3;
+  display:inline;
+  width:255px;
+}
+//Grey background grid after side bar shrinkage(First Unit)
+ .grey-grid1{
    display:inline;
-   width:255px;
+   width:400px;
+   height:80vh;
  }
+ //Grey background grid after side bar shrinkage(Second Unit)
+ .grey-grid2{
+   display:inline;
+   width:400px;
+   height:80vh;
+   padding-left:5px;
+ }
+
+
+
+//side bar
+.nav-menu{
+  background-color:#ffffff;
+  left:-100%;
+  position:fixed;
+  transition: 850ms;
+}
+
+.nav-menu.active{
+  left:0;
+  transition:350ms;
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Caret from "../caret";
+import {IoCloseOutline} from "react-icons/io5";
 
 
 //This function is used to display the Faculty,Year and semester
@@ -21,6 +22,7 @@ export default function ToggleDiv(props) {
       </button>
       <u><b>{props.name}</b></u>
       </label>
+      {props.name==="Faculty"&&<IoCloseOutline onClick={props.onSide} size={25} style={{marginLeft:'90px'}}/>}
       {expandContent&&(
         //This inline-style is used to save the space for displaying semester and year
       <div style={ (props.name==="Year" || props.name==="Semester" ) ? { height:100+'px'} : {}} className="scroll-page">

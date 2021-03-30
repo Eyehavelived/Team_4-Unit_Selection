@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {GiHamburgerMenu} from "react-icons/gi";
 
 const navLinks = [
     {
@@ -68,13 +69,14 @@ const navLinksSchedule = [
     }
 ]
 
-function NavigationSchedule({user}){
+function NavigationSchedule(props){
 
-    const [menuActive, setMenuActive] = useState(false)
+    const [menuActive, setMenuActive] = useState(false);
+
 
     return (
     <nav className="site-navigation">
-        <span className="menu-title">M Unit Selection</span>
+        <span className="menu-title"><GiHamburgerMenu onClick={props.onSide}/>M Unit Selection</span>
         <div className={`menu-content-container ${menuActive && `active`}`}>
             <ul>
                 { navLinksSchedule.map((link,index)=>(
