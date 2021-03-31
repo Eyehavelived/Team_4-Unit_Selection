@@ -91,4 +91,26 @@ function NavigationSchedule(props){
     </nav>)
 }
 
-export {NavigationSchedule};
+function NavigationView(props){
+
+    const [menuActive, setMenuActive] = useState(false);
+
+
+    return (
+    <nav className="site-navigation">
+        <span className="menu-title">M Unit Selection</span>
+        <div className={`menu-content-container ${menuActive && `active`}`}>
+            <ul>
+                { navLinksSchedule.map((link,index)=>(
+                    <li key={index}>
+                        <Link style={link.title==="View" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link>
+                    </li>
+                ))}
+            </ul>
+
+        </div>
+
+    </nav>)
+}
+
+export {NavigationSchedule,NavigationView};

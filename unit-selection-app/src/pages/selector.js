@@ -49,24 +49,28 @@ export default function Selector() {
     {
       title:<ul className="no-bullets">
       <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid9" name="Year" value="2017"/>
-      2017</label>
+      <label> <input onChange={handleChange} type="checkbox" key="uuid9" name="Year" value="year1"/>
+      Year 1</label>
       </li>
       <li>
-      <label>  <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="2018"/>
-      2018</label>
+      <label>  <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="year2"/>
+      Year 2</label>
       </li>
       <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid11" name="Year" value="2019"/>
-      2019</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid11" name="Year" value="year3"/>
+      Year 3</label>
       </li>
       <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="2020"/>
-      2020</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="year4"/>
+      Year 4</label>
       </li>
       <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="2021"/>
-       2021</label>
+      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="honour"/>
+       Honour</label>
+      </li>
+      <li>
+      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="master"/>
+       Master</label>
       </li>
       </ul>
     };
@@ -105,7 +109,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
         workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       },
       {
@@ -115,7 +119,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
         workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       },
       {
@@ -125,7 +129,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'lorem ipsum dolores umbridge',
         workloadReq: 'your soul because the first assignment will decide your grades',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       },
       {
@@ -135,7 +139,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
 
       },
@@ -146,17 +150,17 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2021",
+        year:"year2",
         semester:"Semester1"
       },
       {
-        unitCode: 'FIT6666',
+        unitCode: 'FIT3333',
         unitName: 'Industry-based learning',
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       },
       {
@@ -166,7 +170,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       },
       {
@@ -176,7 +180,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       },
       {
@@ -186,7 +190,7 @@ export default function Selector() {
         unitType: 'Undergraduate',
         synopsis: 'Students on placement participate full time in a defined, graduate level role',
         workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"2021",
+        year:"year3",
         semester:"Semester1"
       }
   ]
@@ -380,49 +384,30 @@ export default function Selector() {
                 </div>
               </div>
           </Col>
-          <div className={sidebar?"grey-grid":"grey-grid1"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
-          {/* <Col lg={sidebar?3:4.5} xs={sidebar?3:4.5} > */}
-          <Col xs={sidebar?3:4.5} >
-              {units.length >0  && (
-                <Unit
-                  key={units[0].unitCode}
-                  id={units[0].unitCode}
-                  unitCode={units[0].unitCode}
-                  unitName={units[0].unitName}
-                  unitType={units[0].unitType}
-                  synopsis={units[0].synopsis}
-                  workloadReq={units[0].workloadReq}
-                  year={units[0].year}
-                  semester={units[0].semester}
-                  compare={true}
-                  onDelete={deleteUnit}
-                  onAddSelected={addInSelectedUnit}
-                  sideBarStatus={sidebar}
-                />
-              )}
-          </Col>
-          </div>
-          <div className={sidebar?"grey-grid":"grey-grid2"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
-          <Col xs={sidebar?3:4.5} >
-              {units.length > 1 && (
-                <Unit
-                  key={units[1].unitCode}
-                  id={units[1].unitCode}
-                  unitCode={units[1].unitCode}
-                  unitName={units[1].unitName}
-                  unitType={units[1].unitType}
-                  synopsis={units[1].synopsis}
-                  workloadReq={units[1].workloadReq}
-                  year={units[1].year}
-                  semester={units[1].semester}
+          <div className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
+              {
+                units.length > 0 && (
+                units.map(element=>
+                <Col>
+                  <Unit
+                  key={element.unitCode}
+                  id={element.unitCode}
+                  unitCode={element.unitCode}
+                  unitName={element.unitName}
+                  unitType={element.unitType}
+                  synopsis={element.synopsis}
+                  workloadReq={element.workloadReq}
+                  year={element.year}
+                  semester={element.semester}
                   //This normal attribute is used to figure out the unit in selected Unit or in compare window
                   compare={true}
                   onDelete={deleteUnit}
                   onAddSelected={addInSelectedUnit}
                   sideBarStatus={sidebar}
                 />
+                </Col>
+                )
               )}
-          </Col>
           </div>
         </Row>
       </Container>

@@ -193,7 +193,8 @@ label {
  //grey background grid for start schedule page
  .grey-grid{
   display:inline;
-  width:255px;
+  width:500px;
+  height:100vh;  
 }
 //Grey background grid after side bar shrinkage(First Unit)
  .grey-grid1{
@@ -203,10 +204,9 @@ label {
  }
  //Grey background grid after side bar shrinkage(Second Unit)
  .grey-grid2{
-   display:inline;
-   width:400px;
+   width:800px;
    height:80vh;
-   padding-left:5px;
+   display:inline;
  }
 
 
@@ -223,3 +223,4 @@ label {
   left:0;
   transition:350ms;
 }
+
