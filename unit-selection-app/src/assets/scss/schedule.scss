@@ -2,7 +2,7 @@
     background-color: white;
     height: 75vh;
 }
-#container-units{
+.container-units{
     height: 63vh;
 
     &::-webkit-scrollbar {
@@ -52,4 +52,8 @@
             transform: rotate(45deg);
         }
     }
+}
+
+#container-tp{
+    height: 50vh;
 }

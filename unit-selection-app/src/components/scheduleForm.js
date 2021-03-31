@@ -6,7 +6,7 @@ export default function ScheduleForm(props){
         listId: "11",
         year:"1",
         sem:"1",
-        units:[{unitCode:"FIT2222",unitName:"test"},{unitCode:"FIT2223",unitName:"test"}]
+        units:[]
     });
 
     const yearOptions = ["1","2","3","4"]
@@ -19,6 +19,7 @@ export default function ScheduleForm(props){
             return {
                 ...prevTeachingPeriod,
                 [name]: value,
+                units:[]
             };
         });
     }

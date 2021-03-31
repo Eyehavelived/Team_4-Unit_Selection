@@ -13,6 +13,19 @@ const reorder = (list, startIndex, endIndex) => {
   
     return result;
 };
+const move = (source, destination, droppableSource, droppableDestination) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
+  
+    destClone.splice(droppableDestination.index, 0, removed);
+  
+    const result = {};
+    result[droppableSource.droppableId] = sourceClone;
+    result[droppableDestination.droppableId] = destClone;
+  
+    return result;
+};
 
 export default function Selection(){
     const SELECTEDUNITS = "selectedUnits"
@@ -66,7 +79,6 @@ export default function Selection(){
     function deleteTeachingPeriod(id){
         updateUnitList(prevTeachingPeriods => {
             return prevTeachingPeriods.filter((tp)=>{
-                console.log(tp);
                 return (tp.listId) !== id
             });
         });
@@ -82,12 +94,21 @@ export default function Selection(){
         const sid = source.droppableId;
         const did = destination.droppableId;
 
-        if(sid === did){
-            const list = unitList.filter((list)=>{return list.listId===sid})
-            const items = reorder(list[0].units,source.index,destination.index);
-            const newState = [...unitList];
-            newState.map((list)=>{return (list.listId===sid?list.units=items:null)})
-            updateUnitList(newState);
+        const sInd = unitList.findIndex((list)=>list.listId===sid);
+        const dInd = unitList.findIndex((list)=>list.listId===did);
+        
+        if(sInd === dInd){
+            const units = reorder(unitList[sInd].units, source.index, destination.index);
+            const newUnitList = [...unitList];
+            newUnitList[sInd].units = units;
+            updateUnitList(newUnitList);
+        }else{
+            const result = move(unitList[sInd].units, unitList[dInd].units, source, destination);
+            const newUnitList = [...unitList];
+            newUnitList[sInd].units = result[sid];
+            newUnitList[dInd].units = result[did];
+
+            updateUnitList(newUnitList);
         }
         
     }
