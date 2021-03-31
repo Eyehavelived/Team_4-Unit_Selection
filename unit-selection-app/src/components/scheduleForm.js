@@ -3,8 +3,10 @@ import React, {useState} from 'react';
 export default function ScheduleForm(props){
 
     const [teachingPeriod,setTeachingPeriod] = useState({
+        listId: "11",
         year:"1",
-        sem:"1"
+        sem:"1",
+        units:[{unitCode:"FIT2222",unitName:"test"},{unitCode:"FIT2223",unitName:"test"}]
     });
 
     const yearOptions = ["1","2","3","4"]
@@ -16,12 +18,14 @@ export default function ScheduleForm(props){
         setTeachingPeriod((prevTeachingPeriod) => {
             return {
                 ...prevTeachingPeriod,
-                [name]: value
+                [name]: value,
             };
         });
     }
 
     function submitTeachingPeriod(event){
+        teachingPeriod.listId = teachingPeriod.year+teachingPeriod.sem
+        console.log(teachingPeriod.listId)
         props.onAdd(teachingPeriod);
         event.preventDefault();
     }
