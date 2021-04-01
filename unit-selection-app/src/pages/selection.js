@@ -327,18 +327,7 @@ export default function Selection() {
         result.push(sampleUnits[i]);
       }
     }
-    // if(result.length===0){
-    //   setFilterUnits({
-    //     faculty:[],
-    //     year:[],
-    //     semester:[]
-    //   });
-    //   setFilterResults([]);
-    // }
-    // else{
     setFilterResults(prevResults=>[...prevResults,...result]);
-    // }
-    
     event.preventDefault();
   }
 
@@ -417,7 +406,7 @@ export default function Selection() {
                 </div>
               </div>
           </Col>
-          <div className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
+          <div className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto no-gutters"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
               {
                 units.length > 0 && (
                 units.map(element=>

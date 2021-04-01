@@ -33,7 +33,7 @@ export default function Navigation({user}){
              ))}
         </ul>
 
-        <button className="ml-auto btn btn-primary navbar-btn"><Link to="/selector">Start Scheduling {`>`}</Link></button>
+        <button className="ml-auto btn btn-primary navbar-btn"><Link to="/selection">Start Scheduling {`>`}</Link></button>
             
     </nav>)
 }
