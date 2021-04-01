@@ -1,6 +1,8 @@
 @import './_variables';
 @import './_navigation';
+@import './_scheduleCard';
 @import 'home.scss';
+@import 'schedule.scss';
 @import 'selection.scss';
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'view.scss';
@@ -8,12 +10,18 @@
 
 html body{
     font-family: -apple-system, system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", Arial, sans-serif;
-    font-weight: 500;
     margin: 0;
+    background-color: $secondary-light;
+    font-size: 14px;
+}
+
+.circle-btn{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 }
 
 /*
-
 h1{
     font-size: 48px;
     line-height: 57px;
@@ -47,7 +55,10 @@ h5{
 p{
   font-size: 16px;
   line-height: 24px;
+  font-weight: none;
 }
+<<<<<<< HEAD
+=======
 
 .btn{
   border-radius: 5px;
@@ -56,4 +67,5 @@ p{
 }
 
 
+>>>>>>> 622fce3b28cfdf7fd49055a06250a99e7113ff0c
 */

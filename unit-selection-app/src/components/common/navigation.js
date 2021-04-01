@@ -25,7 +25,7 @@ export default function Navigation({user}){
     <nav id="nav-override" className="navbar navbar-expand-lg">
         <span className="custom-logo navbar-brand"><Link to='/'>M Unit Selection</Link></span>
 
-        <ul className="navbar-nav mr-auto">
+        <ul className="navbar-nav">
             { navLinks.map((link,index)=>(
                 <li key={index} className="nav-item">
                      <a className="nav-link"><Link to={link.path}>{link.title}</Link></a>
