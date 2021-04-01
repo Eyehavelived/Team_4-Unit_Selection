@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 export default function ScheduleForm(props){
 
     const [teachingPeriod,setTeachingPeriod] = useState({
-        listId: "11",
         year:"1",
         sem:"1",
         units:[]
@@ -26,7 +25,6 @@ export default function ScheduleForm(props){
 
     function submitTeachingPeriod(event){
         teachingPeriod.listId = teachingPeriod.year+teachingPeriod.sem
-        console.log(teachingPeriod.listId)
         props.onAdd(teachingPeriod);
         event.preventDefault();
     }

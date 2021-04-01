@@ -77,11 +77,20 @@ export default function Selection(){
     }
 
     function deleteTeachingPeriod(id){
+        
+        //index of deleted tp
+        const sInd = unitList.findIndex((list)=>list.listId===id);
+        //index of selected unit list
+        const dInd = unitList.findIndex((list)=>list.listId===SELECTEDUNITS);
+        
         updateUnitList(prevTeachingPeriods => {
+            prevTeachingPeriods[dInd].units = [...prevTeachingPeriods[dInd].units,
+                                                ...prevTeachingPeriods[sInd].units];
             return prevTeachingPeriods.filter((tp)=>{
                 return (tp.listId) !== id
             });
         });
+        
     }
 
     
