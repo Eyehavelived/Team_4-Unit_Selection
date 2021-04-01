@@ -1,10 +1,8 @@
 type Query {
     getUnit(unitCode: String): [Unit]
     getUnits: [Unit]
-    # getUnitsWithFilters(filtersStringified: String): [Unit]
-    getUnitsWithFilters: [Unit]
-    # getUnitsWithFilters(whereExpr: any)
-}
+    getUnitsWithFilters(optionsString: String): [Unit]
+    }
 
 type Assessment {
     id: Int

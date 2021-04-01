@@ -25,10 +25,10 @@ const units = () =>
     .leftJoin('unit_prerequisites', 'unit.unitCode', 'unit_prerequisites.unitCode')
     .leftJoin('unit_prohibitions', 'unit.unitCode', 'unit_prohibitions.unitCode')
     .leftJoin('unit_corequisites', 'unit.unitCode', 'unit_corequisites.unitCode')
-    .innerJoin('unit_locations', 'unit.unitCode', 'unit_locations.unitCode')
-    .innerJoin('teaching_location', 'locationId', 'teaching_location.id')
-    .innerJoin('unit_teaching_periods','unit.unitCode', 'unit_teaching_periods.unitCode')
-    .innerJoin('teaching_period', 'unit_teaching_periods.tpId', 'teaching_period.id')
+    .leftJoin('unit_locations', 'unit.unitCode', 'unit_locations.unitCode')
+    .leftJoin('teaching_location', 'locationId', 'teaching_location.id')
+    .leftJoin('unit_teaching_periods','unit.unitCode', 'unit_teaching_periods.unitCode')
+    .leftJoin('teaching_period', 'unit_teaching_periods.tpId', 'teaching_period.id')
     .leftJoin('faculty', 'unitFacultyId', 'faculty.id')
     .leftJoin('degree_type', 'unitDegreeTypeId', 'degree_type.id')
     .groupBy('unit.unitCode')
@@ -37,11 +37,9 @@ const units = () =>
     // .where({'unit.unitCode': "SUBSTR(unit.unitCode, 4, 1) = '3'"})
     // .catch(errorHandler)
 
-// placeholder
 const filters = (options) => {
     whereCalls = []
     whereFilters = {}
-    whereRawFilters = []
     if (options["year"]) {
         // We would expect years to come in as a list such as
         // ["3", "hons"] meaning year 3 units and hons units
@@ -50,21 +48,21 @@ const filters = (options) => {
         years.forEach((year) => {
             switch(year) {
                 case "1":
-                    listArg = listArg.append(1)
+                    listArg.push("1")
                     break
                 case "2":
-                    listArg = listArg.append(2)
+                    listArg.push("2")
                     break
                 case "3":
-                    listArg = listArg.append(3)
+                    listArg.push("3")
                     break
                 case "Hons":
-                    listArg = listArg.append(4)
+                    listArg.push("4")
                     if (!whereFilters["degree_type.id"]) {
-                        whereFilters["degree_type.id"] = 1
+                        whereFilters["degree_type.id"] = [1]
                     } else {
                         if (!whereFilters["degree_type.id"].includes(1)){
-                            whereFilters["degree_type.id"] = whereFilters["degree_type.id"].append(2)
+                            whereFilters["degree_type.id"] = whereFilters["degree_type.id"].push(2)
                         }
                     }
                     break
@@ -72,34 +70,52 @@ const filters = (options) => {
                 // To be confirmed if masters part 1 units start with 4, or if it's just Arts being weird.
                 // if not, this can be changed to just Masters and we filter by graduate
                 case "Masters (Part 1)":
-                    listArg = listArg.append(4)
+                    listArg.push("4")
                     if (!whereFilters["degree_type.id"]) {
-                        whereFilters["degree_type.id"] = 2
+                        whereFilters["degree_type.id"] = [2]
                     } else {
                         if (!whereFilters["degree_type.id"].includes(2)){
-                            whereFilters["degree_type.id"] = whereFilters["degree_type.id"].append(2)
+                            whereFilters["degree_type.id"].push(2)
                         }
                     }
-                    
                     break
                 case "Masters (Part 2)":
-                    listArg = listArg.append(5)
+                    listArg.push("5")
                     break
                 default:
                     errorHandler(new Error("Invalid year value provided %s" % year))
                     break
             }
         })
-        whereFilters = whereRawFilters.append(["SUBSTRING(unit.unitcode, 4, 1) = ?", listArg])
+        console.log(listArg)
+
+        rawStr = listArg.reduce((accumulator, yearVal) =>{
+            accumulator
+                .push("SUBSTRING(unit.unitCode, 4, 1) = "
+                    .concat(yearVal))
+            return accumulator
+                }, [])
+            .join(" OR ")
+
+        whereCalls.push(["whereRaw", rawStr])
     }
 
     if (options["semester"]) {
         // we would expect the semester to have the semester ids in the values
         // semester would have the ids because in order to add semester to the display, it should query the db for what semesters are available
         // likewise with faculties and degree types
-        whereCalls = whereCalls.append(() => whereIn())
+        whereCalls.push(["whereIn", 'unit_teaching_periods.tpId', options["semester"]])
     }
-    return ["'true'"]
+    if (options["faculty"]) {
+        // we expect the matching values to be a list of faculties
+        whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"]])
+    }
+
+    for (const [key, value] of Object.entries(whereFilters)) {
+        whereCalls.push("whereIn", key, value)
+      }
+
+    return whereCalls
 }
 
 
@@ -113,29 +129,32 @@ module.exports = {
         await units()
             .catch(errorHandler),
 
-    getUnitsWithFilters: async () => {
+    getUnitsWithFilters: async (optionsString) => {
         // // because it's a MASSIVE pain to pass varying values through the schema file, we'll decompress the query here.
-        // filtersObj = JSON.parse(filtersString) 
+        options = JSON.parse(optionsString) 
 
-        // // the .whereRaw() method accepts arguments that are typically strings, but can also have integers as well.
-        // // so the whereRawListOfList will have the arguments for a clause on each line, that can be deconstructed with ...ListRow
-        // whereRawListOfList = JSON.parse(whereRawExpr) 
-
-        // qry = units()
-        //     .where(whereObj)
+        // This is an example of what options would look like
+        // testOptions = {
+        //     "year": ["3", "1"],
+        //     "semester": [2],
+        //     "faculty": [1]
+        // }
         
-        arrayList = [["SUBSTRING(unit.unitCode, 4, 1) = ?", [1]], ["unit_locations.locationId = ?", [1]]]
+        arrayList = filters(options)
 
         return await arrayList.reduce((accumulator, arrRow) => {
-            return accumulator.whereRaw(...arrRow)
+            [whereType, ...rest] = arrRow
+            switch (whereType) {
+                case "whereIn":
+                    return accumulator.whereIn(...rest)
+                case "where":
+                    return accumulator.where(...rest)
+                case "whereRaw":
+                    return accumulator.whereRaw(...rest)
+                default:
+                    errorHandler(new Error("No whereType provided in row containing: ".concat(whereType)))
+            }
+            
         }, units()).catch(errorHandler)
-
-        // whereRawListOfList.forEach(arrayRow => {
-        //     qry = qry.where(...arrayRow)
-        // });
-
-        // return await qry.catch(errorHandler)
     }
-
-    //.whereRaw('SUBSTR(unit.unitCode, 4, 1) = ?', [3])
 }
