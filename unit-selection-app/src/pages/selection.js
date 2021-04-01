@@ -8,12 +8,12 @@ import Unit from "../components/unit";
 
 
 
-export default function Selector() {
+export default function Selection() {
   const sampleFaculty = 
     {
       title:
       <ul  className="no-bullets">
-      <li>
+      <li> 
       <label><input onChange={handleChange} type="checkbox" id="uuid1" name="Faculty" value='Faculty of Information Technology'/>Information Techonology</label>
       </li>
       <li>
@@ -200,9 +200,9 @@ export default function Selector() {
   const [filterResults,setFilterResults]=useState([]);
   const [filterUnits,setFilterUnits]=useState(
     {
-      faculty:"",
-      year:"",
-      semester:""
+      faculty:[],
+      year:[],
+      semester:[]
     }
   );
   const [units, setUnits] = useState([]);
@@ -268,49 +268,82 @@ export default function Selector() {
     });
   }
   function handleChange(event){
-    const {value,name} = event.target;
+    const {value,name,checked} = event.target;
+    if(checked){
     setFilterUnits(prevValue=>{
       if(name==="Semester"){
         return{
-          faculty:prevValue.faculty,
-          year:prevValue.year,
-          semester:value
+          faculty:[...prevValue.faculty],
+          year:[...prevValue.year],
+          semester:[...prevValue.semester,value]
         }
       }else if(name==="Year"){
         return{
-        faculty:prevValue.faculty,
-        year:value,
-        semester:prevValue.semester
+        faculty:[...prevValue.faculty],
+        year:[...prevValue.year,value],
+        semester:[...prevValue.semester]
         }
       }else{
         return{
-          faculty:value,
-          year:prevValue.year,
-          semester:prevValue.semester
+          faculty:[...prevValue.faculty,value],
+          year:[...prevValue.year],
+          semester:[...prevValue.semester]
           }
       }
-    })
+    })}
+    else{
+      setFilterUnits(prevValue=>{
+        if(name==="Semester"){
+          return{
+            faculty:[...prevValue.faculty],
+            year:[...prevValue.year],
+            semester:prevValue.semester.filter(element=>
+              element!==value
+            )
+          }
+        }else if(name==="Year"){
+          return{
+          faculty:[...prevValue.faculty],
+          year:prevValue.year.filter(element=>element!==value),
+          semester:[...prevValue.semester]
+          }
+        }else{
+          return{
+            faculty:prevValue.faculty.filter(element=>element!==value),
+            year:[...prevValue.year],
+            semester:[...prevValue.semester]
+            }
+        }
+
+      })
+
+    }
   }
   function handleSortFilter(event){
-    const {faculty,semester,year}=filterUnits;
-    const result=[]
+    const result=[];
     setFilterResults([]);
     for (var i=0;i<sampleUnits.length;i++){
-      if(sampleUnits[i].facultyName===faculty&&sampleUnits[i].year===year&&sampleUnits[i].semester===semester){
+      if(filterUnits.faculty.includes(sampleUnits[i].facultyName)&&filterUnits.year.includes(sampleUnits[i].year)&&filterUnits.semester.includes(sampleUnits[i].semester)){
         result.push(sampleUnits[i]);
       }
     }
+    // if(result.length===0){
+    //   setFilterUnits({
+    //     faculty:[],
+    //     year:[],
+    //     semester:[]
+    //   });
+    //   setFilterResults([]);
+    // }
+    // else{
     setFilterResults(prevResults=>[...prevResults,...result]);
+    // }
+    
     event.preventDefault();
   }
 
   const [sidebar,setSidebar] = useState(true);
-  // const showSideBar = (prevStatus)=>{return (
-    
-  //   setSidebar(!prevStatus)
-  //   console.log(sidebar)
-    
-  //   )};
+
   function showSideBar(){
     setSidebar(prevStatus=>!prevStatus);
     console.log(sidebar);

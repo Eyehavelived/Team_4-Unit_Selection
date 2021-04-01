@@ -45,19 +45,19 @@ const navLinksSchedule = [
     },
     {
         title: '>', 
-        path: '/selector'
+        path: '/selection'
     },
     {
         title: 'Selection', 
-        path: '/selector'
+        path: '/selection'
     },
     {
         title: '>', 
-        path: '/scheduleSecond'
+        path: '/schedule'
     },
     {
         title:'Schedule',
-        path:'/scheduleSecond'
+        path:'/schedule'
     },
     {
         title: '>', 
