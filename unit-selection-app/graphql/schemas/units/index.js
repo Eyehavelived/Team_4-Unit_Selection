@@ -2,6 +2,7 @@
 // const compareUnits = require('./mocks/compareUnits')
 // const scheduleUnits = require('./mocks/scheduleUnits')
 
+const { exception } = require('console')
 const fs = require('fs')
 const path = require('path')
 const PostService = require('../../api/units')
@@ -17,7 +18,9 @@ const getUnitsCurry = cb =>
             console.log("No units found")
             return []
         }
-        // temp = [...units]
+        
+        // From the query, we get locations as a single string "Malaysia,Clayton,Caulfield"
+        // This splits them into list of strings
         return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, ...rest}) => ({
             locationNames: [...new Set(locationNames.split(","))],
             unitPreRequisites: [...new Set(unitPreRequisites ? unitPreRequisites.split(",") : "")],
@@ -28,11 +31,7 @@ const getUnitsCurry = cb =>
         }))
     }
 
-// placeholder
-const filters = (options) => {
-    console.log(options)
-    return true
-}
+
 
 module.exports = {
     resolvers: {
@@ -43,10 +42,12 @@ module.exports = {
 
             getUnits: getUnitsCurry(
                 async () => await PostService.getUnits()
-            // ),
+            ),
             
-            // getUnitsWithFilters: getUnitsCurry(
-            //     async (options) => await PostService.getUnitsWithFilters(filters(options))
+            getUnitsWithFilters: getUnitsCurry(
+                async () => {
+                    console.log()
+                    return await PostService.getUnitsWithFilters()}
             )
         }
     },

@@ -1,6 +1,8 @@
 const db = require('../../database/mysql')
 const {errorHandler} = require('../utils')
 
+// This has to be a call back function and not a constant, because each instance of
+// a query is final and cannot revert back to its unfiltered form.
 const units = () =>
     db
     .select(
@@ -35,6 +37,70 @@ const units = () =>
     // .where({'unit.unitCode': "SUBSTR(unit.unitCode, 4, 1) = '3'"})
     // .catch(errorHandler)
 
+// placeholder
+const filters = (options) => {
+    whereCalls = []
+    whereFilters = {}
+    whereRawFilters = []
+    if (options["year"]) {
+        // We would expect years to come in as a list such as
+        // ["3", "hons"] meaning year 3 units and hons units
+        const years = options["year"]
+        const listArg = []
+        years.forEach((year) => {
+            switch(year) {
+                case "1":
+                    listArg = listArg.append(1)
+                    break
+                case "2":
+                    listArg = listArg.append(2)
+                    break
+                case "3":
+                    listArg = listArg.append(3)
+                    break
+                case "Hons":
+                    listArg = listArg.append(4)
+                    if (!whereFilters["degree_type.id"]) {
+                        whereFilters["degree_type.id"] = 1
+                    } else {
+                        if (!whereFilters["degree_type.id"].includes(1)){
+                            whereFilters["degree_type.id"] = whereFilters["degree_type.id"].append(2)
+                        }
+                    }
+                    break
+
+                // To be confirmed if masters part 1 units start with 4, or if it's just Arts being weird.
+                // if not, this can be changed to just Masters and we filter by graduate
+                case "Masters (Part 1)":
+                    listArg = listArg.append(4)
+                    if (!whereFilters["degree_type.id"]) {
+                        whereFilters["degree_type.id"] = 2
+                    } else {
+                        if (!whereFilters["degree_type.id"].includes(2)){
+                            whereFilters["degree_type.id"] = whereFilters["degree_type.id"].append(2)
+                        }
+                    }
+                    
+                    break
+                case "Masters (Part 2)":
+                    listArg = listArg.append(5)
+                    break
+                default:
+                    errorHandler(new Error("Invalid year value provided %s" % year))
+                    break
+            }
+        })
+        whereFilters = whereRawFilters.append(["SUBSTRING(unit.unitcode, 4, 1) = ?", listArg])
+    }
+
+    if (options["semester"]) {
+        // we would expect the semester to have the semester ids in the values
+        // semester would have the ids because in order to add semester to the display, it should query the db for what semesters are available
+        // likewise with faculties and degree types
+        whereCalls = whereCalls.append(() => whereIn())
+    }
+    return ["'true'"]
+}
 
 
 module.exports = {
@@ -45,13 +111,31 @@ module.exports = {
     
     getUnits: async () =>
         await units()
-            .catch(errorHandler)
+            .catch(errorHandler),
 
-    // getUnitsWithFilters: async (filters, rawFilters) =>
-    //     await units{}
-    //         .where(filters)
-    //         .whereRaw(rawFilters)
-    //         .catch(errorHandler)
+    getUnitsWithFilters: async () => {
+        // // because it's a MASSIVE pain to pass varying values through the schema file, we'll decompress the query here.
+        // filtersObj = JSON.parse(filtersString) 
+
+        // // the .whereRaw() method accepts arguments that are typically strings, but can also have integers as well.
+        // // so the whereRawListOfList will have the arguments for a clause on each line, that can be deconstructed with ...ListRow
+        // whereRawListOfList = JSON.parse(whereRawExpr) 
+
+        // qry = units()
+        //     .where(whereObj)
+        
+        arrayList = [["SUBSTRING(unit.unitCode, 4, 1) = ?", [1]], ["unit_locations.locationId = ?", [1]]]
+
+        return await arrayList.reduce((accumulator, arrRow) => {
+            return accumulator.whereRaw(...arrRow)
+        }, units()).catch(errorHandler)
+
+        // whereRawListOfList.forEach(arrayRow => {
+        //     qry = qry.where(...arrayRow)
+        // });
+
+        // return await qry.catch(errorHandler)
+    }
 
     //.whereRaw('SUBSTR(unit.unitCode, 4, 1) = ?', [3])
 }
