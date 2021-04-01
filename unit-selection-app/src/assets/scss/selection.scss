@@ -1,0 +1,226 @@
+
+.site-navigation{
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #444;
+    
+    .menu-left{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .menu-title{
+        font-size: 24px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-content-container{
+        display: flex;
+        align-items: center;
+    }
+
+    ul{
+        height: 100%;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        padding-inline-start: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style-type: none;
+        padding: 0 20px 0 50px;
+
+        
+        a{  
+            text-decoration: none;
+            padding: 0 20px 0 20px;
+            font-size: 20px;
+            color: #444;
+           
+            &:hover{
+                color: #2997ff;
+            }
+        }
+    }
+   
+
+    .menu-button{
+        background: $primary;
+        padding: 10px 10px;
+        font-size: 25px;
+        font-weight: bold;
+        text-decoration: none;
+
+        a{  
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: white;
+            
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 900px){
+    
+}
+//Add new property for delete the preivous bullete
+ul.no-bullets {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+    line-height:1;
+  }
+
+ //schedule page's button
+ .schedule-button{
+   background-color: #5D6465;
+   border-radius: 4px;
+   color:white;
+   font-size: 16px;
+   padding: 10px 32px;
+   margin: 20px 0;
+ }
+ .search-button{
+  background-color: #5D6465;
+  border-radius: 4px;
+  color:white;
+  font-size: 16px;
+  padding: 10px 32px;
+  margin: 20px 0;
+  width:210px;
+}
+
+
+//schedule scroll
+.scroll-page {
+  float: left;
+  height: 200px;
+  overflow-y: scroll;
+  margin-bottom: 25px;
+  width: 210px;
+  background: #ffffff;
+}
+
+.force-overflow {
+  min-height: 100px;
+}
+
+.scroll-page::-webkit-scrollbar-track {
+  border-radius: 10px;
+  padding: 2px 0;
+  background-color: #A3BEC1;
+}
+
+.scroll-page::-webkit-scrollbar {
+  width: 10px;
+
+}
+
+.scroll-page::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $primary;
+  border: 1px solid #A3BEC1;
+
+}
+
+
+//schedule's caret rotating
+.rotate{
+  transform:rotate(90deg);
+}
+.rotate-back{
+  transform:rotate(0deg);
+}
+.arrow_icon{
+  margin-left:auto;
+  transition:transform 0.6s ease;
+}
+
+//Clear default button style
+.clear-button-default{
+  border:0;
+  background-color: transparent;
+  outline:none;
+}
+
+//Schedule's comparing window
+.floating-button{
+    position: relative;
+    bottom: 5px;
+    left: 180px;
+}
+
+.close-button{
+  position: absolute;
+  right:0px;
+  top:10;
+}
+
+//Fixed the position of selected unit column
+.fix-selected-unit{
+  position:absolute;
+  top:250px;
+
+}
+
+//Checkbox label
+label {
+  display:block; 
+ }
+ 
+ label:hover {
+  background:#eee;
+  cursor:pointer;
+ }
+
+//It is used to styling the check boxes inside Units
+ .checkboxes input{
+  margin: 0px 10px 0px 0px;
+ }
+
+ .checkboxes label{
+   margin: 0px 30px;
+ }
+
+ //grey background grid for start schedule page
+ .grey-grid{
+  display:inline;
+  width:500px;
+  height:100vh;  
+}
+//Grey background grid after side bar shrinkage(First Unit)
+ .grey-grid1{
+   display:inline;
+   width:400px;
+   height:80vh;
+ }
+ //Grey background grid after side bar shrinkage(Second Unit)
+ .grey-grid2{
+   width:800px;
+   height:80vh;
+   display:inline;
+ }
+
+
+
+//side bar
+.nav-menu{
+  background-color:#ffffff;
+  left:-100%;
+  position:fixed;
+  transition: 850ms;
+}
+
+.nav-menu.active{
+  left:0;
+  transition:350ms;
+}
+
