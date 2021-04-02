@@ -33,7 +33,7 @@ export default function Navigation({user}){
              ))}
         </ul>
 
-        <button className="ml-auto btn btn-primary navbar-btn"><Link to="/selection">Start Scheduling {`>`}</Link></button>
+        <button className="ms-auto btn btn-primary navbar-btn"><Link to="/selection">Start Scheduling {`>`}</Link></button>
             
     </nav>)
 }
@@ -71,24 +71,23 @@ const navLinksSchedule = [
 
 function NavigationSchedule(props){
 
-    const [menuActive, setMenuActive] = useState(false);
-
-
     return (
-    <nav className="site-navigation">
-        <span className="menu-title"><GiHamburgerMenu onClick={props.onSide}/>M Unit Selection</span>
-        <div className={`menu-content-container ${menuActive && `active`}`}>
-            <ul>
-                { navLinksSchedule.map((link,index)=>(
-                    <li key={index}>
-                        <Link style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link>
-                    </li>
-                ))}
-            </ul>
+    <nav id="nav-override" className="navbar navbar-expand-lg">
+        <span className="custom-logo navbar-brand">
+            <GiHamburgerMenu className="me-3 mb-1" onClick={props.onSide}/>
+            <Link to='/'>M Unit Selection</Link>
+        </span>
 
-        </div>
-
-    </nav>)
+        <ul className="navbar-nav ms-auto">
+            { navLinksSchedule.map((link,index)=>(
+                <li key={index} className="nav-item">
+                     <a className="nav-link"><Link style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
+                 </li>
+             ))}
+        </ul>
+     
+    </nav>
+    )
 }
 
 function NavigationView(props){

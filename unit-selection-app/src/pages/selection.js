@@ -343,7 +343,7 @@ export default function Selection() {
   
   return (
     <section className="container home">
-      <div className="section hero">
+      <div>
         <NavigationSchedule onSide={showSideBar}/>
       </div>
       <Container>
