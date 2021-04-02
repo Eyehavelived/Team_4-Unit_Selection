@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Row} from "react-bootstrap";
 
 export default function ScheduleForm(props){
 
@@ -31,7 +32,7 @@ export default function ScheduleForm(props){
 
     return (
         <div>
-            <div id="container-form" className="row">
+            <Row id="container-form">
                 <form class="d-inline-flex py-2">
                     <label for="year" className="form-label mt-2 me-2">Year</label>
                     <select class="form-control me-3" id="year" name="year" value={teachingPeriod.year} onChange={handleChange}>
@@ -50,7 +51,7 @@ export default function ScheduleForm(props){
                     
                     <button type="button" className="btn btn-secondary" onClick={submitTeachingPeriod}>Add</button>
                 </form>
-            </div>
+            </Row>
         </div>
     )
 }

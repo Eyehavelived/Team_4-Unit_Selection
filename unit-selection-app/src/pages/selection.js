@@ -1,105 +1,76 @@
 import React, { useState } from "react";
-import { NavigationSelection } from "../components/common/navigation";
-//import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Container, Col} from "react-bootstrap";
-import ToggleDiv from "../components/common/toggle";
+import {NavigationSelection} from "../components/common/navigation";
+import {Row, Col} from "react-bootstrap";
+import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
 import Unit from "../components/unit";
 
 
 
 export default function Selection() {
-  const sampleFaculty = 
+  const sampleFaculty = [
     {
-      title:
-      <ul  className="no-bullets">
-      <li> 
-      <label><input onChange={handleChange} type="checkbox" id="uuid1" name="Faculty" value='Faculty of Information Technology'/>Information Techonology</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid2" name="Faculty" value="Business and Economics"/>
-      Business and Economics</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid3" name="Faculty" value="Science" />
-      Science</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid4" name="Faculty" value="Law"  />
-      Law</label>
-      </li>
-      <li>
-      <label onChange={handleChange} > <input type="checkbox" key="uuid5" name="Faculty" value="Pharmacy and Pharmaceutical Sciences" />Pharmacy and Pharmaceutical Sciences</label>
-      </li>
-      <li>
-      <input onChange={handleChange} type="checkbox" key="uuid6" name="Faculty" value="Education"/>
-      <label> Education</label>
-      </li>
-      <li>
-      <label onChange={handleChange}><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
-     
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid8" name="Faculty" value="Art, Design and Architecture"/>
-       Art, Design and Architecture</label>
-      </li>
-      </ul>
-    };
-  const sampleYear = 
+      id:"uuid1",
+      name:"Faculty of Information Technology"
+    },
     {
-      title:<ul className="no-bullets">
-      <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid9" name="Year" value="year1"/>
-      Year 1</label>
-      </li>
-      <li>
-      <label>  <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="year2"/>
-      Year 2</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid11" name="Year" value="year3"/>
-      Year 3</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="year4"/>
-      Year 4</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="honour"/>
-       Honour</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="master"/>
-       Master</label>
-      </li>
-      </ul>
-    };
-  const sampleSemeter = 
+      id:"uuid2",
+      name:"Faculty of Business & Economics"
+    },
     {
-      title:
-      <ul className="no-bullets">
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid14" name="Semester" value="Semester1"/>
-      Semester 1</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid15" name="Semester" value="Semester2"/>
-      Semester 2</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid16" name="Semester" value="SummerA"/>
-      Summer A</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid17" name="Semester" value="SummerB"/>
-      Summer B</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid18" name="Semester" value="Winter"/>
-      Winter</label>
-      </li>
-      </ul>  
-    };
+      id:"uuid3",
+      name:"Faculty of Science"
+    },
+    {
+      id:"uuid4",
+      name:"Faculty of Law"
+    },
+    {
+      id:"uuid5",
+      name:"Faculty of Pharmacy and Pharmaceutical Sciences"
+    },
+    {
+      id:"uuid6",
+      name:"Faculty of Education"
+    },
+    {
+      id:"uuid7",
+      name:"Faculty of Medicine, Nursing and Health Sciences"
+    },
+    {
+      id:"uuid8",
+      name:"Faculty of Art, Design and Architecture"
+    }
+  ]
+
+  const sampleYear = [
+    {id:"uuid9",
+    name:"year1"},
+    {id:"uuid10",
+    name:"year2"},
+    {id:"uuid11",
+    name:"year3"},
+    {id:"uuid12",
+    name:"honour"},
+    {id:"uuid13",
+    name:"master1"},
+    {id:"uuid14",
+    name:"master2"}
+  ]
+
+  const sampleSemester = [
+    {id:"uuid15",
+    name:"Semester1"},
+    {id:"uuid16",
+    name:"Semester2"},
+    {id:"uuid17",
+    name:"SummerA"},
+    {id:"uuid18",
+    name:"SummerB"},
+    {id:"uuid19",
+    name:"Winter"}
+  ]
+
   const sampleUnits=
     [
       {
@@ -342,30 +313,30 @@ export default function Selection() {
   
   
   return (
-    <section className="container home">
-      <div>
-        <NavigationSelection onSide={showSideBar}/>
-      </div>
-      <Container>
-        <Row>
-        {sidebar&&
-          <Col xs={3} className={sidebar?'nav-menu active':'nav-menu'}>
-          <form onSubmit={handleSortFilter}>
-            <ToggleDiv data={sampleFaculty} name="Faculty" onSide={showSideBar}/>
-            <ToggleDiv data={sampleYear} name="Year" />
-            <ToggleDiv data={sampleSemeter} name="Semester" />
-            <button className="schedule-button">Show filtered result</button>
-          </form> 
-            <h6><b>Unit Code Search</b></h6> 
+    <div>
+      <NavigationSelection onSide={showSideBar}/>
+
+      <Row>
+        {sidebar &&
+          <Col md={2} className="ms-4">
+            <form onSubmit={handleSortFilter}>
+              <div id="container-filter" className="overflow-auto">
+                <ToggleDiv name="Faculty" data={sampleFaculty} onSelect={handleChange}/>
+                <ToggleDiv name="Year" data={sampleYear} onSelect={handleChange}/>
+                <ToggleDiv name="Semester" data={sampleSemester} onSelect={handleChange}/>
+              </div>
+              <button className="btn btn-secondary mt-3">Show Filtered Result</button>
+            </form> 
+            <hr/>
+            <h6 className="mt-2">Unit Code Search</h6> 
             <form onSubmit={handleSearchRequest}>
               <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="search-button" type="submit" value="submit">
-                Search
-              </button>
+              <button className="btn btn-secondary mt-2" type="submit" value="submit">Search</button>
             </form>
-          </Col>}
+          </Col>
+        }
 
-          <Col xs={3}>
+          <Col md={2} className="ms-4">
             
               <u><b>Units</b></u>
               <div className="unit-display">
@@ -438,7 +409,7 @@ export default function Selection() {
           </Col>
           
         </Row>
-      </Container>
-    </section>
+
+    </div>
   );
 }

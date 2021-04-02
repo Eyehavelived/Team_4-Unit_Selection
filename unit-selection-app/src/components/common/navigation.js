@@ -70,21 +70,23 @@ const navLinksSchedule = [
 function NavigationSelection(props){
 
     return (
-    <nav id="nav-override" className="navbar navbar-expand-lg">
-        <span className="custom-logo navbar-brand">
-            <GiHamburgerMenu className="me-3 mb-1"  onClick={props.onSide}/>
-            <Link to='/'>M Unit Selection</Link>
-        </span>
+    <div className="my-3 mx-4"> 
+        <nav id="nav-override" className="navbar navbar-expand-lg">
+            <span className="custom-logo navbar-brand">
+                <GiHamburgerMenu className="me-3 mb-1"  onClick={props.onSide}/>
+                <Link to='/'>M Unit Selection</Link>
+            </span>
 
-        <ul className="navbar-nav ms-auto">
-            { navLinksSchedule.map((link,index)=>(
-                <li key={index} className="nav-item">
-                     <a className="nav-link"><Link style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
-                 </li>
-             ))}
-        </ul>
-     
-    </nav>
+            <ul className="navbar-nav ms-auto">
+                { navLinksSchedule.map((link,index)=>(
+                    <li key={index} className="nav-item">
+                        <a className="nav-link"><Link style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
+                    </li>
+                ))}
+            </ul>
+        
+        </nav>
+    </div>
     )
 }
 
@@ -111,18 +113,20 @@ function NavigationView(){
 function NavigationSchedule(){
 
     return (
-    <nav id="nav-override" className="navbar navbar-expand-lg">
-        <span className="custom-logo navbar-brand"><Link to='/'>M Unit Selection</Link></span>
+    <div className="my-3 mx-4">  
+        <nav id="nav-override" className="navbar navbar-expand-lg">
+            <span className="custom-logo navbar-brand"><Link to='/'>M Unit Selection</Link></span>
 
-        <ul className="navbar-nav ms-auto">
-            { navLinksSchedule.map((link,index)=>(
-                <li key={index} className="nav-item">
-                     <a className="nav-link"><Link style={link.title==="Schedule" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
-                </li>
-             ))}
-        </ul>
-            
-    </nav>)
+            <ul className="navbar-nav ms-auto">
+                { navLinksSchedule.map((link,index)=>(
+                    <li key={index} className="nav-item">
+                        <a className="nav-link"><Link style={link.title==="Schedule" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
+                    </li>
+                ))}
+            </ul>
+                
+        </nav>
+    </div>)
 }
 
 

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
-import { NavigationSchedule } from "../components/common/navigation";
+import {Row, Col} from "react-bootstrap";
+import {NavigationSchedule} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {IoIosAdd} from "react-icons/io";
@@ -125,13 +126,11 @@ export default function Selection(){
 
     return (
         <div className="overflow-hidden">
-            <div className="my-4 mx-4">
-                    <NavigationSchedule/>
-            </div>
+            <NavigationSchedule/>
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
-            <div className="row">
-                <div id="container-selection-units" className="col-2 ms-4 py-3">
+            <Row>
+                <Col md={2} id="container-selection-units" className="ms-4 py-3">
                     <div className="row pb-3 mx-auto">
                         <h5>Selected Units</h5>
                     </div>
@@ -156,9 +155,9 @@ export default function Selection(){
                                 </div>
                             )}
                         </Droppable>
-                </div>
+                </Col>
 
-                <div id="container-schedule" className="col-9 ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative">
+                <Col md={9} id="container-schedule" className="ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
@@ -171,8 +170,8 @@ export default function Selection(){
                             <ScheduleForm onAdd={addTeachingPeriod}/>
                         </div>
                     </div>
-                </div>
-            </div>
+                </Col>
+            </Row>
             </DragDropContext>
         </div> 
     )

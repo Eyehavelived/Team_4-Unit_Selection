@@ -1,6 +1,6 @@
 import React from "react";
-import {FaPlusCircle} from 'react-icons/fa';
-import {IoCloseOutline} from "react-icons/io5";
+import {IoIosAdd} from "react-icons/io";
+import {IoMdClose} from "react-icons/io";
 import {Card} from "react-bootstrap";
 
 function Unit(props) {
@@ -12,13 +12,9 @@ function Unit(props) {
       props.onAddSelected(props.unitCode,props.unitName);
 
   }
-  return (
-    
-    <Card border="info" style={props.compare?(props.sideBarStatus?{width:"14rem"}:{width:'25rem'}):{width:'12rem',height:'12rem'}}>
-      <Card.Header as="h4">{props.unitCode}<IoCloseOutline style={props.compare?(props.sideBarStatus?{left:'190px'}:{left:'365px'}):{}} className="close-button" onClick={()=>handleClick(props.id)} size={30}/></Card.Header>
-      <Card.Body>
-      <Card.Title as="h5"><b>Unit Name: </b></Card.Title>
-      <Card.Text  as="h6">{props.unitName}</Card.Text>
+
+  /*
+  <Card.Body>
       {props.compare&&<Card.Title as="h5"><b>Unit Type: </b></Card.Title>}
       {props.compare&&<Card.Text as="h6"> {props.unitType}</Card.Text>}
       {props.compare&&<Card.Title as="h5"><b>Semester: </b></Card.Title>}
@@ -28,7 +24,32 @@ function Unit(props) {
       {props.compare&&<Card.Title as="h5"><b>Workload: </b></Card.Title>}
       {props.compare&&<Card.Text as="h6">{props.workloadReq}</Card.Text>}
       </Card.Body>
-      {props.compare&&<FaPlusCircle size={40} color={"#AECF8C"} className="floating-button" style={!props.sideBarStatus&&{left:'350px'}}  onClick={handleAddClick}/>}
+  */
+
+  //card header style
+  //style={props.compare?(props.sideBarStatus?{width:"14rem"}:{width:'25rem'}):{width:'12rem',height:'12rem'}}
+  return (
+    //change col8 to sth else
+    <Card className="col-8 mx-1">
+      <button className="clear-btn-override close-btn-override mt-n2 ms-auto" onClick={()=>handleClick(props.id)}><IoMdClose size={20}/></button>
+      <div className="py-1 px-3">
+          <h5>{props.unitCode}</h5>
+          <h5>{props.unitName}</h5>
+          <hr/>
+          <div>
+            {props.compare&&<h6>Unit Type:</h6>}
+            {props.compare&&<p>{props.unitType}</p>}
+            {props.compare&&<h6>Semester:</h6>}
+            {props.compare&&<p>{props.semester+'('+props.year+')'}</p>}
+            {props.compare&&<h6>Synopsis:</h6>}
+            {props.compare&&<p>{props.synopsis}</p>}
+            {props.compare&&<h6>Workload:</h6>}
+            {props.compare&&<p>{props.workloadReq}</p>}
+          </div>
+      </div>
+      
+      {props.compare&& <button className="btn circle-btn-sm fab btn-primary ms-auto mb-2 me-2" onClick={handleAddClick}><IoIosAdd size={23}/></button>}
+      
     </Card>
     
   );

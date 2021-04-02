@@ -1,6 +1,6 @@
 @import './_variables';
 @import './_navigation';
-@import './_scheduleCard';
+@import './_card';
 @import 'home.scss';
 @import 'schedule.scss';
 @import 'selection.scss';
@@ -19,5 +19,16 @@ html body{
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
+}
+
+.circle-btn-sm{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.clear-btn-override{
+  background: none;
+  border: none;
 }
 
