@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavigationSelection } from "../components/common/navigation";
+import { NavigationSchedule } from "../components/common/navigation";
 //import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Container, Col} from "react-bootstrap";
 import ToggleDiv from "../components/common/toggle";
@@ -342,75 +342,77 @@ export default function Selection() {
   
   
   return (
-    <section className="container home">
+    <div>
       <div>
-        <NavigationSelection onSide={showSideBar}/>
+        <NavigationSchedule />
       </div>
-      <Container>
+      <div>
+          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+            Temp
+          </button>
+      </div>
+      <Container className="d-flex">
         <Row>
-        {sidebar&&
-          <Col xs={3} className={sidebar?'nav-menu active':'nav-menu'}>
-          <form onSubmit={handleSortFilter}>
-            <ToggleDiv data={sampleFaculty} name="Faculty" onSide={showSideBar}/>
-            <ToggleDiv data={sampleYear} name="Year" />
-            <ToggleDiv data={sampleSemeter} name="Semester" />
-            <button className="schedule-button">Show filtered result</button>
-          </form> 
-            <h6><b>Unit Code Search</b></h6> 
-            <form onSubmit={handleSearchRequest}>
-              <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="search-button" type="submit" value="submit">
-                Search
-              </button>
-            </form>
-          </Col>}
+          <div id="filter">
+            <Col xs={3}>
+            <form onSubmit={handleSortFilter}>
+              <ToggleDiv data={sampleFaculty} name="Faculty" onSide={showSideBar}/>
+              <ToggleDiv data={sampleYear} name="Year" />
+              <ToggleDiv data={sampleSemeter} name="Semester" />
+              <button className="schedule-button">Show filtered result</button>
+            </form> 
+              <h6><b>Unit Code Search</b></h6> 
+              <form onSubmit={handleSearchRequest}>
+                <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
+                <button className="search-button" type="submit" value="submit">
+                  Search
+                </button>
+              </form>
+            </Col>
+          </div>
 
-          <Col xs={3}>
-            
+          <div id="content">
+            <Col xs={3}>
               <u><b>Units</b></u>
-              <div className="unit-display">
               {filterResults.length>0&&
-              <div className="scroll-page mt-2">
-                <div className="force-overflow">
-                  {filterResults.map((element,index)=>{
-                    return(
-                    <CreateArea onAdd={addUnit} 
-                      key={index} 
-                      id={element.unitCode} 
-                      unitCode={element.unitCode}
-                      unitName={element.unitName}
-                      facultyName={element.facultyName}
-                      unitType={element.unitType}
-                      synopsis={element.synopsis}
-                      workloadReq={element.workloadReq}
-                      year={element.year}
-                      semester={element.semester}
-                      />);
-                    })}
+              <div className="scroll-page">
+              <div className="force-overflow">
+              {filterResults.map((element,index)=>{
+                return(
+              <CreateArea onAdd={addUnit} 
+              key={index} 
+              id={element.unitCode} 
+              unitCode={element.unitCode}
+              unitName={element.unitName}
+              facultyName={element.facultyName}
+              unitType={element.unitType}
+              synopsis={element.synopsis}
+              workloadReq={element.workloadReq}
+              year={element.year}
+              semester={element.semester}
+              />);
+              })}
+              </div>
                 </div>
-              </div>
               }
-              </div>
-          
-            <div className=" mt-1">
-              <u><b>Selected Units</b></u>
-              <div className="schedule-scroll">
-                  {selectedUnits.map((unitItem,index) => {
-                    return (
-                      <Unit
-                        key={index}
-                        id={unitItem.unitCode}
-                        unitCode={unitItem.unitCode}
-                        unitName={unitItem.unitName}
-                        compare={false}
-                        onDelete={deleteSelectedUnit}
-                      />
-                    );
-                  })}
-            </div>
-            </div>
-          </Col>
-          <Col>
+                <div className="fix-selected-unit">
+                  <u><b>Selected Units</b></u>
+                  <div className="schedule-scroll">
+                    {selectedUnits.map((unitItem,index) => {
+                      return (
+                        <Unit
+                          key={index}
+                          id={unitItem.unitCode}
+                          unitCode={unitItem.unitCode}
+                          unitName={unitItem.unitName}
+                          compare={false}
+                          onDelete={deleteSelectedUnit}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+            </Col>
             <div className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto no-gutters"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
                 {
                   units.length > 0 && (
@@ -433,12 +435,13 @@ export default function Selection() {
                     sideBarStatus={sidebar}
                   />
                   </Col>
-                  ))}
+                
+                  )
+                )}
             </div>
-          </Col>
-          
+          </div>
         </Row>
       </Container>
-    </section>
+    </div>
   );
 }

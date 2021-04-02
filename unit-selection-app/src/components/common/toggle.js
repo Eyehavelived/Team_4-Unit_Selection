@@ -17,15 +17,16 @@ export default function ToggleDiv(props) {
   return (
     <div>
       <label>
-      <button className="clear-button-default" onClick={handleClick}> 
-      <Caret width={10} fill={"#006DAE"} className={`${rotate}`} />
-      </button>
-      <u><b>{props.name}</b></u>
+        <button className="clear-button-default" onClick={handleClick}> 
+          <Caret width={10} fill={"#006DAE"} className={`${rotate}`} />
+        </button>
+        <u><b>{props.name}</b></u>
       </label>
       {props.name==="Faculty"&&<IoCloseOutline onClick={props.onSide} size={25} style={{marginLeft:'90px'}}/>}
       {expandContent&&(
         //This inline-style is used to save the space for displaying semester and year
-      <div style={ (props.name==="Year" || props.name==="Semester" ) ? { height:100+'px'} : {}} className="scroll-page">
+      <div className="mb-2 px-2"
+      style={ (props.name==="Year" || props.name==="Semester" ) ? { height:100+'px'} : {}} className="scroll-page">
       <div className="force-overflow">
         {props.data.title}
         </div>

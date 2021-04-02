@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
-import { NavigationSelection } from "../components/common/navigation";
+import { NavigationSchedule } from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {IoIosAdd} from "react-icons/io";
@@ -126,7 +126,7 @@ export default function Selection(){
     return (
         <div className="overflow-hidden">
             <div className="my-4 mx-4">
-                    <NavigationSelection/>
+                    <NavigationSchedule/>
             </div>
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
