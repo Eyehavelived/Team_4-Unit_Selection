@@ -17,9 +17,7 @@ const navLinks = [
     }
 ]
 
-export default function Navigation({user}){
-
-    const [menuActive, setMenuActive] = useState(false)
+export default function Navigation(){
 
     return (
     <nav id="nav-override" className="navbar navbar-expand-lg">
@@ -69,7 +67,7 @@ const navLinksSchedule = [
     }
 ]
 
-function NavigationSchedule(props){
+function NavigationSelection(props){
 
     return (
     <nav id="nav-override" className="navbar navbar-expand-lg">
@@ -90,15 +88,12 @@ function NavigationSchedule(props){
     )
 }
 
-function NavigationView(props){
 
-    const [menuActive, setMenuActive] = useState(false);
-
+function NavigationView(){
 
     return (
     <nav className="site-navigation">
         <span className="menu-title">M Unit Selection</span>
-        <div className={`menu-content-container ${menuActive && `active`}`}>
             <ul>
                 { navLinksSchedule.map((link,index)=>(
                     <li key={index}>
@@ -107,9 +102,28 @@ function NavigationView(props){
                 ))}
             </ul>
 
-        </div>
+       
 
     </nav>)
 }
 
-export {NavigationSchedule,NavigationView};
+
+function NavigationSchedule(){
+
+    return (
+    <nav id="nav-override" className="navbar navbar-expand-lg">
+        <span className="custom-logo navbar-brand"><Link to='/'>M Unit Selection</Link></span>
+
+        <ul className="navbar-nav ms-auto">
+            { navLinks.map((link,index)=>(
+                <li key={index} className="nav-item">
+                     <a className="nav-link"><Link style={link.title==="Schedule" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
+                </li>
+             ))}
+        </ul>
+            
+    </nav>)
+}
+
+
+export {NavigationSchedule,NavigationSelection, NavigationView};

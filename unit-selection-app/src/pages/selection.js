@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { NavigationSchedule } from "../components/common/navigation";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { NavigationSelection } from "../components/common/navigation";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Container, Col} from "react-bootstrap";
 import ToggleDiv from "../components/common/toggle";
 import CreateArea from "../components/createArea";
@@ -344,7 +344,7 @@ export default function Selection() {
   return (
     <section className="container home">
       <div>
-        <NavigationSchedule onSide={showSideBar}/>
+        <NavigationSelection onSide={showSideBar}/>
       </div>
       <Container>
         <Row>
