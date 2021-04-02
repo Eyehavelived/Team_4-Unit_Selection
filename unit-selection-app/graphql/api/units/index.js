@@ -33,9 +33,7 @@ const units = () =>
     .leftJoin('degree_type', 'unitDegreeTypeId', 'degree_type.id')
     .groupBy('unit.unitCode')
     // TODO: unit_assessments, contacts, other_requisite
-    // .where({'unit.unitCode': searchUnitCode})
-    // .where({'unit.unitCode': "SUBSTR(unit.unitCode, 4, 1) = '3'"})
-    // .catch(errorHandler)
+
 
 const filters = (options) => {
     whereCalls = []
@@ -130,15 +128,14 @@ module.exports = {
             .catch(errorHandler),
 
     getUnitsWithFilters: async (optionsString) => {
-        // // because it's a MASSIVE pain to pass varying values through the schema file, we'll decompress the query here.
-        options = JSON.parse(optionsString) 
-
+        // because it's a MASSIVE pain to pass varying values through the schema file, we'll decompress the query here.
         // This is an example of what options would look like
         // testOptions = {
         //     "year": ["3", "1"],
         //     "semester": [2],
         //     "faculty": [1]
         // }
+        options = JSON.parse(optionsString) 
         
         arrayList = filters(options)
 

@@ -1,8 +1,3 @@
-// const searchUnits = require('./mocks/searchUnits')
-// const compareUnits = require('./mocks/compareUnits')
-// const scheduleUnits = require('./mocks/scheduleUnits')
-
-const { exception } = require('console')
 const fs = require('fs')
 const path = require('path')
 const PostService = require('../../api/units')
@@ -30,8 +25,6 @@ const getUnitsCurry = cb =>
             ...rest
         }))
     }
-
-
 
 module.exports = {
     resolvers: {
