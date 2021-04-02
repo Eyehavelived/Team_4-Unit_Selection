@@ -1,0 +1,27 @@
+{
+  "name": "unit-selection-backend",
+  "version": "1.0.0",
+  "description": "A Koa and GraphQL backend for unit-selection-app",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "create-migration": "node ./database/actions/create-migration.js",
+    "run-migration": "node ./database/actions/run-migration.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Eyehavelived/Team_4-Unit_Selection/tree/master/unit-selection-app/graphql"
+  },
+  "author": "Jay Tan",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-koa": "^2.21.0",
+    "bluebird": "^3.7.2",
+    "dotenv": "^8.2.0",
+    "graphql-tools": "^7.0.4",
+    "knex": "^0.95.2",
+    "koa": "^2.13.1",
+    "moment": "^2.29.1",
+    "mysql2": "^2.2.5"
+  }
+}

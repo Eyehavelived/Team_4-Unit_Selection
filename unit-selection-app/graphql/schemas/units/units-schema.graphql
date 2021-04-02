@@ -1,0 +1,32 @@
+type Query {
+    getUnit(unitCode: String): [Unit]
+    getUnits: [Unit]
+    getUnitsWithFilters(optionsString: String): [Unit]
+    }
+
+type Assessment {
+    id: Int
+    assessmentWeight: Float
+    assessmentName: String
+}
+
+type Contact {
+    contactName: String
+    contactEmail: String
+    contactRole: String
+}
+
+type Unit {
+    unitCode: String
+    unitName: String
+    facultyName: String
+    degreeType: String
+    synopsis: String
+    workloadReq: String
+    isActive: Int
+    unitPreRequisites: [String]
+    unitCoRequisites: [String]
+    unitProhibitions: [String]
+    locationNames: [String]
+    teachingPeriods: [String]
+}
