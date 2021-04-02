@@ -94,10 +94,9 @@ export default function Home(){
                     </div>
                         
                     <div id="btn-override" className="col pt-4 d-flex justify-content-end">
-                            
-                        <button className="btn mx-3"><FaBootstrap size={30}/></button>
-                        <button className="btn mx-3"><FaGithub size={30}/></button>
-                        <button className="btn mx-3"></button>
+                        <button className="btn circle-btn mx-3"><FaBootstrap size={30}/></button>
+                        <button className="btn circle-btn mx-3"><FaGithub size={30}/></button>
+                        <button className="btn circle-btn mx-3"></button>
                     </div>
                 </div>
             </section>

@@ -170,20 +170,17 @@ span{
 
 #btn-override{
     button{
-        width: 4rem;
-        height: 4rem;
         background-color: white;
-        border-radius: 50%;
         color: black;
         transition: 0.4s;
 
-    &:hover{
-        transform: translate(0px,-2px);
-    }
+        &:hover{
+            transform: translate(0px,-2px);
+        }
 
-    svg{
-        padding: 0px;
-    }
+        svg{
+            padding: 0px;
+        }
     }
 }
 
