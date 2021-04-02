@@ -1,34 +1,23 @@
 @import './_variables';
 @import './_navigation';
+@import './_scheduleCard';
+@import 'home.scss';
+@import 'schedule.scss';
+@import 'selection.scss';
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'view.scss';
 
 
 html body{
     font-family: -apple-system, system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", Arial, sans-serif;
-    font-weight: 500;
     margin: 0;
-    background-color: $background;
+    background-color: $secondary-light;
+    font-size: 14px;
 }
 
-h1{
-    font-size: 2rem;
+.circle-btn{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
 }
 
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.row{
-    margin: 4em 20px;
-}
-
-.overlay::before{
-    z-index: 1;
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(180deg, transparent 0%, transparent 18%, rgba(0,0,0,0.8) 99%, rgba(0,0,0,0.8) 100% );
-}
