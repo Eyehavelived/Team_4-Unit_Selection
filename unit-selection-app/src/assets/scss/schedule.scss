@@ -4,39 +4,11 @@
 }
 .container-units{
     height: 63vh;
-
-    &::-webkit-scrollbar {
-        width: 4px;
-        background-color: black;
-    }
-    
-    
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px $secondary-light;
-      }
-    
-    &::-webkit-scrollbar-thumb {
-        background-color: $primary;
-    }
 }
 
 #container-schedule{
     background-color: $secondary;
     height: 75vh;
-
-    &::-webkit-scrollbar {
-        height: 4px;
-        background-color: black;
-    }
-    
-    
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px $secondary-light;
-      }
-    
-    &::-webkit-scrollbar-thumb {
-        background-color: $primary;
-    }
 }
 
 #container-form{

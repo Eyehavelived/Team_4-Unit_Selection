@@ -11,8 +11,23 @@
 html body{
     font-family: -apple-system, system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", Arial, sans-serif;
     margin: 0;
-    background-color: $secondary-light;
+    background-color: $offwhite;
     font-size: 14px;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: $secondary-light;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $primary;
 }
 
 .circle-btn{

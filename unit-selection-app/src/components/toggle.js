@@ -27,7 +27,7 @@ export default function ToggleDiv(props) {
               <li className="d-flex">
                 <input onChange={props.onSelect} type="checkbox" id={item.id} 
                   name={props.name} value={item.name} className="mt-1"/>
-                <p className="ms-2 my-0">{item.name}</p>
+                <label for={item.id} className="ms-2 my-0">{item.name}</label>
               </li>
             </ul>
           ))}

@@ -4,6 +4,7 @@ import {Row, Col} from "react-bootstrap";
 import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
 import Unit from "../components/unit";
+import UnitCard from "../components/unitCard";
 
 
 
@@ -310,10 +311,10 @@ export default function Selection() {
 
   }
 
-  
+  // className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto no-gutters"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}
   
   return (
-    <div>
+    <div className="overflow-hidden">
       <NavigationSelection onSide={showSideBar}/>
 
       <Row>
@@ -337,12 +338,11 @@ export default function Selection() {
         }
 
           <Col md={2} className="ms-4">
-            
-              <u><b>Units</b></u>
-              <div className="unit-display">
-              {filterResults.length>0&&
-              <div className="scroll-page mt-2">
-                <div className="force-overflow">
+            <div>
+              <u><h6>Units</h6></u>
+              <div className="container-units overflow-auto">
+                {filterResults.length>0&&
+                  <div>
                   {filterResults.map((element,index)=>{
                     return(
                     <CreateArea onAdd={addUnit} 
@@ -358,52 +358,52 @@ export default function Selection() {
                       semester={element.semester}
                       />);
                     })}
-                </div>
+                  </div>
+                }
               </div>
-              }
-              </div>
+            </div>
+              
           
             <div className=" mt-1">
-              <u><b>Selected Units</b></u>
-              <div className="schedule-scroll">
+              <u><h6>Selected Units</h6></u>
+              <div className="container-units overflow-auto">
                   {selectedUnits.map((unitItem,index) => {
                     return (
-                      <Unit
+                      <UnitCard
                         key={index}
                         id={unitItem.unitCode}
-                        unitCode={unitItem.unitCode}
-                        unitName={unitItem.unitName}
-                        compare={false}
+                        unit={unitItem}
                         onDelete={deleteSelectedUnit}
                       />
                     );
                   })}
-            </div>
+              </div>
             </div>
           </Col>
+
           <Col>
-            <div className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto no-gutters"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
+            <div className="container-detailed-units ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (
                   units.map(element=>
-                  <Col>
-                    <Unit
-                    key={element.unitCode}
-                    id={element.unitCode}
-                    unitCode={element.unitCode}
-                    unitName={element.unitName}
-                    unitType={element.unitType}
-                    synopsis={element.synopsis}
-                    workloadReq={element.workloadReq}
-                    year={element.year}
-                    semester={element.semester}
-                    //This normal attribute is used to figure out the unit in selected Unit or in compare window
-                    compare={true}
-                    onDelete={deleteUnit}
-                    onAddSelected={addInSelectedUnit}
-                    sideBarStatus={sidebar}
-                  />
-                  </Col>
+                    <Col>
+                      <Unit
+                      key={element.unitCode}
+                      id={element.unitCode}
+                      unitCode={element.unitCode}
+                      unitName={element.unitName}
+                      unitType={element.unitType}
+                      synopsis={element.synopsis}
+                      workloadReq={element.workloadReq}
+                      year={element.year}
+                      semester={element.semester}
+                      //This normal attribute is used to figure out the unit in selected Unit or in compare window
+                      compare={true}
+                      onDelete={deleteUnit}
+                      onAddSelected={addInSelectedUnit}
+                      sideBarStatus={sidebar}
+                    />
+                    </Col>
                   ))}
             </div>
           </Col>

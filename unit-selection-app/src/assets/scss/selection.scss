@@ -1,41 +1,7 @@
-//Add new property for delete the preivous bullete
-ul.no-bullets {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
-    line-height:1;
-  }
-
-
-//schedule scroll
-.scroll-page {
-  height: 200px;
-  overflow-y: scroll;
-  background: #ffffff;
-}
 
 .force-overflow {
   min-height: 100px;
 }
-
-.scroll-page::-webkit-scrollbar-track {
-  border-radius: 10px;
-  padding: 2px 0;
-  background-color: #A3BEC1;
-}
-
-.scroll-page::-webkit-scrollbar {
-  width: 10px;
-
-}
-
-.scroll-page::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: $primary;
-  border: 1px solid #A3BEC1;
-
-}
-
 
 //schedule's caret rotating
 .rotate{
@@ -82,28 +48,19 @@ ul.no-bullets {
    display:inline;
  }
 
-//add fixed size to unit display
- .unit-display{
-   height:240px;
- }
-
- #container-filter{
+// Fixed height for toggle container
+#container-filter{
   height: 50vh;
-
-  &::-webkit-scrollbar {
-      width: 4px;
-      background-color: black;
-  }
-  
-  
-  &::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 6px $secondary-light;
-    }
-  
-  &::-webkit-scrollbar-thumb {
-      background-color: $primary;
-  }
 }
 
+// Fixed height for Units and Selected Units container
+.container-units{
+  height: 32vh;
+}
+
+.container-detailed-units{
+    background-color: $secondary;
+    height: 80vh;
+}
 
 

@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
 import {IoMdClose} from "react-icons/io";
 import {Droppable,Draggable} from 'react-beautiful-dnd';
+import {Col} from "react-bootstrap";
+import {UnitListCard} from "./common/unitListCard"
 
 export default function ScheduleCard(props){
 
@@ -9,8 +10,8 @@ export default function ScheduleCard(props){
     }
 
     return (
-        <div className="col-3 card mx-1">
-            <button className="close-btn-override mt-n2 ms-auto" onClick={handleClick}><IoMdClose/></button>
+        <Col md={3} className="card mx-1">
+            <button className="clear-btn-override close-btn-override mt-n2 ms-auto" onClick={handleClick}><IoMdClose/></button>
             <div className="mt-2">
                 <h6>Year {props.tp.year}  / Sem {props.tp.sem}</h6>
                 <hr/>
@@ -20,11 +21,14 @@ export default function ScheduleCard(props){
                         {props.tp.units.map((unit,index)=>(
                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                 {(provided)=>(
-                                <div className="card me-3 mb-1" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                    <div className="pt-2 px-2">
-                                        <h6>{unit.unitCode}</h6>
-                                        <p>{unit.unitName}</p>
+                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                    <div className="card me-3 mb-1" >
+                                        <div className="pt-2 px-2">
+                                            <h6>{unit.unitCode}</h6>
+                                            <p className="mb-2">{unit.unitName}</p>
+                                        </div>
                                     </div>
+                                    <UnitListCard code={unit.unitCode} name={unit.unitName}/>
                                 </div>
                                 )}
                             </Draggable>
@@ -34,5 +38,5 @@ export default function ScheduleCard(props){
                     )}
                 </Droppable> 
             </div>
-    </div>
+        </Col>
 )}
