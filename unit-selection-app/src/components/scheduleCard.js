@@ -1,7 +1,8 @@
+import React from "react";
 import {IoMdClose} from "react-icons/io";
 import {Droppable,Draggable} from 'react-beautiful-dnd';
 import {Col} from "react-bootstrap";
-import {UnitListCard} from "./common/unitListCard"
+import UnitListCard from "../components/common/unitListCard";
 
 export default function ScheduleCard(props){
 
@@ -22,12 +23,6 @@ export default function ScheduleCard(props){
                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                 {(provided)=>(
                                 <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                    <div className="card me-3 mb-1" >
-                                        <div className="pt-2 px-2">
-                                            <h6>{unit.unitCode}</h6>
-                                            <p className="mb-2">{unit.unitName}</p>
-                                        </div>
-                                    </div>
                                     <UnitListCard code={unit.unitCode} name={unit.unitName}/>
                                 </div>
                                 )}

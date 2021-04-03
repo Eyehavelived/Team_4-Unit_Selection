@@ -3,8 +3,8 @@ import {NavigationSelection} from "../components/common/navigation";
 import {Row, Col} from "react-bootstrap";
 import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
-import Unit from "../components/unit";
 import UnitCard from "../components/unitCard";
+import UnitListCard from "../components/common/unitListCard";
 
 
 
@@ -201,7 +201,8 @@ export default function Selection() {
     }
 
   }
-  function addUnit(newUnit) {
+
+  function addUnit(newUnit){
     setUnits((prevUnits) => {
       for (var i = 0; i < prevUnits.length; i++) {
         if (prevUnits[i].unitCode === newUnit.unitCode) {
@@ -211,6 +212,7 @@ export default function Selection() {
       return [...prevUnits, newUnit];
     });
   }
+
   function deleteUnit(id) {
     setUnits((prevUnits) => {
       return prevUnits.filter((unitItem) => {
@@ -319,7 +321,7 @@ export default function Selection() {
 
       <Row>
         {sidebar &&
-          <Col md={2} className="ms-4">
+          <Col md={2} className="white-bg ms-4 py-2 px-1">
             <form onSubmit={handleSortFilter}>
               <div id="container-filter" className="overflow-auto">
                 <ToggleDiv name="Faculty" data={sampleFaculty} onSelect={handleChange}/>
@@ -337,44 +339,21 @@ export default function Selection() {
           </Col>
         }
 
-          <Col md={2} className="ms-4">
-            <div>
+          <Col md={2} className="ms-3 px-0">
+            <div className="white-bg py-2 px-2">
               <u><h6>Units</h6></u>
               <div className="container-units overflow-auto">
-                {filterResults.length>0&&
-                  <div>
-                  {filterResults.map((element,index)=>{
-                    return(
-                    <CreateArea onAdd={addUnit} 
-                      key={index} 
-                      id={element.unitCode} 
-                      unitCode={element.unitCode}
-                      unitName={element.unitName}
-                      facultyName={element.facultyName}
-                      unitType={element.unitType}
-                      synopsis={element.synopsis}
-                      workloadReq={element.workloadReq}
-                      year={element.year}
-                      semester={element.semester}
-                      />);
-                    })}
-                  </div>
-                }
+                {filterResults.length>0 && <CreateArea unitList={filterResults} onAdd={addUnit}/>}
               </div>
             </div>
               
           
-            <div className=" mt-1">
+            <div className="white-bg py-2 px-2 mt-2">
               <u><h6>Selected Units</h6></u>
               <div className="container-units overflow-auto">
-                  {selectedUnits.map((unitItem,index) => {
+                  {selectedUnits.map((unit) => {
                     return (
-                      <UnitCard
-                        key={index}
-                        id={unitItem.unitCode}
-                        unit={unitItem}
-                        onDelete={deleteSelectedUnit}
-                      />
+                      <UnitListCard code={unit.unitCode} name={unit.unitName}  onDelete={deleteSelectedUnit}/>
                     );
                   })}
               </div>
@@ -382,28 +361,24 @@ export default function Selection() {
           </Col>
 
           <Col>
-            <div className="container-detailed-units ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto">
+            <div className="container-detailed-units ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (
-                  units.map(element=>
-                    <Col>
-                      <Unit
-                      key={element.unitCode}
-                      id={element.unitCode}
-                      unitCode={element.unitCode}
-                      unitName={element.unitName}
-                      unitType={element.unitType}
-                      synopsis={element.synopsis}
-                      workloadReq={element.workloadReq}
-                      year={element.year}
-                      semester={element.semester}
-                      //This normal attribute is used to figure out the unit in selected Unit or in compare window
-                      compare={true}
-                      onDelete={deleteUnit}
-                      onAddSelected={addInSelectedUnit}
-                      sideBarStatus={sidebar}
-                    />
-                    </Col>
+                  units.map((unit)=>
+                  
+                      <UnitCard
+                        key={unit.unitCode}
+                        id={unit.unitCode}
+                        unitCode={unit.unitCode}
+                        unitName={unit.unitName}
+                        unitType={unit.unitType}
+                        synopsis={unit.synopsis}
+                        workloadReq={unit.workloadReq}
+                        year={unit.year}
+                        semester={unit.semester}
+                        onDelete={deleteUnit}
+                        onAddSelected={addInSelectedUnit}
+                      />
                   ))}
             </div>
           </Col>

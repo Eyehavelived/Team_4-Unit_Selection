@@ -4,6 +4,7 @@ import {Row, Col} from "react-bootstrap";
 import {NavigationSchedule} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
+import UnitListCard from "../components/common/unitListCard";
 import {IoIosAdd} from "react-icons/io";
 
 //from react-beautiful-dnd git example
@@ -142,11 +143,8 @@ export default function Selection(){
                                         su.units.map((unit,index)=>(
                                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                                 {(provided)=>(
-                                                <div className="card me-3 mb-1" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                    <div className="pt-2 px-2">
-                                                        <h6>{unit.unitCode}</h6>
-                                                        <p>{unit.unitName}</p>
-                                                    </div>
+                                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                                   <UnitListCard code={unit.unitCode} name={unit.unitName}/>
                                                 </div>
                                                 )}
                                             </Draggable>

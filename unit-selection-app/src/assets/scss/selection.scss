@@ -55,12 +55,19 @@
 
 // Fixed height for Units and Selected Units container
 .container-units{
-  height: 32vh;
+  height: 34vh;
 }
 
 .container-detailed-units{
-    background-color: $secondary;
-    height: 80vh;
+  background-color: $secondary;
+  height: 80vh;
 }
 
+.card-height{
+  height: 45vh
+}
+
+.white-bg{
+  background:white;
+}
 
