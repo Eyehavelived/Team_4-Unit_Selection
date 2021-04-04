@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 import {Row, Col} from "react-bootstrap";
-import {NavigationSchedule} from "../components/common/navigation";
+import {NavigationApp} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
@@ -30,6 +30,8 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 };
 
 export default function Selection(){
+    const page = "Schedule"
+
     const SELECTEDUNITS = "selectedUnits"
 
     //temporary data
@@ -127,7 +129,7 @@ export default function Selection(){
 
     return (
         <div className="overflow-hidden">
-            <NavigationSchedule/>
+            <NavigationApp page={page}/>
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Row>

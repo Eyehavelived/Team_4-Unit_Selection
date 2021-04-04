@@ -9,6 +9,8 @@ import {UnitListCardRemove} from "../components/common/unitListCard";
 
 
 export default function Selection() {
+  const page = "Selection"
+
   const sampleFaculty = [
     {
       id:"uuid1",
@@ -312,12 +314,10 @@ export default function Selection() {
     console.log(sidebar);
 
   }
-
-  // className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto no-gutters"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}
   
   return (
     <div className="overflow-hidden">
-      <NavigationSelection onSide={showSideBar}/>
+      <NavigationSelection onSide={showSideBar} page={page}/>
 
       <Row>
         {sidebar &&

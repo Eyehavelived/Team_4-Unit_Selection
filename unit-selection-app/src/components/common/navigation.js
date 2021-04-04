@@ -90,27 +90,7 @@ function NavigationSelection(props){
     )
 }
 
-
-function NavigationView(){
-
-    return (
-    <nav className="site-navigation">
-        <span className="menu-title">M Unit Selection</span>
-            <ul>
-                { navLinksSchedule.map((link,index)=>(
-                    <li key={index}>
-                        <Link style={link.title==="View" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link>
-                    </li>
-                ))}
-            </ul>
-
-       
-
-    </nav>)
-}
-
-
-function NavigationSchedule(){
+function NavigationApp(props){
 
     return (
     <div className="my-3 mx-4">  
@@ -120,7 +100,7 @@ function NavigationSchedule(){
             <ul className="navbar-nav ms-auto">
                 { navLinksSchedule.map((link,index)=>(
                     <li key={index} className="nav-item">
-                        <a className="nav-link"><Link style={link.title==="Schedule" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
+                        <a className="nav-link"><Link style={link.title===props.page ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</Link></a>
                     </li>
                 ))}
             </ul>
@@ -130,4 +110,4 @@ function NavigationSchedule(){
 }
 
 
-export {NavigationSchedule,NavigationSelection, NavigationView};
+export {NavigationSelection, NavigationApp};
