@@ -4,7 +4,7 @@ import {Row, Col} from "react-bootstrap";
 import {NavigationSchedule} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
-import UnitListCard from "../components/common/unitListCard";
+import {UnitListCard} from "../components/common/unitListCard";
 import {IoIosAdd} from "react-icons/io";
 
 //from react-beautiful-dnd git example

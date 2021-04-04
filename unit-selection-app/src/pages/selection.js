@@ -4,7 +4,7 @@ import {Row, Col} from "react-bootstrap";
 import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
-import UnitListCard from "../components/common/unitListCard";
+import {UnitListCardRemove} from "../components/common/unitListCard";
 
 
 
@@ -96,7 +96,7 @@ export default function Selection() {
       },
       {
         unitCode: 'FIT3155',
-        unitName: 'ADvanced Data Structures and Algorithms',
+        unitName: 'Advanced Data Structures and Algorithms',
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'lorem ipsum dolores umbridge',
@@ -353,7 +353,7 @@ export default function Selection() {
               <div className="container-units overflow-auto">
                   {selectedUnits.map((unit) => {
                     return (
-                      <UnitListCard code={unit.unitCode} name={unit.unitName}  onDelete={deleteSelectedUnit}/>
+                      <UnitListCardRemove code={unit.unitCode} name={unit.unitName}  onDelete={deleteSelectedUnit}/>
                     );
                   })}
               </div>

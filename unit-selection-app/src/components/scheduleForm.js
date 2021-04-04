@@ -31,27 +31,25 @@ export default function ScheduleForm(props){
     }
 
     return (
-        <div>
-            <Row id="container-form">
-                <form class="d-inline-flex py-2">
-                    <label for="year" className="form-label mt-2 me-2">Year</label>
-                    <select class="form-control me-3" id="year" name="year" value={teachingPeriod.year} onChange={handleChange}>
-                        {yearOptions.map((year)=>(
-                                <option value={year}>{year}</option>
-                        ))}
-                    </select>
+        <Row id="container-form">
+            <form class="d-inline-flex py-2">
+                <label for="year" className="form-label mt-2 me-2">Year</label>
+                <select class="form-control me-3" id="year" name="year" value={teachingPeriod.year} onChange={handleChange}>
+                    {yearOptions.map((year)=>(
+                            <option value={year}>{year}</option>
+                    ))}
+                </select>
 
-                    <label for="sem" className="form-label mt-2 me-2">Sem</label>
+                <label for="sem" className="form-label mt-2 me-2">Sem</label>
 
-                    <select class="form-control me-3" id="sem" name="sem" value={teachingPeriod.sem} onChange={handleChange}>
-                        {semOptions.map((year)=>(
-                                <option value={year}>{year}</option>
-                        ))}
-                    </select>
+                <select class="form-control me-3" id="sem" name="sem" value={teachingPeriod.sem} onChange={handleChange}>
+                    {semOptions.map((year)=>(
+                            <option value={year}>{year}</option>
+                    ))}
+                </select>
                     
-                    <button type="button" className="btn btn-secondary" onClick={submitTeachingPeriod}>Add</button>
-                </form>
-            </Row>
-        </div>
+                <button type="button" className="btn btn-secondary" onClick={submitTeachingPeriod}>Add</button>
+            </form>
+        </Row>
     )
 }

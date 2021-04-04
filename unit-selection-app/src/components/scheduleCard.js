@@ -2,7 +2,7 @@ import React from "react";
 import {IoMdClose} from "react-icons/io";
 import {Droppable,Draggable} from 'react-beautiful-dnd';
 import {Col} from "react-bootstrap";
-import UnitListCard from "../components/common/unitListCard";
+import {UnitListCard} from "../components/common/unitListCard";
 
 export default function ScheduleCard(props){
 
