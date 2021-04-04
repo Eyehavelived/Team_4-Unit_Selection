@@ -1,10 +1,11 @@
 import React from "react";
-import { NavigationView } from "../components/common/navigation";
-export default function View(){
+import { NavigationApp } from "../components/common/navigation";
 
+export default function View(){
+    const page = "View"
 
     return(
-        <NavigationView/>
+        <NavigationApp page={page}/>
 
     );
 

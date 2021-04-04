@@ -1,105 +1,79 @@
 import React, { useState } from "react";
-import { NavigationSelection } from "../components/common/navigation";
-//import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Container, Col} from "react-bootstrap";
-import ToggleDiv from "../components/common/toggle";
+import {NavigationSelection} from "../components/common/navigation";
+import {Row, Col} from "react-bootstrap";
+import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
-import Unit from "../components/unit";
+import UnitCard from "../components/unitCard";
+import {UnitListCardRemove} from "../components/common/unitListCard";
 
 
 
 export default function Selection() {
-  const sampleFaculty = 
+  const page = "Selection"
+
+  const sampleFaculty = [
     {
-      title:
-      <ul  className="no-bullets">
-      <li> 
-      <label><input onChange={handleChange} type="checkbox" id="uuid1" name="Faculty" value='Faculty of Information Technology'/>Information Techonology</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid2" name="Faculty" value="Business and Economics"/>
-      Business and Economics</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid3" name="Faculty" value="Science" />
-      Science</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid4" name="Faculty" value="Law"  />
-      Law</label>
-      </li>
-      <li>
-      <label onChange={handleChange} > <input type="checkbox" key="uuid5" name="Faculty" value="Pharmacy and Pharmaceutical Sciences" />Pharmacy and Pharmaceutical Sciences</label>
-      </li>
-      <li>
-      <input onChange={handleChange} type="checkbox" key="uuid6" name="Faculty" value="Education"/>
-      <label> Education</label>
-      </li>
-      <li>
-      <label onChange={handleChange}><input type="checkbox" key="uuid7" name="Faculty" value="Medicine, Nursing and Health Sciences"/>Medicine, Nursing and Health Sciences</label>
-     
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid8" name="Faculty" value="Art, Design and Architecture"/>
-       Art, Design and Architecture</label>
-      </li>
-      </ul>
-    };
-  const sampleYear = 
+      id:"uuid1",
+      name:"Faculty of Information Technology"
+    },
     {
-      title:<ul className="no-bullets">
-      <li>
-      <label> <input onChange={handleChange} type="checkbox" key="uuid9" name="Year" value="year1"/>
-      Year 1</label>
-      </li>
-      <li>
-      <label>  <input onChange={handleChange} type="checkbox" key="uuid10" name="Year" value="year2"/>
-      Year 2</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid11" name="Year" value="year3"/>
-      Year 3</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid12" name="Year" value="year4"/>
-      Year 4</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="honour"/>
-       Honour</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid13" name="Year" value="master"/>
-       Master</label>
-      </li>
-      </ul>
-    };
-  const sampleSemeter = 
+      id:"uuid2",
+      name:"Faculty of Business & Economics"
+    },
     {
-      title:
-      <ul className="no-bullets">
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid14" name="Semester" value="Semester1"/>
-      Semester 1</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid15" name="Semester" value="Semester2"/>
-      Semester 2</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid16" name="Semester" value="SummerA"/>
-      Summer A</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid17" name="Semester" value="SummerB"/>
-      Summer B</label>
-      </li>
-      <li>
-      <label><input onChange={handleChange} type="checkbox" key="uuid18" name="Semester" value="Winter"/>
-      Winter</label>
-      </li>
-      </ul>  
-    };
+      id:"uuid3",
+      name:"Faculty of Science"
+    },
+    {
+      id:"uuid4",
+      name:"Faculty of Law"
+    },
+    {
+      id:"uuid5",
+      name:"Faculty of Pharmacy and Pharmaceutical Sciences"
+    },
+    {
+      id:"uuid6",
+      name:"Faculty of Education"
+    },
+    {
+      id:"uuid7",
+      name:"Faculty of Medicine, Nursing and Health Sciences"
+    },
+    {
+      id:"uuid8",
+      name:"Faculty of Art, Design and Architecture"
+    }
+  ]
+
+  const sampleYear = [
+    {id:"uuid9",
+    name:"year1"},
+    {id:"uuid10",
+    name:"year2"},
+    {id:"uuid11",
+    name:"year3"},
+    {id:"uuid12",
+    name:"honour"},
+    {id:"uuid13",
+    name:"master1"},
+    {id:"uuid14",
+    name:"master2"}
+  ]
+
+  const sampleSemester = [
+    {id:"uuid15",
+    name:"Semester1"},
+    {id:"uuid16",
+    name:"Semester2"},
+    {id:"uuid17",
+    name:"SummerA"},
+    {id:"uuid18",
+    name:"SummerB"},
+    {id:"uuid19",
+    name:"Winter"}
+  ]
+
   const sampleUnits=
     [
       {
@@ -124,7 +98,7 @@ export default function Selection() {
       },
       {
         unitCode: 'FIT3155',
-        unitName: 'ADvanced Data Structures and Algorithms',
+        unitName: 'Advanced Data Structures and Algorithms',
         facultyName: 'Faculty of Information Technology',
         unitType: 'Undergraduate',
         synopsis: 'lorem ipsum dolores umbridge',
@@ -229,7 +203,8 @@ export default function Selection() {
     }
 
   }
-  function addUnit(newUnit) {
+
+  function addUnit(newUnit){
     setUnits((prevUnits) => {
       for (var i = 0; i < prevUnits.length; i++) {
         if (prevUnits[i].unitCode === newUnit.unitCode) {
@@ -239,6 +214,7 @@ export default function Selection() {
       return [...prevUnits, newUnit];
     });
   }
+
   function deleteUnit(id) {
     setUnits((prevUnits) => {
       return prevUnits.filter((unitItem) => {
@@ -338,107 +314,77 @@ export default function Selection() {
     console.log(sidebar);
 
   }
-
-  
   
   return (
-    <section className="container home">
-      <div>
-        <NavigationSelection onSide={showSideBar}/>
-      </div>
-      <Container>
-        <Row>
-        {sidebar&&
-          <Col xs={3} className={sidebar?'nav-menu active':'nav-menu'}>
-          <form onSubmit={handleSortFilter}>
-            <ToggleDiv data={sampleFaculty} name="Faculty" onSide={showSideBar}/>
-            <ToggleDiv data={sampleYear} name="Year" />
-            <ToggleDiv data={sampleSemeter} name="Semester" />
-            <button className="schedule-button">Show filtered result</button>
-          </form> 
-            <h6><b>Unit Code Search</b></h6> 
+    <div className="overflow-hidden">
+      <NavigationSelection onSide={showSideBar} page={page}/>
+
+      <Row>
+        {sidebar &&
+          <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
+            <form onSubmit={handleSortFilter}>
+              <div className="height-45 overflow-auto">
+                <ToggleDiv name="Faculty" data={sampleFaculty} onSelect={handleChange}/>
+                <ToggleDiv name="Year" data={sampleYear} onSelect={handleChange}/>
+                <ToggleDiv name="Semester" data={sampleSemester} onSelect={handleChange}/>
+              </div>
+              <button className="btn btn-secondary mt-3">Show Filtered Result</button>
+            </form> 
+            <hr/>
+            <h6 className="mt-2">Unit Code Search</h6> 
             <form onSubmit={handleSearchRequest}>
               <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="search-button" type="submit" value="submit">
-                Search
-              </button>
+              <button className="btn btn-secondary mt-2" type="submit" value="submit">Search</button>
             </form>
-          </Col>}
+          </Col>
+        }
 
-          <Col xs={3}>
-            
-              <u><b>Units</b></u>
-              <div className="unit-display">
-              {filterResults.length>0&&
-              <div className="scroll-page mt-2">
-                <div className="force-overflow">
-                  {filterResults.map((element,index)=>{
-                    return(
-                    <CreateArea onAdd={addUnit} 
-                      key={index} 
-                      id={element.unitCode} 
-                      unitCode={element.unitCode}
-                      unitName={element.unitName}
-                      facultyName={element.facultyName}
-                      unitType={element.unitType}
-                      synopsis={element.synopsis}
-                      workloadReq={element.workloadReq}
-                      year={element.year}
-                      semester={element.semester}
-                      />);
-                    })}
-                </div>
+          <Col md={2} className="height-80 ms-3">
+            <div className="white-bg height-40 py-2 px-2">
+              <u><h6>Units</h6></u>
+              <div className="height-30 overflow-auto">
+                {filterResults.length>0 && <CreateArea unitList={filterResults} onAdd={addUnit}/>}
               </div>
-              }
-              </div>
+            </div>
+              
           
-            <div className=" mt-1">
-              <u><b>Selected Units</b></u>
-              <div className="schedule-scroll">
-                  {selectedUnits.map((unitItem,index) => {
+            <div className="white-bg height-40 py-2 px-2 mt-2">
+              <u><h6>Selected Units</h6></u>
+              <div className="height-30 overflow-auto">
+                  {selectedUnits.map((unit) => {
                     return (
-                      <Unit
-                        key={index}
-                        id={unitItem.unitCode}
-                        unitCode={unitItem.unitCode}
-                        unitName={unitItem.unitName}
-                        compare={false}
-                        onDelete={deleteSelectedUnit}
-                      />
+                      <UnitListCardRemove code={unit.unitCode} name={unit.unitName}  onDelete={deleteSelectedUnit}/>
                     );
                   })}
-            </div>
+              </div>
             </div>
           </Col>
-          <Col>
-            <div className={sidebar?"grey-grid row flex-nowrap flex-row overflow-auto":"grey-grid2 row flex-nowrap flex-row overflow-auto no-gutters"} style={units.length===0?{backgroundColor:"#d3d3d3"}:{}}>
+
+          <Col md={sidebar?7:10}>
+            <div className="grey-bg height-80 ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (
-                  units.map(element=>
-                  <Col>
-                    <Unit
-                    key={element.unitCode}
-                    id={element.unitCode}
-                    unitCode={element.unitCode}
-                    unitName={element.unitName}
-                    unitType={element.unitType}
-                    synopsis={element.synopsis}
-                    workloadReq={element.workloadReq}
-                    year={element.year}
-                    semester={element.semester}
-                    //This normal attribute is used to figure out the unit in selected Unit or in compare window
-                    compare={true}
-                    onDelete={deleteUnit}
-                    onAddSelected={addInSelectedUnit}
-                    sideBarStatus={sidebar}
-                  />
-                  </Col>
+                  units.map((unit)=>
+                  
+                      <UnitCard
+                        key={unit.unitCode}
+                        id={unit.unitCode}
+                        unitCode={unit.unitCode}
+                        unitName={unit.unitName}
+                        unitType={unit.unitType}
+                        synopsis={unit.synopsis}
+                        workloadReq={unit.workloadReq}
+                        year={unit.year}
+                        semester={unit.semester}
+                        onDelete={deleteUnit}
+                        onAddSelected={addInSelectedUnit}
+                      />
                   ))}
             </div>
           </Col>
           
         </Row>
-      </Container>
-    </section>
+
+    </div>
   );
 }

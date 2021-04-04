@@ -1,62 +1,17 @@
-//Add new property for delete the preivous bullete
-ul.no-bullets {
-    list-style-type: none; /* Remove bullets */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margins */
-    line-height:1;
+//Caret
+.caret{
+
+  svg{
+    fill:$primary;
+    width:8px;
   }
 
- //schedule page's button
- .schedule-button{
-   background-color: #5D6465;
-   border-radius: 4px;
-   color:white;
-   font-size: 16px;
-   padding: 10px 32px;
-   margin: 20px 0;
- }
- .search-button{
-  background-color: #5D6465;
-  border-radius: 4px;
-  color:white;
-  font-size: 16px;
-  padding: 10px 32px;
-  margin: 20px 0;
-  width:210px;
+  &:hover{
+    color: $primary;
+  }
 }
 
-
-//schedule scroll
-.scroll-page {
-  height: 200px;
-  overflow-y: scroll;
-  background: #ffffff;
-}
-
-.force-overflow {
-  min-height: 100px;
-}
-
-.scroll-page::-webkit-scrollbar-track {
-  border-radius: 10px;
-  padding: 2px 0;
-  background-color: #A3BEC1;
-}
-
-.scroll-page::-webkit-scrollbar {
-  width: 10px;
-
-}
-
-.scroll-page::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: $primary;
-  border: 1px solid #A3BEC1;
-
-}
-
-
-//schedule's caret rotating
+//Caret rotation
 .rotate{
   transform:rotate(90deg);
 }
@@ -64,66 +19,8 @@ ul.no-bullets {
   transform:rotate(0deg);
 }
 .arrow_icon{
-  margin-left:auto;
-  transition:transform 0.6s ease;
+  transform-origin: 50% 70%;
+  transition:transform 0.3s ease;
 }
-
-//Clear default button style
-.clear-button-default{
-  border:0;
-  background-color: transparent;
-  outline:none;
-}
-
-//Schedule's comparing window
-.floating-button{
-    position: relative;
-    bottom: 5px;
-    left: 180px;
-}
-
-.close-button{
-  position: absolute;
-  right:0px;
-  top:10;
-}
-
-//Checkbox label
-label {
-  display:block; 
- }
- 
- label:hover {
-  background:#eee;
-  cursor:pointer;
- }
-
-//It is used to styling the check boxes inside Units
- .checkboxes input{
-  margin: 0px 10px 0px 0px;
- }
-
- .checkboxes label{
-   margin: 0px 30px;
- }
-
- //grey background grid for start schedule page
- .grey-grid{
-  display:inline;
-  width:500px;
-  height:100vh;  
-}
- //Grey background grid after side bar shrinkage
- .grey-grid2{
-   width:800px;
-   height:80vh;
-   display:inline;
- }
-
-//add fixed size to unit display
- .unit-display{
-   height:240px;
- }
-
 
 

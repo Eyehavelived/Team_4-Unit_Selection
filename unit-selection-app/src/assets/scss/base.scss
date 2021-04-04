@@ -1,6 +1,6 @@
 @import './_variables';
 @import './_navigation';
-@import './_scheduleCard';
+@import './_card';
 @import 'home.scss';
 @import 'schedule.scss';
 @import 'selection.scss';
@@ -11,13 +11,93 @@
 html body{
     font-family: -apple-system, system-ui, BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue", Arial, sans-serif;
     margin: 0;
-    background-color: $secondary-light;
+    background-color: $offwhite;
     font-size: 14px;
 }
 
+p{
+  margin-bottom:10px;
+}
+
+//Scrollbar 
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: $secondary-light;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $primary;
+}
+
+//Button 
 .circle-btn{
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
 }
 
+.circle-btn-sm{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.clear-btn-override{
+  background: none;
+  border: none;
+}
+
+//Checkbox
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+label:hover {
+  cursor:pointer;
+}
+
+//Fixed Heights
+
+.height-30{
+  height: 30vh;
+}
+
+.height-40{
+  height: 40vh;
+}
+
+.height-45{
+  height: 45vh;
+}
+
+.height-50{
+  height: 50vh;
+}
+
+.height-63{
+  height: 63vh;
+}
+
+.height-80{
+  height: 80vh;
+}
+
+//Coloured BG
+.white-bg{
+  background:white;
+}
+
+.grey-bg{
+  background:$secondary;
+}
+
+//Card size
+.card-width{
+  width: 45vh;
+}

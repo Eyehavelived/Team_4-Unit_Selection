@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
-import { NavigationSchedule } from "../components/common/navigation";
+import {Row, Col} from "react-bootstrap";
+import {NavigationApp} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
+import {UnitListCard} from "../components/common/unitListCard";
 import {IoIosAdd} from "react-icons/io";
 
 //from react-beautiful-dnd git example
@@ -28,6 +30,8 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 };
 
 export default function Selection(){
+    const page = "Schedule"
+
     const SELECTEDUNITS = "selectedUnits"
 
     //temporary data
@@ -125,29 +129,24 @@ export default function Selection(){
 
     return (
         <div className="overflow-hidden">
-            <div className="my-4 mx-4">
-                    <NavigationSchedule/>
-            </div>
+            <NavigationApp page={page}/>
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
-            <div className="row">
-                <div id="container-selection-units" className="col-2 ms-4 py-3">
+            <Row>
+                <Col md={2} className="white-bg ms-4 py-3 height-80">
                     <div className="row pb-3 mx-auto">
                         <h5>Selected Units</h5>
                     </div>
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
-                                <div id="container-units" className="overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
+                                <div className="overflow-auto height-63" {...provided.droppableProps} ref={provided.innerRef}>
                                 { unitList.filter((list)=>{return list.listId === SELECTEDUNITS}).map((su)=>{
                                     return(
                                         su.units.map((unit,index)=>(
                                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                                 {(provided)=>(
-                                                <div className="card me-3 mb-1" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                    <div className="pt-2 px-2">
-                                                        <h6>{unit.unitCode}</h6>
-                                                        <p>{unit.unitName}</p>
-                                                    </div>
+                                                <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                                   <UnitListCard code={unit.unitCode} name={unit.unitName}/>
                                                 </div>
                                                 )}
                                             </Draggable>
@@ -156,9 +155,9 @@ export default function Selection(){
                                 </div>
                             )}
                         </Droppable>
-                </div>
+                </Col>
 
-                <div id="container-schedule" className="col-9 ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative">
+                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative height-80">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
@@ -171,8 +170,8 @@ export default function Selection(){
                             <ScheduleForm onAdd={addTeachingPeriod}/>
                         </div>
                     </div>
-                </div>
-            </div>
+                </Col>
+            </Row>
             </DragDropContext>
         </div> 
     )

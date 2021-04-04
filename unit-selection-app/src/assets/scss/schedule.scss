@@ -1,43 +1,3 @@
-#container-selection-units{
-    background-color: white;
-    height: 75vh;
-}
-.container-units{
-    height: 63vh;
-
-    &::-webkit-scrollbar {
-        width: 4px;
-        background-color: black;
-    }
-    
-    
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px $secondary-light;
-      }
-    
-    &::-webkit-scrollbar-thumb {
-        background-color: $primary;
-    }
-}
-
-#container-schedule{
-    background-color: $secondary;
-    height: 75vh;
-
-    &::-webkit-scrollbar {
-        height: 4px;
-        background-color: black;
-    }
-    
-    
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px $secondary-light;
-      }
-    
-    &::-webkit-scrollbar-thumb {
-        background-color: $primary;
-    }
-}
 
 #container-form{
     background-color: white;
@@ -52,8 +12,4 @@
             transform: rotate(45deg);
         }
     }
-}
-
-#container-tp{
-    height: 50vh;
 }
