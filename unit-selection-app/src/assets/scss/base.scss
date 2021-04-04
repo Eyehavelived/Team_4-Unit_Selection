@@ -19,6 +19,7 @@ p{
   margin-bottom:10px;
 }
 
+//Scrollbar 
 *::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -34,6 +35,7 @@ p{
   background-color: $primary;
 }
 
+//Button 
 .circle-btn{
   width: 4rem;
   height: 4rem;
@@ -51,3 +53,51 @@ p{
   border: none;
 }
 
+//Checkbox
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+label:hover {
+  cursor:pointer;
+}
+
+//Fixed Heights
+
+.height-30{
+  height: 30vh;
+}
+
+.height-40{
+  height: 40vh;
+}
+
+.height-45{
+  height: 45vh;
+}
+
+.height-50{
+  height: 50vh;
+}
+
+.height-63{
+  height: 63vh;
+}
+
+.height-80{
+  height: 80vh;
+}
+
+//Coloured BG
+.white-bg{
+  background:white;
+}
+
+.grey-bg{
+  background:$secondary;
+}
+
+//Card size
+.card-width{
+  width: 45vh;
+}

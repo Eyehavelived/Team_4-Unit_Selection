@@ -321,9 +321,9 @@ export default function Selection() {
 
       <Row>
         {sidebar &&
-          <Col md={2} className="white-bg ms-4 py-2 px-1">
+          <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
             <form onSubmit={handleSortFilter}>
-              <div id="container-filter" className="overflow-auto">
+              <div className="height-45 overflow-auto">
                 <ToggleDiv name="Faculty" data={sampleFaculty} onSelect={handleChange}/>
                 <ToggleDiv name="Year" data={sampleYear} onSelect={handleChange}/>
                 <ToggleDiv name="Semester" data={sampleSemester} onSelect={handleChange}/>
@@ -339,18 +339,18 @@ export default function Selection() {
           </Col>
         }
 
-          <Col md={2} className="ms-3 px-0">
-            <div className="white-bg py-2 px-2">
+          <Col md={2} className="height-80 ms-3">
+            <div className="white-bg height-40 py-2 px-2">
               <u><h6>Units</h6></u>
-              <div className="container-units overflow-auto">
+              <div className="height-30 overflow-auto">
                 {filterResults.length>0 && <CreateArea unitList={filterResults} onAdd={addUnit}/>}
               </div>
             </div>
               
           
-            <div className="white-bg py-2 px-2 mt-2">
+            <div className="white-bg height-40 py-2 px-2 mt-2">
               <u><h6>Selected Units</h6></u>
-              <div className="container-units overflow-auto">
+              <div className="height-30 overflow-auto">
                   {selectedUnits.map((unit) => {
                     return (
                       <UnitListCardRemove code={unit.unitCode} name={unit.unitName}  onDelete={deleteSelectedUnit}/>
@@ -360,8 +360,8 @@ export default function Selection() {
             </div>
           </Col>
 
-          <Col>
-            <div className="container-detailed-units ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
+          <Col md={sidebar?7:10}>
+            <div className="grey-bg height-80 ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (
                   units.map((unit)=>

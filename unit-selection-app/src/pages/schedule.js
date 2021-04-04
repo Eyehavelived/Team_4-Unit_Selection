@@ -131,13 +131,13 @@ export default function Selection(){
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Row>
-                <Col md={2} id="container-selection-units" className="ms-4 py-3">
+                <Col md={2} className="white-bg ms-4 py-3 height-80">
                     <div className="row pb-3 mx-auto">
                         <h5>Selected Units</h5>
                     </div>
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
-                                <div id="container-units" className="overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
+                                <div className="overflow-auto height-63" {...provided.droppableProps} ref={provided.innerRef}>
                                 { unitList.filter((list)=>{return list.listId === SELECTEDUNITS}).map((su)=>{
                                     return(
                                         su.units.map((unit,index)=>(
@@ -155,7 +155,7 @@ export default function Selection(){
                         </Droppable>
                 </Col>
 
-                <Col md={9} id="container-schedule" className="ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative">
+                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative height-80">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 

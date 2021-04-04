@@ -1,21 +1,4 @@
-
-.force-overflow {
-  min-height: 100px;
-}
-
-//schedule's caret rotating
-.rotate{
-  transform:rotate(90deg);
-}
-.rotate-back{
-  transform:rotate(0deg);
-}
-.arrow_icon{
-  transform-origin: 50% 70%;
-  transition:transform 0.3s ease;
-}
-
-//Styling caret
+//Caret
 .caret{
 
   svg{
@@ -28,46 +11,16 @@
   }
 }
 
-//Checkbox label
- label:hover {
-  cursor:pointer;
- }
-
-
-
- //grey background grid for start schedule page
- .grey-grid{
-  display:inline;
-  width:500px;
-  height:100vh;  
+//Caret rotation
+.rotate{
+  transform:rotate(90deg);
 }
- //Grey background grid after side bar shrinkage
- .grey-grid2{
-   width:800px;
-   height:80vh;
-   display:inline;
- }
-
-// Fixed height for toggle container
-#container-filter{
-  height: 50vh;
+.rotate-back{
+  transform:rotate(0deg);
+}
+.arrow_icon{
+  transform-origin: 50% 70%;
+  transition:transform 0.3s ease;
 }
 
-// Fixed height for Units and Selected Units container
-.container-units{
-  height: 34vh;
-}
-
-.container-detailed-units{
-  background-color: $secondary;
-  height: 80vh;
-}
-
-.card-height{
-  height: 45vh
-}
-
-.white-bg{
-  background:white;
-}
 
