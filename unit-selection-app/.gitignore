@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# frequently accidentally added files that are never used
+../node_modules
+../package-lock.json
+../package.json
+
 # dependencies
 /node_modules
 /graphql/node_modules
