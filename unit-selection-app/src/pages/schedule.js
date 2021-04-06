@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 import {Row, Col} from "react-bootstrap";
 import {NavigationApp} from "../components/common/navigation";
@@ -35,6 +35,7 @@ export default function Selection(){
     const SELECTEDUNITS = "selectedUnits"
 
     //temporary data
+    /*
     const selectedUnits = [
         {
           unitCode: 'FIT3162',
@@ -57,6 +58,11 @@ export default function Selection(){
           unitName: 'Industry-based learning'
         }
       ]
+    */
+    const [selectedUnits] = useState(()=>{
+        const localData = localStorage.getItem('selectedUnits');
+        return localData ? JSON.parse(localData) : [];
+    });
     
     const su = {
         listId:"selectedUnits",
@@ -65,7 +71,14 @@ export default function Selection(){
         units:selectedUnits
     }
 
-    const [unitList, updateUnitList] = useState([su])
+    const [unitList, updateUnitList] = useState(()=>{
+        const localData = localStorage.getItem('scheduledUnits');
+        return localData ? JSON.parse(localData) : [su];
+    })
+
+    useEffect(()=> {
+        localStorage.setItem('scheduledUnits',JSON.stringify(unitList))
+    },[unitList]);
 
     function addTeachingPeriod(teachingPeriod){
 

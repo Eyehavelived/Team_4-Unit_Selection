@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {NavigationSelection} from "../components/common/navigation";
 import {Row, Col} from "react-bootstrap";
 import ToggleDiv from "../components/toggle";
@@ -180,7 +180,13 @@ export default function Selection() {
     }
   );
   const [units, setUnits] = useState([]);
-  const [selectedUnits, setSelectedUnits] = useState([]);
+  const [selectedUnits, setSelectedUnits] = useState(()=>{
+    const localData = localStorage.getItem('selectedUnits');
+    return localData ? JSON.parse(localData):[]
+  });
+
+  useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
+  
 
   function handleSearchRequest(event) {
     event.preventDefault();
@@ -311,8 +317,6 @@ export default function Selection() {
 
   function showSideBar(){
     setSidebar(prevStatus=>!prevStatus);
-    console.log(sidebar);
-
   }
   
   return (
@@ -360,7 +364,7 @@ export default function Selection() {
             </div>
           </Col>
 
-          <Col md={sidebar?7:10}>
+          <Col md={sidebar?7:9}>
             <div className="grey-bg height-80 ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (
