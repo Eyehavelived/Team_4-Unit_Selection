@@ -1,6 +1,50 @@
-# Getting Started with Create React App
+# Getting Started with Unit Selection and Comparison system for University students Project
+ This web application will help students choose units related to the course of study and allow them to consider units that might be of interest to them. It also provides advice on certain decisions they might make and automatically identifies if any requisites were breached during unit selection.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ And this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Getting Started
+To get the Node server running locally:
+```
+* Clone this repo
+* npm install to install all required dependencies
+* npm run to start the local server
+```
+
+Alternately, you could run the program by using [yarn](https://yarnpkg.com/)(package manager)
+```
+* yarn intall
+* yarn start
+```
+
+## Prequisites
+All the dependencies alreay be bundled in project,so we only need to do yarn install or npm install before the program running.
+
+
+## Built with
+
+* [React.js](https://reactjs.org/) - The front-end framework used
+* [Bootstrap](https://getbootstrap.com/) - The CSS styling package used
+* [GraphQL](https://graphql.org/) - The API query language used
+* [MySQL](https://www.mysql.com/) - The database used
+
+## Versioning
+We use GitHub for verision control.For more details on GitHub, see the [GitHub Website](https://github.com/)
+
+## Authors
+* Jia Ly Ong (Beverly)
+* JingJie Tan (Jay)
+* Yangtian Yan (Aaron)
+
+
+## License
+This project is licensed under the Monash University License 
+
+
+
+
+
+
 
 ## Available Scripts
 
