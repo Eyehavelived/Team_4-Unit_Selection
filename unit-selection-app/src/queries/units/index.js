@@ -1,7 +1,8 @@
-import gql from 'graphql-tag'
+import gql from '@apollo/client';
 
 export const GET_UNIT_BY_UNITCODE_QUERY = gql`
-    query getUnit($unitCode: String) {
+    query getUnitFromUnitcode($unitCode: String) { 
+        getUnit(unitCode: $unitCode) {
             unitCode
             unitName
             synopsis
@@ -14,9 +15,12 @@ export const GET_UNIT_BY_UNITCODE_QUERY = gql`
             degreeType
             isActive
         }
+    }
 `
+
 export const GET_ALL_UNITS_QUERY = gql`
-    query getUnits {
+    query getAllUnits {
+        getUnits {
             unitCode
             unitName
             synopsis
@@ -29,11 +33,12 @@ export const GET_ALL_UNITS_QUERY = gql`
             degreeType
             isActive
         }
+    }
 `
 
 export const GET_FILTERED_UNITS_QUERY = gql`
-    query getSelectionUnits($filterJSON: String) {
-        units: getUnitsWithFilters(filterJSON: $filterJSON) {
+    query getSelectionUnits($whereRawExpr: String) {
+        units: getUnitsWithFilters(whereRawExpr: $whereRawExpr) {
             unitCode
             unitName
             synopsis

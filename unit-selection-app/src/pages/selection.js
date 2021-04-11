@@ -5,12 +5,12 @@ import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
+// import {GET_ALL_UNITS_QUERY} from '../queries/units/index';
 import { useQuery } from "@apollo/client";
 
-import {GET_ALL_UNITS_QUERY, GET_UNIT_BY_UNITCODE_QUERY} from '../queries/units'
 
 export default function Selection() {
-  const page = "Selection"
+  const page = "Selection";
 
   const sampleFaculty = [
     {
@@ -75,106 +75,110 @@ export default function Selection() {
     name:"Winter"}
   ]
 
-  const {sampleUnits, error} = useQuery(GET_ALL_UNITS_QUERY)
-  if (error) {
-    console.log(error)
-  }
+  // console.log("AAAAAAAA")
+  // const {sampleUnits, error} = useQuery(GET_ALL_UNITS_QUERY)
+  // console.log("EEEEEE")
+  // if (error) {
+  //   console.log(error)
+  // }
 
-  console.log(sampleUnits)
-  // const sampleUnits=
-  //   [
-  //     {
-  //       unitCode: 'FIT3162',
-  //       unitName: 'Computer Science Project 2',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
-  //       workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT3161',
-  //       unitName: 'Computer Science Project 1',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
-  //       workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT3155',
-  //       unitName: 'Advanced Data Structures and Algorithms',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'lorem ipsum dolores umbridge',
-  //       workloadReq: 'your soul because the first assignment will decide your grades',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT3045',
-  //       unitName: 'Industry-based learning',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'Students on placement participate full time in a defined, graduate level role',
-  //       workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-  //       year:"year3",
-  //       semester:"Semester1"
+  // console.log(sampleUnits)
+  
+  console.log("EEEEEE")
+  const sampleUnits=
+    [
+      {
+        unitCode: 'FIT3162',
+        unitName: 'Computer Science Project 2',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
+        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
+        year:"year3",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT3161',
+        unitName: 'Computer Science Project 1',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
+        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
+        year:"year3",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT3155',
+        unitName: 'Advanced Data Structures and Algorithms',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'lorem ipsum dolores umbridge',
+        workloadReq: 'your soul because the first assignment will decide your grades',
+        year:"year3",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT3045',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"year3",
+        semester:"Semester1"
 
-  //     },
-  //     {
-  //       unitCode: 'FIT2032',
-  //       unitName: 'Industry-based learning',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'Students on placement participate full time in a defined, graduate level role',
-  //       workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-  //       year:"year2",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT3333',
-  //       unitName: 'Industry-based learning',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'Students on placement participate full time in a defined, graduate level role',
-  //       workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT9999',
-  //       unitName: 'Industry-based learning',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'Students on placement participate full time in a defined, graduate level role',
-  //       workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT8888',
-  //       unitName: 'Industry-based learning',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'Students on placement participate full time in a defined, graduate level role',
-  //       workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     },
-  //     {
-  //       unitCode: 'FIT7777',
-  //       unitName: 'Industry-based learning',
-  //       facultyName: 'Faculty of Information Technology',
-  //       unitType: 'Undergraduate',
-  //       synopsis: 'Students on placement participate full time in a defined, graduate level role',
-  //       workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-  //       year:"year3",
-  //       semester:"Semester1"
-  //     }
-  // ]
+      },
+      {
+        unitCode: 'FIT2032',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"year2",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT3333',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"year3",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT9999',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"year3",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT8888',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"year3",
+        semester:"Semester1"
+      },
+      {
+        unitCode: 'FIT7777',
+        unitName: 'Industry-based learning',
+        facultyName: 'Faculty of Information Technology',
+        unitType: 'Undergraduate',
+        synopsis: 'Students on placement participate full time in a defined, graduate level role',
+        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
+        year:"year3",
+        semester:"Semester1"
+      }
+  ]
 
  
   const [searchRequest,setSearchRequest]=useState("");

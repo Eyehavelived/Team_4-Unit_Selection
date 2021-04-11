@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import './assets/scss/base.scss'
+import './assets/scss/base.scss';
 import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, onError, ApolloLink } from '@apollo/client';
 
 // const errorLink = onError(({ graphQLErrors }) => {
