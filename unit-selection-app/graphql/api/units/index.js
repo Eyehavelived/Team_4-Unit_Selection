@@ -1,5 +1,5 @@
-const db = require('../../database/mysql')
-const {errorHandler} = require('../utils')
+const db = require('../../database/mysql');
+const {errorHandler} = require('../utils');
 
 // This has to be a call back function and not a constant, because each instance of
 // a query is final and cannot revert back to its unfiltered form.
