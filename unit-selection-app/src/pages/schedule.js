@@ -97,6 +97,7 @@ export default function Selection(){
         updateUnitList(prevTeachingPeriods => {
             prevTeachingPeriods[dInd].units = [...prevTeachingPeriods[dInd].units,
                                                 ...prevTeachingPeriods[sInd].units];
+            prevTeachingPeriods[sInd].units = [];
             return prevTeachingPeriods.filter((tp)=>{
                 return (tp.listId) !== id
             });
