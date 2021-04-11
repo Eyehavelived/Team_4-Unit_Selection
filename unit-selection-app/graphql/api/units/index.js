@@ -123,9 +123,10 @@ module.exports = {
             .where({'unit.unitCode': searchUnitCode})
             .catch(errorHandler),
     
-    getUnits: async () =>
-        await units()
-            .catch(errorHandler),
+    getUnits: async () => {
+        console.log("HAI")
+        return await units()
+            .catch(errorHandler)},
 
     getUnitsWithFilters: async (optionsString) => {
         // because it's a MASSIVE pain to pass varying values through the schema file, we'll decompress the query here.

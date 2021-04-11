@@ -17,6 +17,7 @@
   "dependencies": {
     "apollo-server-koa": "^2.21.0",
     "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "graphql-tools": "^7.0.4",
     "knex": "^0.95.2",
