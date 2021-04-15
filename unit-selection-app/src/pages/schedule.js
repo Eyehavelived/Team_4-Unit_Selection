@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 import {Row, Col} from "react-bootstrap";
 import {NavigationApp} from "../components/common/navigation";
@@ -34,38 +34,45 @@ export default function Selection(){
 
     const SELECTEDUNITS = "selectedUnits"
 
-    //temporary data
-    const selectedUnits = [
-        {
-          unitCode: 'FIT3162',
-          unitName: 'Computer Science Project 2'
-        },
-        {
-          unitCode: 'FIT3161',
-          unitName: 'Computer Science Project 1'
-        },
-        {
-          unitCode: 'FIT3155',
-          unitName: 'Advanced Data Structures and Algorithms'
-        },
-        {
-          unitCode: 'FIT3045',
-          unitName: 'Industry-based learning'
-        },
-        {
-          unitCode: 'FIT2032',
-          unitName: 'Industry-based learning'
-        }
-      ]
-    
-    const su = {
-        listId:"selectedUnits",
-        year: "none",
-        sem:"none",
-        units:selectedUnits
-    }
+    const [selectedUnits] = useState(()=>{
+        const localData = localStorage.getItem('selectedUnits');
+        return localData ? JSON.parse(localData) : [];
+    });
 
-    const [unitList, updateUnitList] = useState([su])
+    const [unitList, updateUnitList] = useState(()=>{
+        const localData = localStorage.getItem('scheduledUnits');
+        if (localData){
+            let scheduleList = JSON.parse(localData);
+            //Remove Units
+            let scheduleUnits = []
+            for (const tp of scheduleList){
+                scheduleUnits = scheduleUnits.concat(tp.units);
+                };
+            let toBeRemoved = scheduleUnits.filter((unit)=>{
+                return selectedUnits.map(unit=>unit.unitCode).indexOf(unit.unitCode)<0
+                });
+            scheduleList = scheduleList.map(tp => {
+                let removedUnits = tp.units.filter(unit=>toBeRemoved.map(unit=>unit.unitCode).indexOf(unit.unitCode)<0);
+                return {listId:tp.listId,year:tp.year,sem:tp.sem,units:removedUnits}
+                });
+            //Add Units
+            let toBeAdded = selectedUnits.filter((unit)=>{
+                return scheduleUnits.map(unit=>unit.unitCode).indexOf(unit.unitCode)<0
+                });
+            scheduleList[0].units = scheduleList[0].units.concat(toBeAdded);
+            return scheduleList
+        }else{
+            return [{listId:"selectedUnits",
+                    year: "none",
+                    sem:"none",
+                    units:selectedUnits}];
+        }
+        
+    })
+
+    useEffect(()=> {
+        localStorage.setItem('scheduledUnits',JSON.stringify(unitList))
+    },[unitList]);
 
     function addTeachingPeriod(teachingPeriod){
 
@@ -90,6 +97,7 @@ export default function Selection(){
         updateUnitList(prevTeachingPeriods => {
             prevTeachingPeriods[dInd].units = [...prevTeachingPeriods[dInd].units,
                                                 ...prevTeachingPeriods[sInd].units];
+            prevTeachingPeriods[sInd].units = [];
             return prevTeachingPeriods.filter((tp)=>{
                 return (tp.listId) !== id
             });

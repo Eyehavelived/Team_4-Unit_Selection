@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {NavigationSelection} from "../components/common/navigation";
 import {Row, Col} from "react-bootstrap";
 import ToggleDiv from "../components/toggle";
@@ -6,7 +6,69 @@ import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 // import {GET_ALL_UNITS_QUERY} from '../queries/units/index';
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, gql } from "@apollo/client";
+
+const GET_ALL_UNITS_QUERY = gql`
+    query getAllUnits {
+        getUnits {
+            unitCode
+            unitName
+            synopsis
+            unitCoRequisites
+            unitProhibitions
+            unitPreRequisites
+            teachingPeriods
+            locationNames
+            facultyName
+            degreeType
+            isActive
+        }
+    }
+`
+const GET_UNIT_BY_UNITCODE_QUERY = gql`
+    query getUnitFromUnitcode($unitCode: String) { 
+        getUnit(unitCode: $unitCode) {
+            unitCode
+            unitName
+            synopsis
+            unitCoRequisites
+            unitProhibitions
+            unitPreRequisites
+            teachingPeriods
+            locationNames
+            facultyName
+            degreeType
+            isActive
+        }
+    }
+`
+
+// function getAllUnitsF() {
+//   const {data, error} = useQuery(GET_ALL_UNITS_QUERY)
+//   return data
+// }
+
+// const getAllUnitsCB = (() => {
+//   const {data, error} = useQuery(GET_ALL_UNITS_QUERY)
+//   return data
+// })
+
+// function getByUnitCodeF(qUnitCode) {
+//   const {data, error} = useQuery(GET_UNIT_BY_UNITCODE_QUERY, {
+//     variables: {
+//         unitCode: qUnitCode
+//     }
+//   })
+//   return data
+// }
+// const getByUnitCodeCB = ((qUnitCode) => {
+  // const {data, error} = useQuery(GET_UNIT_BY_UNITCODE_QUERY, {
+  //   variables: {
+  //       unitCode: qUnitCode
+  //   }
+  // })
+  // return data
+// })
 
 
 export default function Selection() {
@@ -63,125 +125,35 @@ export default function Selection() {
   ]
 
   const sampleSemester = [
-    {id:"uuid15",
-    name:"Semester1"},
-    {id:"uuid16",
-    name:"Semester2"},
-    {id:"uuid17",
-    name:"SummerA"},
-    {id:"uuid18",
-    name:"SummerB"},
-    {id:"uuid19",
-    name:"Winter"}
+    {
+      id: 1,
+      name:"Semester1"
+    }, {
+      id: 2,
+      name:"Semester2"
+    },{
+      id: 3,
+      name:"SummerA"
+    },{
+      id: 4,
+      name:"SummerB"
+    },{
+      id: 5,
+      name:"Winter"
+    }
   ]
 
-  // console.log("AAAAAAAA")
-  // const {sampleUnits, error} = useQuery(GET_ALL_UNITS_QUERY)
-  // console.log("EEEEEE")
-  // if (error) {
-  //   console.log(error)
-  // }
+  console.log("AAAAAAAA")
 
+  // const sampleUnits = getAllUnitsF()
   // console.log(sampleUnits)
-  
   console.log("EEEEEE")
-  const sampleUnits=
-    [
-      {
-        unitCode: 'FIT3162',
-        unitName: 'Computer Science Project 2',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
-        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3161',
-        unitName: 'Computer Science Project 1',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
-        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3155',
-        unitName: 'Advanced Data Structures and Algorithms',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'lorem ipsum dolores umbridge',
-        workloadReq: 'your soul because the first assignment will decide your grades',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3045',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
 
-      },
-      {
-        unitCode: 'FIT2032',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year2",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3333',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT9999',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT8888',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT7777',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      }
-  ]
-
- 
   const [searchRequest,setSearchRequest]=useState("");
+  const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+    variables: {unitCode: `${searchRequest}`}
+  })
+  // const [filterResults,setFilterResults]=useState([]);
   const [filterResults,setFilterResults]=useState([]);
   const [filterUnits,setFilterUnits]=useState(
     {
@@ -191,27 +163,45 @@ export default function Selection() {
     }
   );
   const [units, setUnits] = useState([]);
-  const [selectedUnits, setSelectedUnits] = useState([]);
+  const [selectedUnits, setSelectedUnits] = useState(()=>{
+    const localData = localStorage.getItem('selectedUnits');
+    return localData ? JSON.parse(localData):[]
+  });
 
+  useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
+  
   function handleSearchRequest(event) {
     event.preventDefault();
-    var result=null;
-    for (var i=0;i<sampleUnits.length;i++){
-      if(sampleUnits[i].unitCode===searchRequest){
-         result=sampleUnits[i];
-         break;
-      }
+    // var result=null;
+    // for (var i=0;i<sampleUnits.length;i++){
+    //   if(sampleUnits[i].unitCode===searchRequest){
+    //      result=sampleUnits[i];
+    //      break;
+    //   }
+    // }
+    searchUnits();
+    console.log("search complete")
+    if (loading) {
+      console.log("loading...")
     }
-    if(result!=null){
-      setFilterResults((prevUnits) => {
-        for (var i = 0; i < prevUnits.length; i++) {
-          if (prevUnits[i].unitCode === result.unitCode) {
-            return prevUnits;
-          }
-        }
-        return [...prevUnits, result];
-      });
+    if (error) {
+      console.log(error)
     }
+    if (data) {
+      setFilterResults(data)
+    }
+    return data.getUnit;
+
+    // if(result!=null){
+    //   setFilterResults((prevUnits) => {
+    //     for (var i = 0; i < prevUnits.length; i++) {
+    //       if (prevUnits[i].unitCode === result.unitCode) {
+    //         return prevUnits;
+    //       }
+    //     }
+    //     return [...prevUnits, result];
+    //   });
+    // }
 
   }
 
@@ -307,24 +297,40 @@ export default function Selection() {
     }
   }
 
-  function handleSortFilter(event){
-    const result=[];
-    setFilterResults([]);
-    for (var i=0;i<sampleUnits.length;i++){
-      if(filterUnits.faculty.includes(sampleUnits[i].facultyName)&&filterUnits.year.includes(sampleUnits[i].year)&&filterUnits.semester.includes(sampleUnits[i].semester)){
-        result.push(sampleUnits[i]);
-      }
-    }
-    setFilterResults(prevResults=>[...prevResults,...result]);
-    event.preventDefault();
-  }
+  // function handleSortFilter(event){
+  //   const result=[];
+  //   setFilterResults([]);
+  //   for (var i=0;i<sampleUnits.length;i++){
+  //     if(filterUnits.faculty.includes(sampleUnits[i].facultyName)&&filterUnits.year.includes(sampleUnits[i].year)&&filterUnits.semester.includes(sampleUnits[i].semester)){
+  //       result.push(sampleUnits[i]);
+  //     }
+  //   }
+  //   setFilterResults(prevResults=>[...prevResults,...result]);
+  //   event.preventDefault();
+  // }
+
+  function handleSortFilter(event) {
+    // const result = []
+    // setFilterResults([])
+    // if (filterUnits.faculty.length() == filterUnits.year.length() == filterUnits.semester.length() == 0) {
+    //   setFilterResults(()=> {
+    //     const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
+    //     if (loading) console.log("loading...")
+    //     if (error) {
+    //       console.log(error)
+    //     }
+      
+    //     if (data) console.log(data)
+    //     return data
+    //   })
+    // }
+    return [];
+  } 
 
   const [sidebar,setSidebar] = useState(true);
 
   function showSideBar(){
     setSidebar(prevStatus=>!prevStatus);
-    console.log(sidebar);
-
   }
   
   return (
@@ -372,7 +378,7 @@ export default function Selection() {
             </div>
           </Col>
 
-          <Col md={sidebar?7:10}>
+          <Col md={sidebar?7:9}>
             <div className="grey-bg height-80 ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (

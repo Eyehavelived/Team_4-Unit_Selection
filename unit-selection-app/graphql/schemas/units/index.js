@@ -9,6 +9,8 @@ const getUnitsCurry = cb =>
     async (parent, args, ctx, info) => {
         const units = await cb(args, parent)
             .catch(errorHandler)
+        console.log("Argument given:")
+        console.log(args)
         if (!units.length) {
             console.log("No units found")
             return []

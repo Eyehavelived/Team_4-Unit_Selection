@@ -118,10 +118,12 @@ const filters = (options) => {
 
 
 module.exports = {
-    getUnit: async (searchUnitCode) =>
-        await units()
+    getUnit: async (searchUnitCode) => {
+        console.log("Getting unit")
+        console.log(searchUnitCode)
+        return await units()
             .where({'unit.unitCode': searchUnitCode})
-            .catch(errorHandler),
+            .catch(errorHandler)},
     
     getUnits: async () => {
         console.log("HAI")
