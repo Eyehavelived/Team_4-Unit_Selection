@@ -2,7 +2,7 @@ import React from "react";
 import ReactToPrint from "react-to-print";
 import { VscFilePdf } from "react-icons/vsc";
 import { NavigationApp } from "../components/common/navigation";
-import UnitCard from "../components/unitCard2";
+import UnitCard from "../components/unitCardView";
 
 
   const page = "View";
@@ -184,20 +184,20 @@ export default class View extends React.Component {
               <ReactToPrint
                 trigger={() => (
                   <button type="button" className="btn btn-primary">
-                    Clcik Here to download PDF
+                    Click Here to download PDF
                     <VscFilePdf />
                   </button>
                 )}
                 content={() => this.componentRef}
               />
-            </div>
-            <div className="height-80 overflow-auto">
-            <ComponentToPrint ref={(el) => (this.componentRef = el)} />
-            </div>
-           
           </div>
+          <div className="height-80 overflow-auto">
+            <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+          </div>
+           
         </div>
       </div>
+    S</div>
     );
   }
 }
