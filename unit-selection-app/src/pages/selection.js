@@ -22,6 +22,7 @@ const GET_ALL_UNITS_QUERY = gql`
             facultyName
             degreeType
             isActive
+            workloadReq
         }
     }
 `
@@ -39,6 +40,7 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
             facultyName
             degreeType
             isActive
+            workloadReq
         }
     }
 `
@@ -84,17 +86,17 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
 //   return data;
 // }
 
-function Filter() {
-  const [filterResults,setFilterResults]=useState([]);
-  const [filterUnits,setFilterUnits]=useState(
-    {
-      faculty:[],
-      year:[],
-      semester:[]
-    }
-  );
-  return [];
-}
+// function Filter() {
+//   const [filterResults,setFilterResults]=useState([]);
+//   const [filterUnits,setFilterUnits]=useState(
+//     {
+//       faculty:[],
+//       year:[],
+//       semester:[]
+//     }
+//   );
+//   return [];
+// }
 
 export default function Selection() {
   const page = "Selection";
@@ -174,7 +176,7 @@ export default function Selection() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    if (!searchRequest) return;
+    if (!searchRequest) return null;
     searchUnits();
     if (data) {
       setSearchResults(data.getUnit);
@@ -199,7 +201,11 @@ export default function Selection() {
   function handleSearchRequest(event) {
     event.preventDefault();
     console.log(searchResults)
-    setFilterUnits(searchResults)
+    if (searchResults) {
+      setFilterResults(() => searchResults)
+    } else {
+      setFilterResults((prevUnits) => prevUnits)
+    }
     return searchResults;
   }
 
@@ -377,9 +383,8 @@ export default function Selection() {
                         unitName={unit.unitName}
                         unitType={unit.degreeType}
                         synopsis={unit.synopsis}
-                        // workloadReq={unit.workloadReq}
-                        // year={unit.year}
-                        semester={unit.teachingPeriod}
+                        workloadReq={unit.workloadReq}
+                        semester={unit.teachingPeriods}
                         onDelete={deleteUnit}
                         onAddSelected={addInSelectedUnit}
                       />
