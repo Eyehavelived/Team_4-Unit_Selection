@@ -69,30 +69,20 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
   // })
   // return data
 // })
-function Search() {
-  const [searchRequest,setSearchRequest]=useState("");
-  const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
-    variables: {unitCode: `${searchRequest}`}
-  });
-  const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    if (!searchRequest) return;
-    searchUnits();
-    if (data) {
-      setResults(data.getUnit);
-    }
-  }, [searchRequest, data, searchUnits]);
 
-  if (called && loading) {
-    console.log("loading...")
-    return [];
-  }
+// function Search(searchRequest) {
 
-  console.log(data);
 
-  return data;
-}
+//   // if (called && loading) {
+//   //   console.log("loading...")
+//   //   return [];
+//   // }
+
+//   console.log(data);
+
+//   return data;
+// }
 
 function Filter() {
   const [filterResults,setFilterResults]=useState([]);
@@ -177,21 +167,40 @@ export default function Selection() {
       name:"Winter"
     }
   ]
+  const [searchRequest,setSearchRequest]=useState("");
+  const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+    variables: {unitCode: `${searchRequest}`}
+  });
+  const [searchResults, setSearchResults] = useState([]);
 
+  useEffect(() => {
+    if (!searchRequest) return;
+    searchUnits();
+    if (data) {
+      setSearchResults(data.getUnit);
+    }
+  }, [searchRequest, data, searchUnits]);
   // const [filterResults,setFilterResults]=useState([]);
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState(()=>{
     const localData = localStorage.getItem('selectedUnits');
     return localData ? JSON.parse(localData):[]
   });
+  const [filterResults,setFilterResults]=useState([]);
+  const [filterUnits,setFilterUnits]=useState(    {
+    faculty:[],
+    year:[],
+    semester:[]
+  }
+);
 
   useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
   
   function handleSearchRequest(event) {
     event.preventDefault();
-    const results = Search();
-    setFilterUnits(results);
-    return results;
+    console.log(searchResults)
+    setFilterUnits(searchResults)
+    return searchResults;
   }
 
   function handleSortFilter(event) {
