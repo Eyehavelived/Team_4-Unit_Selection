@@ -69,7 +69,42 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
   // })
   // return data
 // })
+function Search() {
+  const [searchRequest,setSearchRequest]=useState("");
+  const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+    variables: {unitCode: `${searchRequest}`}
+  });
+  const [results, setResults] = useState([]);
 
+  useEffect(() => {
+    if (!searchRequest) return;
+    searchUnits();
+    if (data) {
+      setResults(data.getUnit);
+    }
+  }, [searchRequest, data, searchUnits]);
+
+  if (called && loading) {
+    console.log("loading...")
+    return [];
+  }
+
+  console.log(data);
+
+  return data;
+}
+
+function Filter() {
+  const [filterResults,setFilterResults]=useState([]);
+  const [filterUnits,setFilterUnits]=useState(
+    {
+      faculty:[],
+      year:[],
+      semester:[]
+    }
+  );
+  return [];
+}
 
 export default function Selection() {
   const page = "Selection";
@@ -143,25 +178,7 @@ export default function Selection() {
     }
   ]
 
-  console.log("AAAAAAAA")
-
-  // const sampleUnits = getAllUnitsF()
-  // console.log(sampleUnits)
-  console.log("EEEEEE")
-
-  const [searchRequest,setSearchRequest]=useState("");
-  const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
-    variables: {unitCode: `${searchRequest}`}
-  })
   // const [filterResults,setFilterResults]=useState([]);
-  const [filterResults,setFilterResults]=useState([]);
-  const [filterUnits,setFilterUnits]=useState(
-    {
-      faculty:[],
-      year:[],
-      semester:[]
-    }
-  );
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState(()=>{
     const localData = localStorage.getItem('selectedUnits');
@@ -172,38 +189,28 @@ export default function Selection() {
   
   function handleSearchRequest(event) {
     event.preventDefault();
-    // var result=null;
-    // for (var i=0;i<sampleUnits.length;i++){
-    //   if(sampleUnits[i].unitCode===searchRequest){
-    //      result=sampleUnits[i];
-    //      break;
-    //   }
-    // }
-    searchUnits();
-    console.log("search complete")
-    if (loading) {
-      console.log("loading...")
-    }
-    if (error) {
-      console.log(error)
-    }
-    if (data) {
-      setFilterResults(data)
-    }
-    return data.getUnit;
-
-    // if(result!=null){
-    //   setFilterResults((prevUnits) => {
-    //     for (var i = 0; i < prevUnits.length; i++) {
-    //       if (prevUnits[i].unitCode === result.unitCode) {
-    //         return prevUnits;
-    //       }
-    //     }
-    //     return [...prevUnits, result];
-    //   });
-    // }
-
+    const results = Search();
+    setFilterUnits(results);
+    return results;
   }
+
+  function handleSortFilter(event) {
+    // const result = []
+    // setFilterResults([])
+    // if (filterUnits.faculty.length() == filterUnits.year.length() == filterUnits.semester.length() == 0) {
+    //   setFilterResults(()=> {
+    //     const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
+    //     if (loading) console.log("loading...")
+    //     if (error) {
+    //       console.log(error)
+    //     }
+      
+    //     if (data) console.log(data)
+    //     return data
+    //   })
+    // }
+    return [];
+  } 
 
   function addUnit(newUnit){
     setUnits((prevUnits) => {
@@ -296,36 +303,6 @@ export default function Selection() {
 
     }
   }
-
-  // function handleSortFilter(event){
-  //   const result=[];
-  //   setFilterResults([]);
-  //   for (var i=0;i<sampleUnits.length;i++){
-  //     if(filterUnits.faculty.includes(sampleUnits[i].facultyName)&&filterUnits.year.includes(sampleUnits[i].year)&&filterUnits.semester.includes(sampleUnits[i].semester)){
-  //       result.push(sampleUnits[i]);
-  //     }
-  //   }
-  //   setFilterResults(prevResults=>[...prevResults,...result]);
-  //   event.preventDefault();
-  // }
-
-  function handleSortFilter(event) {
-    // const result = []
-    // setFilterResults([])
-    // if (filterUnits.faculty.length() == filterUnits.year.length() == filterUnits.semester.length() == 0) {
-    //   setFilterResults(()=> {
-    //     const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
-    //     if (loading) console.log("loading...")
-    //     if (error) {
-    //       console.log(error)
-    //     }
-      
-    //     if (data) console.log(data)
-    //     return data
-    //   })
-    // }
-    return [];
-  } 
 
   const [sidebar,setSidebar] = useState(true);
 
