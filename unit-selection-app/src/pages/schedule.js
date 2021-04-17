@@ -29,6 +29,9 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
+//currently need to reteive from database, so does scheduleform.js
+const semesterTypes = ["1","2","summera","summerb","winter"];
+
 export default function Selection(){
     const page = "Schedule"
 
@@ -74,6 +77,22 @@ export default function Selection(){
         localStorage.setItem('scheduledUnits',JSON.stringify(unitList))
     },[unitList]);
 
+    //returns true if smaller, returns false if larger
+    function compareTeachingPeriod(currentTeachingPeriod, prevTeachingPeriod){
+        let retVal = false;
+
+        if (currentTeachingPeriod.year === prevTeachingPeriod.year) {
+            if (semesterTypes.indexOf(currentTeachingPeriod.sem) < semesterTypes.indexOf(prevTeachingPeriod.sem)){
+                retVal = true;
+            }
+        }
+        else if (currentTeachingPeriod.year < prevTeachingPeriod.year){
+            retVal = true;
+        }
+        console.log(retVal);
+        return retVal;
+    }
+
     function addTeachingPeriod(teachingPeriod){
 
         updateUnitList(prevTeachingPeriods => {
@@ -83,7 +102,23 @@ export default function Selection(){
                         return prevTeachingPeriods;
                 }
             }
-            return [...prevTeachingPeriods, teachingPeriod]
+
+            let newTeachingPeriod = [...prevTeachingPeriods, teachingPeriod];
+
+            //reorder teaching periods using selection sort
+            for (var i=newTeachingPeriod.length-1; i > 0; i--) {
+                var current = newTeachingPeriod[i];
+                var prev = newTeachingPeriod[i-1];
+                var sort = compareTeachingPeriod(current,prev);
+                if (sort){
+                    newTeachingPeriod[i] = prev;
+                    newTeachingPeriod[i-1] = current;
+                } else {
+                    break;
+                }
+            }
+
+            return newTeachingPeriod;
         });
     }
 
