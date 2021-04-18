@@ -6,7 +6,11 @@ import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 // import {GET_ALL_UNITS_QUERY} from '../queries/units/index';
-import { useLazyQuery, gql } from "@apollo/client";
+import { useLazyQuery, gql, useQuery } from "@apollo/client";
+
+function renameKey(o, oldKey, newKey) {
+  delete Object.assign(o, {[newKey]: o[oldKey] })[oldKey];
+}
 
 const GET_ALL_UNITS_QUERY = gql`
     query getAllUnits {
@@ -45,7 +49,9 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
     }
 `
 
-const sampleYear = [
+
+
+const years = [
   {
     id:"1",
     name:"Year 1"
@@ -79,64 +85,69 @@ const sampleYear = [
 //   return [];
 // }
 
+function Faculties() {
+  const GET_ALL_FACULTIES = gql`
+    query getAllFaculties {
+      getFaculties {
+        id
+        facultyName
+      }
+    }
+  `
+
+  const {loading, error, data} = useQuery(GET_ALL_FACULTIES);
+  if (loading) return [];
+  const faculties = data.getFaculties
+
+  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+  return faculties.map(({facultyName, ...rest}) => ({
+    name: facultyName,
+    ...rest
+  }))
+}
+
+function TeachingPeriods() {
+  const GET_ALL_TEACHING_PERIODS = gql`
+    query getAllTeachingPeriods {
+      getTeachingPeriods {
+        id
+        periodName
+      }
+    }
+  `
+
+  const {loading, error, data} = useQuery(GET_ALL_TEACHING_PERIODS);
+  if (loading) return [];
+  const teachingPeriods = data.getTeachingPeriods
+
+  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+  return teachingPeriods.map(({periodName, ...rest}) => ({
+    name: periodName,
+    ...rest
+  }))
+}
+
 export default function Selection() {
   const page = "Selection";
 
-  const sampleFaculty = [
-    {
-      id:"uuid1",
-      name:"Faculty of Information Technology"
-    },
-    {
-      id:"uuid2",
-      name:"Faculty of Business & Economics"
-    },
-    {
-      id:"uuid3",
-      name:"Faculty of Science"
-    },
-    {
-      id:"uuid4",
-      name:"Faculty of Law"
-    },
-    {
-      id:"uuid5",
-      name:"Faculty of Pharmacy and Pharmaceutical Sciences"
-    },
-    {
-      id:"uuid6",
-      name:"Faculty of Education"
-    },
-    {
-      id:"uuid7",
-      name:"Faculty of Medicine, Nursing and Health Sciences"
-    },
-    {
-      id:"uuid8",
-      name:"Faculty of Art, Design and Architecture"
-    }
-  ]
-
-
-
-  const sampleSemester = [
-    {
-      id: 1,
-      name:"Semester1"
-    }, {
-      id: 2,
-      name:"Semester2"
-    },{
-      id: 3,
-      name:"SummerA"
-    },{
-      id: 4,
-      name:"SummerB"
-    },{
-      id: 5,
-      name:"Winter"
-    }
-  ]
+  // const sampleSemester = [
+  //   {
+  //     id: 1,
+  //     name:"Semester1"
+  //   }, {
+  //     id: 2,
+  //     name:"Semester2"
+  //   },{
+  //     id: 3,
+  //     name:"SummerA"
+  //   },{
+  //     id: 4,
+  //     name:"SummerB"
+  //   },{
+  //     id: 5,
+  //     name:"Winter"
+  //   }
+  // ]
   const [searchRequest,setSearchRequest]=useState("");
   const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
     variables: {unitCode: `${searchRequest}`}
@@ -302,9 +313,9 @@ export default function Selection() {
           <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
             <form onSubmit={handleSortFilter}>
               <div className="height-45 overflow-auto">
-                <ToggleDiv name="Faculty" data={sampleFaculty} onSelect={handleChange}/>
-                <ToggleDiv name="Year" data={sampleYear} onSelect={handleChange}/>
-                <ToggleDiv name="Semester" data={sampleSemester} onSelect={handleChange}/>
+                <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleChange}/>
+                <ToggleDiv name="Year" data={years} onSelect={handleChange}/>
+                <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleChange}/>
               </div>
               <button className="btn btn-secondary mt-3">Show Filtered Result</button>
             </form> 
