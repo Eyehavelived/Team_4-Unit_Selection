@@ -140,59 +140,57 @@ function AllUnits() {
 }
 
 function FilterUnits(filters) {
-  const filtersString = JSON.stringify(filters)
-  const [filterUnits, { data }] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
-    variables: {optionsString: `${filtersString}`}
-  });
 
-  useEffect(() => {
-    filterUnits();
-    if (data) {
-      return data.getUnitsWithFilters;
-    }
-  }, [filtersString, data, filterUnits]);
 }
 
 export default function Selection() {
   const page = "Selection";
 
   const [searchRequest,setSearchRequest]=useState("");
-  const [searchUnits, { data }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+  const [searchUnitsQuery, searchQuery] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
     variables: {unitCode: `${searchRequest}`}
   });
 
-  console.log("AHH")
-  console.log(useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
-    variables: {unitCode: `${searchRequest}`}
-  }).map((options, {data}) => options, {unitResults: data}))
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    if (!searchRequest) return null;
-    searchUnits();
-    if (data) {
-      setSearchResults(data.getUnit);
+    if (!searchRequest) return [];
+    searchUnitsQuery();
+    if (searchQuery.data) {
+      setSearchResults(searchQuery.data.getUnit);
     }
-  }, [searchRequest, data, searchUnits]);
-  // const [filterResults,setFilterResults]=useState([]);
+  }, [searchRequest, searchQuery.data, searchUnitsQuery]);
+  const [filterResults,setFilterResults]=useState([]);
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState(()=>{
     const localData = localStorage.getItem('selectedUnits');
     return localData ? JSON.parse(localData):[]
   });
-  const [filterResults,setFilterResults]=useState([]);
-  const [filterUnits,setFilterUnits]=useState(    {
+  const [filterUnitResults,setFilterUnitResults]=useState([]);
+  const [filterUnits,setFilterUnits]=useState({
     faculty:[],
     year:[],
     semester:[]
-  }
-);
+  });
+  const [filtersString, setFiltersString] = useState("");
+
+  const [filterUnitsQuery, filterQuery] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
+    variables: {optionsString: `${filtersString}`}
+  });
+
+  useEffect(() => {
+    setFiltersString((_) => JSON.stringify(filterUnits))
+    filterUnitsQuery();
+    if (filterQuery.loading) setFilterResults(() => []);
+    if (filterQuery.data) {
+      setFilterUnitResults((_) => filterQuery.data.getUnitsWithFilters);
+    }
+  }, [filterUnits, filterQuery.data, filterUnitsQuery]);
 
   useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
   
   function handleSearchRequest(event) {
     event.preventDefault();
-    console.log(searchResults)
     if (searchResults) {
       setFilterResults((_) => searchResults)
     } else {
@@ -203,13 +201,11 @@ export default function Selection() {
 
   function handleSortFilter(event) {
     event.preventDefault();
-    var results = []
     setFilterResults([])
     if (filterUnits.faculty.length == filterUnits.year.length == filterUnits.semester.length == 0) {
       setFilterResults((_) => AllUnits())
     } else {
-      results = filterUnits
-      setFilterResults((_) => FilterUnits(results))
+      setFilterResults((_) => filterUnitResults)
     }
     //   setFilterResults(()=> {
     //     const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
@@ -222,7 +218,7 @@ export default function Selection() {
     //     return data
     //   })
     // }
-    return results;
+    return filterUnitResults;
   } 
 
   function addUnit(newUnit){
