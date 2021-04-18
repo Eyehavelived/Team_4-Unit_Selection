@@ -1,8 +1,13 @@
+# TODO: Learn how to refactor this into separate files, or refactor it so that it's not called units
 type Query {
     getUnit(unitCode: String): [Unit]
     getUnits: [Unit]
     getUnitsWithFilters(optionsString: String): [Unit]
-    }
+    # -----
+    getFaculties: [Faculty]
+    getTeachingPeriods: [TeachingPeriod]
+    getLocations: [Location]
+}
 
 type Assessment {
     id: Int
@@ -29,4 +34,21 @@ type Unit {
     unitProhibitions: [String]
     locationNames: [String]
     teachingPeriods: [String]
+}
+
+# -----------------------------
+
+type Faculty{
+    id: Int
+    facultyName: String
+}
+
+type TeachingPeriod {
+    id: Int
+    periodName: String
+}
+
+type Location {
+    id: Int
+    locationName: String
 }

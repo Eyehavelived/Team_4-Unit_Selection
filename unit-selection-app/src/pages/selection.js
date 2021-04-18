@@ -45,46 +45,27 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
     }
 `
 
-// function getAllUnitsF() {
-//   const {data, error} = useQuery(GET_ALL_UNITS_QUERY)
-//   return data
-// }
-
-// const getAllUnitsCB = (() => {
-//   const {data, error} = useQuery(GET_ALL_UNITS_QUERY)
-//   return data
-// })
-
-// function getByUnitCodeF(qUnitCode) {
-//   const {data, error} = useQuery(GET_UNIT_BY_UNITCODE_QUERY, {
-//     variables: {
-//         unitCode: qUnitCode
-//     }
-//   })
-//   return data
-// }
-// const getByUnitCodeCB = ((qUnitCode) => {
-  // const {data, error} = useQuery(GET_UNIT_BY_UNITCODE_QUERY, {
-  //   variables: {
-  //       unitCode: qUnitCode
-  //   }
-  // })
-  // return data
-// })
-
-
-// function Search(searchRequest) {
-
-
-//   // if (called && loading) {
-//   //   console.log("loading...")
-//   //   return [];
-//   // }
-
-//   console.log(data);
-
-//   return data;
-// }
+const sampleYear = [
+  {
+    id:"1",
+    name:"Year 1"
+  }, {
+    id:"2",
+    name:"Year 2"
+  }, {
+    id:"3",
+    name:"Year 3"
+  }, {
+    id:"Hons",
+    name:"Honours"
+  }, {
+    id:"Masters (Part 1)",
+    name:"Masters (Part 1)"
+  }, {
+    id:"Masters (Part 2)",
+    name:"Masters (Part 2)"
+  }
+]
 
 // function Filter() {
 //   const [filterResults,setFilterResults]=useState([]);
@@ -136,20 +117,7 @@ export default function Selection() {
     }
   ]
 
-  const sampleYear = [
-    {id:"uuid9",
-    name:"year1"},
-    {id:"uuid10",
-    name:"year2"},
-    {id:"uuid11",
-    name:"year3"},
-    {id:"uuid12",
-    name:"honour"},
-    {id:"uuid13",
-    name:"master1"},
-    {id:"uuid14",
-    name:"master2"}
-  ]
+
 
   const sampleSemester = [
     {

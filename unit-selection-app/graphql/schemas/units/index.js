@@ -9,8 +9,6 @@ const getUnitsCurry = cb =>
     async (parent, args, ctx, info) => {
         const units = await cb(args, parent)
             .catch(errorHandler)
-        console.log("Argument given:")
-        console.log(args)
         if (!units.length) {
             console.log("No units found")
             return []
@@ -28,6 +26,18 @@ const getUnitsCurry = cb =>
         }))
     }
 
+const getOptionsCurry = cb =>
+    async (parent, args, ctx, info) => {
+        const options = await cb(args, parent)
+            .catch(errorHandler)
+        if (!options.length) {
+            console.log("No units found")
+            return []
+        }
+        
+        return options
+    }
+
 module.exports = {
     resolvers: {
         Query:  {
@@ -41,6 +51,17 @@ module.exports = {
             
             getUnitsWithFilters: getUnitsCurry(
                 async (options) => await PostService.getUnitsWithFilters(JSON.stringify(options))
+            ),
+
+            // ------------------------------
+            getFaculties: getOptionsCurry(
+                async () => await PostService.getFaculties()
+            ),
+            getLocations: getOptionsCurry(
+                async () => await PostService.getLocations()
+            ),
+            getTeachingPeriods: getOptionsCurry(
+                async () => await PostService.getTeachingPeriods()
             )
         }
     },

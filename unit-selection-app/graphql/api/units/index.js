@@ -119,8 +119,6 @@ const filters = (options) => {
 
 module.exports = {
     getUnit: async (searchUnitCode) => {
-        console.log("Getting unit")
-        console.log(searchUnitCode)
         return await units()
             .where({'unit.unitCode': searchUnitCode})
             .catch(errorHandler)},
@@ -156,5 +154,30 @@ module.exports = {
             }
             
         }, units()).catch(errorHandler)
-    }
+    },
+    // ----------------------------- Not units
+    getFaculties: async () =>
+        await db
+            .select(
+                'id',
+                'facultyName'
+            )
+            .from('faculty')
+            .catch(errorHandler),
+    getLocations: async () =>
+        await db
+            .select(
+                'id',
+                'locationName'
+            )
+            .from('teaching_location')
+            .catch(errorHandler),
+    getTeachingPeriods: async () =>
+        await db
+            .select(
+                'id',
+                'periodName'
+            )
+            .from('teaching_period')
+            .catch(errorHandler)
 }
