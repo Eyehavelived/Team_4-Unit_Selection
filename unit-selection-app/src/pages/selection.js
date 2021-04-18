@@ -12,24 +12,6 @@ function renameKey(o, oldKey, newKey) {
   delete Object.assign(o, {[newKey]: o[oldKey] })[oldKey];
 }
 
-const GET_ALL_UNITS_QUERY = gql`
-    query getAllUnits {
-        getUnits {
-            unitCode
-            unitName
-            synopsis
-            unitCoRequisites
-            unitProhibitions
-            unitPreRequisites
-            teachingPeriods
-            locationNames
-            facultyName
-            degreeType
-            isActive
-            workloadReq
-        }
-    }
-`
 const GET_UNIT_BY_UNITCODE_QUERY = gql`
     query getUnitFromUnitcode($unitCode: String) { 
         getUnit(unitCode: $unitCode) {
@@ -49,7 +31,24 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
     }
 `
 
-
+const GET_UNITS_WITH_FILTERS = gql`
+  query getUnitsUsingFilters($unitCode: String) { 
+    getUnitsWithFilters(unitCode: $unitCode) {
+      unitCode
+      unitName
+      synopsis
+      unitCoRequisites
+      unitProhibitions
+      unitPreRequisites
+      teachingPeriods
+      locationNames
+      facultyName
+      degreeType
+      isActive
+      workloadReq
+    }
+  }
+`
 
 const years = [
   {
@@ -72,18 +71,6 @@ const years = [
     name:"Masters (Part 2)"
   }
 ]
-
-// function Filter() {
-//   const [filterResults,setFilterResults]=useState([]);
-//   const [filterUnits,setFilterUnits]=useState(
-//     {
-//       faculty:[],
-//       year:[],
-//       semester:[]
-//     }
-//   );
-//   return [];
-// }
 
 function Faculties() {
   const GET_ALL_FACULTIES = gql`
@@ -127,31 +114,57 @@ function TeachingPeriods() {
   }))
 }
 
+function AllUnits() {
+  const GET_ALL_UNITS_QUERY = gql`
+    query getAllUnits {
+      getUnits {
+        unitCode
+        unitName
+        synopsis
+        unitCoRequisites
+        unitProhibitions
+        unitPreRequisites
+        teachingPeriods
+        locationNames
+        facultyName
+        degreeType
+        isActive
+        workloadReq
+      }
+    }
+  `
+
+  const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
+  if (loading) return [];
+  return data.getUnits
+}
+
+function FilterUnits(filters) {
+  const filtersString = JSON.stringify(filters)
+  const [filterUnits, { data }] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
+    variables: {optionsString: `${filtersString}`}
+  });
+
+  useEffect(() => {
+    filterUnits();
+    if (data) {
+      return data.getUnitsWithFilters;
+    }
+  }, [filtersString, data, filterUnits]);
+}
+
 export default function Selection() {
   const page = "Selection";
 
-  // const sampleSemester = [
-  //   {
-  //     id: 1,
-  //     name:"Semester1"
-  //   }, {
-  //     id: 2,
-  //     name:"Semester2"
-  //   },{
-  //     id: 3,
-  //     name:"SummerA"
-  //   },{
-  //     id: 4,
-  //     name:"SummerB"
-  //   },{
-  //     id: 5,
-  //     name:"Winter"
-  //   }
-  // ]
   const [searchRequest,setSearchRequest]=useState("");
-  const [searchUnits, { data, error, loading }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+  const [searchUnits, { data }] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
     variables: {unitCode: `${searchRequest}`}
   });
+
+  console.log("AHH")
+  console.log(useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+    variables: {unitCode: `${searchRequest}`}
+  }).map((options, {data}) => options, {unitResults: data}))
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
@@ -181,7 +194,7 @@ export default function Selection() {
     event.preventDefault();
     console.log(searchResults)
     if (searchResults) {
-      setFilterResults(() => searchResults)
+      setFilterResults((_) => searchResults)
     } else {
       setFilterResults((prevUnits) => prevUnits)
     }
@@ -189,9 +202,15 @@ export default function Selection() {
   }
 
   function handleSortFilter(event) {
-    // const result = []
-    // setFilterResults([])
-    // if (filterUnits.faculty.length() == filterUnits.year.length() == filterUnits.semester.length() == 0) {
+    event.preventDefault();
+    var results = []
+    setFilterResults([])
+    if (filterUnits.faculty.length == filterUnits.year.length == filterUnits.semester.length == 0) {
+      setFilterResults((_) => AllUnits())
+    } else {
+      results = filterUnits
+      setFilterResults((_) => FilterUnits(results))
+    }
     //   setFilterResults(()=> {
     //     const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
     //     if (loading) console.log("loading...")
@@ -203,7 +222,7 @@ export default function Selection() {
     //     return data
     //   })
     // }
-    return [];
+    return results;
   } 
 
   function addUnit(newUnit){
@@ -224,6 +243,7 @@ export default function Selection() {
       });
     });
   }
+
   function addInSelectedUnit(unitcode,title) {
     const newUnit = {
       unitCode: unitcode,
@@ -238,6 +258,7 @@ export default function Selection() {
       return [...prevSelectedUnits, newUnit];
     });
   }
+
   function deleteSelectedUnit(id) {
     setSelectedUnits((prevSelectedUnits) => {
       return prevSelectedUnits.filter((unitItem) => {
@@ -245,52 +266,53 @@ export default function Selection() {
       });
     });
   }
-  function handleChange(event){
-    const {value,name,checked} = event.target;
+
+  function handleChange(event) {
+    const {value, name, checked, id} = event.target;
     if(checked){
-    setFilterUnits(prevValue=>{
-      if(name==="Semester"){
-        return{
-          faculty:[...prevValue.faculty],
-          year:[...prevValue.year],
-          semester:[...prevValue.semester,value]
-        }
-      }else if(name==="Year"){
-        return{
-        faculty:[...prevValue.faculty],
-        year:[...prevValue.year,value],
-        semester:[...prevValue.semester]
-        }
-      }else{
-        return{
-          faculty:[...prevValue.faculty,value],
-          year:[...prevValue.year],
-          semester:[...prevValue.semester]
-          }
-      }
-    })}
-    else{
-      setFilterUnits(prevValue=>{
-        if(name==="Semester"){
+      setFilterUnits(prevValue => {
+        if (name==="Semester") {
           return{
             faculty:[...prevValue.faculty],
             year:[...prevValue.year],
-            semester:prevValue.semester.filter(element=>
-              element!==value
-            )
+            semester:[...prevValue.semester,id]
           }
-        }else if(name==="Year"){
+        } else if (name==="Year") {
           return{
           faculty:[...prevValue.faculty],
-          year:prevValue.year.filter(element=>element!==value),
+          year:[...prevValue.year,id],
           semester:[...prevValue.semester]
           }
-        }else{
+        } else if (name==="Faculty") {
           return{
-            faculty:prevValue.faculty.filter(element=>element!==value),
+            faculty:[...prevValue.faculty,id],
             year:[...prevValue.year],
             semester:[...prevValue.semester]
-            }
+          }
+        } else {
+          console.log("Mysterious clicking noise")
+        }
+      })
+    } else {
+      setFilterUnits(prevValue => {
+        if (name==="Semester") {
+          return{
+            faculty:[...prevValue.faculty],
+            year:[...prevValue.year],
+            semester:prevValue.semester.filter(element=>element!==id)
+          }
+        } else if (name==="Year") {
+          return {
+            faculty:[...prevValue.faculty],
+            year:prevValue.year.filter(element=>element!==id),
+            semester:[...prevValue.semester]
+          }
+        } else {
+          return {
+            faculty:prevValue.faculty.filter(element=>element!==id),
+            year:[...prevValue.year],
+            semester:[...prevValue.semester]
+          }
         }
 
       })
