@@ -32,8 +32,8 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
 `
 
 const GET_UNITS_WITH_FILTERS = gql`
-  query getUnitsUsingFilters($unitCode: String) { 
-    getUnitsWithFilters(unitCode: $unitCode) {
+  query getUnitsUsingFilters($optionsString: String) { 
+    getUnitsWithFilters(optionsString: $optionsString) {
       unitCode
       unitName
       synopsis
