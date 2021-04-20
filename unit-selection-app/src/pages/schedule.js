@@ -29,8 +29,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-//currently need to reteive from database, so does scheduleform.js
-const semesterTypes = ["1","2","summera","summerb","winter"];
+const semesterTypes = ["1","winter","2","summera","summerb"];
 
 export default function Selection(){
     const page = "Schedule"
