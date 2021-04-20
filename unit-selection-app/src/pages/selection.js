@@ -128,37 +128,37 @@ function TeachingPeriods() {
   }))
 }
 
-function AllUnits() {
-  const GET_ALL_UNITS_QUERY = gql`
-    query getAllUnits {
-      getUnits {
-        unitCode
-        unitName
-        synopsis
-        unitCoRequisites
-        unitProhibitions
-        unitPreRequisites
-        teachingPeriods
-        locationNames
-        facultyName
-        degreeType
-        isActive
-        workloadReq
-      }
-    }
-  `
+// function AllUnits() {
+//   const GET_ALL_UNITS_QUERY = gql`
+//     query getAllUnits {
+//       getUnits {
+//         unitCode
+//         unitName
+//         synopsis
+//         unitCoRequisites
+//         unitProhibitions
+//         unitPreRequisites
+//         teachingPeriods
+//         locationNames
+//         facultyName
+//         degreeType
+//         isActive
+//         workloadReq
+//       }
+//     }
+//   `
 
-  const {loading, data} = useQuery(GET_ALL_UNITS_QUERY);
-  if (loading) return [];
-  console.log(data)
-  return data.getUnits
-}
+//   const {loading, data} = useQuery(GET_ALL_UNITS_QUERY);
+//   if (loading) return [];
+//   console.log(data)
+//   return data.getUnits
+// }
 
 export default function Selection() {
   const page = "Selection"; 
 
   const [searchRequest,setSearchRequest]=useState("");
-  const [searchUnitsQuery, searchQuery] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+  const [getSearchUnits, searchUnitsResults] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
     variables: {unitCode: `${searchRequest}`}
   });
 
@@ -166,11 +166,11 @@ export default function Selection() {
 
   useEffect(() => {
     if (!searchRequest) return [];
-    searchUnitsQuery();
-    if (searchQuery.data) {
-      setSearchResults(searchQuery.data.getUnit);
+    getSearchUnits();
+    if (searchUnitsResults.data) {
+      setSearchResults(searchUnitsResults.data.getUnit);
     }
-  }, [searchRequest, searchQuery.data, searchUnitsQuery]);
+  }, [searchRequest, searchUnitsResults.data, getSearchUnits]);
   const [filterResults,setFilterResults]=useState([]);
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState(()=>{
@@ -184,28 +184,28 @@ export default function Selection() {
     semester:[]
   });
 
-  const [filterOptionsBuffer,setFilterOptionsBuffer]=useState({
-    faculty:[],
-    year:[],
-    semester:[]
-  });
+  // const [filterOptionsBuffer,setFilterOptionsBuffer]=useState({
+  //   faculty:[],
+  //   year:[],
+  //   semester:[]
+  // });
 
   const [filtersString, setFiltersString] = useState("");
 
-  const [filterUnitsQuery, filterQuery] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
+  const [getFilteredUnits, filteredUnitsResult] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
     variables: {optionsString: `${filtersString}`}
   });
 
-  useEffect(() => {
-    const opsStr = JSON.stringify(filterOptions)
+  // useEffect(() => {
+  //   const opsStr = JSON.stringify(filterOptions)
 
-    setFiltersString(() => opsStr);
-    filterUnitsQuery();
-    if (filterQuery.loading) setFilterResults(() => []);
-    if (filterQuery.data) {
-      setFilterUnitResults(() => filterQuery.data.getUnitsWithFilters);
-    }
-  }, [filterOptions, filterQuery.data, filterUnitsQuery]);
+  //   setFiltersString(() => opsStr);
+  //   filterUnitsQuery();
+  //   if (filterQuery.loading) setFilterResults(() => []);
+  //   if (filterQuery.data) {
+  //     setFilterUnitResults(() => filterQuery.data.getUnitsWithFilters);
+  //   }
+  // }, [filterOptions, filterQuery.data, filterUnitsQuery]);
 
   useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
   
@@ -221,10 +221,11 @@ export default function Selection() {
 
   function handleSubmitOptionsFilter(event) {
     event.preventDefault();
-    setFilterOptions(() => filterOptionsBuffer)
-    console.log(filterUnitResults)
-    setFilterResults(() => filterUnitResults)
-    setFilterUnitResults(() => [])
+    setFiltersString(() => JSON.stringify(filterOptions))
+    getFilteredUnits()
+    console.log(filteredUnitsResult)
+    console.log(filteredUnitsResult.getUnitsWithFilters)
+    // setFilterResults(() => filteredUnitsResult.getUnitsWithFilters)
     return [];
   } 
 
@@ -276,10 +277,10 @@ export default function Selection() {
     // could be because optionid isn't a default toggle attribute and so it's not passed properly under the hood.
     const optionId = event.target.getAttribute('optionid');
 
-    setFilterOptionsBuffer(({faculty, year, semester}) => ({
-      faculty: (name === "Faculty") ? (checked) ? [...faculty, optionId]: faculty.filter(element => element !== optionId): faculty,
-      year: (name === "Year") ? (checked) ? [...year, optionId]: year.filter(element => element !== optionId): year,
-      semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId): semester
+    setFilterOptions(({faculty, year, semester}) => ({
+      faculty: (name === "Faculty") ? (checked) ? [...faculty, optionId]: faculty.filter(element => element !== optionId) : faculty,
+      year: (name === "Year") ? (checked) ? [...year, optionId]: year.filter(element => element !== optionId) : year,
+      semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId) : semester
     }))
   }
 
