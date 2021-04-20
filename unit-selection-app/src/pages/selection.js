@@ -5,210 +5,187 @@ import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
+import { useLazyQuery, gql, useQuery } from "@apollo/client";
 
+function getToggleId(itemId, itemName) {
+  const idDict = {
+    "Faculty": "1",
+    "Year": "2",
+    "Semester": "3"
+  }
+  return idDict[itemName] + "_" + itemId.toString()
+}
 
+const GET_UNIT_BY_UNITCODE_QUERY = gql`
+    query getUnitFromUnitcode($unitCode: String) { 
+        getUnit(unitCode: $unitCode) {
+            unitCode
+            unitName
+            synopsis
+            unitCoRequisites
+            unitProhibitions
+            unitPreRequisites
+            teachingPeriods
+            locationNames
+            facultyName
+            degreeType
+            isActive
+            workloadReq
+        }
+    }
+`
+
+const GET_UNITS_WITH_FILTERS = gql`
+  query getUnitsUsingFilters($optionsString: String) { 
+    getUnitsWithFilters(optionsString: $optionsString) {
+      unitCode
+      unitName
+      synopsis
+      unitCoRequisites
+      unitProhibitions
+      unitPreRequisites
+      teachingPeriods
+      locationNames
+      facultyName
+      degreeType
+      isActive
+      workloadReq
+    }
+  }
+`
+
+const years = [
+  {
+    id: "2_1",
+    optionId:"1",
+    name:"Year 1"
+  }, {
+    id: "2_2",
+    optionId:"2",
+    name:"Year 2"
+  }, {
+    id: "2_3",
+    optionId:"3",
+    name:"Year 3"
+  }, {
+    id: "2_4",
+    optionId:"Hons",
+    name:"Honours"
+  }, {
+    id: "2_5",
+    optionId:"Masters (Part 1)",
+    name:"Masters (Part 1)"
+  }, {
+    id: "2_6",
+    optionId:"Masters (Part 2)",
+    name:"Masters (Part 2)"
+  }
+]
+
+function Faculties() {
+  const GET_ALL_FACULTIES = gql`
+    query getAllFaculties {
+      getFaculties {
+        id
+        facultyName
+      }
+    }
+  `
+
+  const {loading, data} = useQuery(GET_ALL_FACULTIES);
+  if (loading) return [];
+  const faculties = data.getFaculties
+
+  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+  return faculties.map(({facultyName, id}) => ({
+    name: facultyName,
+    optionId: id,
+    id: getToggleId(id, "Faculty")
+  }))
+}
+
+function TeachingPeriods() {
+  const GET_ALL_TEACHING_PERIODS = gql`
+    query getAllTeachingPeriods {
+      getTeachingPeriods {
+        id
+        periodName
+      }
+    }
+  `
+
+  const {loading, data} = useQuery(GET_ALL_TEACHING_PERIODS);
+  if (loading) return [];
+  const teachingPeriods = data.getTeachingPeriods
+
+  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+  return teachingPeriods.map(({periodName, id}) => ({
+    name: periodName,
+    optionId: id,
+    id: getToggleId(id, "Semester")
+  }))
+}
 
 export default function Selection() {
-  const page = "Selection"
+  const page = "Selection"; 
 
-  const sampleFaculty = [
-    {
-      id:"uuid1",
-      name:"Faculty of Information Technology"
-    },
-    {
-      id:"uuid2",
-      name:"Faculty of Business & Economics"
-    },
-    {
-      id:"uuid3",
-      name:"Faculty of Science"
-    },
-    {
-      id:"uuid4",
-      name:"Faculty of Law"
-    },
-    {
-      id:"uuid5",
-      name:"Faculty of Pharmacy and Pharmaceutical Sciences"
-    },
-    {
-      id:"uuid6",
-      name:"Faculty of Education"
-    },
-    {
-      id:"uuid7",
-      name:"Faculty of Medicine, Nursing and Health Sciences"
-    },
-    {
-      id:"uuid8",
-      name:"Faculty of Art, Design and Architecture"
-    }
-  ]
-
-  const sampleYear = [
-    {id:"uuid9",
-    name:"year1"},
-    {id:"uuid10",
-    name:"year2"},
-    {id:"uuid11",
-    name:"year3"},
-    {id:"uuid12",
-    name:"honour"},
-    {id:"uuid13",
-    name:"master1"},
-    {id:"uuid14",
-    name:"master2"}
-  ]
-
-  const sampleSemester = [
-    {id:"uuid15",
-    name:"Semester1"},
-    {id:"uuid16",
-    name:"Semester2"},
-    {id:"uuid17",
-    name:"SummerA"},
-    {id:"uuid18",
-    name:"SummerB"},
-    {id:"uuid19",
-    name:"Winter"}
-  ]
-
-  const sampleUnits=
-    [
-      {
-        unitCode: 'FIT3162',
-        unitName: 'Computer Science Project 2',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a non-trivial computer science project. Projects are generally software-based, although sometimes they may involve hardware development',
-        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3161',
-        unitName: 'Computer Science Project 1',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'This unit provides practical experience in researching, designing, developing and testing a substantial computer science project.',
-        workloadReq: 'Minimum total expected workload to achieve the learning outcomes for this unit is 144 hours per semester',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3155',
-        unitName: 'Advanced Data Structures and Algorithms',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'lorem ipsum dolores umbridge',
-        workloadReq: 'your soul because the first assignment will decide your grades',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3045',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-
-      },
-      {
-        unitCode: 'FIT2032',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year2",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT3333',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT9999',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT8888',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      },
-      {
-        unitCode: 'FIT7777',
-        unitName: 'Industry-based learning',
-        facultyName: 'Faculty of Information Technology',
-        unitType: 'Undergraduate',
-        synopsis: 'Students on placement participate full time in a defined, graduate level role',
-        workloadReq: 'Students on placement are deployed full-time for 22 weeks with the industry partners',
-        year:"year3",
-        semester:"Semester1"
-      }
-  ]
-
- 
   const [searchRequest,setSearchRequest]=useState("");
-  const [filterResults,setFilterResults]=useState([]);
-  const [filterUnits,setFilterUnits]=useState(
-    {
-      faculty:[],
-      year:[],
-      semester:[]
+  const [getSearchUnits, searchUnitsResults] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+    variables: {unitCode: `${searchRequest}`}
+  });
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    if (!searchRequest) return [];
+    getSearchUnits();
+    if (searchUnitsResults.data) {
+      setSearchResults(searchUnitsResults.data.getUnit);
     }
-  );
+  }, [searchRequest, searchUnitsResults.data, getSearchUnits]);
+  const [filterResults,setFilterResults]=useState([]);
   const [units, setUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState(()=>{
     const localData = localStorage.getItem('selectedUnits');
     return localData ? JSON.parse(localData):[]
   });
+  const [filterUnitResults,setFilterUnitResults]=useState([]);
+  const [filterOptions,setFilterOptions]=useState({
+    faculty:[],
+    year:[],
+    semester:[]
+  });
+
+  const [filtersString, setFiltersString] = useState("");
+
+  const [getFilteredUnits, filteredUnitsResult] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
+    variables: {optionsString: `${filtersString}`}
+  });
+
+  useEffect(() => {
+    setFiltersString(() => JSON.stringify(filterOptions))
+    getFilteredUnits();
+    if (filteredUnitsResult.data) {
+      setFilterUnitResults(() => filteredUnitsResult.data.getUnitsWithFilters)
+    }
+  }, [filterOptions, filteredUnitsResult.data, getFilteredUnits])
 
   useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
   
-
   function handleSearchRequest(event) {
     event.preventDefault();
-    var result=null;
-    for (var i=0;i<sampleUnits.length;i++){
-      if(sampleUnits[i].unitCode===searchRequest){
-         result=sampleUnits[i];
-         break;
-      }
+    if (searchResults) {
+      setFilterResults((_) => searchResults)
+    } else {
+      setFilterResults((prevUnits) => prevUnits)
     }
-    if(result!=null){
-      setFilterResults((prevUnits) => {
-        for (var i = 0; i < prevUnits.length; i++) {
-          if (prevUnits[i].unitCode === result.unitCode) {
-            return prevUnits;
-          }
-        }
-        return [...prevUnits, result];
-      });
-    }
-
+    return searchResults;
   }
+
+  function handleSubmitOptionsFilter(event) {
+    event.preventDefault();
+    if (filterUnitResults) setFilterResults(() => filterUnitResults)
+  } 
 
   function addUnit(newUnit){
     setUnits((prevUnits) => {
@@ -228,6 +205,7 @@ export default function Selection() {
       });
     });
   }
+
   function addInSelectedUnit(unitcode,title) {
     const newUnit = {
       unitCode: unitcode,
@@ -242,6 +220,7 @@ export default function Selection() {
       return [...prevSelectedUnits, newUnit];
     });
   }
+
   function deleteSelectedUnit(id) {
     setSelectedUnits((prevSelectedUnits) => {
       return prevSelectedUnits.filter((unitItem) => {
@@ -249,68 +228,18 @@ export default function Selection() {
       });
     });
   }
-  function handleChange(event){
-    const {value,name,checked} = event.target;
-    if(checked){
-    setFilterUnits(prevValue=>{
-      if(name==="Semester"){
-        return{
-          faculty:[...prevValue.faculty],
-          year:[...prevValue.year],
-          semester:[...prevValue.semester,value]
-        }
-      }else if(name==="Year"){
-        return{
-        faculty:[...prevValue.faculty],
-        year:[...prevValue.year,value],
-        semester:[...prevValue.semester]
-        }
-      }else{
-        return{
-          faculty:[...prevValue.faculty,value],
-          year:[...prevValue.year],
-          semester:[...prevValue.semester]
-          }
-      }
-    })}
-    else{
-      setFilterUnits(prevValue=>{
-        if(name==="Semester"){
-          return{
-            faculty:[...prevValue.faculty],
-            year:[...prevValue.year],
-            semester:prevValue.semester.filter(element=>
-              element!==value
-            )
-          }
-        }else if(name==="Year"){
-          return{
-          faculty:[...prevValue.faculty],
-          year:prevValue.year.filter(element=>element!==value),
-          semester:[...prevValue.semester]
-          }
-        }else{
-          return{
-            faculty:prevValue.faculty.filter(element=>element!==value),
-            year:[...prevValue.year],
-            semester:[...prevValue.semester]
-            }
-        }
 
-      })
+  function handleToggleOptions(event) {
+    const {name, checked} = event.target;
+    // for some reason, using the above to get optionid fails and always returns undefined instead.
+    // could be because optionid isn't a default toggle attribute and so it's not passed properly under the hood.
+    const optionId = event.target.getAttribute('optionid');
 
-    }
-  }
-  function handleSortFilter(event){
-    const result=[];
-    setFilterResults([]);
-    for (var i=0;i<sampleUnits.length;i++){
-      if(filterUnits.faculty.includes(sampleUnits[i].facultyName)&&filterUnits.year.includes(sampleUnits[i].year)&&filterUnits.semester.includes(sampleUnits[i].semester)){
-        result.push(sampleUnits[i]);
-      }
-    }
-    setFilterResults(prevResults=>[...prevResults,...result]);
-    event.preventDefault();
+    setFilterOptions(({faculty, year, semester}) => ({
+      faculty: (name === "Faculty") ? (checked) ? [...faculty, optionId]: faculty.filter(element => element !== optionId) : faculty,
+      year: (name === "Year") ? (checked) ? [...year, optionId]: year.filter(element => element !== optionId) : year,
+      semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId) : semester
+    }))
   }
 
   const [sidebar,setSidebar] = useState(true);
@@ -326,11 +255,11 @@ export default function Selection() {
       <Row>
         {sidebar &&
           <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
-            <form onSubmit={handleSortFilter}>
+            <form onSubmit={handleSubmitOptionsFilter}>
               <div className="height-45 overflow-auto">
-                <ToggleDiv name="Faculty" data={sampleFaculty} onSelect={handleChange}/>
-                <ToggleDiv name="Year" data={sampleYear} onSelect={handleChange}/>
-                <ToggleDiv name="Semester" data={sampleSemester} onSelect={handleChange}/>
+                <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Year" data={years} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleToggleOptions}/>
               </div>
               <button className="btn btn-secondary mt-3">Show Filtered Result</button>
             </form> 
@@ -375,11 +304,10 @@ export default function Selection() {
                         id={unit.unitCode}
                         unitCode={unit.unitCode}
                         unitName={unit.unitName}
-                        unitType={unit.unitType}
+                        unitType={unit.degreeType}
                         synopsis={unit.synopsis}
                         workloadReq={unit.workloadReq}
-                        year={unit.year}
-                        semester={unit.semester}
+                        semester={unit.teachingPeriods}
                         onDelete={deleteUnit}
                         onAddSelected={addInSelectedUnit}
                       />

@@ -23,7 +23,7 @@ export default function UnitCard(props){
                     <h6>Unit Type:</h6>
                     <p>{props.unitType}</p>
                     <h6>Semester:</h6>
-                    <p>{props.semester+'('+props.year+')'}</p>
+                    <p>{props.semester}</p>
                     <h6>Synopsis:</h6>
                     <p>{props.synopsis}</p>
                     <h6>Workload:</h6>

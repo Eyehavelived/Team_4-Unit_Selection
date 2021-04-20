@@ -1,5 +1,5 @@
-const db = require('../../database/mysql')
-const {errorHandler} = require('../utils')
+const db = require('../../database/mysql');
+const {errorHandler} = require('../utils');
 
 // This has to be a call back function and not a constant, because each instance of
 // a query is final and cannot revert back to its unfiltered form.
@@ -38,7 +38,7 @@ const units = () =>
 const filters = (options) => {
     whereCalls = []
     whereFilters = {}
-    if (options["year"]) {
+    if (options["year"].length > 0) {
         // We would expect years to come in as a list such as
         // ["3", "hons"] meaning year 3 units and hons units
         const years = options["year"]
@@ -85,7 +85,6 @@ const filters = (options) => {
                     break
             }
         })
-        console.log(listArg)
 
         rawStr = listArg.reduce((accumulator, yearVal) =>{
             accumulator
@@ -98,15 +97,15 @@ const filters = (options) => {
         whereCalls.push(["whereRaw", rawStr])
     }
 
-    if (options["semester"]) {
+    if (options["semester"].length > 0) {
         // we would expect the semester to have the semester ids in the values
         // semester would have the ids because in order to add semester to the display, it should query the db for what semesters are available
         // likewise with faculties and degree types
-        whereCalls.push(["whereIn", 'unit_teaching_periods.tpId', options["semester"]])
+        whereCalls.push(["whereIn", 'unit_teaching_periods.tpId', options["semester"].map(val => parseInt(val))])
     }
-    if (options["faculty"]) {
+    if (options["faculty"].length > 0) {
         // we expect the matching values to be a list of faculties
-        whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"]])
+        whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"].map(val => parseInt(val))])
     }
 
     for (const [key, value] of Object.entries(whereFilters)) {
@@ -118,12 +117,12 @@ const filters = (options) => {
 
 
 module.exports = {
-    getUnit: async (searchUnitCode) =>
+    getUnit: async (searchUnitCode) => 
         await units()
             .where({'unit.unitCode': searchUnitCode})
             .catch(errorHandler),
     
-    getUnits: async () =>
+    getUnits: async () => 
         await units()
             .catch(errorHandler),
 
@@ -135,9 +134,8 @@ module.exports = {
         //     "semester": [2],
         //     "faculty": [1]
         // }
-        options = JSON.parse(optionsString) 
-        
-        arrayList = filters(options)
+        const options = JSON.parse(optionsString) 
+        const arrayList = filters(JSON.parse(options.optionsString))
 
         return await arrayList.reduce((accumulator, arrRow) => {
             [whereType, ...rest] = arrRow
@@ -153,5 +151,30 @@ module.exports = {
             }
             
         }, units()).catch(errorHandler)
-    }
+    },
+    // ----------------------------- Not units
+    getFaculties: async () =>
+        await db
+            .select(
+                'id',
+                'facultyName'
+            )
+            .from('faculty')
+            .catch(errorHandler),
+    getLocations: async () =>
+        await db
+            .select(
+                'id',
+                'locationName'
+            )
+            .from('teaching_location')
+            .catch(errorHandler),
+    getTeachingPeriods: async () =>
+        await db
+            .select(
+                'id',
+                'periodName'
+            )
+            .from('teaching_period')
+            .catch(errorHandler)
 }

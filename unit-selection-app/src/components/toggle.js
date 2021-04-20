@@ -5,6 +5,7 @@ import Caret from "./caret";
 export default function ToggleDiv(props) {
   const [expandContent, setExpandContent] = useState("false");
   const [rotate,setRotate] = useState("arrow_icon rotate");
+
   function handleClick(event) {
     setExpandContent((wasExpanded) => !wasExpanded);
     setRotate(
@@ -26,7 +27,7 @@ export default function ToggleDiv(props) {
             <ul className="list-unstyled my-0 ps-2">
               <li className="d-flex">
                 <input onChange={props.onSelect} type="checkbox" id={item.id} 
-                  name={props.name} value={item.name} className="mt-1"/>
+                  name={props.name} value={item.name} optionId={item.optionId} className="mt-1"/>
                 <label for={item.id} className="ms-2 my-0">{item.name}</label>
               </li>
             </ul>
