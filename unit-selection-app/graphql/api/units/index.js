@@ -38,10 +38,7 @@ const units = () =>
 const filters = (options) => {
     whereCalls = []
     whereFilters = {}
-    console.log("Trying to get filters...")
-    console.log(options)
     if (options["year"].length > 0) {
-        console.log("Yep, we're in year")
         // We would expect years to come in as a list such as
         // ["3", "hons"] meaning year 3 units and hons units
         const years = options["year"]
@@ -88,7 +85,6 @@ const filters = (options) => {
                     break
             }
         })
-        console.log(listArg)
 
         rawStr = listArg.reduce((accumulator, yearVal) =>{
             accumulator
@@ -121,15 +117,14 @@ const filters = (options) => {
 
 
 module.exports = {
-    getUnit: async (searchUnitCode) => {
-        return await units()
+    getUnit: async (searchUnitCode) => 
+        await units()
             .where({'unit.unitCode': searchUnitCode})
-            .catch(errorHandler)},
+            .catch(errorHandler),
     
-    getUnits: async () => {
-        console.log("HAI")
-        return await units()
-            .catch(errorHandler)},
+    getUnits: async () => 
+        await units()
+            .catch(errorHandler),
 
     getUnitsWithFilters: async (optionsString) => {
         // because it's a MASSIVE pain to pass varying values through the schema file, we'll decompress the query here.
@@ -139,13 +134,8 @@ module.exports = {
         //     "semester": [2],
         //     "faculty": [1]
         // }
-        console.log("HELLO")
         const options = JSON.parse(optionsString) 
-        console.log(options.optionsString)
-        
         const arrayList = filters(JSON.parse(options.optionsString))
-
-        console.log(arrayList)
 
         return await arrayList.reduce((accumulator, arrRow) => {
             [whereType, ...rest] = arrRow
