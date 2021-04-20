@@ -9,7 +9,8 @@ export default function ScheduleForm(props){
         units:[]
     });
 
-    const yearOptions = ["1","2","3","4"]
+    const year = new Date().getFullYear();
+    const yearOptions = [year-6,year-5,year-4,year-3,year-2,year-1,year,year+1,year+2,year+3,year+4,year+5,year+6]
     const semOptions = ["1","2","summera","summerb","winter"]
 
     function handleChange(event){
