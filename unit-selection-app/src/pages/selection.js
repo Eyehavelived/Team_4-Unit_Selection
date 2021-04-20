@@ -7,6 +7,7 @@ import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 // import {GET_ALL_UNITS_QUERY} from '../queries/units/index';
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
+import { sleep } from "../utils/sleep"
 
 
 function getToggleId(itemId, itemName) {
@@ -193,6 +194,7 @@ export default function Selection() {
   const [filtersString, setFiltersString] = useState("");
 
   const [getFilteredUnits, filteredUnitsResult] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
+  // const [getFilteredUnits, filteredUnitsResult] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
     variables: {optionsString: `${filtersString}`}
   });
 
@@ -221,12 +223,17 @@ export default function Selection() {
 
   function handleSubmitOptionsFilter(event) {
     event.preventDefault();
+    console.log(filterOptions)
+    console.log(JSON.stringify(filterOptions))
     setFiltersString(() => JSON.stringify(filterOptions))
-    getFilteredUnits()
+    getFilteredUnits();
+    while (filteredUnitsResult.loading) {
+      getFilteredUnits();
+    };
     console.log(filteredUnitsResult)
-    console.log(filteredUnitsResult.getUnitsWithFilters)
-    // setFilterResults(() => filteredUnitsResult.getUnitsWithFilters)
-    return [];
+    // console.log(filteredUnitsResult.data.getUnitsWithFilters)
+    // setFilterResults(() => data.getUnitsWithFilters)
+    if (filteredUnitsResult.data) setFilterResults(() => filteredUnitsResult.data.getUnitsWithFilters) 
   } 
 
   function addUnit(newUnit){

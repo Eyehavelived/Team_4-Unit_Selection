@@ -38,7 +38,10 @@ const units = () =>
 const filters = (options) => {
     whereCalls = []
     whereFilters = {}
-    if (options["year"]) {
+    console.log("Trying to get filters...")
+    console.log(options)
+    if (options["year"].length > 0) {
+        console.log("Yep, we're in year")
         // We would expect years to come in as a list such as
         // ["3", "hons"] meaning year 3 units and hons units
         const years = options["year"]
@@ -98,13 +101,13 @@ const filters = (options) => {
         whereCalls.push(["whereRaw", rawStr])
     }
 
-    if (options["semester"]) {
+    if (options["semester"].length > 0) {
         // we would expect the semester to have the semester ids in the values
         // semester would have the ids because in order to add semester to the display, it should query the db for what semesters are available
         // likewise with faculties and degree types
         whereCalls.push(["whereIn", 'unit_teaching_periods.tpId', options["semester"].map(val => parseInt(val))])
     }
-    if (options["faculty"]) {
+    if (options["faculty"].length > 0) {
         // we expect the matching values to be a list of faculties
         whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"].map(val => parseInt(val))])
     }
@@ -137,10 +140,10 @@ module.exports = {
         //     "faculty": [1]
         // }
         console.log("HELLO")
-        options = JSON.parse(optionsString) 
-        console.log(options)
+        const options = JSON.parse(optionsString) 
+        console.log(options.optionsString)
         
-        arrayList = filters(options)
+        const arrayList = filters(JSON.parse(options.optionsString))
 
         console.log(arrayList)
 
