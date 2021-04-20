@@ -102,11 +102,11 @@ const filters = (options) => {
         // we would expect the semester to have the semester ids in the values
         // semester would have the ids because in order to add semester to the display, it should query the db for what semesters are available
         // likewise with faculties and degree types
-        whereCalls.push(["whereIn", 'unit_teaching_periods.tpId', options["semester"]])
+        whereCalls.push(["whereIn", 'unit_teaching_periods.tpId', options["semester"].map(val => parseInt(val))])
     }
     if (options["faculty"]) {
         // we expect the matching values to be a list of faculties
-        whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"]])
+        whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"].map(val => parseInt(val))])
     }
 
     for (const [key, value] of Object.entries(whereFilters)) {
@@ -136,9 +136,13 @@ module.exports = {
         //     "semester": [2],
         //     "faculty": [1]
         // }
+        console.log("HELLO")
         options = JSON.parse(optionsString) 
+        console.log(options)
         
         arrayList = filters(options)
+
+        console.log(arrayList)
 
         return await arrayList.reduce((accumulator, arrRow) => {
             [whereType, ...rest] = arrRow

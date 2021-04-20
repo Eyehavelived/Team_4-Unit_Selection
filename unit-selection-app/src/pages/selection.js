@@ -8,8 +8,14 @@ import {UnitListCardRemove} from "../components/common/unitListCard";
 // import {GET_ALL_UNITS_QUERY} from '../queries/units/index';
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
 
-function renameKey(o, oldKey, newKey) {
-  delete Object.assign(o, {[newKey]: o[oldKey] })[oldKey];
+
+function getToggleId(itemId, itemName) {
+  const idDict = {
+    "Faculty": "1",
+    "Year": "2",
+    "Semester": "3"
+  }
+  return idDict[itemName] + "_" + itemId.toString()
 }
 
 const GET_UNIT_BY_UNITCODE_QUERY = gql`
@@ -52,22 +58,28 @@ const GET_UNITS_WITH_FILTERS = gql`
 
 const years = [
   {
-    id:"1",
+    id: "2_1",
+    optionId:"1",
     name:"Year 1"
   }, {
-    id:"2",
+    id: "2_2",
+    optionId:"2",
     name:"Year 2"
   }, {
-    id:"3",
+    id: "2_3",
+    optionId:"3",
     name:"Year 3"
   }, {
-    id:"Hons",
+    id: "2_4",
+    optionId:"Hons",
     name:"Honours"
   }, {
-    id:"Masters (Part 1)",
+    id: "2_5",
+    optionId:"Masters (Part 1)",
     name:"Masters (Part 1)"
   }, {
-    id:"Masters (Part 2)",
+    id: "2_6",
+    optionId:"Masters (Part 2)",
     name:"Masters (Part 2)"
   }
 ]
@@ -82,14 +94,15 @@ function Faculties() {
     }
   `
 
-  const {loading, error, data} = useQuery(GET_ALL_FACULTIES);
+  const {loading, data} = useQuery(GET_ALL_FACULTIES);
   if (loading) return [];
   const faculties = data.getFaculties
 
   // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
-  return faculties.map(({facultyName, ...rest}) => ({
+  return faculties.map(({facultyName, id}) => ({
     name: facultyName,
-    ...rest
+    optionId: id,
+    id: getToggleId(id, "Faculty")
   }))
 }
 
@@ -103,14 +116,15 @@ function TeachingPeriods() {
     }
   `
 
-  const {loading, error, data} = useQuery(GET_ALL_TEACHING_PERIODS);
+  const {loading, data} = useQuery(GET_ALL_TEACHING_PERIODS);
   if (loading) return [];
   const teachingPeriods = data.getTeachingPeriods
 
   // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
-  return teachingPeriods.map(({periodName, ...rest}) => ({
+  return teachingPeriods.map(({periodName, id}) => ({
     name: periodName,
-    ...rest
+    optionId: id,
+    id: getToggleId(id, "Semester")
   }))
 }
 
@@ -134,17 +148,14 @@ function AllUnits() {
     }
   `
 
-  const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
+  const {loading, data} = useQuery(GET_ALL_UNITS_QUERY);
   if (loading) return [];
+  console.log(data)
   return data.getUnits
 }
 
-function FilterUnits(filters) {
-
-}
-
 export default function Selection() {
-  const page = "Selection";
+  const page = "Selection"; 
 
   const [searchRequest,setSearchRequest]=useState("");
   const [searchUnitsQuery, searchQuery] = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
@@ -167,11 +178,18 @@ export default function Selection() {
     return localData ? JSON.parse(localData):[]
   });
   const [filterUnitResults,setFilterUnitResults]=useState([]);
-  const [filterUnits,setFilterUnits]=useState({
+  const [filterOptions,setFilterOptions]=useState({
     faculty:[],
     year:[],
     semester:[]
   });
+
+  const [filterOptionsBuffer,setFilterOptionsBuffer]=useState({
+    faculty:[],
+    year:[],
+    semester:[]
+  });
+
   const [filtersString, setFiltersString] = useState("");
 
   const [filterUnitsQuery, filterQuery] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
@@ -179,13 +197,15 @@ export default function Selection() {
   });
 
   useEffect(() => {
-    setFiltersString((_) => JSON.stringify(filterUnits))
+    const opsStr = JSON.stringify(filterOptions)
+
+    setFiltersString(() => opsStr);
     filterUnitsQuery();
     if (filterQuery.loading) setFilterResults(() => []);
     if (filterQuery.data) {
-      setFilterUnitResults((_) => filterQuery.data.getUnitsWithFilters);
+      setFilterUnitResults(() => filterQuery.data.getUnitsWithFilters);
     }
-  }, [filterUnits, filterQuery.data, filterUnitsQuery]);
+  }, [filterOptions, filterQuery.data, filterUnitsQuery]);
 
   useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
   
@@ -199,26 +219,13 @@ export default function Selection() {
     return searchResults;
   }
 
-  function handleSortFilter(event) {
+  function handleSubmitOptionsFilter(event) {
     event.preventDefault();
-    setFilterResults([])
-    if (filterUnits.faculty.length == filterUnits.year.length == filterUnits.semester.length == 0) {
-      setFilterResults((_) => AllUnits())
-    } else {
-      setFilterResults((_) => filterUnitResults)
-    }
-    //   setFilterResults(()=> {
-    //     const {loading, error, data} = useQuery(GET_ALL_UNITS_QUERY);
-    //     if (loading) console.log("loading...")
-    //     if (error) {
-    //       console.log(error)
-    //     }
-      
-    //     if (data) console.log(data)
-    //     return data
-    //   })
-    // }
-    return filterUnitResults;
+    setFilterOptions(() => filterOptionsBuffer)
+    console.log(filterUnitResults)
+    setFilterResults(() => filterUnitResults)
+    setFilterUnitResults(() => [])
+    return [];
   } 
 
   function addUnit(newUnit){
@@ -263,57 +270,17 @@ export default function Selection() {
     });
   }
 
-  function handleChange(event) {
-    const {value, name, checked, id} = event.target;
-    if(checked){
-      setFilterUnits(prevValue => {
-        if (name==="Semester") {
-          return{
-            faculty:[...prevValue.faculty],
-            year:[...prevValue.year],
-            semester:[...prevValue.semester,id]
-          }
-        } else if (name==="Year") {
-          return{
-          faculty:[...prevValue.faculty],
-          year:[...prevValue.year,id],
-          semester:[...prevValue.semester]
-          }
-        } else if (name==="Faculty") {
-          return{
-            faculty:[...prevValue.faculty,id],
-            year:[...prevValue.year],
-            semester:[...prevValue.semester]
-          }
-        } else {
-          console.log("Mysterious clicking noise")
-        }
-      })
-    } else {
-      setFilterUnits(prevValue => {
-        if (name==="Semester") {
-          return{
-            faculty:[...prevValue.faculty],
-            year:[...prevValue.year],
-            semester:prevValue.semester.filter(element=>element!==id)
-          }
-        } else if (name==="Year") {
-          return {
-            faculty:[...prevValue.faculty],
-            year:prevValue.year.filter(element=>element!==id),
-            semester:[...prevValue.semester]
-          }
-        } else {
-          return {
-            faculty:prevValue.faculty.filter(element=>element!==id),
-            year:[...prevValue.year],
-            semester:[...prevValue.semester]
-          }
-        }
+  function handleToggleOptions(event) {
+    const {name, checked} = event.target;
+    // for some reason, using the above to get optionid fails and always returns undefined instead.
+    // could be because optionid isn't a default toggle attribute and so it's not passed properly under the hood.
+    const optionId = event.target.getAttribute('optionid');
 
-      })
-
-    }
+    setFilterOptionsBuffer(({faculty, year, semester}) => ({
+      faculty: (name === "Faculty") ? (checked) ? [...faculty, optionId]: faculty.filter(element => element !== optionId): faculty,
+      year: (name === "Year") ? (checked) ? [...year, optionId]: year.filter(element => element !== optionId): year,
+      semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId): semester
+    }))
   }
 
   const [sidebar,setSidebar] = useState(true);
@@ -329,11 +296,11 @@ export default function Selection() {
       <Row>
         {sidebar &&
           <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
-            <form onSubmit={handleSortFilter}>
+            <form onSubmit={handleSubmitOptionsFilter}>
               <div className="height-45 overflow-auto">
-                <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleChange}/>
-                <ToggleDiv name="Year" data={years} onSelect={handleChange}/>
-                <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleChange}/>
+                <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Year" data={years} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleToggleOptions}/>
               </div>
               <button className="btn btn-secondary mt-3">Show Filtered Result</button>
             </form> 
