@@ -5,10 +5,7 @@ import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
-// import {GET_ALL_UNITS_QUERY} from '../queries/units/index';
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
-import { sleep } from "../utils/sleep"
-
 
 function getToggleId(itemId, itemName) {
   const idDict = {
@@ -129,32 +126,6 @@ function TeachingPeriods() {
   }))
 }
 
-// function AllUnits() {
-//   const GET_ALL_UNITS_QUERY = gql`
-//     query getAllUnits {
-//       getUnits {
-//         unitCode
-//         unitName
-//         synopsis
-//         unitCoRequisites
-//         unitProhibitions
-//         unitPreRequisites
-//         teachingPeriods
-//         locationNames
-//         facultyName
-//         degreeType
-//         isActive
-//         workloadReq
-//       }
-//     }
-//   `
-
-//   const {loading, data} = useQuery(GET_ALL_UNITS_QUERY);
-//   if (loading) return [];
-//   console.log(data)
-//   return data.getUnits
-// }
-
 export default function Selection() {
   const page = "Selection"; 
 
@@ -185,29 +156,19 @@ export default function Selection() {
     semester:[]
   });
 
-  // const [filterOptionsBuffer,setFilterOptionsBuffer]=useState({
-  //   faculty:[],
-  //   year:[],
-  //   semester:[]
-  // });
-
   const [filtersString, setFiltersString] = useState("");
 
   const [getFilteredUnits, filteredUnitsResult] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
-  // const [getFilteredUnits, filteredUnitsResult] = useLazyQuery(GET_UNITS_WITH_FILTERS,{
     variables: {optionsString: `${filtersString}`}
   });
 
-  // useEffect(() => {
-  //   const opsStr = JSON.stringify(filterOptions)
-
-  //   setFiltersString(() => opsStr);
-  //   filterUnitsQuery();
-  //   if (filterQuery.loading) setFilterResults(() => []);
-  //   if (filterQuery.data) {
-  //     setFilterUnitResults(() => filterQuery.data.getUnitsWithFilters);
-  //   }
-  // }, [filterOptions, filterQuery.data, filterUnitsQuery]);
+  useEffect(() => {
+    setFiltersString(() => JSON.stringify(filterOptions))
+    getFilteredUnits();
+    if (filteredUnitsResult.data) {
+      setFilterUnitResults(() => filteredUnitsResult.data.getUnitsWithFilters)
+    }
+  }, [filterOptions, filteredUnitsResult.data, getFilteredUnits])
 
   useEffect(()=> {localStorage.setItem('selectedUnits',JSON.stringify(selectedUnits))},[selectedUnits]);
   
@@ -223,17 +184,7 @@ export default function Selection() {
 
   function handleSubmitOptionsFilter(event) {
     event.preventDefault();
-    console.log(filterOptions)
-    console.log(JSON.stringify(filterOptions))
-    setFiltersString(() => JSON.stringify(filterOptions))
-    getFilteredUnits();
-    while (filteredUnitsResult.loading) {
-      getFilteredUnits();
-    };
-    console.log(filteredUnitsResult)
-    // console.log(filteredUnitsResult.data.getUnitsWithFilters)
-    // setFilterResults(() => data.getUnitsWithFilters)
-    if (filteredUnitsResult.data) setFilterResults(() => filteredUnitsResult.data.getUnitsWithFilters) 
+    if (filterUnitResults) setFilterResults(() => filterUnitResults)
   } 
 
   function addUnit(newUnit){
