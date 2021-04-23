@@ -11,7 +11,8 @@ function getToggleId(itemId, itemName) {
   const idDict = {
     "Faculty": "1",
     "Year": "2",
-    "Semester": "3"
+    "Semester": "3",
+    "Location":"4"
   }
   return idDict[itemName] + "_" + itemId.toString()
 }
@@ -126,6 +127,27 @@ function TeachingPeriods() {
   }))
 }
 
+function TeachingLocations() {
+  const GET_ALL_LOCATIONS = gql`
+    query getAllLocations {
+      getLocations {
+        id
+        locationName
+      }
+    }
+  `
+  const {loading, data} = useQuery(GET_ALL_LOCATIONS );
+  if (loading) return [];
+  const locations = data.getLocations
+
+  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+  return locations.map(({locationName, id}) => ({
+    name: locationName,
+    optionId: id,
+    id: getToggleId(id, "Location")
+  }))
+}
+
 export default function Selection() {
   const page = "Selection"; 
 
@@ -153,7 +175,8 @@ export default function Selection() {
   const [filterOptions,setFilterOptions]=useState({
     faculty:[],
     year:[],
-    semester:[]
+    semester:[],
+    location:[]
   });
 
   const [filtersString, setFiltersString] = useState("");
@@ -235,10 +258,11 @@ export default function Selection() {
     // could be because optionid isn't a default toggle attribute and so it's not passed properly under the hood.
     const optionId = event.target.getAttribute('optionid');
 
-    setFilterOptions(({faculty, year, semester}) => ({
+    setFilterOptions(({faculty, year, semester,location}) => ({
       faculty: (name === "Faculty") ? (checked) ? [...faculty, optionId]: faculty.filter(element => element !== optionId) : faculty,
       year: (name === "Year") ? (checked) ? [...year, optionId]: year.filter(element => element !== optionId) : year,
-      semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId) : semester
+      semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId) : semester,
+      location: (name === "Location") ? (checked) ? [...location, optionId]: location.filter(element => element !== optionId) : location
     }))
   }
 
@@ -260,6 +284,7 @@ export default function Selection() {
                 <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleToggleOptions}/>
                 <ToggleDiv name="Year" data={years} onSelect={handleToggleOptions}/>
                 <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Location" data={TeachingLocations()} onSelect={handleToggleOptions}/>
               </div>
               <button className="btn btn-secondary mt-3">Show Filtered Result</button>
             </form> 
@@ -305,6 +330,7 @@ export default function Selection() {
                         unitCode={unit.unitCode}
                         unitName={unit.unitName}
                         unitType={unit.degreeType}
+                        location={unit.locationNames}
                         synopsis={unit.synopsis}
                         workloadReq={unit.workloadReq}
                         semester={unit.teachingPeriods}
