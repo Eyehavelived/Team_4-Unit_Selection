@@ -29,8 +29,8 @@ VALUES
 ('Dr Graeme Gange', 'Graeme.Gange@monash.edu'),
 ('Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
 ('Taylor Kearney', 'Taylor.Kearney@monash.edu'),
-('Ms Kamalashunee Velautham', 'Kamalashunee.Kvelautham@monash.edu'),
-('Ms ashunee Velautham', 'Kamalashunee.Kvelautham@monash.edu');
+('Ms Kamalashunee Velautham', 'Kamalnee.Kvem@monash.edu'),
+('Ms ashunee Velautham', 'Kamaee.Kvelsm@monash.edu');
 
 INSERT INTO degree_type(degreeTypeName)
 VALUES

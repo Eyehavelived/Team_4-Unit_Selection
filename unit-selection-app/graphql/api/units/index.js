@@ -36,8 +36,8 @@ const units = () =>
 
 
 const filters = (options) => {
-    whereCalls = []
-    whereFilters = {}
+    const whereCalls = []
+    const whereFilters = {}
     if (options["year"].length > 0) {
         // We would expect years to come in as a list such as
         // ["3", "hons"] meaning year 3 units and hons units
@@ -86,7 +86,7 @@ const filters = (options) => {
             }
         })
 
-        rawStr = listArg.reduce((accumulator, yearVal) =>{
+        const rawStr = listArg.reduce((accumulator, yearVal) =>{
             accumulator
                 .push("SUBSTRING(unit.unitCode, 4, 1) = "
                     .concat(yearVal))
@@ -107,6 +107,10 @@ const filters = (options) => {
         // we expect the matching values to be a list of faculties
         whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"].map(val => parseInt(val))])
     }
+    if (options["location"].length > 0) {
+        whereCalls.push(["whereIn", 'unit.unitLocation', options["location"].map(val => parseInt(val))])
+    }
+
 
     for (const [key, value] of Object.entries(whereFilters)) {
         whereCalls.push("whereIn", key, value)
@@ -132,13 +136,15 @@ module.exports = {
         // testOptions = {
         //     "year": ["3", "1"],
         //     "semester": [2],
-        //     "faculty": [1]
+        //     "faculty": [1],
+        //     "location": [],
+        //      "unitCodes": []
         // }
         const options = JSON.parse(optionsString) 
         const arrayList = filters(JSON.parse(options.optionsString))
 
         return await arrayList.reduce((accumulator, arrRow) => {
-            [whereType, ...rest] = arrRow
+            const [whereType, ...rest] = arrRow
             switch (whereType) {
                 case "whereIn":
                     return accumulator.whereIn(...rest)

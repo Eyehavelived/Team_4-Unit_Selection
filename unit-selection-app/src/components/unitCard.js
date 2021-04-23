@@ -24,6 +24,8 @@ export default function UnitCard(props){
                     <p>{props.unitType}</p>
                     <h6>Semester:</h6>
                     <p>{props.semester}</p>
+                    <h6>Location:</h6>
+                    <p>{props.location}</p>
                     <h6>Synopsis:</h6>
                     <p>{props.synopsis}</p>
                     <h6>Workload:</h6>
