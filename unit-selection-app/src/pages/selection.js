@@ -93,8 +93,17 @@ function Faculties() {
     }
   `
 
-  const {loading, data} = useQuery(GET_ALL_FACULTIES);
+  const {loading, data, error, called} = useQuery(GET_ALL_FACULTIES);
+
   if (loading) return [];
+  if (error) {
+    console.log(error)
+    return [];
+  }
+  if (error) {
+    console.log(called)
+    return [];
+  }
   const faculties = data.getFaculties
 
   // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
@@ -115,8 +124,16 @@ function TeachingPeriods() {
     }
   `
 
-  const {loading, data} = useQuery(GET_ALL_TEACHING_PERIODS);
+  const {loading, data, error, called} = useQuery(GET_ALL_TEACHING_PERIODS);
   if (loading) return [];
+  if (error) {
+    console.log(error)
+    return [];
+  }
+  if (error) {
+    console.log(called)
+    return [];
+  }
   const teachingPeriods = data.getTeachingPeriods
 
   // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
@@ -136,8 +153,16 @@ function TeachingLocations() {
       }
     }
   `
-  const {loading, data} = useQuery(GET_ALL_LOCATIONS );
+  const {loading, data, error, called} = useQuery(GET_ALL_LOCATIONS);
   if (loading) return [];
+  if (error) {
+    console.log(error)
+    return [];
+  }
+  if (error) {
+    console.log(called)
+    return [];
+  }
   const locations = data.getLocations
 
   // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 

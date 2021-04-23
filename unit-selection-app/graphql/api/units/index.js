@@ -32,9 +32,6 @@ const units = () =>
     .leftJoin('faculty', 'unitFacultyId', 'faculty.id')
     .leftJoin('degree_type', 'unitDegreeTypeId', 'degree_type.id')
     .groupBy('unit.unitCode')
-    .where(
-        {"unit.unitCode": "FIT3162"}
-    )
     // TODO: unit_assessments, contacts, other_requisite
 
 
@@ -140,7 +137,8 @@ module.exports = {
         //     "year": ["3", "1"],
         //     "semester": [2],
         //     "faculty": [1],
-        //     "location": []
+        //     "location": [],
+        //      "unitCodes": []
         // }
         const options = JSON.parse(optionsString) 
         const arrayList = filters(JSON.parse(options.optionsString))
