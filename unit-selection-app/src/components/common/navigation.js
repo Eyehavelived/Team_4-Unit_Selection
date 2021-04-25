@@ -56,14 +56,14 @@ const navLinksSchedule = [
     {
         title:'Schedule',
         path:'/schedule'
-    // },
-    // {
-    //     title: '>', 
-    //     path: '/view'
-    // },
-    // {
-    //     title:'View',
-    //     path:'/view'
+    },
+    {
+        title: '>', 
+        path: '/view'
+    },
+    {
+        title:'View',
+        path:'/view'
     }
 ]
 

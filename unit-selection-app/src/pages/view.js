@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useState,useRef} from "react";
 import ReactToPrint from "react-to-print";
 import { VscFilePdf } from "react-icons/vsc";
 import { NavigationApp } from "../components/common/navigation";
 import UnitCard from "../components/unitCardView";
+import {useReactToPrint} from "react-to-print"
 
 
   const page = "View";
@@ -90,114 +91,146 @@ import UnitCard from "../components/unitCardView";
     },
   ];
 
-  class ComponentToPrint extends React.Component {
-    render(){return (
-      <div className="col-10">
-        {sampleUnitsSemester1.length !== 0 && (
-          <h4 className="mx-1">Semester1</h4>
-        )}
-        {sampleUnitsSemester1.length !== 0 &&
-          sampleUnitsSemester1.map((element, index) => (
-            <UnitCard
-              unitCode={element.unitCode}
-              unitType={element.unitType}
-              unitName={element.unitName}
-              semester={element.semester}
-              year={element.year}
-              synopsis={element.synopsis}
-              workloadReq={element.workloadReq}
-              view={true}
-            />
-          ))}
-        {sampleUnitsSemester2.length !== 0 && (
-          <h4 className="mx-1">Semester2</h4>
-        )}
-        {sampleUnitsSemester2.length !== 0 &&
-          sampleUnitsSemester2.map((element, index) => (
-            <UnitCard
-              unitCode={element.unitCode}
-              unitType={element.unitType}
-              unitName={element.unitName}
-              semester={element.semester}
-              year={element.year}
-              synopsis={element.synopsis}
-              workloadReq={element.workloadReq}
-              view={true}
-            />
-          ))}
-        {sampleUnitsWinter.length !== 0 && <h4 className="mx-1">Winter</h4>}
-        {sampleUnitsWinter.length !== 0 &&
-          sampleUnitsWinter.map((element, index) => (
-            <UnitCard
-              unitCode={element.unitCode}
-              unitType={element.unitType}
-              unitName={element.unitName}
-              semester={element.semester}
-              year={element.year}
-              synopsis={element.synopsis}
-              workloadReq={element.workloadReq}
-              view={true}
-            />
-          ))}
-        {sampleUnitsSummerA.length !== 0 && <h4 className="mx-1">SummerA</h4>}
-        {sampleUnitsSummerA.length !== 0 &&
-          sampleUnitsSummerA.map((element, index) => (
-            <UnitCard
-              unitCode={element.unitCode}
-              unitType={element.unitType}
-              unitName={element.unitName}
-              semester={element.semester}
-              year={element.year}
-              synopsis={element.synopsis}
-              workloadReq={element.workloadReq}
-              view={true}
-            />
-          ))}
-        {sampleUnitsSummerB.length !== 0 && <h4 className="mx-1">SummerB</h4>}
-        {sampleUnitsSummerB.length !== 0 &&
-          sampleUnitsSummerB.map((element, index) => (
-            <UnitCard
-              unitCode={element.unitCode}
-              unitType={element.unitType}
-              unitName={element.unitName}
-              semester={element.semester}
-              year={element.year}
-              synopsis={element.synopsis}
-              workloadReq={element.workloadReq}
-              view={true}
-            />
-          ))}
-      </div>
-    );
-  }
-}
 
 
-export default class View extends React.Component {
-  render() {
-    return (
-      <div>
+
+// export default class View extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <NavigationApp page={page} />
+//         <div className="container">
+//           <div className="row">
+//           <div className="text-center mb-3">
+//               <ReactToPrint
+//                 trigger={() => (
+//                   <button type="button" className="btn btn-primary">
+//                     Click Here to download PDF
+//                     <VscFilePdf />
+//                   </button>
+//                 )}
+//                 content={() => this.componentRef}
+//               />
+//           </div>
+//           <div className="height-80 overflow-auto">
+//             <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+//           </div>
+           
+//         </div>
+//       </div>
+//     </div>
+//     );
+//   }
+// }
+
+export default function View(){
+  const componentRef = useRef()
+  const handlePrint=useReactToPrint({
+    content:()=>componentRef.current
+  })
+  const [scheduledUnits] = useState(()=>{
+    const localData = localStorage.getItem('scheduledUnits');
+    return localData ? JSON.parse(localData) : [];
+  });
+  window.myglobal=scheduledUnits
+  console.log(window.myglobal)
+  return(
+          <div>
         <NavigationApp page={page} />
         <div className="container">
           <div className="row">
           <div className="text-center mb-3">
-              <ReactToPrint
-                trigger={() => (
-                  <button type="button" className="btn btn-primary">
-                    Click Here to download PDF
-                    <VscFilePdf />
-                  </button>
-                )}
-                content={() => this.componentRef}
-              />
+              <button type="button" className="btn btn-primary" onClick={handlePrint}>Click Here to download PDF</button>
           </div>
           <div className="height-80 overflow-auto">
-            <ComponentToPrint ref={(el) => (this.componentRef = el)} />
+            <ComponentToPrint ref={componentRef} />
           </div>
            
         </div>
       </div>
-    S</div>
-    );
-  }
+    </div>
+  );
+
+}
+
+class ComponentToPrint extends React.Component {
+  render(){return (
+    <div className="col-10">
+      {sampleUnitsSemester1.length !== 0 && (
+        <h4 className="mx-1">Semester1</h4>
+      )}
+      {sampleUnitsSemester1.length !== 0 &&
+        sampleUnitsSemester1.map((element, index) => (
+          <UnitCard
+            unitCode={element.unitCode}
+            unitType={element.unitType}
+            unitName={element.unitName}
+            semester={element.semester}
+            year={element.year}
+            synopsis={element.synopsis}
+            workloadReq={element.workloadReq}
+            view={true}
+          />
+        ))}
+      {sampleUnitsSemester2.length !== 0 && (
+        <h4 className="mx-1">Semester2</h4>
+      )}
+      {sampleUnitsSemester2.length !== 0 &&
+        sampleUnitsSemester2.map((element, index) => (
+          <UnitCard
+            unitCode={element.unitCode}
+            unitType={element.unitType}
+            unitName={element.unitName}
+            semester={element.semester}
+            year={element.year}
+            synopsis={element.synopsis}
+            workloadReq={element.workloadReq}
+            view={true}
+          />
+        ))}
+      {sampleUnitsWinter.length !== 0 && <h4 className="mx-1">Winter</h4>}
+      {sampleUnitsWinter.length !== 0 &&
+        sampleUnitsWinter.map((element, index) => (
+          <UnitCard
+            unitCode={element.unitCode}
+            unitType={element.unitType}
+            unitName={element.unitName}
+            semester={element.semester}
+            year={element.year}
+            synopsis={element.synopsis}
+            workloadReq={element.workloadReq}
+            view={true}
+          />
+        ))}
+      {sampleUnitsSummerA.length !== 0 && <h4 className="mx-1">SummerA</h4>}
+      {sampleUnitsSummerA.length !== 0 &&
+        sampleUnitsSummerA.map((element, index) => (
+          <UnitCard
+            unitCode={element.unitCode}
+            unitType={element.unitType}
+            unitName={element.unitName}
+            semester={element.semester}
+            year={element.year}
+            synopsis={element.synopsis}
+            workloadReq={element.workloadReq}
+            view={true}
+          />
+        ))}
+      {sampleUnitsSummerB.length !== 0 && <h4 className="mx-1">SummerB</h4>}
+      {sampleUnitsSummerB.length !== 0 &&
+        sampleUnitsSummerB.map((element, index) => (
+          <UnitCard
+            unitCode={element.unitCode}
+            unitType={element.unitType}
+            unitName={element.unitName}
+            semester={element.semester}
+            year={element.year}
+            synopsis={element.synopsis}
+            workloadReq={element.workloadReq}
+            view={true}
+          />
+        ))}
+    </div>
+  );
+}
 }
