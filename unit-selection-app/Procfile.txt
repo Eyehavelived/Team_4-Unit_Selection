@@ -1,1 +1,2 @@
-worker: node graphql/app
+web:yarn start
+worker:node graphql/app
