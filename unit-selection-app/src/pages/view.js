@@ -1,9 +1,8 @@
 import React,{useState,useRef} from "react";
-import ReactToPrint from "react-to-print";
-import { VscFilePdf } from "react-icons/vsc";
 import { NavigationApp } from "../components/common/navigation";
 import UnitCard from "../components/unitCardView";
 import {useReactToPrint} from "react-to-print"
+import { useLazyQuery, gql, useQuery } from "@apollo/client";
 
 
   const page = "View";
@@ -93,36 +92,6 @@ import {useReactToPrint} from "react-to-print"
 
 
 
-
-// export default class View extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <NavigationApp page={page} />
-//         <div className="container">
-//           <div className="row">
-//           <div className="text-center mb-3">
-//               <ReactToPrint
-//                 trigger={() => (
-//                   <button type="button" className="btn btn-primary">
-//                     Click Here to download PDF
-//                     <VscFilePdf />
-//                   </button>
-//                 )}
-//                 content={() => this.componentRef}
-//               />
-//           </div>
-//           <div className="height-80 overflow-auto">
-//             <ComponentToPrint ref={(el) => (this.componentRef = el)} />
-//           </div>
-           
-//         </div>
-//       </div>
-//     </div>
-//     );
-//   }
-// }
-
 export default function View(){
   const componentRef = useRef()
   const handlePrint=useReactToPrint({
@@ -132,8 +101,27 @@ export default function View(){
     const localData = localStorage.getItem('scheduledUnits');
     return localData ? JSON.parse(localData) : [];
   });
-  window.myglobal=scheduledUnits
-  console.log(window.myglobal)
+  // window.myglobal=scheduledUnits
+  // console.log(window.myglobal)
+  const GET_UNIT_BY_UNITCODE_QUERY = gql`
+  query getUnitFromUnitcode($unitCode: String) { 
+      getUnit(unitCode: $unitCode) {
+          unitCode
+          unitName
+          synopsis
+          unitCoRequisites
+          unitProhibitions
+          unitPreRequisites
+          teachingPeriods
+          locationNames
+          facultyName
+          degreeType
+          isActive
+          workloadReq
+      }
+  }
+`
+
   return(
           <div>
         <NavigationApp page={page} />
