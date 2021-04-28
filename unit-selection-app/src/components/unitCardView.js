@@ -8,7 +8,7 @@ export default function UnitCard(props){
             <div className="mt-2">
                 <h5 className="text-center">{props.unitCode}</h5>
                 <h6 className="text-center">{props.unitName}</h6>
-                <hr/>
+                {/* <hr/>
                 <div className="height-40 px-3 my-2">
                     <h6>Unit Type:</h6>
                     <p>{props.unitType}</p>
@@ -18,7 +18,7 @@ export default function UnitCard(props){
                     <p>{props.synopsis}</p>
                     <h6>Workload:</h6>
                     <p>{props.workloadReq}</p>
-                </div>
+                </div> */}
             </div>
         </Card>
     )}

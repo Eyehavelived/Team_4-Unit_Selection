@@ -2,7 +2,6 @@ import React,{useState,useRef} from "react";
 import { NavigationApp } from "../components/common/navigation";
 import UnitCard from "../components/unitCardView";
 import {useReactToPrint} from "react-to-print"
-import { useLazyQuery, gql, useQuery } from "@apollo/client";
 
 
   const page = "View";
@@ -101,42 +100,19 @@ export default function View(){
     const localData = localStorage.getItem('scheduledUnits');
     return localData ? JSON.parse(localData) : [];
   });
-  // window.myglobal=scheduledUnits
-  // console.log(window.myglobal)
-  console.log(scheduledUnits)
-  const unitCodes=[]
-  for (var i=1;i<scheduledUnits.length;i++){
-    for (var j=0;j<scheduledUnits[i].units.length;j++){
-        const [result]=[scheduledUnits[i].units[j]];
-        unitCodes.push(result.unitCode);
-    }
-  }
-  console.log(unitCodes);//["FIT3162", "FIT3161"]
-//   const GET_UNIT_BY_UNITCODE_QUERY = gql`
-//   query getUnitFromUnitcode($unitCode: String) { 
-//       getUnit(unitCode: $unitCode) {
-//           unitCode
-//           unitName
-//           synopsis
-//           unitCoRequisites
-//           unitProhibitions
-//           unitPreRequisites
-//           teachingPeriods
-//           locationNames
-//           facultyName
-//           degreeType
-//           isActive
-//           workloadReq
-//       }
-//   }
-// `
-// const resultInfos=[]
-// for (var i=0;i<unitCodes.length;i++){
-//   const resultInfo = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
-//     variables: {unitCode: `${unitCodes[i]}`}
-//   });
-// }
-// console.log(resultInfo);
+  // scheduledUnits=scheduledUnits.split(0)
+  window.myglobal=scheduledUnits.slice(1);
+  console.log(window.myglobal)
+  // console.log(scheduledUnits)
+  // const unitCodes=[]
+  // for (var i=1;i<scheduledUnits.length;i++){
+  //   for (var j=0;j<scheduledUnits[i].units.length;j++){
+  //       const [result]=[scheduledUnits[i].units[j]];
+  //       unitCodes.push(result.unitCode);
+  //   }
+  // }
+  // console.log(unitCodes);//["FIT3162", "FIT3161"]
+
 
 
   return(
@@ -161,81 +137,98 @@ export default function View(){
 class ComponentToPrint extends React.Component {
   render(){return (
     <div className="col-10">
-      {sampleUnitsSemester1.length !== 0 && (
-        <h4 className="mx-1">Semester1</h4>
-      )}
-      {sampleUnitsSemester1.length !== 0 &&
-        sampleUnitsSemester1.map((element, index) => (
-          <UnitCard
-            unitCode={element.unitCode}
-            unitType={element.unitType}
-            unitName={element.unitName}
-            semester={element.semester}
-            year={element.year}
-            synopsis={element.synopsis}
-            workloadReq={element.workloadReq}
-            view={true}
-          />
-        ))}
-      {sampleUnitsSemester2.length !== 0 && (
-        <h4 className="mx-1">Semester2</h4>
-      )}
-      {sampleUnitsSemester2.length !== 0 &&
-        sampleUnitsSemester2.map((element, index) => (
-          <UnitCard
-            unitCode={element.unitCode}
-            unitType={element.unitType}
-            unitName={element.unitName}
-            semester={element.semester}
-            year={element.year}
-            synopsis={element.synopsis}
-            workloadReq={element.workloadReq}
-            view={true}
-          />
-        ))}
-      {sampleUnitsWinter.length !== 0 && <h4 className="mx-1">Winter</h4>}
-      {sampleUnitsWinter.length !== 0 &&
-        sampleUnitsWinter.map((element, index) => (
-          <UnitCard
-            unitCode={element.unitCode}
-            unitType={element.unitType}
-            unitName={element.unitName}
-            semester={element.semester}
-            year={element.year}
-            synopsis={element.synopsis}
-            workloadReq={element.workloadReq}
-            view={true}
-          />
-        ))}
-      {sampleUnitsSummerA.length !== 0 && <h4 className="mx-1">SummerA</h4>}
-      {sampleUnitsSummerA.length !== 0 &&
-        sampleUnitsSummerA.map((element, index) => (
-          <UnitCard
-            unitCode={element.unitCode}
-            unitType={element.unitType}
-            unitName={element.unitName}
-            semester={element.semester}
-            year={element.year}
-            synopsis={element.synopsis}
-            workloadReq={element.workloadReq}
-            view={true}
-          />
-        ))}
-      {sampleUnitsSummerB.length !== 0 && <h4 className="mx-1">SummerB</h4>}
-      {sampleUnitsSummerB.length !== 0 &&
-        sampleUnitsSummerB.map((element, index) => (
-          <UnitCard
-            unitCode={element.unitCode}
-            unitType={element.unitType}
-            unitName={element.unitName}
-            semester={element.semester}
-            year={element.year}
-            synopsis={element.synopsis}
-            workloadReq={element.workloadReq}
-            view={true}
-          />
-        ))}
+      {window.myglobal.length>=2 &&
+        window.myglobal.map((element,index)=>{
+            <h4 className="mx-1">Year {element.year} Semester1 {element.sem}</h4>
+            element.units.map((unitInfo,index2)=>(
+              <UnitCard
+              unitCode={unitInfo.unitCode}
+              unitName={unitInfo.unitName}
+              />
+            ))
+      })}
     </div>
   );
 }
 }
+// class ComponentToPrint extends React.Component {
+//   render(){return (
+//     <div className="col-10">
+//       {sampleUnitsSemester1.length !== 0 && (
+//         <h4 className="mx-1">Semester1</h4>
+//       )}
+//       {sampleUnitsSemester1.length !== 0 &&
+//         sampleUnitsSemester1.map((element, index) => (
+//           <UnitCard
+//             unitCode={element.unitCode}
+//             unitType={element.unitType}
+//             unitName={element.unitName}
+//             semester={element.semester}
+//             year={element.year}
+//             synopsis={element.synopsis}
+//             workloadReq={element.workloadReq}
+//             view={true}
+//           />
+//         ))}
+//       {sampleUnitsSemester2.length !== 0 && (
+//         <h4 className="mx-1">Semester2</h4>
+//       )}
+//       {sampleUnitsSemester2.length !== 0 &&
+//         sampleUnitsSemester2.map((element, index) => (
+//           <UnitCard
+//             unitCode={element.unitCode}
+//             unitType={element.unitType}
+//             unitName={element.unitName}
+//             semester={element.semester}
+//             year={element.year}
+//             synopsis={element.synopsis}
+//             workloadReq={element.workloadReq}
+//             view={true}
+//           />
+//         ))}
+//       {sampleUnitsWinter.length !== 0 && <h4 className="mx-1">Winter</h4>}
+//       {sampleUnitsWinter.length !== 0 &&
+//         sampleUnitsWinter.map((element, index) => (
+//           <UnitCard
+//             unitCode={element.unitCode}
+//             unitType={element.unitType}
+//             unitName={element.unitName}
+//             semester={element.semester}
+//             year={element.year}
+//             synopsis={element.synopsis}
+//             workloadReq={element.workloadReq}
+//             view={true}
+//           />
+//         ))}
+//       {sampleUnitsSummerA.length !== 0 && <h4 className="mx-1">SummerA</h4>}
+//       {sampleUnitsSummerA.length !== 0 &&
+//         sampleUnitsSummerA.map((element, index) => (
+//           <UnitCard
+//             unitCode={element.unitCode}
+//             unitType={element.unitType}
+//             unitName={element.unitName}
+//             semester={element.semester}
+//             year={element.year}
+//             synopsis={element.synopsis}
+//             workloadReq={element.workloadReq}
+//             view={true}
+//           />
+//         ))}
+//       {sampleUnitsSummerB.length !== 0 && <h4 className="mx-1">SummerB</h4>}
+//       {sampleUnitsSummerB.length !== 0 &&
+//         sampleUnitsSummerB.map((element, index) => (
+//           <UnitCard
+//             unitCode={element.unitCode}
+//             unitType={element.unitType}
+//             unitName={element.unitName}
+//             semester={element.semester}
+//             year={element.year}
+//             synopsis={element.synopsis}
+//             workloadReq={element.workloadReq}
+//             view={true}
+//           />
+//         ))}
+//     </div>
+//   );
+// }
+// }
