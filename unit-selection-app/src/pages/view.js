@@ -103,24 +103,41 @@ export default function View(){
   });
   // window.myglobal=scheduledUnits
   // console.log(window.myglobal)
-  const GET_UNIT_BY_UNITCODE_QUERY = gql`
-  query getUnitFromUnitcode($unitCode: String) { 
-      getUnit(unitCode: $unitCode) {
-          unitCode
-          unitName
-          synopsis
-          unitCoRequisites
-          unitProhibitions
-          unitPreRequisites
-          teachingPeriods
-          locationNames
-          facultyName
-          degreeType
-          isActive
-          workloadReq
-      }
+  console.log(scheduledUnits)
+  const unitCodes=[]
+  for (var i=1;i<scheduledUnits.length;i++){
+    for (var j=0;j<scheduledUnits[i].units.length;j++){
+        const [result]=[scheduledUnits[i].units[j]];
+        unitCodes.push(result.unitCode);
+    }
   }
-`
+  console.log(unitCodes);//["FIT3162", "FIT3161"]
+//   const GET_UNIT_BY_UNITCODE_QUERY = gql`
+//   query getUnitFromUnitcode($unitCode: String) { 
+//       getUnit(unitCode: $unitCode) {
+//           unitCode
+//           unitName
+//           synopsis
+//           unitCoRequisites
+//           unitProhibitions
+//           unitPreRequisites
+//           teachingPeriods
+//           locationNames
+//           facultyName
+//           degreeType
+//           isActive
+//           workloadReq
+//       }
+//   }
+// `
+// const resultInfos=[]
+// for (var i=0;i<unitCodes.length;i++){
+//   const resultInfo = useLazyQuery(GET_UNIT_BY_UNITCODE_QUERY,{
+//     variables: {unitCode: `${unitCodes[i]}`}
+//   });
+// }
+// console.log(resultInfo);
+
 
   return(
           <div>
