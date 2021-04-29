@@ -101,7 +101,7 @@ export default function View(){
     return localData ? JSON.parse(localData) : [];
   });
   // scheduledUnits=scheduledUnits.split(0)
-  window.myglobal=scheduledUnits.slice(1);
+  window.myglobal=scheduledUnits.slice(0,scheduledUnits.length-1);
   console.log(window.myglobal)
   // console.log(scheduledUnits)
   // const unitCodes=[]
@@ -139,13 +139,15 @@ class ComponentToPrint extends React.Component {
     <div className="col-10">
       {window.myglobal.length>=2 &&
         window.myglobal.map((element,index)=>{
-            <h4 className="mx-1">Year {element.year} Semester1 {element.sem}</h4>
+          return[
+            <h4 className="mx-1">Year {element.year} Semester {element.sem}</h4>,
             element.units.map((unitInfo,index2)=>(
               <UnitCard
               unitCode={unitInfo.unitCode}
               unitName={unitInfo.unitName}
               />
             ))
+            ]
       })}
     </div>
   );
