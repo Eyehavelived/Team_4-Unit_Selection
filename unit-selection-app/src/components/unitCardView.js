@@ -1,10 +1,9 @@
-import {IoMdClose, IoIosAdd} from "react-icons/io";
 import {Card} from "react-bootstrap";
 
 export default function UnitCard(props){
 
     return (
-        <Card className="mx-1" style={{width:"60rem"}}>
+        <Card className="mx-1" style={{width:"70rem"}}>
             <div className="mt-2">
                 <h5 className="text-center">{props.unitCode}</h5>
                 <h6 className="text-center">{props.unitName}</h6>
