@@ -1,4 +1,5 @@
 import React from "react"
+import {IoIosAddCircleOutline} from "react-icons/io";
 
 
 //This method is used to display units in the Units column after we filter our choice
@@ -28,8 +29,9 @@ export default function CreateArea(props) {
         {props.unitList.map((unit)=>
         <div className="mb-2">
           <li>
-            <input onClick={submitUnit(unit)} type="checkbox"
-              id={unit.unitCode} className="mt-1"/>
+            {/* <input onClick={submitUnit(unit)} type="checkbox"
+              id={unit.unitCode} className="mt-1"/> */}
+            <button className="small-size mt-1" onClick={submitUnit(unit)} id={unit.unitCode}><IoIosAddCircleOutline size={20}/></button>
             <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}
             </label>
           </li>
