@@ -1,23 +1,9 @@
 import React from "react"
-import {IoIosAddCircleOutline} from "react-icons/io";
+import { BsEye } from "react-icons/bs";
 
 
 //This method is used to display units in the Units column after we filter our choice
-export default function CreateArea(props) {
-  /*
-    const unit={
-      unitCode: props.unitCode,
-      unitName:props.unitName,
-      facultyName:props.facultyName,
-      unitType:props.unitType,
-      synopsis:props.synopsis,
-      workloadReq:props.workloadReq,
-      year:props.year,
-      semester:props.semester
-    };
-    */
-
-    
+export default function CreateArea(props) {    
     //When we click the checkbox,it will submit our request and display more information in our comparing window
     const submitUnit = unit => event => {
       props.onAdd(unit);
@@ -31,7 +17,7 @@ export default function CreateArea(props) {
           <li>
             {/* <input onClick={submitUnit(unit)} type="checkbox"
               id={unit.unitCode} className="mt-1"/> */}
-            <button className="small-size mt-1" onClick={submitUnit(unit)} id={unit.unitCode}><IoIosAddCircleOutline size={20}/></button>
+            <button className="small-size mt-1" onClick={submitUnit(unit)} id={unit.unitCode}><BsEye size={20}/></button>
             <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}
             </label>
           </li>

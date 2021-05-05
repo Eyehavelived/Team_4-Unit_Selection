@@ -7,6 +7,7 @@ import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
 
+
 function getToggleId(itemId, itemName) {
   const idDict = {
     "Faculty": "1",
