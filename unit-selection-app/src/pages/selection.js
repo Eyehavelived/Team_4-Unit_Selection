@@ -6,6 +6,7 @@ import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 function getToggleId(itemId, itemName) {
   const idDict = {
@@ -174,6 +175,9 @@ function TeachingLocations() {
 }
 
 export default function Selection() {
+  const history = useHistory();
+  const navigateTo = () => history.push('/schedule');
+
   const page = "Selection"; 
 
   const [searchRequest,setSearchRequest]=useState("");
@@ -304,6 +308,12 @@ export default function Selection() {
       <Row>
         {sidebar &&
           <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
+          <h6 className="mt-2">Unit Code Search</h6> 
+            <form onSubmit={handleSearchRequest}>
+              <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
+              <button className="btn btn-secondary btn-sm mb-1" type="submit" value="submit">Search</button>
+            </form>
+            <hr/>
             <form onSubmit={handleSubmitOptionsFilter}>
               <div className="height-45 overflow-auto">
                 <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleToggleOptions}/>
@@ -313,13 +323,10 @@ export default function Selection() {
               </div>
               <button className="btn btn-secondary mt-3">Show Filtered Result</button>
             </form> 
-            <hr/>
-            <h6 className="mt-2">Unit Code Search</h6> 
-            <form onSubmit={handleSearchRequest}>
-              <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="btn btn-secondary mt-2" type="submit" value="submit">Search</button>
-            </form>
+            <button className="btn mt-3 btn-primary" onClick={navigateTo}
+            style={selectedUnits.length>0?{background:"#0275d8" }:{background:"grey"}} type="button">Go to Schedule {'>'}</button>
           </Col>
+          
         }
 
           <Col md={2} className="height-80 ms-3">
