@@ -4,12 +4,49 @@
     border-radius: 5px;
 }
 
-#floating-btn{
-    .fab{
-        transition: 0.4s;
-
-        &:active{
-            transform: rotate(45deg);
-        }
+.floating-btn{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    color: $offwhite;
+    border:none;
+    background-color: $primary;
+    transition: all 0.5s ease-in-out;
+    &::after{
+        transform: rotate(-45deg);
     }
+
 }
+
+.floating-btn-active{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    color: $offwhite;
+    border:none;
+    background-color: $primary;
+    transition: all 0.5s ease-in-out;
+    transform: rotate(-45deg);
+    
+    &::after{
+        transform: rotate(45deg);
+    }
+    
+}
+
+.hide-form{
+    visibility: none;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.show-form{
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
