@@ -2,7 +2,8 @@ import React,{useState,useRef} from "react";
 import { NavigationApp } from "../components/common/navigation";
 import UnitCard from "../components/unitCardView";
 import {useReactToPrint} from "react-to-print";
-
+import {Col} from "react-bootstrap";
+import { BiPrinter } from "react-icons/bi";
 
 
 
@@ -11,13 +12,13 @@ import {useReactToPrint} from "react-to-print";
 
 class ComponentToPrint extends React.Component {
   render(){return (
-    <div className="px-5">
+    <div className="px-4 py-5  row ">
+    <h1 className="text-center text-primary">M Unit Selection</h1>
       {window.myglobal.length>=1 &&
-      <div>
-        {window.myglobal.map((element,index)=>{
+        window.myglobal.map((element,index)=>{
           return[
-           <div className="position-relative" style={{ display:"inline-block"}}>
-            <h4 className="mx-1 text-center">{element.year} Semester {element.sem}</h4>
+           <div className="col-3 mb-5">
+            <h4 className="mx-1 ms-5">{element.year} Semester {element.sem}</h4>
             {element.units.map((unitInfo,index2)=>(
               <UnitCard
               unitCode={unitInfo.unitCode}
@@ -27,8 +28,8 @@ class ComponentToPrint extends React.Component {
             </div>
             ]
       })}
-      </div>
-      }
+
+      
     </div>
   );
 }
@@ -52,10 +53,10 @@ export default function View(){
         <NavigationApp page={page} />
         <div className="container">
           <div className="row">
-          <div className="text-center mb-3">
-              <button type="button" className="btn btn-primary" onClick={handlePrint}>Click Here to download PDF</button>
+          <div className="text-center">
+              <button type="button" className="btn btn-primary" onClick={handlePrint}>Click Here to download PDF <BiPrinter/></button>
           </div>
-          <div className="height-80 overflow-auto">
+          <div className="height-10 overflow-auto">
             <ComponentToPrint ref={componentRef} />
           </div>
            
