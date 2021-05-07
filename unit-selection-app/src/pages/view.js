@@ -11,7 +11,7 @@ import {useReactToPrint} from "react-to-print";
 
 class ComponentToPrint extends React.Component {
   render(){return (
-    <div>
+    <div className="px-5">
       {window.myglobal.length>=1 &&
       <div>
         {window.myglobal.map((element,index)=>{
