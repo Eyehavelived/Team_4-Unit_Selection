@@ -55,7 +55,7 @@ export default function View(){
           <div className="text-center mb-3">
               <button type="button" className="btn btn-primary" onClick={handlePrint}>Click Here to download PDF</button>
           </div>
-          <div className="height-80 width-80 overflow-auto">
+          <div className="height-80 overflow-auto">
             <ComponentToPrint ref={componentRef} />
           </div>
            
