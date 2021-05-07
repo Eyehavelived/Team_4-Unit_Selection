@@ -7,6 +7,7 @@ type Query {
     getFaculties: [Faculty]
     getTeachingPeriods: [TeachingPeriod]
     getLocations: [Location]
+    getSpecialisations:[Specialisation]
 }
 
 type Assessment {
@@ -51,4 +52,9 @@ type TeachingPeriod {
 type Location {
     id: Int
     locationName: String
+}
+
+type Specialisation{
+    id:Int
+    specName:String
 }

@@ -1,3 +1,4 @@
+const { validateOperation } = require('@apollo/client/link/utils');
 const db = require('../../database/mysql');
 const {errorHandler} = require('../utils');
 
@@ -111,7 +112,7 @@ const filters = (options) => {
         whereCalls.push(["whereIn", 'unit.unitLocation', options["location"].map(val => parseInt(val))])
     }
     if(options["specialisation"].length>0){
-        whereCalls.push(["whereIn",'specialisation_units.specialisationId',options["specialisation"]])
+        whereCalls.push(["whereIn",'specialisation_units.specialisationId',options["specialisation"].map(val=>parseInt(val))])
     }
   
 
