@@ -7,7 +7,7 @@ import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-
+import {BsSearch}from "react-icons/bs";
 function getToggleId(itemId, itemName) {
   const idDict = {
     "Faculty": "1",
@@ -311,7 +311,7 @@ export default function Selection() {
           <h6 className="mt-2">Unit Code Search</h6> 
             <form onSubmit={handleSearchRequest}>
               <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="btn btn-secondary btn-sm mb-1" type="submit" value="submit">Search</button>
+              <button className="btn btn-secondary btn-sm mb-1 ms-3" type="submit" value="submit"><BsSearch/></button>
             </form>
             <hr/>
             <form onSubmit={handleSubmitOptionsFilter}>
