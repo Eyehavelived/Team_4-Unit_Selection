@@ -110,6 +110,10 @@ const filters = (options) => {
     if (options["location"].length > 0) {
         whereCalls.push(["whereIn", 'unit.unitLocation', options["location"].map(val => parseInt(val))])
     }
+    if(options["specialisation"].length>0){
+        whereCalls.push(["whereIn",'specialisation_units.specialisationId',options["specialisation"]])
+    }
+  
 
 
     for (const [key, value] of Object.entries(whereFilters)) {
