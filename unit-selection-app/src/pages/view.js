@@ -2,12 +2,11 @@ import React,{useState,useRef} from "react";
 import { NavigationApp } from "../components/common/navigation";
 import UnitCard from "../components/unitCardView";
 import {useReactToPrint} from "react-to-print";
-import {Col} from "react-bootstrap";
 import { BiPrinter } from "react-icons/bi";
 
 
 
-  const page = "View";
+const page = "View";
 
 
 class ComponentToPrint extends React.Component {
@@ -18,7 +17,10 @@ class ComponentToPrint extends React.Component {
         window.myglobal.map((element,index)=>{
           return[
            <div className="col-3 mb-5">
-            <h4 className="mx-1 ms-5">{element.year} Semester {element.sem}</h4>
+           {(element.sem==="1" || element.sem==="2")?
+           <h4 className="mx-1 ms-5">{element.year} Semester {element.sem}</h4>:
+           <h4 className="mx-1 ms-5">{element.year} {element.sem}</h4>
+            }
             {element.units.length>0?
             element.units.map((unitInfo,index2)=>(
               <UnitCard
@@ -30,6 +32,8 @@ class ComponentToPrint extends React.Component {
             }
             </div>
             ]
+            
+          
       })}
 
       
