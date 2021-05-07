@@ -18,6 +18,7 @@ export default function View(){
     const localData = localStorage.getItem('scheduledUnits');
     return localData ? JSON.parse(localData) : [];
   });
+  console.log(scheduledUnits)
   window.myglobal=scheduledUnits.slice(0,scheduledUnits.length-1);
   console.log(window.myglobal)
   return(

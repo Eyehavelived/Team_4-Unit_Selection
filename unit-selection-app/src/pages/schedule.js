@@ -29,12 +29,14 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-const semesterTypes = ["1","winter","2","summera","summerb"];
+const semesterTypes = ["1","Winter","2","Summer A","Summer B"];
 
 export default function Selection(){
     const page = "Schedule"
 
     const SELECTEDUNITS = "selectedUnits"
+
+    const [active, setActive] = useState(true);
 
     const [selectedUnits] = useState(()=>{
         const localData = localStorage.getItem('selectedUnits');
@@ -170,7 +172,7 @@ export default function Selection(){
     
 
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden position-relative">
             <NavigationApp page={page}/>
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -199,22 +201,22 @@ export default function Selection(){
                         </Droppable>
                 </Col>
 
-                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative height-80">
+                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto height-80">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
                         tp={tp} onDelete={deleteTeachingPeriod}/>
                     ))}
-                    
-                    <div id="floating-btn" className="position-absolute bottom-0 mb-2 d-inline-flex">
-                        <button className="btn circle-btn fab btn-primary mb-2" data-toggle="collapse"><IoIosAdd size={30}/></button>
-                        <div id="hidden-form" className="mt-1 ms-4">
-                            <ScheduleForm onAdd={addTeachingPeriod}/>
-                        </div>
-                    </div>
                 </Col>
+                
             </Row>
             </DragDropContext>
+            <div className="position-absolute bottom-0 end-0 mb-1 mx-4 d-flex">
+                <div id="hidden-form" className="mt-1 mx-4" class={active?"hide-form":"show-form"}>
+                    <ScheduleForm onAdd={addTeachingPeriod}/>
+                </div>
+                <button id="show-btn" onClick={()=>{setActive(!active)}} className={active?"floating-btn":"floating-btn-active"}><IoIosAdd size={30}/></button>      
+            </div>
         </div> 
     )
 }
