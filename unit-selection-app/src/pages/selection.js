@@ -307,18 +307,16 @@ export default function Selection() {
 
       <Row>
         {sidebar &&
-          <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
+          <Col md={2} className="white-bg height-80 ms-5 ">
           <h6 className="mt-2">Unit Code Search</h6> 
-            <form onSubmit={handleSearchRequest}>
-            <Row className="d-inline-flex flex-row">
-            
-              <input classname="p-2" type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-          
-          
-              <button className="btn btn-secondary btn-sm p-2" type="submit" value="submit"><BsSearch/></button>
-            
-            </Row>
+            <form onSubmit={handleSearchRequest} >
+              <div className="d-flex flex-row">
+                <input id="searchInput" type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
+                <button className="btn btn-secondary btn-sm ms-2" type="submit" value="submit"><BsSearch/></button>
+              </div>
             </form>
+   
+            
             <hr/>
             <form onSubmit={handleSubmitOptionsFilter}>
               <div className="height-45 overflow-auto">
