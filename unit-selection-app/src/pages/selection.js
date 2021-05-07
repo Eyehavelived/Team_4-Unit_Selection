@@ -310,12 +310,12 @@ export default function Selection() {
           <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
           <h6 className="mt-2">Unit Code Search</h6> 
             <form onSubmit={handleSearchRequest}>
-            <Row className="d-inline-flex">
+            <Row className="d-inline-flex flex-row">
             
-              <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-            
+              <input classname="p-2" type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
           
-              <button className="btn btn-secondary btn-sm" type="submit" value="submit"><BsSearch/></button>
+          
+              <button className="btn btn-secondary btn-sm p-2" type="submit" value="submit"><BsSearch/></button>
             
             </Row>
             </form>
