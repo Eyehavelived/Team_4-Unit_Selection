@@ -28,7 +28,7 @@ class ComponentToPrint extends React.Component {
               unitName={unitInfo.unitName}
               /> 
             )):
-            <h4 className="ms-5">No units selected for this period</h4>
+            <h6 className="ms-5 text-muted">No units selected for this period</h6>
             }
             </div>
             ]
