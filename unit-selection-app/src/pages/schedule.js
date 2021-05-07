@@ -67,8 +67,8 @@ export default function Selection(){
             return scheduleList
         }else{
             return [{listId:"selectedUnits",
-                    year: "none",
-                    sem:"none",
+                    year: 0,
+                    sem: 0,
                     units:selectedUnits}];
         }
         
