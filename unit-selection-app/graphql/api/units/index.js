@@ -187,5 +187,15 @@ module.exports = {
                 'periodName'
             )
             .from('teaching_period')
-            .catch(errorHandler)
+            .catch(errorHandler),
+
+    getSpecialisations: async () =>
+            await db
+                .select(
+                    'id',
+                    'specName'
+                )
+                .from('specialisation')
+                .catch(errorHandler)
+    
 }
