@@ -21,7 +21,9 @@ export default function CreateArea(props) {
             <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}
             </label>
           </li>
-          <h7 className="ms-4">{unit.unitName}</h7>
+          <div className="ms-4">
+          <h7>{unit.unitName}</h7>
+          </div>
           </div>
         )}
       </ul>
