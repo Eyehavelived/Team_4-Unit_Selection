@@ -12,19 +12,22 @@ import { BiPrinter } from "react-icons/bi";
 
 class ComponentToPrint extends React.Component {
   render(){return (
-    <div className="px-4 py-5  row ">
-    <h1 className="text-center text-primary">M Unit Selection</h1>
+    <div className="px-4 py-5 row ">
+    <h1 className="text-center text-primary mb-5">M Unit Selection</h1>
       {window.myglobal.length>=1 &&
         window.myglobal.map((element,index)=>{
           return[
            <div className="col-3 mb-5">
             <h4 className="mx-1 ms-5">{element.year} Semester {element.sem}</h4>
-            {element.units.map((unitInfo,index2)=>(
+            {element.units.length>0?
+            element.units.map((unitInfo,index2)=>(
               <UnitCard
               unitCode={unitInfo.unitCode}
               unitName={unitInfo.unitName}
               /> 
-            ))}
+            )):
+            <h4 className="ms-5">No units selected for this period</h4>
+            }
             </div>
             ]
       })}
@@ -47,6 +50,7 @@ export default function View(){
   });
   // console.log(scheduledUnits)
   window.myglobal=scheduledUnits.slice(1,scheduledUnits.length);
+ 
   console.log(window.myglobal)
   return(
           <div>
