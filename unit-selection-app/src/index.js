@@ -7,7 +7,7 @@ import './assets/scss/base.scss';
 import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, onError, ApolloLink } from '@apollo/client';
 
 const client = new ApolloClient({
-  link:  new HttpLink({uri:'http://localhost:4000/graphql'}),
+  link:  new HttpLink({uri:'us-cdbr-east-03.cleardb.com/graphql'}),
   cache: new InMemoryCache()
 })
 

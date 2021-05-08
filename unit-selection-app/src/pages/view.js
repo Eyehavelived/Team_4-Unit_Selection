@@ -23,6 +23,7 @@ class ComponentToPrint extends React.Component {
             if (element.year === this.lastElementYear) {
               return [
                 <Row>
+                  <div className="mt-3">
                   {element.sem === "1" || element.sem === "2" ? (
                     <h4 className="text-primary">
                       <i> Sem {element.sem}</i>
@@ -32,10 +33,11 @@ class ComponentToPrint extends React.Component {
                       <i>{element.sem}</i>
                     </h4>
                   )}
+                  </div>
 
                   {element.units.length > 0 ? (
                     element.units.map((unitInfo, index2) => (
-                      <Col md={3}>
+                      <Col xs={3}>
                         <UnitListCard
                           code={unitInfo.unitCode}
                           name={unitInfo.unitName}
@@ -53,18 +55,23 @@ class ComponentToPrint extends React.Component {
               this.lastElementYear = element.year;
               return [
                 <Row className="mt-5">
-                    <h4 className="text-primary">
-                      <u>{element.year}</u>
-                    </h4>
-                    {element.sem === "1" || element.sem === "2" ? (
+                    <div className="mt-2">
                       <h4 className="text-primary">
-                        <i>Sem {element.sem}</i>
+                        <u>{element.year}</u>
                       </h4>
-                    ) : (
-                      <h4 className="text-primary">
-                        <i>{element.sem}</i>
-                      </h4>
-                    )}
+                    </div>
+                    <div className="mt-2">
+                      {element.sem === "1" || element.sem === "2" ? (
+                        <h4 className="text-primary">
+                          <i>Sem {element.sem}</i>
+                        </h4>
+                      ) : (
+                        <h4 className="text-primary">
+                          <i>{element.sem}</i>
+                        </h4>
+                      )}
+                    </div>
+                    
                     {element.units.length > 0 ? (
                       element.units.map((unitInfo, index2) => (
                         <Col md={3}>
