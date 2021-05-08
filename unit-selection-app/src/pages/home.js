@@ -1,60 +1,42 @@
 import React from 'react';
 import Navigation from '../components/common/navigation';
 import hero_image from '../assets/images/home_png.png';
-import { FaBootstrap } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
+import {Link as LinkR} from 'react-router-dom';
+import { FaBootstrap, FaGithub } from "react-icons/fa";
 
 
 export default function Home(){
     return (
         <article>
-            <section className="container-hero">
+            <section id="home" className="container-hero my-0 py-0">
            
-                <div className="container my-4">
+                <div className="container-nav py-2 fixed-top">
                     <Navigation/>
+                </div>
+
+                <div className="navbar-replace">
+                    
                 </div>
 
                 <div className="container my-4">
                      <div className="row">
-                        <div className="col-7 my-5 mx-3">
-                            <h1>Make <span>Unit Selection</span> Easy</h1>
-                            <h4>Schedule your time at Monash University and make selecting units stress-free.</h4>
-                            <button className="btn btn-primary btn-lg my-3" type="button">Making New Schedule</button>
-                            <br></br>
-                            <button className="btn btn-outline-secondary btn-lg my-3" type="submit">Upload Previous Schedule</button>
-                        </div>
-                        <div className="col-3 my-5">
-                            <img src={hero_image}/>
+                        <div className="col my-5 mx-3 text-center">
+                            <div className="mb-5">
+                                <h1>Make <span>Unit Selection</span> Easy</h1>
+                                <h4>Schedule your time at Monash University and make selecting units stress-free.</h4>
+                            </div>
+                            <div id="hero-btn" className="mt-5">
+                                <LinkR to="/selection">
+                                <button id="hero-btn" className="btn btn-primary btn-lg my-3" type="button">Making New Schedule</button>
+                                </LinkR>
+                            </div>
                         </div>
                      </div>
                 </div>
             </section>
             
-            <section className="container-about">
-                <div className="container my-4">
-                    <div className="row py-5 mx-3">
-                        <h1>ABOUT US</h1>
-                    </div>
-                    <div className="row pb-5">
-                        <div className="col-3">
-                            <img src={hero_image}/>
-                        </div>
-                        <div className="col-2"></div>
-                        <div className="col-7 py-3 px-5 about-custom">
-                            <h4 className="pt-3">The Project</h4>
-                            <br/>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac venenatis tellus. Nunc blandit risus vel suscipit sodales. Nullam vitae lorem nisi. In placerat quis nisi sagittis efficitur. Quisque hendrerit ante sapien, nec hendrerit augue viverra luctus. Sed vestibulum nibh sit amet sapien laoreet feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                            <br/>
-                            <hr/>
-                            <h4>The Group</h4>
-                            <br/>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac venenatis tellus. Nunc blandit risus vel suscipit sodales. Nullam vitae lorem nisi. In placerat quis nisi sagittis efficitur. Quisque hendrerit ante sapien, nec hendrerit augue viverra luctus. Sed vestibulum nibh sit amet sapien laoreet feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                        </div>
-                    </div>               
-                </div>
-            </section>
-            <section className="container-howto">
-                <div className="container my-4">
+            <section id="howtouse" className="container-howto my-0 py-0">
+                <div className="container">
                     <div className="row py-5 mx-3">
                         <h1>HOW TO USE</h1>
                     </div>
@@ -85,7 +67,32 @@ export default function Home(){
                 </div>
                 
             </section>
-            <section className="container-contact">
+
+            <section id="about" className="container-about my-0 py-0">
+                <div className="container">
+                    <div className="row py-5 mx-3">
+                        <h1>ABOUT US</h1>
+                    </div>
+                    <div className="row pb-5">
+                        <div className="col-3">
+                            <img src={hero_image}/>
+                        </div>
+                        <div className="col-2"></div>
+                        <div className="col-7 py-3 px-5 about-custom">
+                            <h4 className="pt-3">The Project</h4>
+                            <br/>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac venenatis tellus. Nunc blandit risus vel suscipit sodales. Nullam vitae lorem nisi. In placerat quis nisi sagittis efficitur. Quisque hendrerit ante sapien, nec hendrerit augue viverra luctus. Sed vestibulum nibh sit amet sapien laoreet feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                            <br/>
+                            <hr/>
+                            <h4>The Group</h4>
+                            <br/>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac venenatis tellus. Nunc blandit risus vel suscipit sodales. Nullam vitae lorem nisi. In placerat quis nisi sagittis efficitur. Quisque hendrerit ante sapien, nec hendrerit augue viverra luctus. Sed vestibulum nibh sit amet sapien laoreet feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                        </div>
+                    </div>               
+                </div>
+            </section>
+            
+            <section className="container-contact my-0 py-0">
                 <div className="row py-4 mx-3">
                     <div className="col">
                         <h4 className="mb-4">Contact Us</h4>

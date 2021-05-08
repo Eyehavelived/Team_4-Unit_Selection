@@ -62,6 +62,15 @@ module.exports = {
             ),
             getTeachingPeriods: getOptionsCurry(
                 async () => await PostService.getTeachingPeriods()
+            ),
+            getSpecialisations: getOptionsCurry(
+                async () => await PostService.getSpecialisations()
+            ),
+            getCourses: getOptionsCurry(
+                async () => await PostService.getCourses()
+            ),
+            getAcademicFocus:getOptionsCurry(
+                async () => await PostService.getAcademicFocus()
             )
         }
     },

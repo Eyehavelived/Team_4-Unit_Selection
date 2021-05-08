@@ -13,7 +13,9 @@ function getToggleId(itemId, itemName) {
     "Year": "2",
     "Semester": "3",
     "Location":"4",
-    "Specialisation":"5"
+    "Specialisation":"5",
+    "Course":"6",
+    "Academic_focus":"7"
   }
   return idDict[itemName] + "_" + itemId.toString()
 }
@@ -194,7 +196,7 @@ function Specialisations() {
   }
   const specialisations = data.getSpecialisations
 
-  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+
   return specialisations.map(({specName, id}) => ({
     name: specName,
     optionId: id,
@@ -202,6 +204,62 @@ function Specialisations() {
   }))
 }
 
+function Courses() {
+  const GET_ALL_COURSES = gql`
+    query getAllCourses {
+      getCourses {
+        courseCode 
+        courseName
+      }
+    }
+  `
+  const {loading, data, error, called} = useQuery(GET_ALL_COURSES);
+  if (loading) return [];
+  if (error) {
+    console.log(error)
+    return [];
+  }
+  if (error) {
+    console.log(called)
+    return [];
+  }
+  const courses = data.getCourses
+
+  // Remaps the 'periodName' key to 'name' to maintain the elegance of the Toggle element 
+  return courses.map(({courseCode,courseName}) => ({
+    name: courseName,
+    optionId: courseCode,
+    id: getToggleId(courseCode, "Course")
+  }))
+}
+function Academic_focus() {
+  const GET_ALL_ACADEMIC_FOCUS = gql`
+    query getAllAcademicFocus {
+      getAcademicFocus {
+        id
+        mmName
+      }
+    }
+  `
+  const {loading, data, error, called} = useQuery(GET_ALL_ACADEMIC_FOCUS);
+  if (loading) return [];
+  if (error) {
+    console.log(error)
+    return [];
+  }
+  if (error) {
+    console.log(called)
+    return [];
+  }
+  const academic_focus= data.getAcademicFocus
+
+
+  return academic_focus.map(({id,mmName}) => ({
+    name: mmName,
+    optionId: id,
+    id: getToggleId(id, "Academic_focus")
+  }))
+}
 
 
 export default function Selection() {
@@ -232,7 +290,10 @@ export default function Selection() {
     faculty:[],
     year:[],
     semester:[],
-    location:[]
+    location:[],
+    specialisation:[],
+    course:[],
+    academic_focus:[]
   });
 
   const [filtersString, setFiltersString] = useState("");
@@ -314,12 +375,14 @@ export default function Selection() {
     // could be because optionid isn't a default toggle attribute and so it's not passed properly under the hood.
     const optionId = event.target.getAttribute('optionid');
 
-    setFilterOptions(({faculty, year, semester,location,specialisation}) => ({
+    setFilterOptions(({faculty, year, semester,location,specialisation,course,academic_focus}) => ({
       faculty: (name === "Faculty") ? (checked) ? [...faculty, optionId]: faculty.filter(element => element !== optionId) : faculty,
       year: (name === "Year") ? (checked) ? [...year, optionId]: year.filter(element => element !== optionId) : year,
       semester: (name === "Semester") ? (checked) ? [...semester, optionId]: semester.filter(element => element !== optionId) : semester,
       location: (name === "Location") ? (checked) ? [...location, optionId]: location.filter(element => element !== optionId) : location,
-      specialisation: (name === "Specialisation") ? (checked) ? [...specialisation, optionId]: specialisation.filter(element => element !== optionId) : specialisation
+      specialisation: (name === "Specialisation") ? (checked) ? [...specialisation, optionId]: specialisation.filter(element => element !== optionId) : specialisation,
+      course: (name === "Course") ? (checked) ? [...course, optionId]: course.filter(element => element !== optionId) : course,
+      academic_focus: (name === "Academic_focus") ? (checked) ? [...academic_focus, optionId]: academic_focus.filter(element => element !== optionId) : academic_focus
     }))
   }
 
@@ -343,6 +406,8 @@ export default function Selection() {
                 <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleToggleOptions}/>
                 <ToggleDiv name="Location" data={TeachingLocations()} onSelect={handleToggleOptions}/>
                 <ToggleDiv name="Specialisation" data={Specialisations()} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Course" data={Courses()} onSelect={handleToggleOptions}/>
+                <ToggleDiv name="Academic_focus" data={Academic_focus()} onSelect={handleToggleOptions}/>
               </div>
               <button className="btn btn-secondary mt-3">Show Filtered Result</button>
             </form> 

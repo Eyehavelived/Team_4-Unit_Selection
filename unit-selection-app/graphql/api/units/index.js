@@ -109,11 +109,19 @@ const filters = (options) => {
         whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"].map(val => parseInt(val))])
     }
     if (options["location"].length > 0) {
-        whereCalls.push(["whereIn", 'unit.unitLocation', options["location"].map(val => parseInt(val))])
+        whereCalls.push(["whereIn", 'unit.unitLocationId', options["location"].map(val => parseInt(val))])
     }
     if(options["specialisation"].length>0){
         whereCalls.push(["whereIn",'specialisation_units.specialisationId',options["specialisation"].map(val=>parseInt(val))])
     }
+    if(options["course"].length>0){
+        whereCalls.push(["whereIn",'course.courseCode',options["course"].map(val=>parseInt(val))])
+    }
+    if(options["academic_focus"].length>0){
+        whereCalls.push(["whereIn",'academic_focus.id',options["academic_focus"].map(val=>parseInt(val))])
+
+    }
+
   
 
 
@@ -196,6 +204,23 @@ module.exports = {
                     'specName'
                 )
                 .from('specialisation')
-                .catch(errorHandler)
-    
+                .catch(errorHandler),
+                
+   getCourses: async () =>
+            await db
+                .select(
+                    'courseCode',
+                    'courseName'
+                )
+                .from('course')
+                .catch(errorHandler),
+    getAcademicFocus: async () =>
+                await db
+                    .select(
+                        'id',
+                        'mmName',
+                    )
+                    .from('academic_focus')
+                    .catch(errorHandler)
+                    
 }
