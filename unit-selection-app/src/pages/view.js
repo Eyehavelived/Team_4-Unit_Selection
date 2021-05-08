@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { NavigationApp } from "../components/common/navigation";
-import UnitCard from "../components/unitCardView";
+import { UnitListCard } from "../components/common/unitListCard";
+//import UnitCard from "../components/unitCardView";
 import { useReactToPrint } from "react-to-print";
 import { BiPrinter } from "react-icons/bi";
 import { Row, Col } from "react-bootstrap";
@@ -15,7 +16,7 @@ class ComponentToPrint extends React.Component {
   }
   render() {
     return (
-      <div className="px-4 py-5">
+      <div className="container px-4 py-5">
         <h1 className="text-center text-primary mb-5">MUSe</h1>
         {window.myglobal.length >= 1 &&
           window.myglobal.map((element, index) => {
@@ -34,12 +35,12 @@ class ComponentToPrint extends React.Component {
 
                   {element.units.length > 0 ? (
                     element.units.map((unitInfo, index2) => (
-                      <div className="col-3">
-                        <UnitCard
-                          unitCode={unitInfo.unitCode}
-                          unitName={unitInfo.unitName}
+                      <Col md={3}>
+                        <UnitListCard
+                          code={unitInfo.unitCode}
+                          name={unitInfo.unitName}
                         />
-                      </div>
+                      </Col>
                     ))
                   ) : (
                     <h6 className="text-muted">
@@ -66,12 +67,12 @@ class ComponentToPrint extends React.Component {
                     )}
                     {element.units.length > 0 ? (
                       element.units.map((unitInfo, index2) => (
-                        <div className="col-3">
-                          <UnitCard
-                            unitCode={unitInfo.unitCode}
-                            unitName={unitInfo.unitName}
+                        <Col md={3}>
+                          <UnitListCard
+                            code={unitInfo.unitCode}
+                            name={unitInfo.unitName}
                           />
-                        </div>
+                        </Col>
                       ))
                     ) : (
                       <h6 className="text-muted">
