@@ -85,6 +85,10 @@ label:hover {
   height: 63vh;
 }
 
+.height-70{
+  height: 70vh;
+}
+
 .height-80{
   height: 80vh;
 }
@@ -101,4 +105,18 @@ label:hover {
 //Card size
 .card-width{
   width: 45vh;
+}
+
+// custom container
+@mixin make-container($padding-x: $container-padding-x) {
+  width: 97vw;
+  padding-right: $padding-x;
+  padding-left: $padding-x;
+  margin-right: 1.5vw;
+  margin-left: 1.5vw;
+}
+
+// Usage
+.app-container {
+  @include make-container();
 }
