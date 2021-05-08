@@ -8,12 +8,15 @@ import { FaBootstrap, FaGithub } from "react-icons/fa";
 export default function Home(){
     return (
         <article>
+
+            <div className="bg-offwhite fixed-top">
+                <Navigation/>
+            </div>
+
+
             <section id="home" className="container-hero my-0 py-0">
            
-                <div className="container-nav py-2 fixed-top">
-                    <Navigation/>
-                </div>
-
+                
                 <div className="navbar-replace">
                     
                 </div>
@@ -35,7 +38,7 @@ export default function Home(){
                 </div>
             </section>
             
-            <section id="howtouse" className="container-howto my-0 py-0">
+            <section id="howtouse">
                 <div className="container">
                     <div className="row py-5 mx-3">
                         <h1>HOW TO USE</h1>
