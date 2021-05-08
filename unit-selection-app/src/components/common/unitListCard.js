@@ -8,7 +8,7 @@ function UnitListCardRemove(props){
     }
 
     return (
-        <div className="card me-3 mb-1 position-relative" >
+        <div className="card ms-1 mb-1 position-relative" >
             <div className="position-absolute top-0 end-0">
                 <button className="clear-btn-override close-btn-override mt-n2 ms-auto" onClick={handleClick}><IoMdClose/></button>
             </div>

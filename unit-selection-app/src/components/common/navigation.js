@@ -97,7 +97,7 @@ function NavigationSelection(props){
 function NavigationApp(props){
 
     return (
-    <div className="my-3 mx-4">  
+    <div className="mt-3">  
         <nav id="nav-override" className="navbar navbar-expand-lg">
             <span className="custom-logo navbar-brand"><LinkR to='/'>MUSe</LinkR></span>
 
