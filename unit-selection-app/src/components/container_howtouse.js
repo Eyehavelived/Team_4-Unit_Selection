@@ -1,16 +1,18 @@
 import React from 'react'
 
-const container_howtouse = () => {
+const Container_howtouse = () => {
     return (
-        <div className="container-howto">
-            <Row className="py-5 mx-3">
-                <h1>HOW TO USE</h1>
-            </Row>
-            <Row>
-                
-            </Row>
-        </div>
+        <section id="howtouse" className="grey-bg">
+            <div className="container">
+                <Row className="py-5 mx-3">
+                    <h1>HOW TO USE</h1>
+                </Row>
+                <Row>
+                    
+                </Row>
+            </div>
+        </section>
     )
 }
 
-export default container_howtouse
+export default Container_howtouse

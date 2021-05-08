@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigation from '../components/common/navigation';
-import Container_hero from '../components/container_hero';
+import {Container_hero,Container_howtouse} from '../components';
 import hero_image from '../assets/images/home_png.png';
 import { FaBootstrap, FaGithub } from "react-icons/fa";
 
@@ -13,6 +13,8 @@ export default function Home(){
             </div>
 
             <Container_hero/>
+            
+            <Container_howtouse/>
             
             <section id="howtouse">
                 <div className="container">
