@@ -1,9 +1,8 @@
 import React from 'react';
 import Navigation from '../components/common/navigation';
+import Container_hero from '../components/container_hero';
 import hero_image from '../assets/images/home_png.png';
-import {Link as LinkR} from 'react-router-dom';
 import { FaBootstrap, FaGithub } from "react-icons/fa";
-
 
 export default function Home(){
     return (
@@ -13,30 +12,7 @@ export default function Home(){
                 <Navigation/>
             </div>
 
-
-            <section id="home" className="container-hero my-0 py-0">
-           
-                
-                <div className="navbar-replace">
-                    
-                </div>
-
-                <div className="container my-4">
-                     <div className="row">
-                        <div className="col my-5 mx-3 text-center">
-                            <div className="mb-5">
-                                <h1>Make <span>Unit Selection</span> Easy</h1>
-                                <h4>Schedule your time at Monash University and make selecting units stress-free.</h4>
-                            </div>
-                            <div id="hero-btn" className="mt-5">
-                                <LinkR to="/selection">
-                                <button id="hero-btn" className="btn btn-primary btn-lg my-3" type="button">Making New Schedule</button>
-                                </LinkR>
-                            </div>
-                        </div>
-                     </div>
-                </div>
-            </section>
+            <Container_hero/>
             
             <section id="howtouse">
                 <div className="container">
