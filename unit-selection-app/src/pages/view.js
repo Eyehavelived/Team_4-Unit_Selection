@@ -109,24 +109,23 @@ export default function View() {
   window.myglobal = scheduledUnits.slice(1, scheduledUnits.length);
   console.log(window.myglobal);
   return (
-    <div>
+    <div className="app-container">
       <NavigationApp page={page} />
-      <div className="container">
-        <div className="row">
-          <div className="text-center">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={handlePrint}
-            >
-              Click Here to download PDF <BiPrinter />
-            </button>
-          </div>
-          <div className="height-10 overflow-auto">
-            <ComponentToPrint ref={componentRef} />
-          </div>
-        </div>
+     
+      <div className="text-center my-4">
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={handlePrint}
+        >
+          Click Here to download PDF <BiPrinter />
+        </button>
       </div>
+          
+      <div className="height-70 overflow-auto">
+        <ComponentToPrint ref={componentRef} />
+      </div>
+       
     </div>
   );
 }
