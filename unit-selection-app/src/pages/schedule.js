@@ -205,7 +205,7 @@ export default function Selection(){
                         </Droppable>
                 </Col>
 
-                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto height-70">
+                <Col md={10} className="grey-bg py-2 px-1 row flex-row flex-nowrap overflow-auto height-70">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
