@@ -62,7 +62,7 @@ type Specialisation{
 }
 
 type Course{
-    courseCode:Int
+    courseCode:String
     courseName:String
 }
 type Academic{
