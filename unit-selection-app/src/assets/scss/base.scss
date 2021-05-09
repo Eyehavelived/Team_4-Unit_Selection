@@ -102,8 +102,25 @@ label:hover {
   background:white;
 }
 
+.lightgrey-bg{
+  background:$secondary-light;
+}
+
 .grey-bg{
   background:$secondary;
+}
+
+//Text Colour
+.primary-text{
+  color: $primary;
+}
+
+.secondary-text{
+  color: $secondary;
+}
+
+.secondary-light-text{
+  color: $secondary-light;
 }
 
 //Card size
