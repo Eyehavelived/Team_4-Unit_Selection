@@ -52,8 +52,8 @@ const Container_howtouse = () => {
                     </Col>
                     <Col md={6} className="text-center">gif or video here</Col>
                 </Row>
-                <div className="spacing-20"></div>
             </div>
+            <div className="spacing-20"></div>
         </section>
     )
 }

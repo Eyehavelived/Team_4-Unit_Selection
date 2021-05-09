@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from '../components/common/navigation';
 import Container_hero from '../components/container_hero';
 import Container_howtouse from '../components/container_howtouse';
+import Container_about from '../components/container_about';
 import hero_image from '../assets/images/home_png.png';
 import { FaBootstrap, FaGithub } from "react-icons/fa";
 
@@ -17,31 +18,7 @@ export default function Home(){
             
             <Container_howtouse/>
             
-        
-
-            <section id="about" className="container-about my-0 py-0">
-                <div className="container">
-                    <div className="row py-5 mx-3">
-                        <h1>ABOUT US</h1>
-                    </div>
-                    <div className="row pb-5">
-                        <div className="col-3">
-                            <img src={hero_image}/>
-                        </div>
-                        <div className="col-2"></div>
-                        <div className="col-7 py-3 px-5 about-custom">
-                            <h4 className="pt-3">The Project</h4>
-                            <br/>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac venenatis tellus. Nunc blandit risus vel suscipit sodales. Nullam vitae lorem nisi. In placerat quis nisi sagittis efficitur. Quisque hendrerit ante sapien, nec hendrerit augue viverra luctus. Sed vestibulum nibh sit amet sapien laoreet feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                            <br/>
-                            <hr/>
-                            <h4>The Group</h4>
-                            <br/>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac venenatis tellus. Nunc blandit risus vel suscipit sodales. Nullam vitae lorem nisi. In placerat quis nisi sagittis efficitur. Quisque hendrerit ante sapien, nec hendrerit augue viverra luctus. Sed vestibulum nibh sit amet sapien laoreet feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                        </div>
-                    </div>               
-                </div>
-            </section>
+            <Container_about/>
             
             <section className="container-contact my-0 py-0">
                 <div className="row py-4 mx-3">
