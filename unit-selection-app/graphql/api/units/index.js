@@ -38,6 +38,8 @@ const units = () =>
     .leftJoin('course', 'course_core_units.courseCode', 'course.courseCode')
     .leftJoin('academic_focus_units', 'unit.unitCode', 'academic_focus_units.unitCode')
     .leftJoin('academic_focus', 'academic_focus_units.mmId', 'academic_focus.id')
+    .leftJoin('specialisation_units','unit.unitCode','specialisation_units.unitCode')
+    .leftJoin('specialisation','specialisation_units.specialisationId','specialisation.id')
     .groupBy('unit.unitCode')
     // TODO: unit_assessments, contacts, other_requisite
 
@@ -118,7 +120,7 @@ const filters = (options) => {
         whereCalls.push(["whereIn", 'unit.unitLocationId', options["location"].map(val => parseInt(val))])
     }
     if(options["specialisation"].length>0){
-        whereCalls.push(["whereIn",'specialisation_units.specialisationId',options["specialisation"].map(val=>parseInt(val))])
+        whereCalls.push(["whereIn",'specialisation.id',options["specialisation"].map(val=>parseInt(val))])
     }
     if(options["course"].length>0){
         whereCalls.push(["whereIn",'course.courseCode',options["course"].map(val=>parseInt(val))])
