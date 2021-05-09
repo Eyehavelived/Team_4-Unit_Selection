@@ -29,12 +29,14 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-const semesterTypes = ["1","winter","2","summera","summerb"];
+const semesterTypes = ["1","Winter","2","Summer A","Summer B"];
 
 export default function Selection(){
     const page = "Schedule"
 
     const SELECTEDUNITS = "selectedUnits"
+
+    //const [active, setActive] = useState(true);
 
     const [selectedUnits] = useState(()=>{
         const localData = localStorage.getItem('selectedUnits');
@@ -65,8 +67,8 @@ export default function Selection(){
             return scheduleList
         }else{
             return [{listId:"selectedUnits",
-                    year: "none",
-                    sem:"none",
+                    year: 0,
+                    sem: 0,
                     units:selectedUnits}];
         }
         
@@ -170,14 +172,18 @@ export default function Selection(){
     
 
     return (
-        <div className="overflow-hidden">
+        <div className="app-container ">
             <NavigationApp page={page}/>
-
+            <Row className="mb-3">
+                <Col md={6}>
+                    <ScheduleForm onAdd={addTeachingPeriod}/>
+                </Col> 
+            </Row>
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Row>
-                <Col md={2} className="white-bg ms-4 py-3 height-80">
+                <Col md={2} className="white-bg py-3 height-70">
                     <div className="row pb-3 mx-auto">
-                        <h5>Selected Units</h5>
+                        <h6>Selected Units</h6>
                     </div>
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
@@ -199,22 +205,16 @@ export default function Selection(){
                         </Droppable>
                 </Col>
 
-                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto position-relative height-80">
+                <Col md={10} className="grey-bg py-2 px-1 row flex-row flex-nowrap overflow-auto height-70">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
                         tp={tp} onDelete={deleteTeachingPeriod}/>
                     ))}
-                    
-                    <div id="floating-btn" className="position-absolute bottom-0 mb-2 d-inline-flex">
-                        <button className="btn circle-btn fab btn-primary mb-2" data-toggle="collapse"><IoIosAdd size={30}/></button>
-                        <div id="hidden-form" className="mt-1 ms-4">
-                            <ScheduleForm onAdd={addTeachingPeriod}/>
-                        </div>
-                    </div>
                 </Col>
             </Row>
             </DragDropContext>
+            
         </div> 
     )
 }
