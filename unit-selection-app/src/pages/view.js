@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { NavigationApp } from "../components/common/navigation";
 import { UnitListCard } from "../components/common/unitListCard";
-//import UnitCard from "../components/unitCardView";
 import { useReactToPrint } from "react-to-print";
 import { BiPrinter } from "react-icons/bi";
 import { Row, Col } from "react-bootstrap";
