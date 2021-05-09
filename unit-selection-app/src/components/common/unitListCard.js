@@ -27,7 +27,7 @@ function UnitListCard(props){
             <div className="pt-2 px-2">
                 <h6>{props.code}</h6>
                 <p>{props.name}</p>
-                <p className="mb-2">temporary semester</p>
+                <p className="mb-2">{props.sem}</p>
             </div>
         </div>
     )
