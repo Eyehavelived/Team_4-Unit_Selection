@@ -17,7 +17,7 @@ export default function CreateArea(props) {
           <li>
             {/* <input onClick={submitUnit(unit)} type="checkbox"
               id={unit.unitCode} className="mt-1"/> */}
-            <button className="small-size mt-1" onClick={submitUnit(unit)} id={unit.unitCode}><BsEye size={20}/></button>
+            <button className="small-size mt-1" onClick={submitUnit(unit)} id={unit.unitCode}><BsEye size={15}/></button>
             <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}
             </label>
           </li>
