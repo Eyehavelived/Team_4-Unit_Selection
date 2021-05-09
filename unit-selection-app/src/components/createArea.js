@@ -11,19 +11,17 @@ export default function CreateArea(props) {
     }
   
     return (
-      <ul className="list-unstyled my-1">
+      <ul className="list-unstyled my-1 list-click-hover">
         {props.unitList.map((unit)=>
         <div className="mb-2">
-          <li>
-            {/* <input onClick={submitUnit(unit)} type="checkbox"
-              id={unit.unitCode} className="mt-1"/> */}
-            <button className="small-size mt-1" onClick={submitUnit(unit)} id={unit.unitCode}><BsEye size={15}/></button>
-            <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}
-            </label>
+          <li onClick={submitUnit(unit)} >
+            <BsEye size={15}/>
+            <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}</label>
+            <div className="ms-4">
+            <h7>{unit.unitName}</h7>
+            </div>
           </li>
-          <div className="ms-4">
-          <h7>{unit.unitName}</h7>
-          </div>
+          
           </div>
         )}
       </ul>
