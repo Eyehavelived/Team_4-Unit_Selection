@@ -74,7 +74,7 @@ class ComponentToPrint extends React.Component {
                     
                     {element.units.length > 0 ? (
                       element.units.map((unitInfo, index2) => (
-                        <Col md={3}>
+                        <Col xs={3}>
                           <UnitListCard
                             code={unitInfo.unitCode}
                             name={unitInfo.unitName}
@@ -118,7 +118,7 @@ export default function View() {
           className="btn btn-primary btn-sm"
           onClick={handlePrint}
         >
-          Click Here to download PDF <BiPrinter />
+          Click Here to download PDF <BiPrinter/>
         </button>
       </div>
           
