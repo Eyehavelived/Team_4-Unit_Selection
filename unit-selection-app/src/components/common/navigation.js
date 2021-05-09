@@ -22,20 +22,22 @@ const navLinks = [
 const Navigation = ()=>{
 
     return (
-    <nav id="nav-override" className="navbar navbar-expand-lg px-3">
-        <span className="custom-logo navbar-brand"><LinkR to='/'>M Unit Selection</LinkR></span>
+    <div className="my-3 mx-4">  
+        <nav id="nav-override" className="navbar navbar-expand-lg">
+        <span className="custom-logo navbar-brand"><LinkR to='/'>MUSe</LinkR></span>
 
-        <ul className="navbar-nav">
-            { navLinks.map((link,index)=>(
-                <li key={index} className="nav-item">
-                     <a className="nav-link"><LinkS to={link.path} offset={-70} smooth={true} duration={50}>{link.title}</LinkS></a>
-                 </li>
-             ))}
-        </ul>
+            <ul className="navbar-nav">
+                { navLinks.map((link,index)=>(
+                    <li key={index} className="nav-item">
+                        <a className="nav-link"><LinkS to={link.path} offset={-70} smooth={true} duration={50}>{link.title}</LinkS></a>
+                    </li>
+                ))}
+            </ul>
 
-        <button className="ms-auto btn btn-primary navbar-btn"><LinkR to="/selection">Start Scheduling {`>`}</LinkR></button>
-            
-    </nav>)
+            <button className="ms-auto btn btn-primary btn-sm navbar-btn"><LinkR to="/selection">Start Scheduling {`>`}</LinkR></button>
+        </nav>
+    </div>
+    )
 }
 
 const navLinksSchedule = [
@@ -71,6 +73,16 @@ const navLinksSchedule = [
 
 import React from 'react'
 
+<<<<<<< HEAD
+=======
+    return (
+    <div className="my-3 mx-4"> 
+        <nav id="nav-override" className="navbar navbar-expand-lg">
+            <span className="custom-logo navbar-brand">
+                <GiHamburgerMenu className="me-3 mb-1"  onClick={props.onSide}/>
+                <LinkR to='/'>MUSe</LinkR>
+            </span>
+>>>>>>> 8db3411960bb531e603200ec9c14b5ed8961ff1e
 
 
 const NavigationApp = (props)=>{
@@ -78,7 +90,7 @@ const NavigationApp = (props)=>{
     return (
     <div className="mt-3">  
         <nav id="nav-override" className="navbar navbar-expand-lg">
-            <span className="custom-logo navbar-brand"><LinkR to='/'>M Unit Selection</LinkR></span>
+            <span className="custom-logo navbar-brand"><LinkR to='/'>MUSe</LinkR></span>
 
             <ul className="navbar-nav ms-auto">
                 { navLinksSchedule.map((link,index)=>(

@@ -1,33 +1,31 @@
-#hero-btn{
-    margin-top: 10vh!important; 
+#home{
+    span{
+        color: $primary;
+    }
 }
 
-.container-nav{
-    background-color: $offwhite;
-
+#about{
+    img{
+        height: 30vh;
+    }
 }
 
-.navbar-replace{
-    background-color: $offwhite;
+#contact{
+    background-color: $primary;
+    color: $offwhite;
+}
+
+.spacing-20{
+    //background-color: $offwhite;
     height: 20vh;
 }
 
-.container-about{
-    background-color: $secondary-light;
-
-    h1{
-        color: $secondary;
-        text-decoration: underline;
-    }
+.title-deco{
+    height: 2.5rem;
+    width: .3rem;
+    background-color: $primary;
 }
 
-.container-howto{
-    background-color: $secondary-dark;
-    h1{
-        color: white;
-        text-decoration: underline;
-    }
-}
 
 .container-contact{
     background-color: $primary;
@@ -37,15 +35,6 @@
     }
 }
 
-.about-custom{
-    background-color: white;
-}
-
-.carousel-item{
-    height: 32rem;
-    background: $secondary;
-    color:white;
-}
 
 #btn-override{
     button{
