@@ -37,6 +37,8 @@ type Unit {
     unitProhibitions: [String]
     locationNames: [String]
     teachingPeriods: [String]
+    courseNames: [String]
+    majorMinorNames: [String]
 }
 
 # -----------------------------

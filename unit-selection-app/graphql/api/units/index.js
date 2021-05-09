@@ -21,6 +21,8 @@ const units = () =>
         db.raw('GROUP_CONCAT(unit_corequisites.coReqUnitCode) as unitCoRequisites'),
         db.raw('GROUP_CONCAT(teaching_location.locationName) as locationNames'),
         db.raw('GROUP_CONCAT(teaching_period.periodName) as teachingPeriodNames'),
+        db.raw('GROUP_CONCAT(academic_focus.mmName) as majorMinorNames'),
+        db.raw('GROUP_CONCAT(course.courseName) as courseNames')
     )
     .from('unit')
     .leftJoin('unit_prerequisites', 'unit.unitCode', 'unit_prerequisites.unitCode')
@@ -32,6 +34,10 @@ const units = () =>
     .leftJoin('teaching_period', 'unit_teaching_periods.tpId', 'teaching_period.id')
     .leftJoin('faculty', 'unitFacultyId', 'faculty.id')
     .leftJoin('degree_type', 'unitDegreeTypeId', 'degree_type.id')
+    .leftJoin('course_core_units','unit.unitCode', 'course_core_units.unitCode')
+    .leftJoin('course', 'course_core_units.courseCode', 'course.courseCode')
+    .leftJoin('academic_focus_units', 'unit.unitCode', 'academic_focus_units.unitCode')
+    .leftJoin('academic_focus', 'academic_focus_units.mmId', 'academic_focus.id')
     .groupBy('unit.unitCode')
     // TODO: unit_assessments, contacts, other_requisite
 

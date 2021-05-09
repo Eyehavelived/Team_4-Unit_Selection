@@ -16,12 +16,14 @@ const getUnitsCurry = cb =>
         
         // From the query, we get locations as a single string "Malaysia,Clayton,Caulfield"
         // This splits them into list of strings
-        return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, ...rest}) => ({
+        return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, courseNames, majorMinorNames, ...rest}) => ({
             locationNames: [...new Set(locationNames.split(","))],
             unitPreRequisites: [...new Set(unitPreRequisites ? unitPreRequisites.split(",") : "")],
             unitCoRequisites: [...new Set(unitCoRequisites ? unitCoRequisites.split(",") : "")],
             unitProhibitions: [...new Set(unitProhibitions ? unitProhibitions.split(",") : "")],
             teachingPeriods: [...new Set(teachingPeriodNames.split(","))],
+            courseNames: [...new Set(courseNames ? courseNames.split(",") : "")],
+            majorMinorNames: [...new Set(majorMinorNames ? majorMinorNames.split(",") : "")],
             ...rest
         }))
     }
