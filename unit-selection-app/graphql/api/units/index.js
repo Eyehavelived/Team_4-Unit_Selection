@@ -22,7 +22,8 @@ const units = () =>
         db.raw('GROUP_CONCAT(teaching_location.locationName) as locationNames'),
         db.raw('GROUP_CONCAT(teaching_period.periodName) as teachingPeriodNames'),
         db.raw('GROUP_CONCAT(academic_focus.mmName) as majorMinorNames'),
-        db.raw('GROUP_CONCAT(course.courseName) as courseNames')
+        db.raw('GROUP_CONCAT(course.courseName) as courseNames'),
+        db.raw('GROUP_CONCAT(specialisation.specName) as specNames'),
     )
     .from('unit')
     .leftJoin('unit_prerequisites', 'unit.unitCode', 'unit_prerequisites.unitCode')
