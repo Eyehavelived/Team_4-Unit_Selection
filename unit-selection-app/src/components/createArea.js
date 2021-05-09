@@ -18,7 +18,7 @@ export default function CreateArea(props) {
             <BsEye size={15}/>
             <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}</label>
             <div className="ms-4">
-            <h7>{unit.unitName}</h7>
+            <p>{unit.unitName}</p>
             </div>
           </li>
           
