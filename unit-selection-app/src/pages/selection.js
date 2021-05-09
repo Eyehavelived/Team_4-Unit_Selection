@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {NavigationSelection} from "../components/common/navigation";
+import {NavigationApp} from "../components/common/navigation";
 import {Row, Col} from "react-bootstrap";
 import ToggleDiv from "../components/toggle";
 import CreateArea from "../components/createArea";
@@ -292,19 +292,14 @@ export default function Selection() {
     }))
   }
 
-  const [sidebar,setSidebar] = useState(true);
 
-  function showSideBar(){
-    setSidebar(prevStatus=>!prevStatus);
-  }
-  
   return (
-    <div className="overflow-hidden">
-      <NavigationSelection onSide={showSideBar} page={page}/>
+    <div className="app-container overflow-hidden">
+      <NavigationApp page={page}/>
 
-      <Row>
-        {sidebar &&
-          <Col md={2} className="white-bg height-80 ms-5 py-2 px-2">
+      <Row className="mt-2">
+        
+          <Col md={2} className="white-bg height-80 py-2 px-2">
             <form onSubmit={handleSubmitOptionsFilter}>
               <div className="height-45 overflow-auto">
                 <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleToggleOptions}/>
@@ -321,9 +316,9 @@ export default function Selection() {
               <button className="btn btn-secondary mt-2" type="submit" value="submit">Search</button>
             </form>
           </Col>
-        }
+        
 
-          <Col md={2} className="height-80 ms-3">
+          <Col md={2} className="height-80">
             <div className="white-bg height-40 py-2 px-2">
               <u><h6>Units</h6></u>
               <div className="height-30 overflow-auto">
@@ -344,8 +339,8 @@ export default function Selection() {
             </div>
           </Col>
 
-          <Col md={sidebar?7:9}>
-            <div className="grey-bg height-80 ms-3 py-2 px-1 row flex-row flex-nowrap overflow-auto">
+          <Col md={8}>
+            <div className="grey-bg height-80 py-2 px-1 row flex-row flex-nowrap overflow-auto">
                 {
                   units.length > 0 && (
                   units.map((unit)=>

@@ -1,10 +1,9 @@
 import React from 'react';
-import Navigation from '../components/common/navigation';
+import {Navigation} from '../components/common/navigation';
 import Container_hero from '../components/container_hero';
 import Container_howtouse from '../components/container_howtouse';
 import Container_about from '../components/container_about';
 import Container_contact from '../components/container_contact';
-import { FaBootstrap, FaGithub } from "react-icons/fa";
 
 export default function Home(){
     return (
