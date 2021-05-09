@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
 import {Link as LinkR} from 'react-router-dom';
 import {Link as LinkS} from 'react-scroll';
-import {GiHamburgerMenu} from "react-icons/gi";
+
+
 
 const navLinks = [
     {
@@ -19,7 +19,7 @@ const navLinks = [
     }
 ]
 
-export default function Navigation(){
+const Navigation = ()=>{
 
     return (
     <nav id="nav-override" className="navbar navbar-expand-lg px-3">
@@ -69,30 +69,11 @@ const navLinksSchedule = [
     }
 ]
 
-function NavigationSelection(props){
+import React from 'react'
 
-    return (
-    <div className="my-3 mx-4"> 
-        <nav id="nav-override" className="navbar navbar-expand-lg">
-            <span className="custom-logo navbar-brand">
-                <GiHamburgerMenu className="me-3 mb-1"  onClick={props.onSide}/>
-                <LinkR to='/'>M Unit Selection</LinkR>
-            </span>
 
-            <ul className="navbar-nav ms-auto">
-                { navLinksSchedule.map((link,index)=>(
-                    <li key={index} className="nav-item">
-                        <a className="nav-link"><LinkR style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</LinkR></a>
-                    </li>
-                ))}
-            </ul>
-        
-        </nav>
-    </div>
-    )
-}
 
-function NavigationApp(props){
+const NavigationApp = (props)=>{
 
     return (
     <div className="mt-3">  
@@ -112,4 +93,4 @@ function NavigationApp(props){
 }
 
 
-export {NavigationSelection, NavigationApp};
+export {Navigation, NavigationApp};

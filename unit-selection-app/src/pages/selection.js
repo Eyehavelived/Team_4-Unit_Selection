@@ -291,13 +291,6 @@ export default function Selection() {
     }))
   }
 
-  /*
-  const [sidebar,setSidebar] = useState(true);
-
-  function showSideBar(){
-    setSidebar(prevStatus=>!prevStatus);
-  }
-  */
 
   return (
     <div className="app-container overflow-hidden">
