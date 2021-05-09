@@ -6,8 +6,13 @@
 
 #about{
     img{
-        height: 35vh;
+        height: 30vh;
     }
+}
+
+#contact{
+    background-color: $primary;
+    color: $offwhite;
 }
 
 .spacing-20{
@@ -21,22 +26,6 @@
     background-color: $primary;
 }
 
-.container-about{
-    background-color: $secondary-light;
-
-    h1{
-        color: $secondary;
-        text-decoration: underline;
-    }
-}
-
-.container-howto{
-    background-color: $secondary-dark;
-    h1{
-        color: white;
-        text-decoration: underline;
-    }
-}
 
 .container-contact{
     background-color: $primary;
@@ -46,15 +35,6 @@
     }
 }
 
-.about-custom{
-    background-color: white;
-}
-
-.carousel-item{
-    height: 32rem;
-    background: $secondary;
-    color:white;
-}
 
 #btn-override{
     button{

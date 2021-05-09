@@ -5,6 +5,7 @@ const Container_howtouse = () => {
     return (
         <section id="howtouse" className="">
             <div className="container">
+                <hr/>
                 <Row className="py-5 mx-3">
                     <h1 className="fw-bold secondary-text">HOW TO USE</h1>
                 </Row>
@@ -22,10 +23,10 @@ const Container_howtouse = () => {
                             <li><h6>Go to schedule page once you’re done choosing your units!</h6></li>
                         </ul>
                     </Col>
-                    <Col md={6} className="text-center">gif or video here</Col>
+                    <Col md={6} className="text-center align-self-center">gif or video here</Col>
                 </Row>
                 <Row className="my-5">
-                    <Col md={6} className="text-center">gif or video here</Col>
+                    <Col md={6} className="text-center align-self-center">gif or video here</Col>
                     <Col md={6}>
                         <div className="d-inline-flex mb-3">
                             <div className="title-deco me-1"></div>
@@ -50,7 +51,7 @@ const Container_howtouse = () => {
                             <li><h6>Review your final schedule and save the pdf by clicking the “Export PDF button”</h6></li>
                         </ul>
                     </Col>
-                    <Col md={6} className="text-center">gif or video here</Col>
+                    <Col md={6} className="text-center align-self-center">gif or video here</Col>
                 </Row>
             </div>
             <div className="spacing-20"></div>
