@@ -24,7 +24,7 @@ const Navigation = ()=>{
     return (
     <div className="my-3 mx-4">  
         <nav id="nav-override" className="navbar navbar-expand-lg">
-        <span className="custom-logo navbar-brand"><LinkR to='/'>MUSe</LinkR></span>
+        <span className="custom-logo navbar-brand"><LinkS to='home'>MUSe</LinkS></span>
 
             <ul className="navbar-nav">
                 { navLinks.map((link,index)=>(
@@ -33,8 +33,11 @@ const Navigation = ()=>{
                     </li>
                 ))}
             </ul>
-
-            <button className="ms-auto btn btn-primary btn-sm navbar-btn"><LinkR to="/selection">Start Scheduling {`>`}</LinkR></button>
+            <div className="ms-auto">
+                <LinkR to="/selection">
+                <button className=" btn btn-primary btn-md navbar-btn">Start Scheduling {`>`}</button>
+                </LinkR>
+            </div>
         </nav>
     </div>
     )
@@ -70,19 +73,6 @@ const navLinksSchedule = [
         path:'/view'
     }
 ]
-
-import React from 'react'
-
-<<<<<<< HEAD
-=======
-    return (
-    <div className="my-3 mx-4"> 
-        <nav id="nav-override" className="navbar navbar-expand-lg">
-            <span className="custom-logo navbar-brand">
-                <GiHamburgerMenu className="me-3 mb-1"  onClick={props.onSide}/>
-                <LinkR to='/'>MUSe</LinkR>
-            </span>
->>>>>>> 8db3411960bb531e603200ec9c14b5ed8961ff1e
 
 
 const NavigationApp = (props)=>{

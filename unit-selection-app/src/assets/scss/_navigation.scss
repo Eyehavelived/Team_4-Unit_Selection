@@ -13,6 +13,9 @@
 
     span a{
         color: black;
+        &:hover{
+            cursor:pointer;
+        }
     }
 
     button a{
