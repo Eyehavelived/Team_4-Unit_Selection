@@ -1,22 +1,9 @@
 import React from "react"
+import { BsEye } from "react-icons/bs";
 
 
 //This method is used to display units in the Units column after we filter our choice
-export default function CreateArea(props) {
-  /*
-    const unit={
-      unitCode: props.unitCode,
-      unitName:props.unitName,
-      facultyName:props.facultyName,
-      unitType:props.unitType,
-      synopsis:props.synopsis,
-      workloadReq:props.workloadReq,
-      year:props.year,
-      semester:props.semester
-    };
-    */
-
-    
+export default function CreateArea(props) {    
     //When we click the checkbox,it will submit our request and display more information in our comparing window
     const submitUnit = unit => event => {
       props.onAdd(unit);
@@ -24,16 +11,17 @@ export default function CreateArea(props) {
     }
   
     return (
-      <ul className="list-unstyled my-1">
+      <ul className="list-unstyled my-1 list-click-hover">
         {props.unitList.map((unit)=>
         <div className="mb-2">
-          <li>
-            <input onClick={submitUnit(unit)} type="checkbox"
-              id={unit.unitCode} className="mt-1"/>
-            <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}
-            </label>
+          <li onClick={submitUnit(unit)} >
+            <BsEye size={15}/>
+            <label for={unit.unitCode} className="ms-2 my-0">{unit.unitCode}</label>
+            <div className="ms-4">
+            <h7>{unit.unitName}</h7>
+            </div>
           </li>
-          <h7>{unit.unitName}</h7>
+          
           </div>
         )}
       </ul>
