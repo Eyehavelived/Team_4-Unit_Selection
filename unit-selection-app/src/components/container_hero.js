@@ -5,7 +5,7 @@ import {Row, Col} from "react-bootstrap";
 const Container_hero = () => {
     return (
         <section id="home">
-            <div className="navbar-replace"></div>
+            <div className="spacing-20"></div>
             <div className="container my-4">
                 <Row>
                     <Col md={3}></Col>

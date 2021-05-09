@@ -1,16 +1,18 @@
-#hero-btn{
-    margin-top: 10vh!important; 
-}
-
 #home{
     span{
         color: $primary;
     }
 }
 
-.navbar-replace{
-    background-color: $offwhite;
+.spacing-20{
+    //background-color: $offwhite;
     height: 20vh;
+}
+
+.title-deco{
+    height: 2.5rem;
+    width: .3rem;
+    background-color: $primary;
 }
 
 .container-about{

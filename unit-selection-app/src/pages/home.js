@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from '../components/common/navigation';
-import {Container_hero,Container_howtouse} from '../components';
+import Container_hero from '../components/container_hero';
+import Container_howtouse from '../components/container_howtouse';
 import hero_image from '../assets/images/home_png.png';
 import { FaBootstrap, FaGithub } from "react-icons/fa";
 
@@ -16,38 +17,7 @@ export default function Home(){
             
             <Container_howtouse/>
             
-            <section id="howtouse">
-                <div className="container">
-                    <div className="row py-5 mx-3">
-                        <h1>HOW TO USE</h1>
-                    </div>
-                    <div id="carousel-id" className="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-id" data-slide-to="1"></li>
-                                <li data-target="#carousel-id" data-slide-to="2"></li>
-                            </ol>
-                            <div className="carousel-inner">
-                                <div class="carousel-item active">
-                                </div>
-                                <div class="carousel-item ">
-                                </div>
-                                <div class="carousel-item ">
-                                </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#carousel-id" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carousel-id" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                    //possibly video embbed              
-                </div>
-                
-            </section>
+        
 
             <section id="about" className="container-about my-0 py-0">
                 <div className="container">
