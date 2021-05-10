@@ -1,154 +1,31 @@
-/*
-
-.nav{
-    height: 10vh;
-}
-
-.container-hero{
-    max-width: 100%;
-}
-
-.container-about{
-    max-width: 100%;
-    background-color: $secondary-col-1;
-}
-
-.container-howto{
-    max-width: 100%;
-    background-color: $secondary-col-2;
-}
-
-.about-heading{
-    color: white;
-}
-
-.section-heading{
-    text-decoration: underline;
-    padding: 0px 65px;
-}
-
-.about-content{
-    padding: 0px 65px;
-    display: flex;
-    justify-content: space-between;
-
-    &:img{
-        width: 400px;
-        height: 350px;
+#home{
+    span{
+        color: $primary;
     }
 }
 
-.hero-text{
-    max-width: 60%;
-}
-
-.about-text{
-    background: white;
-    max-width: 50%;
-    padding: 10px 65px;
-}
-
-.section-main{
-    box-sizing: border-box;
-    padding: 6vh 6vw;
-}
-
-.hero-content{
-    padding: 0px 4.6vw;
-    display: flex;
-    justify-content: space-between;
-
-    &:img{
-        width: 400px;
-        height: 350px;
+#about{
+    img{
+        height: 30vh;
     }
 }
 
-footer{
-    background: $primary-col-1;
+#contact{
+    background-color: $primary;
+    color: $offwhite;
 }
 
-span{
-    color: $primary-col-1;
+.spacing-20{
+    //background-color: $offwhite;
+    height: 20vh;
 }
 
-.impact-btn{
-    font-size: 31px;
-    margin: 20px 0px;
-    font-weight: bold;
-    background: none;
-    transition: 0.8s;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-
-    
+.title-deco{
+    height: 2.5rem;
+    width: .3rem;
+    background-color: $primary;
 }
 
-.impact-btn:before{
-    background: $primary-col-1;
-    height: 0%;
-    left: 0;
-    position: absolute;
-    transition: 0.8s;
-    width: 100%;
-    z-index: -1;
-    content: "";
-}
-
-.home-fst-btn{
-    color: white;
-
-    &:hover{
-        color: $primary-col-1;
-    }
-
-    &:before{
-        border-radius: 0 0 50% 50%;
-        top: 0;
-        height: 180%;
-    }
-
-    &:hover:before{
-        height: 180%;
-    }
-}
-  
-.home-snd-btn{
-    border: 5px dashed $secondary-col-1;
-    color: $primary-col-1;
-
-    &:hover{
-        color: white
-    }
-
-    &:before{
-        bottom: 0;
-        border-radius: 50% 50% 0 0;
-    }
-
-    &:hover:before{
-        height: 0%;
-    }
-}
-
-*/
-.container-about{
-    background-color: $secondary-dark;
-
-    h1{
-        color: white;
-        text-decoration: underline;
-    }
-}
-
-.container-howto{
-    background-color: $secondary-light;
-    h1{
-        color: $secondary;
-        text-decoration: underline;
-    }
-}
 
 .container-contact{
     background-color: $primary;
@@ -158,15 +35,6 @@ span{
     }
 }
 
-.about-custom{
-    background-color: white;
-}
-
-.carousel-item{
-    height: 32rem;
-    background: $secondary;
-    color:white;
-}
 
 #btn-override{
     button{

@@ -18,7 +18,7 @@ export default function ScheduleCard(props){
                 <hr/>
                 <Droppable droppableId={props.tp.listId}>
                     {(provided)=>(
-                        <div className="height-50" {...provided.droppableProps} ref={provided.innerRef}>
+                        <div className="height-50 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
                         {props.tp.units.map((unit,index)=>(
                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                 {(provided)=>(
