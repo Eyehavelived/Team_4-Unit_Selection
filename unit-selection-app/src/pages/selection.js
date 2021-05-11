@@ -6,8 +6,8 @@ import CreateArea from "../components/createArea";
 import UnitCard from "../components/unitCard";
 import {UnitListCardRemove} from "../components/common/unitListCard";
 import { useLazyQuery, gql, useQuery } from "@apollo/client";
-
-
+import { useHistory } from "react-router-dom";
+import {BsSearch}from "react-icons/bs";
 function getToggleId(itemId, itemName) {
   const idDict = {
     "Faculty": "1",
@@ -175,6 +175,9 @@ function TeachingLocations() {
 }
 
 export default function Selection() {
+  const history = useHistory();
+  const navigateTo = () => history.push('/schedule');
+
   const page = "Selection"; 
 
   const [searchRequest,setSearchRequest]=useState("");
@@ -291,8 +294,6 @@ export default function Selection() {
       location: (name === "Location") ? (checked) ? [...location, optionId]: location.filter(element => element !== optionId) : location
     }))
   }
-
-
   return (
     <div className="app-container overflow-hidden">
       <NavigationApp page={page}/>
@@ -300,6 +301,16 @@ export default function Selection() {
       <Row className="mt-2">
         
           <Col md={2} className="white-bg height-80 py-2 px-2">
+            <h6 className="mt-2">Unit Code Search</h6> 
+            <form onSubmit={handleSearchRequest}>
+              <div className="d-flex flex-row">
+                <input id="searchInput" type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
+                <button className="btn btn-secondary btn-sm ms-2" type="submit" value="submit"><BsSearch/></button>
+              </div>
+            </form>
+   
+            
+            <hr/>
             <form onSubmit={handleSubmitOptionsFilter}>
               <div className="height-45 overflow-auto">
                 <ToggleDiv name="Faculty" data={Faculties()} onSelect={handleToggleOptions}/>
@@ -307,14 +318,12 @@ export default function Selection() {
                 <ToggleDiv name="Semester" data={TeachingPeriods()} onSelect={handleToggleOptions}/>
                 <ToggleDiv name="Location" data={TeachingLocations()} onSelect={handleToggleOptions}/>
               </div>
-              <button className="btn btn-secondary mt-3">Show Filtered Result</button>
+              <button className="btn btn-secondary mt-2">Show Filtered Result</button>
+              
             </form> 
-            <hr/>
-            <h6 className="mt-2">Unit Code Search</h6> 
-            <form onSubmit={handleSearchRequest}>
-              <input type="text"  name="unitCode" value={searchRequest} onChange={e=>setSearchRequest(e.target.value)}></input>
-              <button className="btn btn-secondary mt-2" type="submit" value="submit">Search</button>
-            </form>
+            <button className="btn mt-2 btn-primary" onClick={navigateTo}
+             style={selectedUnits.length>0?{background:"#0275d8" }:{background:"grey"}} type="button">Go to Schedule {'>'}</button>
+           
           </Col>
         
 
@@ -367,3 +376,5 @@ export default function Selection() {
     </div>
   );
 }
+
+
