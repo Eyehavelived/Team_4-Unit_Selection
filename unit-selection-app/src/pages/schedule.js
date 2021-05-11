@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import {Link as LinkR} from 'react-router-dom';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 import {Row, Col} from "react-bootstrap";
 import {NavigationApp} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
-import {IoIosAdd} from "react-icons/io";
 
 //from react-beautiful-dnd git example
 const reorder = (list, startIndex, endIndex) => {
@@ -181,13 +181,13 @@ export default function Selection(){
             </Row>
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Row>
-                <Col md={2} className="white-bg py-3 height-70">
-                    <div className="row pb-3 mx-auto">
+                <Col md={2} className="d-flex flex-column justify-content-between white-bg py-3 height-70">
+                    <Row className="pb-3">
                         <h6>Selected Units</h6>
-                    </div>
+                    </Row>
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
-                                <div className="overflow-auto height-63" {...provided.droppableProps} ref={provided.innerRef}>
+                                <div className="overflow-auto height-50" {...provided.droppableProps} ref={provided.innerRef}>
                                 { unitList.filter((list)=>{return list.listId === SELECTEDUNITS}).map((su)=>{
                                     return(
                                         su.units.map((unit,index)=>(
@@ -203,6 +203,12 @@ export default function Selection(){
                                 </div>
                             )}
                         </Droppable>
+                    <Row>
+                        <LinkR to="/view">
+                        <button className="btn btn-primary">Go to View {'>'}</button>
+                        </LinkR>
+                    </Row>
+                    
                 </Col>
 
                 <Col md={10} className="grey-bg py-2 px-1 row flex-row flex-nowrap overflow-auto height-70">
