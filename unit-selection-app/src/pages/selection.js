@@ -319,9 +319,10 @@ export default function Selection() {
                 <ToggleDiv name="Location" data={TeachingLocations()} onSelect={handleToggleOptions}/>
               </div>
               <button className="btn btn-secondary mt-2">Show Filtered Result</button>
-              <button className="btn mt-2 btn-primary" onClick={navigateTo}
-             style={selectedUnits.length>0?{background:"#0275d8" }:{background:"grey"}} type="button">Go to Schedule {'>'}</button>
+              
             </form> 
+            <button className="btn mt-2 btn-primary" onClick={navigateTo}
+             style={selectedUnits.length>0?{background:"#0275d8" }:{background:"grey"}} type="button">Go to Schedule {'>'}</button>
            
           </Col>
         
