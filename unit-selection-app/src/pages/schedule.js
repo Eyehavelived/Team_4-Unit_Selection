@@ -205,7 +205,7 @@ export default function Selection(){
                         </Droppable>
                     <Row>
                         <LinkR to="/view">
-                        <button className="btn btn-primary">Go to View {'>'}</button>
+                        <button className="btn btn-primary">View Map {'>'}</button>
                         </LinkR>
                     </Row>
                     
