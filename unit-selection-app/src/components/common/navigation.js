@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
 import {Link as LinkR} from 'react-router-dom';
 import {Link as LinkS} from 'react-scroll';
-import {GiHamburgerMenu} from "react-icons/gi";
+
+
 
 const navLinks = [
     {
@@ -19,23 +19,28 @@ const navLinks = [
     }
 ]
 
-export default function Navigation(){
+const Navigation = ()=>{
 
     return (
-    <nav id="nav-override" className="navbar navbar-expand-lg px-3">
-        <span className="custom-logo navbar-brand"><LinkR to='/'>M Unit Selection</LinkR></span>
+    <div className="my-3 mx-4">  
+        <nav id="nav-override" className="navbar navbar-expand-lg">
+        <span className="custom-logo navbar-brand"><LinkS to='home'>MUSe</LinkS></span>
 
-        <ul className="navbar-nav">
-            { navLinks.map((link,index)=>(
-                <li key={index} className="nav-item">
-                     <a className="nav-link"><LinkS to={link.path} offset={-70} smooth={true} duration={50}>{link.title}</LinkS></a>
-                 </li>
-             ))}
-        </ul>
-
-        <button className="ms-auto btn btn-primary navbar-btn"><LinkR to="/selection">Start Scheduling {`>`}</LinkR></button>
-            
-    </nav>)
+            <ul className="navbar-nav">
+                { navLinks.map((link,index)=>(
+                    <li key={index} className="nav-item">
+                        <a className="nav-link"><LinkS to={link.path} offset={-70} smooth={true} duration={50}>{link.title}</LinkS></a>
+                    </li>
+                ))}
+            </ul>
+            <div className="ms-auto">
+                <LinkR to="/selection">
+                <button className=" btn btn-primary btn-md navbar-btn">Start Scheduling {`>`}</button>
+                </LinkR>
+            </div>
+        </nav>
+    </div>
+    )
 }
 
 const navLinksSchedule = [
@@ -58,46 +63,24 @@ const navLinksSchedule = [
     {
         title:'Schedule',
         path:'/schedule'
-    // },
-    // {
-    //     title: '>', 
-    //     path: '/view'
-    // },
-    // {
-    //     title:'View',
-    //     path:'/view'
+    },
+    {
+        title: '>', 
+        path: '/view'
+    },
+    {
+        title:'View',
+        path:'/view'
     }
 ]
 
-function NavigationSelection(props){
+
+const NavigationApp = (props)=>{
 
     return (
-    <div className="my-3 mx-4"> 
+    <div className="mt-3">  
         <nav id="nav-override" className="navbar navbar-expand-lg">
-            <span className="custom-logo navbar-brand">
-                <GiHamburgerMenu className="me-3 mb-1"  onClick={props.onSide}/>
-                <LinkR to='/'>M Unit Selection</LinkR>
-            </span>
-
-            <ul className="navbar-nav ms-auto">
-                { navLinksSchedule.map((link,index)=>(
-                    <li key={index} className="nav-item">
-                        <a className="nav-link"><LinkR style={link.title==="Selection" ? {color:"#006DAE"}:{}} to={link.path}>{link.title}</LinkR></a>
-                    </li>
-                ))}
-            </ul>
-        
-        </nav>
-    </div>
-    )
-}
-
-function NavigationApp(props){
-
-    return (
-    <div className="my-3 mx-4">  
-        <nav id="nav-override" className="navbar navbar-expand-lg">
-            <span className="custom-logo navbar-brand"><LinkR to='/'>M Unit Selection</LinkR></span>
+            <span className="custom-logo navbar-brand"><LinkR to='/'>MUSe</LinkR></span>
 
             <ul className="navbar-nav ms-auto">
                 { navLinksSchedule.map((link,index)=>(
@@ -112,4 +95,4 @@ function NavigationApp(props){
 }
 
 
-export {NavigationSelection, NavigationApp};
+export {Navigation, NavigationApp};

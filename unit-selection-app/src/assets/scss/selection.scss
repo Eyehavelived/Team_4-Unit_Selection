@@ -27,3 +27,11 @@
   width:70%!important;
 }
 
+//Change hover
+.list-click-hover{
+  li{
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
