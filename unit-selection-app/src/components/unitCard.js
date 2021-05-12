@@ -12,8 +12,6 @@ export default function UnitCard(props){
   
     }
 
-    const semString = null;
-
     return (
         <Card className="card-width mx-1 position-relative">
             <button className="clear-btn-override close-btn-override mt-n2 ms-auto" onClick={handleClick}><IoMdClose/></button>
