@@ -13,9 +13,16 @@
 
     span a{
         color: black;
+        &:hover{
+            cursor:pointer;
+        }
     }
 
     button a{
         color:white;
     }
+}
+
+.bg-offwhite{
+    background-color: $offwhite;
 }

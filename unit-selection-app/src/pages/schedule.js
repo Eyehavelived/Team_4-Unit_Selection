@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import {Link as LinkR} from 'react-router-dom';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 import {Row, Col} from "react-bootstrap";
 import {NavigationApp} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
-import {IoIosAdd} from "react-icons/io";
 
 //from react-beautiful-dnd git example
 const reorder = (list, startIndex, endIndex) => {
@@ -36,7 +36,7 @@ export default function Selection(){
 
     const SELECTEDUNITS = "selectedUnits"
 
-    const [active, setActive] = useState(true);
+    //const [active, setActive] = useState(true);
 
     const [selectedUnits] = useState(()=>{
         const localData = localStorage.getItem('selectedUnits');
@@ -172,18 +172,22 @@ export default function Selection(){
     
 
     return (
-        <div className="overflow-hidden position-relative">
+        <div className="app-container ">
             <NavigationApp page={page}/>
-
+            <Row className="mb-3">
+                <Col md={6}>
+                    <ScheduleForm onAdd={addTeachingPeriod}/>
+                </Col> 
+            </Row>
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Row>
-                <Col md={2} className="white-bg ms-4 py-3 height-80">
-                    <div className="row pb-3 mx-auto">
-                        <h5>Selected Units</h5>
-                    </div>
+                <Col md={2} className="d-flex flex-column justify-content-between white-bg py-3 height-70">
+                    <Row className="pb-3">
+                        <h6>Selected Units</h6>
+                    </Row>
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
-                                <div className="overflow-auto height-63" {...provided.droppableProps} ref={provided.innerRef}>
+                                <div className="overflow-auto height-50" {...provided.droppableProps} ref={provided.innerRef}>
                                 { unitList.filter((list)=>{return list.listId === SELECTEDUNITS}).map((su)=>{
                                     return(
                                         su.units.map((unit,index)=>(
@@ -199,24 +203,24 @@ export default function Selection(){
                                 </div>
                             )}
                         </Droppable>
+                    <Row>
+                        <LinkR to="/view">
+                        <button className="btn btn-primary">View Map {'>'}</button>
+                        </LinkR>
+                    </Row>
+                    
                 </Col>
 
-                <Col md={9} className="grey-bg ms-4 py-2 px-1 row flex-row flex-nowrap overflow-auto height-80">
+                <Col md={10} className="grey-bg py-2 px-1 row flex-row flex-nowrap overflow-auto height-70">
                     
                     {unitList.filter((tp)=>{return tp.listId!==SELECTEDUNITS}).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
                         tp={tp} onDelete={deleteTeachingPeriod}/>
                     ))}
                 </Col>
-                
             </Row>
             </DragDropContext>
-            <div className="position-absolute bottom-0 end-0 mb-1 mx-4 d-flex">
-                <div id="hidden-form" className="mt-1 mx-4" class={active?"hide-form":"show-form"}>
-                    <ScheduleForm onAdd={addTeachingPeriod}/>
-                </div>
-                <button id="show-btn" onClick={()=>{setActive(!active)}} className={active?"floating-btn":"floating-btn-active"}><IoIosAdd size={30}/></button>      
-            </div>
+            
         </div> 
     )
 }

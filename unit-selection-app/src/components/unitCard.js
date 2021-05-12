@@ -23,7 +23,7 @@ export default function UnitCard(props){
                     <h6>Unit Type:</h6>
                     <p>{props.unitType}</p>
                     <h6>Semester:</h6>
-                    <p>{props.semester}</p>
+                    <p>{props.semester.join(", ")}</p>
                     <h6>Location:</h6>
                     <p>{props.location}</p>
                     <h6>Synopsis:</h6>
