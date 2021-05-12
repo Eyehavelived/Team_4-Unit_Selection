@@ -12,6 +12,8 @@ export default function UnitCard(props){
   
     }
 
+    const semString = null;
+
     return (
         <Card className="card-width mx-1 position-relative">
             <button className="clear-btn-override close-btn-override mt-n2 ms-auto" onClick={handleClick}><IoMdClose/></button>
@@ -23,7 +25,7 @@ export default function UnitCard(props){
                     <h6>Unit Type:</h6>
                     <p>{props.unitType}</p>
                     <h6>Semester:</h6>
-                    <p>{props.semester}</p>
+                    <p>{props.semester.join(", ")}</p>
                     <h6>Location:</h6>
                     <p>{props.location}</p>
                     <h6>Synopsis:</h6>
