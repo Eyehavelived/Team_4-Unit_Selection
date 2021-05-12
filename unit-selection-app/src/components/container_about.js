@@ -27,7 +27,7 @@ const Container_about = () => {
                     <Col className="text-center px-2">
                         <img src={profile2} className="rounded-circle"/>
                         <h4 className="fw-bold mt-3">Jing Jie Tan</h4>
-                        <h6 className="primary-text mb-4">---</h6>
+                        <h6 className="primary-text mb-4">Bachelors of Science {'&'} Computer Science</h6>
                         <h6>Responsibilities:</h6>
                         <ul className="list-unstyled">
                             <li> - Back-end development with Apollo Client and GQL</li>
