@@ -104,7 +104,7 @@ export default function Selection(){
         //     }
         // })
         // console.log(outputList)
-        // return outputList;
+        return outputList;
     })
 
     useEffect(()=> {
