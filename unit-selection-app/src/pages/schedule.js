@@ -143,6 +143,7 @@ export default function Selection(){
 
     
     function handleOnDragEnd(result){
+        console.log(result)
         const { source, destination } = result;
 
         if (!destination) {
