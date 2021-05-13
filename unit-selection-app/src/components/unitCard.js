@@ -8,7 +8,7 @@ export default function UnitCard(props){
     }
 
     function handleAddClick(){
-        props.onAddSelected(props.unitCode,props.unitName);
+        props.onAddSelected(props.unitCode,props.unitName,props.semester);
   
     }
 
