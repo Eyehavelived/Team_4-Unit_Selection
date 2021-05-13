@@ -226,7 +226,8 @@ export default function Selection(){
                                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                                 {(provided)=>(
                                                 <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                   <UnitListCard code={unit.unitCode} name={unit.unitName}/>
+                                                    {console.log(unit.unitSem)}
+                                                   <UnitListCard code={unit.unitCode} name={unit.unitName} sem={unit.unitSem}/>
                                                 </div>
                                                 )}
                                             </Draggable>
