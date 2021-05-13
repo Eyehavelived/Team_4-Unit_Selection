@@ -6,6 +6,20 @@ import {NavigationApp} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
+import { gql, useQuery } from "@apollo/client";
+
+const GET_UNITS_WITH_FILTERS = gql`
+    query getUnitsByUnitCodes($optionsString: String) { 
+        getUnitsWithFilters(optionsString: $optionsString) {
+            unitCode
+            unitCoRequisites
+            unitProhibitions
+            unitPreRequisites
+            teachingPeriods
+            isActive
+        }
+    }
+`
 
 //from react-beautiful-dnd git example
 const reorder = (list, startIndex, endIndex) => {
@@ -36,14 +50,17 @@ export default function Selection(){
 
     const SELECTEDUNITS = "selectedUnits"
 
-    //const [active, setActive] = useState(true);
-
     const [selectedUnits] = useState(()=>{
         const localData = localStorage.getItem('selectedUnits');
         return localData ? JSON.parse(localData) : [];
     });
 
-    console.log(selectedUnits)
+    const allUnitCodes = []
+    selectedUnits.forEach(({units}) => 
+        units.forEach(({unitCode}) => 
+            allUnitCodes.push(unitCode)
+        )
+    )
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
@@ -82,28 +99,24 @@ export default function Selection(){
 
         // Validate output list before returning it
         // create a list of all the selected units - this could be refactored... somehow.
-        let allUnits = new Set()
-        outputList.forEach(({units}) => 
-            units.forEach(({unitCode}) => 
-                allUnits.add(unitCode)
-            )
-        )
         
-        // const viewedUnits = new Set()
-        // outputList.map(({listId, year, sem, units}) => {
-        //     let errorMsg = null
-        //     const wrongTP = []
-        //     const wrongPreReq = []
-        //     const wrongCoReq = []
-        //     const wrongProhib = []
-        //     if (listId != "selectedUnits") {
-        //         units.forEach(unit =>
-                    
-        //         )
-        //         console.log(units)
-        //     }
-        // })
-        // console.log(outputList)
+        
+        const viewedUnits = new Set()
+        outputList.map(({listId, year, sem, units}) => {
+            let errorMsg = null
+            const wrongTP = []
+            const wrongPreReq = []
+            const wrongCoReq = []
+            const wrongProhib = []
+            if (listId != "selectedUnits") {
+                const thisSemUnits = units.map(({unitCode}) => unitCode)
+                units.forEach(unit =>
+                    viewedUnits.add(unit)   
+                )
+
+            }
+        })
+        console.log(outputList)
         return outputList;
     })
 
@@ -226,7 +239,6 @@ export default function Selection(){
                                             <Draggable key={unit.unitCode} draggableId={unit.unitCode} index={index}>
                                                 {(provided)=>(
                                                 <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                                    {console.log(unit.unitSem)}
                                                    <UnitListCard code={unit.unitCode} name={unit.unitName} sem={unit.unitSem}/>
                                                 </div>
                                                 )}

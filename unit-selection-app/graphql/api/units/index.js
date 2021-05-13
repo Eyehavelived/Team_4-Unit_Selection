@@ -158,6 +158,10 @@ module.exports = {
             
         }, units()).catch(errorHandler)
     },
+    getUnitsByUnitCodes: async (searchUnitCodes) => 
+        await units()
+            .whereIn('unit.unitCode', searchUnitCodes["searchUnitCodes"])
+            .catch(errorHandler),
     // ----------------------------- Not units
     getFaculties: async () =>
         await db

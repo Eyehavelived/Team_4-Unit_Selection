@@ -3,6 +3,7 @@ type Query {
     getUnit(unitCode: String): [Unit]
     getUnits: [Unit]
     getUnitsWithFilters(optionsString: String): [Unit]
+    getUnitsByUnitCodes(searchUnitCodes: [String]): [Unit]
     # -----
     getFaculties: [Faculty]
     getTeachingPeriods: [TeachingPeriod]

@@ -52,6 +52,9 @@ module.exports = {
             getUnitsWithFilters: getUnitsCurry(
                 async (options) => await PostService.getUnitsWithFilters(JSON.stringify(options))
             ),
+            getUnitsByUnitCodes: getUnitsCurry(
+                async (unitCodes) => await PostService.getUnitsByUnitCodes(unitCodes)
+            ),
 
             // ------------------------------
             getFaculties: getOptionsCurry(
