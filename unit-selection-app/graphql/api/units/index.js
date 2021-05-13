@@ -124,7 +124,7 @@ const filters = (options) => {
         whereCalls.push(["whereIn",'specialisation.id',options["specialisation"].map(val=>parseInt(val))])
     }
     if(options["course"].length>0){
-        whereCalls.push(["whereIn",'course.courseCode',options["course"].map(val=>parseInt(val))])
+        whereCalls.push(["whereIn",'course.courseCode',options["course"]])
     }
     if(options["academic_focus"].length>0){
         whereCalls.push(["whereIn",'academic_focus.id',options["academic_focus"].map(val=>parseInt(val))])

@@ -350,10 +350,11 @@ export default function Selection() {
     });
   }
 
-  function addInSelectedUnit(unitcode,title) {
+  function addInSelectedUnit(unitcode,title,semester) {
     const newUnit = {
       unitCode: unitcode,
       unitName: title,
+      unitSem: semester
     };
     setSelectedUnits((prevSelectedUnits) => {
       for (var i = 0; i < prevSelectedUnits.length; i++) {
