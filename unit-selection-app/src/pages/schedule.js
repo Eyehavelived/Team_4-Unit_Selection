@@ -8,9 +8,9 @@ import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
 import { gql, useQuery } from "@apollo/client";
 
-const GET_UNITS_WITH_FILTERS = gql`
-    query getUnitsByUnitCodes($optionsString: String) { 
-        getUnitsWithFilters(optionsString: $optionsString) {
+const GET_UNITS_BY_UNIT_CODES = gql`
+    query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
+        getUnitsWithFilters(searchUnitCodes: $searchUnitCodes) {
             unitCode
             unitCoRequisites
             unitProhibitions
@@ -55,12 +55,21 @@ export default function Selection(){
         return localData ? JSON.parse(localData) : [];
     });
 
-    const allUnitCodes = []
-    selectedUnits.forEach(({units}) => 
-        units.forEach(({unitCode}) => 
-            allUnitCodes.push(unitCode)
-        )
-    )
+    const [allUnitCodes] = useState(() => {
+        const allUnitCodes = []
+        if (selectedUnits) {
+            selectedUnits.forEach(({unitCode}) => 
+                allUnitCodes.push(unitCode)
+            )
+        }
+        return allUnitCodes
+    })
+
+    const {loading, data, error, called} = useQuery(GET_UNITS_BY_UNIT_CODES, 
+        {variables: {searchUnitCodes: `${allUnitCodes}`}}
+        );
+    console.log("aaaaa")
+    console.log(data)
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
