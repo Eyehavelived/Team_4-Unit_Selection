@@ -45,33 +45,48 @@ export default function Selection(){
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
+        let outputList = [];
         if (localData){
             let scheduleList = JSON.parse(localData);
             //Remove Units
             let scheduleUnits = []
             for (const tp of scheduleList){
                 scheduleUnits = scheduleUnits.concat(tp.units);
-                };
+            };
             let toBeRemoved = scheduleUnits.filter((unit)=>{
                 return selectedUnits.map(unit=>unit.unitCode).indexOf(unit.unitCode)<0
-                });
+            });
             scheduleList = scheduleList.map(tp => {
                 let removedUnits = tp.units.filter(unit=>toBeRemoved.map(unit=>unit.unitCode).indexOf(unit.unitCode)<0);
-                return {listId:tp.listId,year:tp.year,sem:tp.sem,units:removedUnits}
-                });
+                return {
+                    listId: tp.listId,
+                    year: tp.year,
+                    sem: tp.sem,
+                    units: removedUnits
+                }
+            });
             //Add Units
             let toBeAdded = selectedUnits.filter((unit)=>{
                 return scheduleUnits.map(unit=>unit.unitCode).indexOf(unit.unitCode)<0
-                });
+            });
             scheduleList[0].units = scheduleList[0].units.concat(toBeAdded);
-            return scheduleList
-        }else{
-            return [{listId:"selectedUnits",
+            outputList = scheduleList
+        } else {
+            outputList = [{listId:"selectedUnits",
                     year: 0,
                     sem: 0,
                     units:selectedUnits}];
         }
-        
+
+        // Validate output list before returning it
+        outputList.map(({listId, year, sem, units}) => {
+            let errorMsg = null
+            const wrongSem = []
+            const wrongReq = []
+            if (listId != "selectedUnits") {
+
+            }
+        })
     })
 
     useEffect(()=> {
