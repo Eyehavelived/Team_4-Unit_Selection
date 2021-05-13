@@ -43,6 +43,8 @@ export default function Selection(){
         return localData ? JSON.parse(localData) : [];
     });
 
+    console.log(selectedUnits)
+
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
         let outputList = [];
@@ -79,14 +81,30 @@ export default function Selection(){
         }
 
         // Validate output list before returning it
-        outputList.map(({listId, year, sem, units}) => {
-            let errorMsg = null
-            const wrongSem = []
-            const wrongReq = []
-            if (listId != "selectedUnits") {
-
-            }
-        })
+        // create a list of all the selected units - this could be refactored... somehow.
+        let allUnits = new Set()
+        outputList.forEach(({units}) => 
+            units.forEach(({unitCode}) => 
+                allUnits.add(unitCode)
+            )
+        )
+        
+        // const viewedUnits = new Set()
+        // outputList.map(({listId, year, sem, units}) => {
+        //     let errorMsg = null
+        //     const wrongTP = []
+        //     const wrongPreReq = []
+        //     const wrongCoReq = []
+        //     const wrongProhib = []
+        //     if (listId != "selectedUnits") {
+        //         units.forEach(unit =>
+                    
+        //         )
+        //         console.log(units)
+        //     }
+        // })
+        // console.log(outputList)
+        // return outputList;
     })
 
     useEffect(()=> {
@@ -105,7 +123,6 @@ export default function Selection(){
         else if (currentTeachingPeriod.year < prevTeachingPeriod.year){
             retVal = true;
         }
-        console.log(retVal);
         return retVal;
     }
 
@@ -158,7 +175,6 @@ export default function Selection(){
 
     
     function handleOnDragEnd(result){
-        console.log(result)
         const { source, destination } = result;
 
         if (!destination) {
