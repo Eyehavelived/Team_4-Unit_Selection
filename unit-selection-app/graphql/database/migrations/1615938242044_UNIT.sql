@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS {}.unit (
     unitName VARCHAR(30) NOT NULL,
     unitFacultyId INT(12) NOT NULL,
     unitDegreeTypeId INT(1) NOT NULL,
-    synopsis VARCHAR(1000),
+    synopsis VARCHAR(500),
     workloadReq VARCHAR(500),
     isActive BOOL NOT NULL DEFAULT 1,
     CONSTRAINT fk_ufaculty FOREIGN KEY (unitFacultyId)

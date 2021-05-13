@@ -1,50 +1,50 @@
 SET @@global.sql_mode= '';
 
-INSERT INTO teaching_period(id, periodName)
+INSERT INTO teaching_period(periodName)
 VALUES
-(1, 'Semester 1'),
-(2, 'Semester 2'),
-(3, 'Summer A'),
-(4, 'Summer B'),
-(5, 'Winter');
+('Semester 1'),
+('Semester 2'),
+('Summer A'),
+('Summer B'),
+('Winter');
 
-INSERT INTO teaching_location(id, locationName)
+INSERT INTO teaching_location(locationName)
 VALUES
-(1, 'Clayton'),
-(2, 'Caulfield'),
-(3, 'Malaysia'),
-(4, 'Peninsula');
+('Clayton'),
+('Caulfield'),
+('Malaysia'),
+('Peninsula');
 
-INSERT INTO staff(id, staffName, staffEmailAddr)
+INSERT INTO staff(staffName, staffEmailAddr)
 VALUES
-(1,'Associate Professor Bernhard Jenny', 'Bernie.Jenny@monash.edu'),
-(2,'Dr Soon Lay Ki', 'Soon.LayKi@monash.edu'),
-(3,'Associate Professor Ting Chee Ming', 'Ting.CheeMing@monash.edu'),
-(4,'Mr Stephen Huxford', 'Stephen.Huxford@monash.edu'),
-(5,'Dr Ian Tan', 'Ian.Tan1@monash.edu'),
-(6,'Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
-(7,'Dr Arun Konagurthu', 'Arun.Konagurthu@monash.edu'),
-(8,'Dr Mario Boley', 'Mario.Boley@monash.edu'),
-(9,'Mr Ganesh Krishnasamy', 'Ganesh.Krishnasamy@monash.edu'),
-(10,'Dr Graeme Gange', 'Graeme.Gange@monash.edu'),
-(11,'Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
-(12,'Taylor Kearney', 'Taylor.Kearney@monash.edu'),
-(13,'Ms Kamalashunee Velautham', 'Kamalnee.Kvem@monash.edu'),
-(14,'Ms ashunee Velautham', 'Kamaee.Kvelsm@monash.edu');
+('Associate Professor Bernhard Jenny', 'Bernie.Jenny@monash.edu'),
+('Dr Soon Lay Ki', 'Soon.LayKi@monash.edu'),
+('Associate Professor Ting Chee Ming', 'Ting.CheeMing@monash.edu'),
+('Mr Stephen Huxford', 'Stephen.Huxford@monash.edu'),
+('Dr Ian Tan', 'Ian.Tan1@monash.edu'),
+('Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
+('Dr Arun Konagurthu', 'Arun.Konagurthu@monash.edu'),
+('Dr Mario Boley', 'Mario.Boley@monash.edu'),
+('Mr Ganesh Krishnasamy', 'Ganesh.Krishnasamy@monash.edu'),
+('Dr Graeme Gange', 'Graeme.Gange@monash.edu'),
+('Associate Professor Anuja Dharmaratne', 'anuja@monash.edu'),
+('Taylor Kearney', 'Taylor.Kearney@monash.edu'),
+('Ms Kamalashunee Velautham', 'Kamalnee.Kvem@monash.edu'),
+('Ms ashunee Velautham', 'Kamaee.Kvelsm@monash.edu');
 
-INSERT INTO degree_type(id,degreeTypeName)
+INSERT INTO degree_type(degreeTypeName)
 VALUES
-(1,'Undergraduate'),
-(2,'Graduate'),
-(3,'Postgraduate'),
-(4,'Honors'),
-(5,'Diploma');
+('Undergraduate'),
+('Graduate'),
+('Postgraduate'),
+('Honors'),
+('Diploma');
 
-INSERT INTO faculty(id,facultyName)
+INSERT INTO faculty(facultyName)
 VALUES
-(1,'Faculty of Information Technology'),
-(2,'Faculty of Arts'),
-(3,'Faculty of Science');
+('Faculty of Information Technology'),
+('Faculty of Arts'),
+('Faculty of Science');
 
 INSERT INTO course(courseCode, courseName, facultyId, firstYearCredit, secondYearCredit, thirdYearCredit)
 VALUES
@@ -62,10 +62,10 @@ VALUES
 ('C2000', 'Interactive media'),
 ('C2000', 'Software development');
 
-INSERT INTO specialisation(id, courseCode, specName)
+INSERT INTO specialisation(courseCode, specName)
 VALUES
-(1, 'C2001', 'Advanced computer science'),
-(2, 'C2001', 'Data science');
+('C2001', 'Advanced computer science'),
+('C2001', 'Data science');
 
 INSERT INTO unit(unitCode, unitName, unitFacultyId, unitDegreeTypeId, synopsis, workloadReq)
 VALUES
