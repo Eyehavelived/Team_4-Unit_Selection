@@ -179,10 +179,11 @@ module.exports = {
             
         }, units()).catch(errorHandler)
     },
-    getUnitsByUnitCodes: async (searchUnitCodes) => 
-        await units()
+    getUnitsByUnitCodes: async (searchUnitCodes) =>{ 
+        console.log("Called!")
+        return await units()
             .whereIn('unit.unitCode', searchUnitCodes["searchUnitCodes"])
-            .catch(errorHandler),
+            .catch(errorHandler)},
     // ----------------------------- Not units
     getFaculties: async () =>
         await db

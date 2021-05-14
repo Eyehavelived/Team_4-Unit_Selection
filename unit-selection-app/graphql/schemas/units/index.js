@@ -12,7 +12,8 @@ const getUnitsCurry = cb =>
         if (!units.length) {
             console.log("No units found")
             return []
-        }
+        } else {
+        console.log(units)}
         
         // From the query, we get locations as a single string "Malaysia,Clayton,Caulfield"
         // This splits them into list of strings

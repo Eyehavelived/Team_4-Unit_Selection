@@ -8,18 +8,18 @@ import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
 import { gql, useQuery, useLazyQuery } from "@apollo/client";
 
-// const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
-//     query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
-//         getUnitsWithFilters(searchUnitCodes: $searchUnitCodes) {
-//             unitCode
-//             unitCoRequisites
-//             unitProhibitions
-//             unitPreRequisites
-//             teachingPeriods
-//             isActive
-//         }
-//     }
-// `
+const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
+    query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
+        getUnitsByUnitCodes(searchUnitCodes: $searchUnitCodes) {
+            unitCode
+            unitCoRequisites
+            unitProhibitions
+            unitPreRequisites
+            teachingPeriods
+            isActive
+        }
+    }
+`
 //from react-beautiful-dnd git example
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -47,7 +47,7 @@ const semesterTypes = ["1","Winter","2","Summer A","Summer B"];
 function GetAllSelectedUnits(allUnitCodes) {
     const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
         query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
-            getUnitsWithFilters(searchUnitCodes: $searchUnitCodes) {
+            getUnitsByUnitCodes(searchUnitCodes: $searchUnitCodes) {
                 unitCode
                 unitCoRequisites
                 unitProhibitions
@@ -66,7 +66,7 @@ function GetAllSelectedUnits(allUnitCodes) {
         return [];
     }
     if (loading) return [];
-    const units = data.getUnitsWithFilters
+    const units = data.getUnitsByUnitCodes
     return units
 }
 
@@ -87,12 +87,22 @@ export default function Selection(){
                 allUnitCodes.push(unitCode)
             )
         }
-        return allUnitCodes
+        return [allUnitCodes]
     })
 
-    // const [getSelectedUnits, selectedUnitsResults] = useQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
-    //     variables: {unitCode: `${allUnitCodes}`}
-    // });
+    
+    const [selectedUnitsDetails, setSelectedUnitsDetails] = useState([])
+    const [getSelectedUnits, selectedUnitsResults] = useLazyQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
+        variables: {unitCode: `${allUnitCodes}`}
+    });
+
+    useEffect(() => {
+        if (!allUnitCodes) return [];
+        getSelectedUnits();
+        if (selectedUnitsResults.data) {
+        setSelectedUnitsDetails(selectedUnitsResults.data.getUnitsByUnitCodes);
+        }
+    }, [allUnitCodes, selectedUnitsResults.data, getSelectedUnits]);
 
     // const [selectedUnitsResults, getSelectedUnits] = useState(() => GetAllSelectedUnits(allUnitCodes))
 
@@ -152,7 +162,7 @@ export default function Selection(){
 
         //     }
         // })
-        console.log(outputList)
+        console.log(selectedUnitsDetails)
         return outputList;
     })
 
@@ -248,7 +258,7 @@ export default function Selection(){
 
             updateUnitList(newUnitList);
         }
-        
+        console.log(selectedUnitsDetails)
     }
     
 
@@ -269,7 +279,6 @@ export default function Selection(){
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
                                 <div className="overflow-auto height-50" {...provided.droppableProps} ref={provided.innerRef}>
-                                    {console.log(unitList)}
                                 { unitList.filter((list)=>{return list.listId === SELECTEDUNITS}).map((su)=>{
                                     return(
                                         su.units.map((unit,index)=>(
