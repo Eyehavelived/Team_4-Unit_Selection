@@ -90,11 +90,11 @@ export default function Selection(){
         return allUnitCodes
     })
 
-    const [getSelectedUnits, selectedUnitsResults] = useQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
-        variables: {unitCode: `${allUnitCodes}`}
-    });
+    // const [getSelectedUnits, selectedUnitsResults] = useQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
+    //     variables: {unitCode: `${allUnitCodes}`}
+    // });
 
-    
+    const [selectedUnitsResults, getSelectedUnits] = useState(() => GetAllSelectedUnits(allUnitCodes))
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
@@ -133,7 +133,7 @@ export default function Selection(){
 
         // Validate output list before returning it
         // create a list of all the selected units - this could be refactored... somehow.
-        console.log(selectedUnitsResults)
+        // console.log(selectedUnitsResults)
         getSelectedUnits()
         console.log(selectedUnitsResults)
 
@@ -269,6 +269,7 @@ export default function Selection(){
                     <Droppable droppableId={SELECTEDUNITS}>
                             {(provided)=>(
                                 <div className="overflow-auto height-50" {...provided.droppableProps} ref={provided.innerRef}>
+                                    {console.log(unitList)}
                                 { unitList.filter((list)=>{return list.listId === SELECTEDUNITS}).map((su)=>{
                                     return(
                                         su.units.map((unit,index)=>(
