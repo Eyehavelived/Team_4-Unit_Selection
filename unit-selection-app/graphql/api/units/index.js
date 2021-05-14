@@ -20,6 +20,9 @@ const units = () =>
         db.raw('GROUP_CONCAT(unit_corequisites.coReqUnitCode) as unitCoRequisites'),
         db.raw('GROUP_CONCAT(teaching_location.locationName) as locationNames'),
         db.raw('GROUP_CONCAT(teaching_period.periodName) as teachingPeriodNames'),
+        db.raw('GROUP_CONCAT(academic_focus.mmName) as majorMinorNames'),
+        db.raw('GROUP_CONCAT(course.courseName) as courseNames'),
+        db.raw('GROUP_CONCAT(specialisation.specName) as specNames'),
     )
     .from('unit')
     .leftJoin('unit_prerequisites', 'unit.unitCode', 'unit_prerequisites.unitCode')
@@ -31,6 +34,12 @@ const units = () =>
     .leftJoin('teaching_period', 'unit_teaching_periods.tpId', 'teaching_period.id')
     .leftJoin('faculty', 'unitFacultyId', 'faculty.id')
     .leftJoin('degree_type', 'unitDegreeTypeId', 'degree_type.id')
+    .leftJoin('course_core_units','unit.unitCode', 'course_core_units.unitCode')
+    .leftJoin('course', 'course_core_units.courseCode', 'course.courseCode')
+    .leftJoin('academic_focus_units', 'unit.unitCode', 'academic_focus_units.unitCode')
+    .leftJoin('academic_focus', 'academic_focus_units.mmId', 'academic_focus.id')
+    .leftJoin('specialisation_units','unit.unitCode','specialisation_units.unitCode')
+    .leftJoin('specialisation','specialisation_units.specialisationId','specialisation.id')
     .groupBy('unit.unitCode')
     // TODO: unit_assessments, contacts, other_requisite
 
@@ -108,8 +117,20 @@ const filters = (options) => {
         whereCalls.push(["whereIn", 'unit.unitFacultyId', options["faculty"].map(val => parseInt(val))])
     }
     if (options["location"].length > 0) {
-        whereCalls.push(["whereIn", 'unit.unitLocation', options["location"].map(val => parseInt(val))])
+        whereCalls.push(["whereIn", 'unit.unitLocationId', options["location"].map(val => parseInt(val))])
     }
+    if(options["specialisation"].length>0){
+        whereCalls.push(["whereIn",'specialisation.id',options["specialisation"].map(val=>parseInt(val))])
+    }
+    if(options["course"].length>0){
+        whereCalls.push(["whereIn",'course.courseCode',options["course"]])
+    }
+    if(options["academic_focus"].length>0){
+        whereCalls.push(["whereIn",'academic_focus.id',options["academic_focus"].map(val=>parseInt(val))])
+
+    }
+
+  
 
 
     for (const [key, value] of Object.entries(whereFilters)) {
@@ -182,5 +203,32 @@ module.exports = {
                 'periodName'
             )
             .from('teaching_period')
-            .catch(errorHandler)
+            .catch(errorHandler),
+
+    getSpecialisations: async () =>
+            await db
+                .select(
+                    'id',
+                    'specName'
+                )
+                .from('specialisation')
+                .catch(errorHandler),
+                
+   getCourses: async () =>
+            await db
+                .select(
+                    'courseCode',
+                    'courseName'
+                )
+                .from('course')
+                .catch(errorHandler),
+    getAcademicFocus: async () =>
+                await db
+                    .select(
+                        'id',
+                        'mmName',
+                    )
+                    .from('academic_focus')
+                    .catch(errorHandler)
+                    
 }

@@ -7,6 +7,9 @@ type Query {
     getFaculties: [Faculty]
     getTeachingPeriods: [TeachingPeriod]
     getLocations: [Location]
+    getSpecialisations:[Specialisation]
+    getCourses:[Course]
+    getAcademicFocus:[Academic]
 }
 
 type Assessment {
@@ -34,6 +37,8 @@ type Unit {
     unitProhibitions: [String]
     locationNames: [String]
     teachingPeriods: [String]
+    courseNames: [String]
+    majorMinorNames: [String]
 }
 
 # -----------------------------
@@ -51,4 +56,18 @@ type TeachingPeriod {
 type Location {
     id: Int
     locationName: String
+}
+
+type Specialisation{
+    id:Int
+    specName:String
+}
+
+type Course{
+    courseCode:String
+    courseName:String
+}
+type Academic{
+    id:Int
+    mmName:String
 }
