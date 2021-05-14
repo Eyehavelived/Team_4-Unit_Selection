@@ -1,4 +1,3 @@
-const { validateOperation } = require('@apollo/client/link/utils');
 const db = require('../../database/mysql');
 const {errorHandler} = require('../utils');
 
