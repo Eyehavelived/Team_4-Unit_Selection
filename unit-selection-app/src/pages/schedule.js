@@ -6,21 +6,20 @@ import {NavigationApp} from "../components/common/navigation";
 import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useLazyQuery } from "@apollo/client";
 
-const GET_UNITS_BY_UNIT_CODES = gql`
-    query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
-        getUnitsWithFilters(searchUnitCodes: $searchUnitCodes) {
-            unitCode
-            unitCoRequisites
-            unitProhibitions
-            unitPreRequisites
-            teachingPeriods
-            isActive
-        }
-    }
-`
-
+// const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
+//     query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
+//         getUnitsWithFilters(searchUnitCodes: $searchUnitCodes) {
+//             unitCode
+//             unitCoRequisites
+//             unitProhibitions
+//             unitPreRequisites
+//             teachingPeriods
+//             isActive
+//         }
+//     }
+// `
 //from react-beautiful-dnd git example
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -45,6 +44,32 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 
 const semesterTypes = ["1","Winter","2","Summer A","Summer B"];
 
+function GetAllSelectedUnits(allUnitCodes) {
+    const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
+        query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
+            getUnitsWithFilters(searchUnitCodes: $searchUnitCodes) {
+                unitCode
+                unitCoRequisites
+                unitProhibitions
+                unitPreRequisites
+                teachingPeriods
+                isActive
+            }
+        }
+    `
+
+    const {data, loading, error} = useQuery(GET_UNITS_BY_UNIT_CODES_QUERY, 
+        {variables: {searchUnitCodes: `${allUnitCodes}`}}
+    );
+    if (error) {
+        console.log(error)
+        return [];
+    }
+    if (loading) return [];
+    const units = data.getUnitsWithFilters
+    return units
+}
+
 export default function Selection(){
     const page = "Schedule"
 
@@ -65,11 +90,11 @@ export default function Selection(){
         return allUnitCodes
     })
 
-    const {loading, data, error, called} = useQuery(GET_UNITS_BY_UNIT_CODES, 
-        {variables: {searchUnitCodes: `${allUnitCodes}`}}
-        );
-    console.log("aaaaa")
-    console.log(data)
+    const [getSelectedUnits, selectedUnitsResults] = useQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
+        variables: {unitCode: `${allUnitCodes}`}
+    });
+
+    
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
@@ -108,24 +133,26 @@ export default function Selection(){
 
         // Validate output list before returning it
         // create a list of all the selected units - this could be refactored... somehow.
-        
-        
-        const viewedUnits = new Set()
-        outputList.map(({listId, year, sem, units}) => {
-            let errorMsg = null
-            const wrongTP = []
-            const wrongPreReq = []
-            const wrongCoReq = []
-            const wrongProhib = []
-            if (listId != "selectedUnits") {
-                const thisSemUnits = units.map(({unitCode}) => unitCode)
-                units.forEach(unit =>
-                    viewedUnits.add(unit)   
-                )
+        console.log(selectedUnitsResults)
+        getSelectedUnits()
+        console.log(selectedUnitsResults)
 
-            }
-        })
-        console.log(outputList)
+        // const viewedUnits = new Set()
+        // outputList.map(({listId, year, sem, units}) => {
+        //     let errorMsg = null
+        //     const wrongTP = []
+        //     const wrongPreReq = []
+        //     const wrongCoReq = []
+        //     const wrongProhib = []
+        //     if (listId != "selectedUnits") {
+        //         const thisSemUnits = units.map(({unitCode}) => unitCode)
+        //         units.forEach(unit =>
+        //             viewedUnits.add(unit)   
+        //         )
+
+        //     }
+        // })
+        // console.log(outputList)
         return outputList;
     })
 
