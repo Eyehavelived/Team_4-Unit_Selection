@@ -94,7 +94,7 @@ export default function Selection(){
     //     variables: {unitCode: `${allUnitCodes}`}
     // });
 
-    const [selectedUnitsResults, getSelectedUnits] = useState(() => GetAllSelectedUnits(allUnitCodes))
+    // const [selectedUnitsResults, getSelectedUnits] = useState(() => GetAllSelectedUnits(allUnitCodes))
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
@@ -134,8 +134,8 @@ export default function Selection(){
         // Validate output list before returning it
         // create a list of all the selected units - this could be refactored... somehow.
         // console.log(selectedUnitsResults)
-        getSelectedUnits()
-        console.log(selectedUnitsResults)
+        // getSelectedUnits()
+        // console.log(selectedUnitsResults)
 
         // const viewedUnits = new Set()
         // outputList.map(({listId, year, sem, units}) => {
@@ -152,7 +152,7 @@ export default function Selection(){
 
         //     }
         // })
-        // console.log(outputList)
+        console.log(outputList)
         return outputList;
     })
 
