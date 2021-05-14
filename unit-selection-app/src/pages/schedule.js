@@ -90,7 +90,6 @@ export default function Selection(){
         else if (currentTeachingPeriod.year < prevTeachingPeriod.year){
             retVal = true;
         }
-        console.log(retVal);
         return retVal;
     }
 
