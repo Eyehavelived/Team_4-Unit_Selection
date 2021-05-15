@@ -93,15 +93,23 @@ export default function Selection(){
     
     const [selectedUnitsDetails, setSelectedUnitsDetails] = useState([])
     const [getSelectedUnits, selectedUnitsResults] = useLazyQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
-        variables: {unitCode: `${allUnitCodes}`}
+        variables: {searchUnitCodes: `${allUnitCodes}`}
     });
 
+    /* This will basically be called twice 
+        once when the page is still rendering and allUnitCodes == []
+        another time when allUnitCodes is filled in
+    */
     useEffect(() => {
         if (!allUnitCodes) return [];
         getSelectedUnits();
+        if (selectedUnitsResults.error) {
+            console.log(selectedUnitsResults.error)
+        }
         if (selectedUnitsResults.data) {
         setSelectedUnitsDetails(selectedUnitsResults.data.getUnitsByUnitCodes);
         }
+        console.log(selectedUnitsResults)
     }, [allUnitCodes, selectedUnitsResults.data, getSelectedUnits]);
 
     // const [selectedUnitsResults, getSelectedUnits] = useState(() => GetAllSelectedUnits(allUnitCodes))
@@ -162,6 +170,7 @@ export default function Selection(){
 
         //     }
         // })
+        getSelectedUnits()
         console.log(selectedUnitsDetails)
         return outputList;
     })

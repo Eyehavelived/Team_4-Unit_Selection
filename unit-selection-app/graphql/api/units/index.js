@@ -181,8 +181,11 @@ module.exports = {
     },
     getUnitsByUnitCodes: async (searchUnitCodes) =>{ 
         console.log("Called!")
+        // Things are weird.
+        const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"][0].split(",") : []
+        console.log(queryArg)
         return await units()
-            .whereIn('unit.unitCode', searchUnitCodes["searchUnitCodes"])
+            .whereIn('unit.unitCode', queryArg)
             .catch(errorHandler)},
     // ----------------------------- Not units
     getFaculties: async () =>

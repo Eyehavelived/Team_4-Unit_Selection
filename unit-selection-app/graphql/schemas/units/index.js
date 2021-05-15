@@ -12,12 +12,11 @@ const getUnitsCurry = cb =>
         if (!units.length) {
             console.log("No units found")
             return []
-        } else {
-        console.log(units)}
-        
+        }
+        console.log(units)
         // From the query, we get locations as a single string "Malaysia,Clayton,Caulfield"
         // This splits them into list of strings
-        return units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, courseNames, majorMinorNames, specNames, ...rest}) => ({
+        const output = units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, courseNames, majorMinorNames, specNames, ...rest}) => ({
             locationNames: [...new Set(locationNames.split(","))],
             unitPreRequisites: [...new Set(unitPreRequisites ? unitPreRequisites.split(",") : "")],
             unitCoRequisites: [...new Set(unitCoRequisites ? unitCoRequisites.split(",") : "")],
@@ -28,6 +27,7 @@ const getUnitsCurry = cb =>
             specNames:[...new Set(specNames ? specNames.split(",") : "")],
             ...rest
         }))
+        return output
     }
 
 const getOptionsCurry = cb =>
@@ -35,7 +35,7 @@ const getOptionsCurry = cb =>
         const options = await cb(args, parent)
             .catch(errorHandler)
         if (!options.length) {
-            console.log("No units found")
+            console.log("No options found")
             return []
         }
         
