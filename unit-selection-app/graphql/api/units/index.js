@@ -176,12 +176,7 @@ module.exports = {
         }, units()).catch(errorHandler)
     },
     getUnitsByUnitCodes: async (searchUnitCodes) =>{ 
-        // For some reason, searchUnitCode is coming in as a list of all my strings concatenated
-        if (searchUnitCodes["searchUnitCodes"].length == 1) {
-            const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"][0].split(",") : []
-        } else {
-            const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"] : []
-        }
+        const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"] : []
         return await units()
             .whereIn('unit.unitCode', queryArg)
             .catch(errorHandler)},
