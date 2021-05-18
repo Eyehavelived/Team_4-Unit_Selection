@@ -191,6 +191,8 @@ export default function Selection(){
             prevTeachingPeriods.map(({listId, year, sem, units}) => {
                 let errorMsg = null
                 const wrongTP = []
+                // rewrite semester to match the db for validation
+                const thisSem = (sem === "1" || sem === "2") ? "Semester " + sem : sem
                 // TODO: Test validations for requisites
                 const wrongPreReq = []
                 const wrongCoReq = []
@@ -206,15 +208,30 @@ export default function Selection(){
                         const [unitDetails] = selectedUnitsDetails.filter(({unitCode}) => unitCode === thisUnitCode)
 
                         // check corequisites, which have to be taken in the same semester
-                        if (unitDetails["unitCoRequisites"].filter((unitCode) => !thisSemUnits.includes(unitCode)).length > 0) {
-                            wrongCoReq.push(thisUnitCode)
+                        const coReqConflict = unitDetails["unitCoRequisites"].filter((unitCode) => !thisSemUnits.includes(unitCode))
+                        if (coReqConflict.length > 0) {
+                            wrongCoReq.push([thisUnitCode, coReqConflict])
                         }
 
                         // check prerequisites, which we should have already viewed before
-
+                        const preReqMet = unitDetails["unitPreRequisites"].filter((unitCode) => viewedUnits.includes(unitCode))
+                        if (preReqMet.length === 0) {
+                            wrongPreReq.push([thisUnitCode, preReqConflict])
+                        }
                         // check prohibitions, which will be found from all the selected units - units in the "selectUnits" TP
+                        const prohibConflict = unitDetails["unitProhibitions"].filter((unitCode) => schedUnits.includes(unitCode))
+                        if (prohibConflict.length > 0) {
+                            wrongProhib.push([thisUnitCode, prohibConflict])
+                        }
+
+                        // check if semester is correct
+                        if (!unitDetails["teachingPeriods"].includes(thisSemUnits)) {
+                            wrongTP.push([thisUnitCode, unitDetails["teachingPeriods"]])
+                        }
                     })
                 }
+
+                // TODO: Construct error message to save as error
             })
         })
     }
