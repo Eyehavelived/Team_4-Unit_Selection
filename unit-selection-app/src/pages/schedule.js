@@ -107,7 +107,7 @@ export default function Selection(){
             console.log(selectedUnitsResults.error)
         }
         if (selectedUnitsResults.data) {
-        setSelectedUnitsDetails(selectedUnitsResults.data.getUnitsByUnitCodes);
+            setSelectedUnitsDetails(selectedUnitsResults.data.getUnitsByUnitCodes);
         }
         console.log(selectedUnitsResults)
     }, [allUnitCodes, selectedUnitsResults.data, getSelectedUnits]);
@@ -133,7 +133,8 @@ export default function Selection(){
                     listId: tp.listId,
                     year: tp.year,
                     sem: tp.sem,
-                    units: removedUnits
+                    units: removedUnits,
+                    error: null
                 }
             });
             //Add Units
@@ -146,7 +147,9 @@ export default function Selection(){
             outputList = [{listId:"selectedUnits",
                     year: 0,
                     sem: 0,
-                    units:selectedUnits}];
+                    units:selectedUnits,
+                    error: null
+                }];
         }
 
         // Validate output list before returning it
@@ -159,9 +162,7 @@ export default function Selection(){
         // outputList.map(({listId, year, sem, units}) => {
         //     let errorMsg = null
         //     const wrongTP = []
-        //     const wrongPreReq = []
-        //     const wrongCoReq = []
-        //     const wrongProhib = []
+            
         //     if (listId != "selectedUnits") {
         //         const thisSemUnits = units.map(({unitCode}) => unitCode)
         //         units.forEach(unit =>
@@ -170,14 +171,53 @@ export default function Selection(){
 
         //     }
         // })
-        getSelectedUnits()
-        console.log(selectedUnitsDetails)
+        
         return outputList;
     })
+
+
 
     useEffect(()=> {
         localStorage.setItem('scheduledUnits',JSON.stringify(unitList))
     },[unitList]);
+
+    function validateTeachingPeriod() {
+        updateUnitList(prevTeachingPeriods => {
+            // allUnitCodes
+            // selectUnitsDetails
+            const schedUnits = []
+
+            const viewedUnits = new Set()
+            prevTeachingPeriods.map(({listId, year, sem, units}) => {
+                let errorMsg = null
+                const wrongTP = []
+                // TODO: Test validations for requisites
+                const wrongPreReq = []
+                const wrongCoReq = []
+                const wrongProhib = []
+                if (listId === "selectedUnits") {
+                    allUnitCodes.forEach((unitCode) => {
+                        if (!units.includes(unitCode)) schedUnits.push(unitCode)
+                    })
+                } else {
+                    const thisSemUnits = units.map(({unitCode}) => unitCode)
+                    thisSemUnits.forEach((thisUnitCode) => {
+                        viewedUnits.add(thisUnitCode)
+                        const [unitDetails] = selectedUnitsDetails.filter(({unitCode}) => unitCode === thisUnitCode)
+
+                        // check corequisites, which have to be taken in the same semester
+                        if (unitDetails["unitCoRequisites"].filter((unitCode) => !thisSemUnits.includes(unitCode)).length > 0) {
+                            wrongCoReq.push(thisUnitCode)
+                        }
+
+                        // check prerequisites, which we should have already viewed before
+
+                        // check prohibitions, which will be found from all the selected units - units in the "selectUnits" TP
+                    })
+                }
+            })
+        })
+    }
 
     //returns true if smaller, returns false if larger
     function compareTeachingPeriod(currentTeachingPeriod, prevTeachingPeriod){
@@ -267,7 +307,6 @@ export default function Selection(){
 
             updateUnitList(newUnitList);
         }
-        console.log(selectedUnitsDetails)
     }
     
 

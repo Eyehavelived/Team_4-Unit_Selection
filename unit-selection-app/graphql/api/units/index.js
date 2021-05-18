@@ -130,16 +130,12 @@ const filters = (options) => {
 
     }
 
-  
-
-
     for (const [key, value] of Object.entries(whereFilters)) {
         whereCalls.push("whereIn", key, value)
       }
 
     return whereCalls
 }
-
 
 module.exports = {
     getUnit: async (searchUnitCode) => 
@@ -180,10 +176,12 @@ module.exports = {
         }, units()).catch(errorHandler)
     },
     getUnitsByUnitCodes: async (searchUnitCodes) =>{ 
-        console.log("Called!")
-        // Things are weird.
-        const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"][0].split(",") : []
-        console.log(queryArg)
+        // For some reason, searchUnitCode is coming in as a list of all my strings concatenated
+        if (searchUnitCodes["searchUnitCodes"].length == 1) {
+            const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"][0].split(",") : []
+        } else {
+            const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"] : []
+        }
         return await units()
             .whereIn('unit.unitCode', queryArg)
             .catch(errorHandler)},
