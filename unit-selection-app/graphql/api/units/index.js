@@ -130,16 +130,12 @@ const filters = (options) => {
 
     }
 
-  
-
-
     for (const [key, value] of Object.entries(whereFilters)) {
         whereCalls.push("whereIn", key, value)
       }
 
     return whereCalls
 }
-
 
 module.exports = {
     getUnit: async (searchUnitCode) => 
@@ -179,6 +175,11 @@ module.exports = {
             
         }, units()).catch(errorHandler)
     },
+    getUnitsByUnitCodes: async (searchUnitCodes) =>{ 
+        const queryArg = searchUnitCodes["searchUnitCodes"] ? searchUnitCodes["searchUnitCodes"] : []
+        return await units()
+            .whereIn('unit.unitCode', queryArg)
+            .catch(errorHandler)},
     // ----------------------------- Not units
     getFaculties: async () =>
         await db
