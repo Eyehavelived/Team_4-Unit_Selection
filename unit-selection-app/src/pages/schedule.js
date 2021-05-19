@@ -44,32 +44,6 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 
 const semesterTypes = ["1","Winter","2","Summer A","Summer B"];
 
-function GetAllSelectedUnits(allUnitCodes) {
-    const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
-        query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
-            getUnitsByUnitCodes(searchUnitCodes: $searchUnitCodes) {
-                unitCode
-                unitCoRequisites
-                unitProhibitions
-                unitPreRequisites
-                teachingPeriods
-                isActive
-            }
-        }
-    `
-
-    const {data, loading, error} = useQuery(GET_UNITS_BY_UNIT_CODES_QUERY, 
-        {variables: {searchUnitCodes: `${allUnitCodes}`}}
-    );
-    if (error) {
-        console.log(error)
-        return [];
-    }
-    if (loading) return [];
-    const units = data.getUnitsByUnitCodes
-    return units
-}
-
 export default function Selection(){
     const page = "Schedule"
 
@@ -111,7 +85,123 @@ export default function Selection(){
         }
     }, [allUnitCodes, selectedUnitsResults.data, getSelectedUnits]);
 
-    // const [selectedUnitsResults, getSelectedUnits] = useState(() => GetAllSelectedUnits(allUnitCodes))
+    const validateUnitListFunc = (prevTeachingPeriods) => {
+        const schedUnits = []
+        const viewedUnits = new Set()
+        const loadDescrip = unitCount => {
+            if (unitCount === 0) return "";
+            if (unitCount <= 2) return "Underload";
+            if (unitCount === 3) return "Underload (Internationals) || Full study load";
+            if (unitCount === 4) return "Full study load";
+            if (unitCount > 4) return "Overload";
+        }
+
+        return prevTeachingPeriods.map(({listId, year, sem, units}) => {
+            let errorMsg = []
+            const wrongTP = []
+            // rewrite semester to match the db for validation
+            const thisSem = (sem === "1" || sem === "2") ? "Semester " + sem : sem
+            // TODO: Test validations for requisites
+            const wrongPreReq = []
+            const wrongCoReq = []
+            const wrongProhib = []
+            if (listId === "selectedUnits") {
+                allUnitCodes.forEach((unitCode) => {
+                    if (!units.includes(unitCode)) schedUnits.push(unitCode)
+                })
+            } else {
+                const thisSemUnits = units.map(({unitCode}) => unitCode)
+                thisSemUnits.forEach((thisUnitCode) => {
+                    viewedUnits.add(thisUnitCode)
+                    const [unitDetails] = selectedUnitsDetails.filter(({unitCode}) => unitCode === thisUnitCode)
+
+                    /*
+                    FIXME:
+                    Query for all unit details only works sometimes
+                    Requisite information is not provided by backend
+                    Even if the query works, this still doesn't handle it correctly,
+                    but the following code do not presently affect the code output
+                    */ 
+                    if (!unitDetails) {
+                        console.log(`No data found for ${thisUnitCode}`) 
+                    } else { 
+                        // check corequisites, which have to be taken in the same semester
+                        const coReqConflict = unitDetails["unitCoRequisites"].filter((unitCode) => !thisSemUnits.includes(unitCode))
+                        if (coReqConflict.length > 0) {
+                            wrongCoReq.push([thisUnitCode, coReqConflict])
+                        }
+
+                        // check prerequisites, which we should have already viewed before
+                        const preReqMet = unitDetails["unitPreRequisites"].filter((unitCode) => viewedUnits.includes(unitCode))
+                        if (preReqMet.length === 0) {
+                            wrongPreReq.push([thisUnitCode, preReqMet])
+                        }
+                        // check prohibitions, which will be found from all the selected units - units in the "selectUnits" TP
+                        const prohibConflict = unitDetails["unitProhibitions"].filter((unitCode) => schedUnits.includes(unitCode))
+                        if (prohibConflict.length > 0) {
+                            wrongProhib.push([thisUnitCode, prohibConflict])
+                        }
+                    }
+                })
+                // check if semester is correct
+                units.forEach((unit) => {
+                    if (!unit["unitSem"].includes(thisSem)) {
+                        wrongTP.push([unit["unitCode"], unit["unitSem"]])
+                    }
+                })
+
+            }
+
+            // Construct error message to save as error
+            if (wrongTP.length > 0) {
+                const errStr = ["The following unit(s) is not available in this teaching period:"]
+                wrongTP.forEach(([unitCode, semesters]) => {
+                    errStr.push(
+                        `${unitCode} is only available in ${semesters.map(
+                            sem => sem === "1" || sem === "2" ? "Semester " + sem : sem
+                        ).join(", ")}`
+                    )
+                })
+                errorMsg.push(errStr.join("\n\t"))
+            } 
+            if (wrongPreReq.length > 0) {
+                const errStr = ["The following unit(s) do not have their Prerequisites met:"]
+                wrongPreReq.forEach(([unitCode, prereqs]) => {
+                    errStr.push(
+                        `${unitCode} requires one of: ${prereqs.join(", ")}`
+                    )
+                })
+                errorMsg.push(errStr.join("\n\t"))
+            } 
+            if (wrongProhib.length > 0) {
+                const errStr = ["The following unit(s) is not available in this teaching period:"]
+                wrongProhib.forEach(([unitCode, prohibitions]) => {
+                    errStr.push(
+                        `${unitCode} is prohibited due to the following unit(s): ${prohibitions.join(", ")}`
+                    )
+                })
+                errorMsg.push(errStr.join("\n\t"))
+            } 
+            if (wrongCoReq.length > 0) {
+                const errStr = ["The following unit(s) is not available in this teaching period:"]
+                wrongCoReq.forEach(([unitCode, coreqs]) => {
+                    errStr.push(
+                        `${unitCode} requires the following units be taken in the same semester: ${coreqs.join(", ")}`
+                    )
+                })
+                errorMsg.push(errStr.join("\n\t"))
+            }
+            
+            return {
+                listId: listId,
+                year: year,
+                sem: sem,
+                units: units,
+                error: errorMsg.join("\n\n"),
+                load: listId !== "selectedUnits" ? loadDescrip(units.length) : null
+            }
+        })
+    }
 
     const [unitList, updateUnitList] = useState(()=>{
         const localData = localStorage.getItem('scheduledUnits');
@@ -133,7 +223,8 @@ export default function Selection(){
                     year: tp.year,
                     sem: tp.sem,
                     units: removedUnits,
-                    error: ""
+                    error: "",
+                    load: ""
                 }
             });
             //Add Units
@@ -147,130 +238,19 @@ export default function Selection(){
                     year: 0,
                     sem: 0,
                     units:selectedUnits,
-                    error: ""
+                    error: "",
+                    load: null
                 }];
         }
-        return outputList;
+        return validateUnitListFunc(outputList);
     })
-
-
 
     useEffect(()=> {
         localStorage.setItem('scheduledUnits',JSON.stringify(unitList))
     },[unitList]);
 
     function validateTeachingPeriod() {
-        updateUnitList(prevTeachingPeriods => {
-            // allUnitCodes
-            // selectUnitsDetails
-            const schedUnits = []
-
-            const viewedUnits = new Set()
-            return prevTeachingPeriods.map(({listId, year, sem, units}) => {
-                let errorMsg = []
-                const wrongTP = []
-                // rewrite semester to match the db for validation
-                const thisSem = (sem === "1" || sem === "2") ? "Semester " + sem : sem
-                // TODO: Test validations for requisites
-                const wrongPreReq = []
-                const wrongCoReq = []
-                const wrongProhib = []
-                if (listId === "selectedUnits") {
-                    allUnitCodes.forEach((unitCode) => {
-                        if (!units.includes(unitCode)) schedUnits.push(unitCode)
-                    })
-                } else {
-                    const thisSemUnits = units.map(({unitCode}) => unitCode)
-                    thisSemUnits.forEach((thisUnitCode) => {
-                        viewedUnits.add(thisUnitCode)
-                        const [unitDetails] = selectedUnitsDetails.filter(({unitCode}) => unitCode === thisUnitCode)
-
-                        /*
-                        FIXME:
-                        Query for all unit details only works sometimes
-                        Requisite information is not provided by backend
-                        Even if the query works, this still doesn't handle it correctly,
-                        but the following code do not presently affect the code output
-                        */ 
-                        if (!unitDetails) {
-                            console.log(`No data found for ${thisUnitCode}`) 
-                        } else { 
-                            // check corequisites, which have to be taken in the same semester
-                            const coReqConflict = unitDetails["unitCoRequisites"].filter((unitCode) => !thisSemUnits.includes(unitCode))
-                            if (coReqConflict.length > 0) {
-                                wrongCoReq.push([thisUnitCode, coReqConflict])
-                            }
-
-                            // check prerequisites, which we should have already viewed before
-                            const preReqMet = unitDetails["unitPreRequisites"].filter((unitCode) => viewedUnits.includes(unitCode))
-                            if (preReqMet.length === 0) {
-                                wrongPreReq.push([thisUnitCode, preReqMet])
-                            }
-                            // check prohibitions, which will be found from all the selected units - units in the "selectUnits" TP
-                            const prohibConflict = unitDetails["unitProhibitions"].filter((unitCode) => schedUnits.includes(unitCode))
-                            if (prohibConflict.length > 0) {
-                                wrongProhib.push([thisUnitCode, prohibConflict])
-                            }
-                        }
-                    })
-                    // check if semester is correct
-                    units.forEach((unit) => {
-                        if (!unit["unitSem"].includes(thisSem)) {
-                            wrongTP.push([unit["unitCode"], unit["unitSem"]])
-                        }
-                    })
-
-                }
-
-                // Construct error message to save as error
-                if (wrongTP.length > 0) {
-                    const errStr = ["The following unit(s) is not available in this teaching period:"]
-                    wrongTP.forEach(([unitCode, semesters]) => {
-                        errStr.push(
-                            `${unitCode} is only available in ${semesters.map(
-                                sem => sem === "1" || sem === "2" ? "Semester " + sem : sem
-                            ).join(", ")}`
-                        )
-                    })
-                    errorMsg.push(errStr.join("\n\t"))
-                } 
-                if (wrongPreReq.length > 0) {
-                    const errStr = ["The following unit(s) do not have their Prerequisites met:"]
-                    wrongPreReq.forEach(([unitCode, prereqs]) => {
-                        errStr.push(
-                            `${unitCode} requires one of: ${prereqs.join(", ")}`
-                        )
-                    })
-                    errorMsg.push(errStr.join("\n\t"))
-                } 
-                if (wrongProhib.length > 0) {
-                    const errStr = ["The following unit(s) is not available in this teaching period:"]
-                    wrongProhib.forEach(([unitCode, prohibitions]) => {
-                        errStr.push(
-                            `${unitCode} is prohibited due to the following unit(s): ${prohibitions.join(", ")}`
-                        )
-                    })
-                    errorMsg.push(errStr.join("\n\t"))
-                } 
-                if (wrongCoReq.length > 0) {
-                    const errStr = ["The following unit(s) is not available in this teaching period:"]
-                    wrongCoReq.forEach(([unitCode, coreqs]) => {
-                        errStr.push(
-                            `${unitCode} requires the following units be taken in the same semester: ${coreqs.join(", ")}`
-                        )
-                    })
-                    errorMsg.push(errStr.join("\n\t"))
-                }
-                
-                return {
-                    listId: listId,
-                    year: year,
-                    sem: sem,
-                    units: units,
-                    error: errorMsg.join("\n\n")
-                }
-            })
-        })
+        updateUnitList(validateUnitListFunc)
     }
 
     //returns true if smaller, returns false if larger
