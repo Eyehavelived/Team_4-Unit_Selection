@@ -20,4 +20,17 @@
     color: $offwhite;
     width: 300px;
     border-radius: 10px;
+    opacity: 0.9;
+}
+
+.underload{
+    background-color: lighten($warning, 50%) !important;
+}
+
+.overload{
+    background-color: lighten($error, 57%) !important;
+}
+
+.fullload{
+    background-color: lighten($primary, 60%) !important;
 }
