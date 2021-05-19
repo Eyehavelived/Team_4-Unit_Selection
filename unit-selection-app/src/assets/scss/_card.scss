@@ -3,3 +3,21 @@
         color: $secondary-dark
     }
 }
+
+.error{
+    z-index: 1;
+    color: $error;
+    h6{
+        color: $error;
+    }
+    &:hover{
+        cursor: default;
+    }
+}
+
+.errormsg{
+    background: $error;
+    color: $offwhite;
+    width: 300px;
+    border-radius: 10px;
+}

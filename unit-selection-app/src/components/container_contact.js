@@ -15,7 +15,7 @@ const Container_contact = () => {
                     <p>yyan0061@student.monash.edu</p>
                 </Col>
                     
-                <Col id="btn-override" className="align-self-center d-flex justify-content-end">
+                <Col id="btn-override" className="d-flex justify-content-end">
                     <LinkR to={{pathname:"https://github.com/Eyehavelived/Team_4-Unit_Selection"}} target="_blank">
                         <button className="btn circle-btn mx-3"><FaGithub size={30}/></button>
                     </LinkR>
