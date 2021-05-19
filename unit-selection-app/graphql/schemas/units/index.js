@@ -13,7 +13,6 @@ const getUnitsCurry = cb =>
             console.log("No units found")
             return []
         }
-        console.log(units)
         // From the query, we get locations as a single string "Malaysia,Clayton,Caulfield"
         // This splits them into list of strings
         const output = units.map(({locationNames, teachingPeriodNames, unitPreRequisites, unitCoRequisites, unitProhibitions, courseNames, majorMinorNames, specNames, ...rest}) => ({
