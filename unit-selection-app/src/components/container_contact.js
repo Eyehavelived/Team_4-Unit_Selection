@@ -1,8 +1,7 @@
 import React from 'react'
 import {Link as LinkR} from 'react-router-dom';
 import {Row, Col} from "react-bootstrap";
-import { FaBootstrap, FaGithub, FaReact } from "react-icons/fa";
-import { Collapse } from 'bootstrap';
+import { FaBootstrap, FaReact } from "react-icons/fa";
 
 const Container_contact = () => {
     return (
@@ -15,10 +14,7 @@ const Container_contact = () => {
                     <p>yyan0061@student.monash.edu</p>
                 </Col>
                     
-                <Col id="btn-override" className="d-flex justify-content-end">
-                    <LinkR to={{pathname:"https://github.com/Eyehavelived/Team_4-Unit_Selection"}} target="_blank">
-                        <button className="btn circle-btn mx-3"><FaGithub size={30}/></button>
-                    </LinkR>
+                <Col id="btn-override" className="align-self-center d-flex justify-content-end">
                     <LinkR to={{pathname:"https://getbootstrap.com/"}} target="_blank">
                         <button className="btn circle-btn mx-3"><FaBootstrap size={30}/></button>
                     </LinkR>
