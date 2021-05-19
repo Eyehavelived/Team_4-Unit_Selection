@@ -7,6 +7,7 @@ import ScheduleForm from '../components/scheduleForm';
 import ScheduleCard from '../components/scheduleCard'
 import {UnitListCard} from "../components/common/unitListCard";
 import { gql, useQuery, useLazyQuery } from "@apollo/client";
+import {GiPlainCircle} from "react-icons/gi";
 
 const GET_UNITS_BY_UNIT_CODES_QUERY = gql`
     query getUnitsByUnitCodes($searchUnitCodes: [String]) { 
@@ -352,6 +353,16 @@ export default function Selection(){
                 <Col md={6}>
                     <ScheduleForm onAdd={addTeachingPeriod}/>
                 </Col> 
+                <Col className="align-self-center">
+                    <div style={{width:"100%"}} className="d-inline-flex flex-row align-items-center justify-content-end">
+                        <div className="warning-text ms-4 me-1"><GiPlainCircle size={20}/></div>
+                        <p className="my-0"> = underload </p>
+                        <div className="primary-text ms-4 me-1"><GiPlainCircle size={20}/></div>
+                        <p className="my-0"> = underload (international) </p>
+                        <div className="error-text ms-4 me-1"><GiPlainCircle size={20}/></div>
+                        <p className="my-0"> = overload </p>
+                    </div>
+                </Col>
             </Row>
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Row>

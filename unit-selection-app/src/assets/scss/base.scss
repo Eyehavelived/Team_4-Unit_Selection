@@ -127,6 +127,15 @@ label:hover {
   color: $secondary-light;
 }
 
+.warning-text{
+  color: $warning;
+}
+
+.error-text{
+  color: $error;
+}
+
+
 //Card size
 .card-width{
   width: 45vh;
