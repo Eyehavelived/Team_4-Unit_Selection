@@ -202,7 +202,7 @@ export default function Selection(){
                 sem: sem,
                 units: units,
                 error: errorMsg.join("\n\n"),
-                load: listId !== "selectedUnits" ? loadDescrip(units.length) : null
+                load: listId !== "selectedUnits" || !breakSemesters.includes(sem) ? loadDescrip(units.length) : ""
             }
         })
     }
