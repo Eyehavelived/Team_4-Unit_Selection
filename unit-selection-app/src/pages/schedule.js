@@ -192,6 +192,10 @@ export default function Selection(){
                 })
                 errorMsg.push(errStr.join("\n\t"))
             }
+            const breakSemesters = ["Summer A", "Summer B", "Winter"]
+            if (breakSemesters.includes(sem) && units.length > 1) {
+                errorMsg.push(`You can only enrol in 1 unit for this teaching period.\nYou have scheduled ${units.length} units in this period.`)
+            }
             
             return {
                 listId: listId,
@@ -199,7 +203,7 @@ export default function Selection(){
                 sem: sem,
                 units: units,
                 error: errorMsg.join("\n\n"),
-                load: listId !== "selectedUnits" ? loadDescrip(units.length) : null
+                load: listId !== "selectedUnits" || !breakSemesters.includes(sem) ? loadDescrip(units.length) : ""
             }
         })
     }
