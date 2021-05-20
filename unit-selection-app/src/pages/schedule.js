@@ -65,7 +65,7 @@ export default function Selection(){
         return [allUnitCodes]
     })
 
-    
+    // currently not in use
     const [selectedUnitsDetails, setSelectedUnitsDetails] = useState([])
     const [getSelectedUnits, selectedUnitsResults] = useLazyQuery(GET_UNITS_BY_UNIT_CODES_QUERY,{
         variables: {searchUnitCodes: allUnitCodes}
@@ -100,9 +100,7 @@ export default function Selection(){
         return prevTeachingPeriods.map(({listId, year, sem, units}) => {
             const errorMsg = {
                 wrongTP: null,
-                wrongPreReq: null,
-                wrongCoReq: null,
-                wrongProhib: null
+                wrongBrkLoad: null
             }
             const wrongTP = []
             // rewrite semester to match the db for validation
