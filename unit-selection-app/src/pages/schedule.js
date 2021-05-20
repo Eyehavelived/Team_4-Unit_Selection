@@ -340,7 +340,6 @@ export default function Selection(){
                 <Col md={10} className="grey-bg py-2 px-1 row flex-row flex-nowrap overflow-auto height-70">
                     
                     {unitList.filter((tp)=>{
-                        {console.log(tp)}       // for testing purposes. Remove before PR
                         return tp.listId!==SELECTEDUNITS
                     }).map((tp,index) => (
                         <ScheduleCard key={tp.year+tp.sem} index={index} 
