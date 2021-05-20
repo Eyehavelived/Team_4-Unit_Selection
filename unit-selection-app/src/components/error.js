@@ -15,7 +15,8 @@ const Error = (props) => {
             {(onHover)? 
                 <div className="position-absolute top-100 start-100 ">
                     <div className="errormsg p-2">
-                        {props.error}
+                        {/* {String(props.error)} */}
+                        {console.log(props.error)}
                     </div>
                 </div>
                 :null}
