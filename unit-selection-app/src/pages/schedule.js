@@ -88,7 +88,6 @@ export default function Selection(){
 
     const validateUnitListFunc = (prevTeachingPeriods) => {
         const schedUnits = []
-        const viewedUnits = new Set()
         const loadDescrip = unitCount => {
             if (unitCount === 0) return "";
             if (unitCount <= 2) return "Underload";
@@ -105,10 +104,6 @@ export default function Selection(){
             const wrongTP = []
             // rewrite semester to match the db for validation
             const thisSem = (sem === "1" || sem === "2") ? "Semester " + sem : sem
-            // TODO: Test validations for requisites
-            const wrongPreReq = []
-            const wrongCoReq = []
-            const wrongProhib = []
             if (listId === "selectedUnits") {
                 allUnitCodes.forEach((unitCode) => {
                     if (!units.includes(unitCode)) schedUnits.push(unitCode)
@@ -133,6 +128,10 @@ export default function Selection(){
                     .join(", ")}`)
                 ]
             } 
+            const breakSemesters = ["Summer A", "Summer B", "Winter"]
+            if (breakSemesters.includes(sem) && units.length > 1) {
+                errorMsg.wrongBrkLoad = [`You can only enrol in 1 unit for this teaching period.`,`You have scheduled ${units.length} units in this period.`]
+            }
             
             return {
                 listId: listId,
@@ -140,7 +139,7 @@ export default function Selection(){
                 sem: sem,
                 units: units,
                 error: errorMsg,
-                load: listId !== "selectedUnits" ? loadDescrip(units.length) : null
+                load: listId !== "selectedUnits" || !breakSemesters.includes(sem) ? loadDescrip(units.length) : ""
             }
         })
     }
