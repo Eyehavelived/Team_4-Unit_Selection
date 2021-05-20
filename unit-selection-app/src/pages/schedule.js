@@ -139,7 +139,7 @@ export default function Selection(){
                 sem: sem,
                 units: units,
                 error: errorMsg,
-                load: listId !== "selectedUnits" || !breakSemesters.includes(sem) ? loadDescrip(units.length) : ""
+                load: listId !== "selectedUnits" && !breakSemesters.includes(sem) ? loadDescrip(units.length) : ""
             }
         })
     }
