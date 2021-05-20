@@ -10,7 +10,6 @@
     "add": "^2.0.6",
     "apollo-client": "^2.6.10",
     "bootstrap": "^5.0.0-beta3",
-    "classnames": "^2.3.1",
     "dependencies": "^0.0.1",
     "font-awesome": "^4.7.0",
     "graphql": "^15.5.0",

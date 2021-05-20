@@ -97,10 +97,6 @@ label:hover {
   height: 80vh;
 }
 
-.width-full{
-  width: 100%;
-}
-
 //Coloured BG
 .white-bg{
   background:white;
@@ -126,15 +122,6 @@ label:hover {
 .secondary-light-text{
   color: $secondary-light;
 }
-
-.warning-text{
-  color: $warning;
-}
-
-.error-text{
-  color: $error;
-}
-
 
 //Card size
 .card-width{

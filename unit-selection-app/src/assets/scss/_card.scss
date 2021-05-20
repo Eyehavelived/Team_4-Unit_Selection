@@ -3,34 +3,3 @@
         color: $secondary-dark
     }
 }
-
-.error{
-    z-index: 1;
-    color: $error;
-    h6{
-        color: $error;
-    }
-    &:hover{
-        cursor: default;
-    }
-}
-
-.errormsg{
-    background: $error;
-    color: $offwhite;
-    width: 300px;
-    border-radius: 10px;
-    opacity: 0.9;
-}
-
-.underload{
-    background-color: lighten($warning, 50%) !important;
-}
-
-.overload{
-    background-color: lighten($error, 57%) !important;
-}
-
-.fullload{
-    background-color: lighten($primary, 60%) !important;
-}
