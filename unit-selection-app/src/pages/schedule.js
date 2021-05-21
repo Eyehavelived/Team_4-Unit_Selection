@@ -164,8 +164,11 @@ export default function Selection(){
                     year: tp.year,
                     sem: tp.sem,
                     units: removedUnits,
-                    error: "",
-                    load: ""
+                    error: {
+                        wrongTP: null,
+                        wrongBrkLoad: null
+                    },
+                    load: null
                 }
             });
             //Add Units
@@ -179,7 +182,10 @@ export default function Selection(){
                     year: 0,
                     sem: 0,
                     units:selectedUnits,
-                    error: "",
+                    error: {
+                        wrongTP: null,
+                        wrongBrkLoad: null
+                    },
                     load: null
                 }];
         }
