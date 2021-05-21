@@ -26,7 +26,6 @@ export default function ScheduleCard(props){
             <div className="mt-2">
                 <div className="width-full d-inline-flex justify-content-between align-items-center ">
                     <h6 className="my-0">Year {props.tp.year}  / Sem {props.tp.sem}</h6>
-                    {console.log(props.tp)}
                     {(props.tp.error.wrongTP!=null || props.tp.error.wrongBrkLoad!=null)? 
                     <Error error={props.tp.error}/> : <p></p>}
                 </div>
