@@ -10,7 +10,9 @@ export default function ScheduleForm(props){
     const [teachingPeriod,setTeachingPeriod] = useState({
         year:year,
         sem:"1",
-        units:[]
+        units:[],
+        error:{wrongTP:null,wrongBrkLoad:null},
+        load:null
     });
 
     
@@ -22,7 +24,7 @@ export default function ScheduleForm(props){
             return {
                 ...prevTeachingPeriod,
                 [name]: value,
-                units:[]
+                units:[],
             };
         });
     }
