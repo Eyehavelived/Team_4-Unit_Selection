@@ -20,7 +20,14 @@ function getToggleId(itemId, itemName) {
   }
   return idDict[itemName] + "_" + itemId.toString()
 }
+/*
+ This function as a connection between the front end and the back end by 
+ using a specific unit code to query the corresponding unit information
+ from the back end database
 
+ param:Unit code of string type
+ return:The details of unit information,which includes unitCode,unitName,synopsis etc.
+*/
 const GET_UNIT_BY_UNITCODE_QUERY = gql`
     query getUnitFromUnitcode($unitCode: String) { 
         getUnit(unitCode: $unitCode) {
@@ -39,7 +46,14 @@ const GET_UNIT_BY_UNITCODE_QUERY = gql`
         }
     }
 `
+/*
+ This function as a connection between the front end and the back end by 
+ using a different filtering option(e.g Year, Semester, Location, Specialisation etc) to 
+ query the corresponding unit information from the back end database
 
+ param:Different filtering options
+ return:The details of unit information,which includes unitCode,unitName,synopsis etc.
+*/
 const GET_UNITS_WITH_FILTERS = gql`
   query getUnitsUsingFilters($optionsString: String) { 
     getUnitsWithFilters(optionsString: $optionsString) {
@@ -330,10 +344,17 @@ export default function Selection() {
     event.preventDefault();
     if (filterUnitResults) setFilterResults(() => filterUnitResults)
   } 
+  /*
+  This function is used to add selected unit from all the units returned from our database 
+  into our comparison window.
 
+  param:The selected unit passed from the createArea component
+  return:The updated array contains all the units that will be displayed in the comparison window
+  */
   function addUnit(newUnit){
     setUnits((prevUnits) => {
       for (var i = 0; i < prevUnits.length; i++) {
+        //Make sure that subjects are not added twice
         if (prevUnits[i].unitCode === newUnit.unitCode) {
           return prevUnits;
         }
@@ -430,6 +451,8 @@ export default function Selection() {
             <div className="white-bg height-40 py-2 px-2">
               <u><h6>Units</h6></u>
               <div className="height-30 overflow-auto">
+              {/* filterResults store the units returned by the database that meet the user's filter criteria */}
+              {/* If filterResults is not empty,then it will call CreateArea componet to create area for each unit */}
                 {filterResults.length>0 && <CreateArea unitList={filterResults} onAdd={addUnit}/>}
               </div>
             </div>
@@ -446,13 +469,14 @@ export default function Selection() {
               </div>
             </div>
           </Col>
-
+          
+          {/* Comparing window */}
           <Col md={8}>
             <div className="grey-bg height-80 py-2 px-1 row flex-row flex-nowrap overflow-auto">
+            {/* If units array is not empty, generate unit card for each unit */}
                 {
                   units.length > 0 && (
                   units.map((unit)=>
-                  
                       <UnitCard
                         key={unit.unitCode}
                         id={unit.unitCode}

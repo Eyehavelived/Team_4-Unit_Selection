@@ -1,12 +1,12 @@
 import {IoMdClose, IoIosAdd} from "react-icons/io";
-import {Col,Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 
 export default function UnitCard(props){
-
+    //This function is used to remove the unit from comparison window
     function handleClick() {
         props.onDelete(props.id);
     }
-
+    //This function is used to add units in Selected Units list
     function handleAddClick(){
         props.onAddSelected(props.unitCode,props.unitName,props.semester);
   
@@ -16,6 +16,7 @@ export default function UnitCard(props){
         <Card className="card-width mx-1 position-relative">
             <button className="clear-btn-override close-btn-override mt-n2 ms-auto" onClick={handleClick}><IoMdClose/></button>
             <div className="mt-2">
+                {/* Display the unit information */}
                 <h5>{props.unitCode}</h5>
                 <h6>{props.unitName}</h6>
                 <hr/>
